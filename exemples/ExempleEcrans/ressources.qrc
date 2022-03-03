@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="precedent.png">ressources/precedent.png</file>
+        <file alias="suivant.png">ressources/suivant.png</file>
+    </qresource>
+</RCC>
