@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="cafetiere-off.png">images/cafetiere-rouge.png</file>
+        <file alias="cafetiere-on.png">images/cafetiere-verte.png</file>
+    </qresource>
+</RCC>
