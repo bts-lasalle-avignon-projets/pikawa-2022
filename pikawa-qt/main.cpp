@@ -14,11 +14,19 @@
  *
  */
 
-int main(int argc, char *argv[]) {
-  QApplication a(argc, argv);
-  IHMPikawa w;
+int main(int argc, char* argv[])
+{
+    QApplication a(argc, argv);
 
-  w.show();
+    QFile file(":/qss/pikawa.qss");
+    if(file.open(QFile::ReadOnly))
+    {
+        QString styleSheet = QLatin1String(file.readAll());
+        a.setStyleSheet(styleSheet);
+    }
 
-  return a.exec();
+    IHMPikawa w;
+    w.show();
+
+    return a.exec();
 }

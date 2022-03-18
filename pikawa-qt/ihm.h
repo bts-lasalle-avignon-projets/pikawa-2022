@@ -19,25 +19,44 @@
 #define PLEIN_ECRAN
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
+namespace Ui
+{
 class IHMPikawa;
 }
 QT_END_NAMESPACE
+
+/**
+ * @enum LongueurPreparation
+ * @brief Long, Moyen ou Court
+ */
+enum LongueurCafe
+{
+    Court = 0,
+    Moyen = 1,
+    Long  = 2
+};
 
 /**
  * @class IHMPikawa
  * @brief Déclaration de la classe IHMPikawa
  * @details Cette classe s'occupe de l'affichage sur l'écran de la Raspeberry Pi
  */
-class IHMPikawa : public QMainWindow {
-  Q_OBJECT
+class IHMPikawa : public QMainWindow
+{
+    Q_OBJECT
 
-public:
-  IHMPikawa(QWidget *parent = nullptr);
-  ~IHMPikawa();
+  public:
+    IHMPikawa(QWidget* parent = nullptr);
+    ~IHMPikawa();
 
-private:
-  Ui::IHMPikawa *ui; //!< la fenêtre graphique associée à cette classe
+  private:
+    Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
+
+    void initialiserIHM();
+    void gererEvenements();
+
+  public slots:
+    void afficherLongueurPreparation(int longueurPreparation);
 };
 
 #endif // IHM_H

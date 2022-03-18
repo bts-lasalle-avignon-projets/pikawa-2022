@@ -201,7 +201,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QLabel" name="typeBoissonChoisie">
+               <widget class="QLabel" name="labelLongueurPreparation">
                 <property name="lineWidth">
                  <number>3</number>
                 </property>
@@ -214,7 +214,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QSlider" name="verticalSlider">
+               <widget class="QSlider" name="selectionLongueurPreparation">
                 <property name="maximumSize">
                  <size>
                   <width>40</width>

@@ -4,4 +4,7 @@
         <file alias="cafetiere-on.png">images/cafetiere-verte.png</file>
         <file alias="cafe.png">images/cafe.png</file>
     </qresource>
+    <qresource prefix="/qss">
+        <file>pikawa.qss</file>
+    </qresource>
 </RCC>
