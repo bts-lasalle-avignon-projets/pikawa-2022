@@ -11,22 +11,20 @@
  *
  */
 
-IHMPikawa::IHMPikawa(QWidget* parent) :
-    QMainWindow(parent), ui(new Ui::IHMPikawa)
-{
-    ui->setupUi(this);
-    qDebug() << Q_FUNC_INFO;
+IHMPikawa::IHMPikawa(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::IHMPikawa) {
+  ui->setupUi(this);
+  qDebug() << Q_FUNC_INFO;
 
-    ui->statusbar->showMessage(QString::fromUtf8("Pikawa 2022"));
+  ui->statusbar->showMessage(QString::fromUtf8("Pikawa 2022"));
 
 #ifdef PLEIN_ECRAN
-    showFullScreen();
+  showFullScreen();
 // showMaximized();
 #endif
 }
 
-IHMPikawa::~IHMPikawa()
-{
-    delete ui;
-    qDebug() << Q_FUNC_INFO;
+IHMPikawa::~IHMPikawa() {
+  delete ui;
+  qDebug() << Q_FUNC_INFO;
 }

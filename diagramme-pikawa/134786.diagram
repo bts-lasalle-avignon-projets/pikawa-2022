@@ -1,0 +1,105 @@
+format 224
+
+classcanvas 128002 class_ref 135298 // Utilisateur
+  simpleclassdiagramsettings end
+  xyz 23 243 2000
+end
+usecasecanvas 128130 usecase_ref 128002 // Lancer la préparation d'un café
+  xyzwh 334 102 3005 64 32 label_xy 264 86
+end
+usecasecanvas 128258 usecase_ref 128130 // Programmer la préparation d'un café
+  xyzwh 351 207 3005 64 32 label_xy 273 190
+end
+usecasecanvas 128386 usecase_ref 128258 // Paramétrer ses préférences
+  xyzwh 350 301 3005 64 32 label_xy 294 283
+end
+usecasecanvas 128514 usecase_ref 128386 // Visualiser les alertes
+  xyzwh 288 456 3005 64 32 label_xy 266 435
+end
+usecasecanvas 128642 usecase_ref 128514 // Suivre l'état de vie de la machine
+  xyzwh 258 593 3005 64 32 label_xy 187 628
+end
+usecasecanvas 134786 usecase_ref 128642 // Choisir le type de capsule
+  xyzwh 615 25 3005 64 32 label_xy 563 57
+end
+usecasecanvas 135170 usecase_ref 128770 // Choisir le type de boisson
+  xyzwh 647 102 3005 64 32 label_xy 595 134
+end
+usecasecanvas 135554 usecase_ref 128898 // Dialoguer avec la machine
+  xyzwh 716 363 3005 64 32 label_xy 660 343
+end
+usecasecanvas 136450 usecase_ref 129026 // S'identifier
+  xyzwh 577 267 3005 64 32 label_xy 583 247
+end
+usecasecanvas 137218 usecase_ref 129154 // Visualiser son utilisation
+  xyzwh 335 373 3005 64 32 label_xy 300 354
+end
+textcanvas 138626 "<<include>>"
+  xyzwh 682 450 3013 81 15
+textcanvas 138754 "<<include>>"
+  xyzwh 523.5 423.5 3013 81 15
+textcanvas 138882 "<<include>>"
+  xyzwh 538.5 192.5 3013 81 15
+textcanvas 139010 "<<include>>"
+  xyzwh 471.5 319.5 3013 81 15
+textcanvas 139138 "<<include>>"
+  xyzwh 474.5 245.5 3013 81 15
+textcanvas 139266 "<<include>>"
+  xyzwh 694.5 220.5 3013 81 15
+textcanvas 139394 "<<include>>"
+  xyzwh 470.5 374.5 3013 81 15
+textcanvas 139906 "<<extend>>"
+  xyzwh 478 52 3011 79 15
+textcanvas 140034 "<<extend>>"
+  xyzwh 492.5 103.5 3011 79 15
+line 128770 ----
+  from ref 128002 z 3006 to point 197 159
+  line 134402 z 3006 to ref 128130
+line 130562 ----
+  from ref 128258 z 3006 to point 203 239
+  line 134530 z 3006 to ref 128002
+line 131714 ---- decenter_begin 714
+  from ref 128002 z 3006 to ref 128386
+line 133122 ----
+  from ref 128002 z 3006 to point 170 398
+  line 134658 z 3006 to ref 128514
+line 134146 ----
+  from ref 128002 z 3006 to point 113 463
+  line 134274 z 3006 to ref 128642
+simplerelationcanvas 136066 simplerelation_ref 128002
+  from ref 128642 z 3006 to point 595 555
+  line 136194 z 3006 to ref 135554
+end
+simplerelationcanvas 136322 simplerelation_ref 128130
+  from ref 128514 z 3006 to ref 135554
+end
+simplerelationcanvas 136578 simplerelation_ref 128258
+  from ref 128386 z 3006 to point 486 314
+  line 136706 z 3006 to ref 136450
+end
+line 137346 ----
+  from ref 128002 z 3006 to point 185 339
+  line 137474 z 3006 to ref 137218
+simplerelationcanvas 137602 simplerelation_ref 128386
+  from ref 137218 z 3006 to point 521 367
+  line 137730 z 3006 to ref 136450
+end
+simplerelationcanvas 137858 simplerelation_ref 128514
+  from ref 128258 z 3006 to point 509 231
+  line 137986 z 3006 to ref 136450
+end
+simplerelationcanvas 138114 simplerelation_ref 128642
+  from ref 128130 z 3006 to point 513 165
+  line 138242 z 3006 to ref 136450
+end
+simplerelationcanvas 138370 simplerelation_ref 128770
+  from ref 128130 z 3006 to point 674 177
+  line 138498 z 3006 to ref 135554
+end
+simplerelationcanvas 139650 simplerelation_ref 128898
+  from ref 135170 z 3006 to ref 128130
+end
+simplerelationcanvas 139778 simplerelation_ref 129026
+  from ref 134786 z 3006 to ref 128130
+end
+end
