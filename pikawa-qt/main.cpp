@@ -17,8 +17,15 @@
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-    IHMPikawa    w;
 
+    QFile file(":/qss/pikawa.qss");
+    if(file.open(QFile::ReadOnly))
+    {
+        QString styleSheet = QLatin1String(file.readAll());
+        a.setStyleSheet(styleSheet);
+    }
+
+    IHMPikawa w;
     w.show();
 
     return a.exec();

@@ -1,0 +1,26 @@
+/* La barre verticale */
+QSlider::groove:vertical {
+    border: 0px solid transparent;
+    width: 8px;
+    background: #eeeeee;
+    margin: 2px 0;
+}
+
+/* La poignée */
+QSlider::handle:vertical {
+    background-color: rgb(193, 125, 17);
+    height: 32px;
+    width: 6px;
+    border: 0px solid transparent;
+    margin: 0 -15px;
+    border-radius: 10px;
+}
+
+QSlider::handle:vertical:pressed {
+    background-color: rgb(193, 125, 17);
+    height: 32px;
+    width: 6px;
+    border: 0px solid transparent;
+    margin: 0 -15px;
+    border-radius: 10px;
+}
