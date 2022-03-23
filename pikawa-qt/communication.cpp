@@ -1,6 +1,3 @@
 #include "communication.h"
 
-communication::communication()
-{
-
-}
+Communication::Communication() : active(false), connecte(false) {}
