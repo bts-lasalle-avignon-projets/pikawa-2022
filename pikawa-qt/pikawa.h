@@ -2,23 +2,21 @@
 #define PIKAWA_H
 #include <QVector>
 
-using namespace std;
-
-class Pikawa
+class Cafetiere
 {
   private:
-    QVector<string> nomCapsules;
-    QVector<string> nomBoissons;
-    int             capsuleChoisie;
-    int             boissonChoisie;
-    int             niveauEau;
-    bool            connectee;
-    bool            activee;
-    bool            capsulePresente;
-    bool            tassePresente;
+    QVector<QString> nomCapsules;
+    QVector<QString> nomBoissons;
+    int              capsuleChoisie;
+    int              boissonChoisie;
+    int              niveauEau;
+    bool             connectee;
+    bool             activee;
+    bool             capsulePresente;
+    bool             tassePresente;
 
   public:
-    Pikawa();
+    Cafetiere();
 };
 
 #endif // PIKAWA_H
