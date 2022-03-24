@@ -8,11 +8,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     communication.cpp \
     main.cpp \
-    ihm.cpp
+    ihm.cpp \
+    pikawa.cpp
 
 HEADERS += \
     communication.h \
-    ihm.h
+    ihm.h \
+    pikawa.h
 
 FORMS += \
     ihm.ui
