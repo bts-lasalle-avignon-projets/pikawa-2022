@@ -5,6 +5,6 @@
         <file alias="cafe.png">images/cafe.png</file>
     </qresource>
     <qresource prefix="/qss">
-        <file>pikawa.qss</file>
+        <file>cafetiere.qss</file>
     </qresource>
 </RCC>

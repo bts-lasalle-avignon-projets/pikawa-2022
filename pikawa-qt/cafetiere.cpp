@@ -1,4 +1,4 @@
-#include "pikawa.h"
+#include "cafetiere.h"
 #include "QVector"
 
 Cafetiere::Cafetiere() :
