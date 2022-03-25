@@ -25,6 +25,8 @@ class IHMPikawa;
 }
 QT_END_NAMESPACE
 
+class BaseDeDonnees;
+
 /**
  * @enum LongueurPreparation
  * @brief Long, Moyen ou Court
@@ -51,6 +53,7 @@ class IHMPikawa : public QMainWindow
 
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
+    BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
 
     void initialiserIHM();
     void gererEvenements();

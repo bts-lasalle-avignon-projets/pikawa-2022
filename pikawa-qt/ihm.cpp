@@ -1,5 +1,6 @@
 #include "ihm.h"
 #include "ui_ihm.h"
+#include "basededonnees.h"
 #include <QDebug>
 
 /**
@@ -17,6 +18,12 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
 
+    /**
+     * @todo Mettre une constante pour le NOM de la base de données
+     */
+    baseDeDonnees = BaseDeDonnees::getInstance();
+    baseDeDonnees->ouvrir("pikawa.sqlite");
+
     gererEvenements();
 
     initialiserIHM();
@@ -30,6 +37,7 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 IHMPikawa::~IHMPikawa()
 {
     delete ui;
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
 
