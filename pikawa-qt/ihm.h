@@ -67,7 +67,9 @@ class IHMPikawa : public QMainWindow
   public slots:
     void afficherLongueurPreparation(int longueurPreparation);
     void afficherEcran(IHMPikawa::Ecran ecran);
-    void afficherEcranSuivant();
+    void afficherPageInformations();
+    void afficherPageEntretien();
+    void afficherPageParametres();
 };
 
 #endif // IHM_H
