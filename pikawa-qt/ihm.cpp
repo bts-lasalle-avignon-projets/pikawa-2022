@@ -21,6 +21,11 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 
     initialiserIHM();
 
+    connect(ui->BouttonInformations,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherEcranSuivant()));
+
 #ifdef PLEIN_ECRAN
     showFullScreen();
 // showMaximized();
@@ -62,4 +67,17 @@ void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
     qDebug() << Q_FUNC_INFO << "longueurPreparation" << longueurPreparation;
     ui->labelLongueurPreparation->setText(
       labelsLongueurPreparation.at(longueurPreparation));
+}
+
+void IHMPikawa::afficherEcran(IHMPikawa::Ecran ecran)
+{
+    qDebug() << Q_FUNC_INFO << "ecran" << ecran;
+    ui->ecrans->setCurrentIndex(ecran);
+}
+
+void IHMPikawa::afficherEcranSuivant()
+{
+    int ecranCourant = IHMPikawa::Ecran(ui->ecrans->currentIndex());
+    int ecranSuivant = (ecranCourant + 1) % int(IHMPikawa::NbEcrans);
+    afficherEcran(IHMPikawa::Ecran(ecranSuivant));
 }
