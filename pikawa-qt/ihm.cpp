@@ -28,6 +28,15 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 
     initialiserIHM();
 
+    connect(ui->bouttonInformations,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageInformations()));
+    connect(ui->bouttonEntretien,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageEntretien()));
+
 #ifdef PLEIN_ECRAN
     showFullScreen();
 // showMaximized();
@@ -70,4 +79,24 @@ void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
     qDebug() << Q_FUNC_INFO << "longueurPreparation" << longueurPreparation;
     ui->labelLongueurPreparation->setText(
       labelsLongueurPreparation.at(longueurPreparation));
+}
+
+void IHMPikawa::afficherEcran(IHMPikawa::Ecran ecran)
+{
+    qDebug() << Q_FUNC_INFO << "ecran" << ecran;
+    ui->ecrans->setCurrentIndex(ecran);
+}
+
+void IHMPikawa::afficherPageInformations()
+{
+    afficherEcran(IHMPikawa::Ecran(1));
+}
+
+void IHMPikawa::afficherPageEntretien()
+{
+    afficherEcran(IHMPikawa::Ecran(2));
+}
+
+void IHMPikawa::afficherPageParametres()
+{
 }

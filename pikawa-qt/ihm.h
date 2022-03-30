@@ -47,6 +47,15 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
+    enum Ecran
+    {
+        Accueil     = 0,
+        Information = 1,
+        Entretien   = 2,
+        Parametre   = 3,
+        NbEcrans
+    };
+
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
@@ -60,6 +69,10 @@ class IHMPikawa : public QMainWindow
 
   public slots:
     void afficherLongueurPreparation(int longueurPreparation);
+    void afficherEcran(IHMPikawa::Ecran ecran);
+    void afficherPageInformations();
+    void afficherPageEntretien();
+    void afficherPageParametres();
 };
 
 #endif // IHM_H

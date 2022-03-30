@@ -1,7 +1,7 @@
 format 224
 
 fragment 128002 "dss Lancer préparation café"
-  xyzwh 84 128 2000 947 657
+  xyzwh 59 140 2000 947 657
 end
 classinstance 128130 class_ref 135042 // Client
   name ""   xyz 177 168 2000 life_line_z 2000
@@ -14,7 +14,7 @@ fragment 136322 "alt"
   xyzwh 114 281.5 2005 649 103
 end
 textcanvas 137474 "[capsule absente]"
-  xyzwh 146 298 2010 257 88
+  xyzwh 144 296 2010 257 88
 note 137858 "Niveau, tasse, bac caspules
 "
   xyzwh 854 515 2000 127 89
@@ -22,15 +22,21 @@ fragment 138626 "loop"
   xyzwh 99 207 2005 759 192
 end
 fragment 138754 "loop"
-  xyzwh 100 484 2005 906 214
+  xyzwh 97 482 2005 906 214
 end
 textcanvas 138882 "[cafetierePasPrete]"
-  xyzwh 129.5 599 2010 257 88
+  xyzwh 136 585 2010 257 88
+textcanvas 139010 "!estCaspuleDisponible()
+"
+  xyzwh 149 210 2010 156 33
+textcanvas 139138 "!estCafetierePrete()
+"
+  xyzwh 145 485.5 2010 156 33
 durationcanvas 131074 classinstance_ref 128130 // :Client
-  xyzwh 194 215 2010 11 26
+  xyzwh 194 227 2010 11 28
 end
 durationcanvas 131202 classinstance_ref 128386 // :pikawa
-  xyzwh 604 214 2010 11 178
+  xyzwh 604 228 2010 11 165
   overlappingdurationcanvas 136706
     xyzwh 610 249 2020 11 25
   end
@@ -39,10 +45,10 @@ durationcanvas 131202 classinstance_ref 128386 // :pikawa
   end
 end
 durationcanvas 131458 classinstance_ref 128130 // :Client
-  xyzwh 194 429 2010 11 27
+  xyzwh 194 426 2010 11 30
 end
 durationcanvas 131586 classinstance_ref 128386 // :pikawa
-  xyzwh 604 428 2010 11 25
+  xyzwh 604 426 2010 11 27
 end
 durationcanvas 131842 classinstance_ref 128130 // :Client
   xyzwh 194 502 2010 11 25
@@ -62,21 +68,21 @@ end
 msg 131330 synchronous
   from durationcanvas_ref 131074
   to durationcanvas_ref 131202
-  yz 230 2015 explicitmsg "choisirTypeCapsule()"
+  yz 244 2015 explicitmsg "choisirTypeCapsule()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 308 216
+  label_xy 322 233
 msg 131714 synchronous
   from durationcanvas_ref 131458
   to durationcanvas_ref 131586
-  yz 430 2015 explicitmsg "choisirTypeBoisson()"
+  yz 435 2015 explicitmsg "choisirLongueur()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 312 415
+  label_xy 335 421
 msg 132098 synchronous
   from durationcanvas_ref 131842
   to durationcanvas_ref 131970
   yz 511 2015 explicitmsg "lancerPreparationCafe()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 316 500
+  label_xy 316 498
 reflexivemsg 136834 synchronous
   to durationcanvas_ref 136706
   yz 249 2025 explicitmsg "estCapsuleDisponible()"

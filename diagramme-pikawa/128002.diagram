@@ -2,15 +2,15 @@ format 224
 
 classcanvas 128130 class_ref 128130 // Pikawa
   classdiagramsettings member_max_width 0 end
-  xyzwh 412 269 0 175 187
+  xyzwh 412 269 0 191 187
 end
 classcanvas 128258 class_ref 128258 // Preparation
   classdiagramsettings member_max_width 0 end
-  xyzwh 155 294 2000 173 135
+  xyzwh 155 294 2000 191 135
 end
 classcanvas 128386 class_ref 128386 // Communication
   classdiagramsettings member_max_width 0 end
-  xyzwh 423 538 2000 151 101
+  xyzwh 432 538 2000 155 101
 end
 classcanvas 128514 class_ref 128514 // IHM
   classdiagramsettings member_max_width 0 end
