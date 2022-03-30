@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -886,7 +886,7 @@ background: rgb(193, 125, 17);
               <string notr="true">font-size:20px;</string>
              </property>
              <property name="text">
-              <string>Disponibilité caspule :</string>
+              <string>Disponibilité des caspules :</string>
              </property>
             </widget>
            </item>
