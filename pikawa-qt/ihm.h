@@ -45,7 +45,7 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
-    enum Ecran
+    enum Page
     {
         Accueil     = 0,
         Information = 1,
@@ -66,7 +66,8 @@ class IHMPikawa : public QMainWindow
 
   public slots:
     void afficherLongueurPreparation(int longueurPreparation);
-    void afficherEcran(IHMPikawa::Ecran ecran);
+    void afficherPage(IHMPikawa::Page page);
+    void afficherPageAcceuil();
     void afficherPageInformations();
     void afficherPageEntretien();
     void afficherPageParametres();

@@ -3,6 +3,9 @@
         <file alias="cafetiere-off.png">images/cafetiere-rouge.png</file>
         <file alias="cafetiere-on.png">images/cafetiere-verte.png</file>
         <file alias="cafe.png">images/cafe.png</file>
+        <file alias="RondVert.png">images/RondVert.png</file>
+        <file alias="RondRouge.png">images/RondRouge.png</file>
+
     </qresource>
     <qresource prefix="/qss">
         <file>pikawa.qss</file>
