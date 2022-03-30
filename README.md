@@ -22,3 +22,7 @@ Exemples : la Delonghi, PrimaDonna Elite, la Saeco Granbaristo Avanti et les Jur
 
 Actuellement, il n’existe pas de solutions équivalentes pour des machines à capsules.
 
+## Kanban
+
+[pikawa-2022](https://github.com/btssn-lasalle-84/pikawa-2022/projects/1)
+
