@@ -1,14 +1,20 @@
-#ifndef PIKAWA_H
-#define PIKAWA_H
+#ifndef CAFETIERE_H
+#define CAFETIERE_H
 
 #include <QVector>
+#include <QObject>
 
 class IHMPikawa;
+class Communication;
+class Preparation;
 
-class Cafetiere
+class Cafetiere : public QObject
 {
+    Q_OBJECT
   private:
-    IHMPikawa* ihm;
+    IHMPikawa*     ihm;
+    Communication* communication;
+    Preparation*   preparation;
 
     QVector<QString> nomCapsules;
     QVector<QString> nomBoissons;
@@ -22,9 +28,17 @@ class Cafetiere
 
   public:
     Cafetiere();
+    ~Cafetiere();
 
     IHMPikawa* getIHMPikaw();
-    void       setIHMPikawa(IHMPikawa ihm);
+    void       setIHMPikawa(IHMPikawa* ihm);
+
+    Communication* getCommunication();
+    void           setCommunication(Communication* communication);
+
+    Preparation* getPreparation();
+    void         setPreparation(Preparation* preparation);
+    void         activerLaDecouverte();
 };
 
-#endif // PIKAWA_H
+#endif // CAFETIERE_H

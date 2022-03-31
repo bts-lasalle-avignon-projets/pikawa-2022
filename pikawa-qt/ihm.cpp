@@ -58,6 +58,11 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
             this,
             SLOT(afficherPageParametres()));
 
+    connect(ui->bouttonConnecter,
+            SIGNAL(clicked()),
+            this,
+            SLOT(cafetiere->activerLaDecouverte()));
+
 #ifdef PLEIN_ECRAN
     showFullScreen();
 // showMaximized();

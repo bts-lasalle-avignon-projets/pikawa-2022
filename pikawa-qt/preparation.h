@@ -2,26 +2,21 @@
 #define PREPARATION_H
 
 #include <QVector>
-
-class Cafetiere;
+#include <QString>
 
 class Preparation
 {
   private:
-    Cafetiere* cafetere;
-
     QVector<QString> nomCapsules;
     QVector<QString> nomBoissons;
     bool             capsulePresente;
     bool             tassePresente;
 
   public:
-    Cafetiere* getCafetiere();
-    void       setCafetiere(Cafetiere* cafetiere);
-
     Preparation();
+    ~Preparation();
 
-    void chercherCafetiere();
+    void chercherESP();
 };
 
 #endif // PREPARATION_H

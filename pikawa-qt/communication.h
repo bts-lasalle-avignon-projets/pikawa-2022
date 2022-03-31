@@ -3,26 +3,20 @@
 
 #include <QBluetoothDeviceDiscoveryAgent>
 
-class Cafetiere;
-
 class Communication : public QObject
 {
   private:
     bool active;
     bool connecte;
 
-    Cafetiere* cafetiere;
-
   public:
-    Cafetiere* getCafetiere();
-    void       setCafetiere(Cafetiere* cafetere);
-
     Communication();
+    ~Communication();
 
-    void chercherCafetiere();
+    void activerLaDecouverte();
 
   public slots:
-    bool estCafetiereDecourverte(const QBluetoothDeviceInfo& device);
+    void estESPDecourverts(const QBluetoothDeviceInfo& esp);
 };
 
 #endif // COMMUNICATION_H

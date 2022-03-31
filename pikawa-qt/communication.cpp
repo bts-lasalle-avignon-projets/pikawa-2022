@@ -9,23 +9,26 @@ Communication::Communication() : active(false), connecte(false)
 {
     QBluetoothLocalDevice appareilLocal;
     QString               nomAppareilLocal;
-    chercherCafetiere();
 }
 
-void Communication::chercherCafetiere()
+Communication::~Communication()
+{
+}
+
+void Communication::activerLaDecouverte()
 {
     QBluetoothDeviceDiscoveryAgent* agentDecouvreur =
       new QBluetoothDeviceDiscoveryAgent(this);
     connect(agentDecouvreur,
-            SIGNAL(estCafetiereDecourverte(QBluetoothDeviceInfo)),
+            SIGNAL(estESPDecourverts(QBluetoothDeviceInfo)),
             this,
-            SLOT(estCafetiereDecourverte(QBluetoothDeviceInfo)));
+            SLOT(estESPDecourverts(QBluetoothDeviceInfo)));
 
     agentDecouvreur->start();
 }
 
-bool Communication::estCafetiereDecourverte(const QBluetoothDeviceInfo& device)
+void Communication::estESPDecourverts(const QBluetoothDeviceInfo& esp)
 {
-    qDebug() << "Decouverte d'un nouvel appareil:" << device.name() << '('
-             << device.address().toString() << ')';
+    qDebug() << "Decouverte d'un nouvel appareil: " << esp.name() << '('
+             << esp.address().toString() << ')';
 }
