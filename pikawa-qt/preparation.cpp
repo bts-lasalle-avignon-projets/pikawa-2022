@@ -10,7 +10,7 @@
  *
  */
 
-Preparation::Preparation(QObject* parent) : capsulePresente(false), tassePresente(false)
+Preparation::Preparation(QObject* parent) : QObject(parent), capsulePresente(false), tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
 }

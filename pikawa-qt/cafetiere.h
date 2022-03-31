@@ -42,7 +42,7 @@ class Cafetiere : public QObject
 
   public:
     Cafetiere(IHMPikawa* ihm);
-    virtual ~Cafetiere(); //!< permettra d'appeller le destructeur de la classe qui est detruite
+    virtual ~Cafetiere();
 
   public slots:
     void connecter();

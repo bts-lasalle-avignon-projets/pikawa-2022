@@ -21,6 +21,7 @@
  */
 class Preparation : public QObject
 {
+    Q_OBJECT
   private:
     QStringList nomCapsules;
     QStringList nomBoissons;
@@ -28,7 +29,7 @@ class Preparation : public QObject
     bool        tassePresente;
 
   public:
-    Preparation(QObject* parent);
+    Preparation(QObject *parent = nullptr);
     ~Preparation();
 };
 
