@@ -1,9 +1,30 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
+/**
+ * @file communication.h
+ *
+ * @brief Déclaration de la classe Communication
+ * @author
+ * @version 1.0
+ *
+ */
+
 #include <QObject>
 #include <QBluetoothDeviceInfo>
 
+/**
+ * @def PREFIXE_NOM_CAFETIERE
+ * @brief Le nom de l'appareil Bluetooth d'une cafetière doit contenir ce
+ * préfixe
+ */
+#define PREFIXE_NOM_CAFETIERE "PIKAWA"
+
+/**
+ * @class Communication
+ * @brief
+ * @details
+ */
 class Communication : public QObject
 {
     Q_OBJECT
@@ -17,7 +38,7 @@ class Communication : public QObject
 
   public slots:
     void activerLaDecouverte();
-    void decouvrirCafetiere(const QBluetoothDeviceInfo& esp);
+    void decouvrirCafetiere(const QBluetoothDeviceInfo& appareilBluetooth);
 };
 
 #endif // COMMUNICATION_H

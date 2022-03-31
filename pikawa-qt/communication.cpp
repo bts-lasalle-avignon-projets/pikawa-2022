@@ -1,5 +1,14 @@
 #include "communication.h"
 
+/**
+ * @file communication.cpp
+ *
+ * @brief Définition de la classe Communication
+ * @author
+ * @version 1.0
+ *
+ */
+
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QString>
@@ -31,7 +40,7 @@ void Communication::activerLaDecouverte()
 void Communication::decouvrirCafetiere(
   const QBluetoothDeviceInfo& appareilBluetooth)
 {
-    qDebug() << Q_FUNC_INFO << "appareil Bluettoth" << appareilBluetooth.name()
+    qDebug() << Q_FUNC_INFO << "appareil Bluetooth" << appareilBluetooth.name()
              << '[' << appareilBluetooth.address().toString() << ']';
     /**
      * @todo Vérifier que le nom de l'appareil Bluetooth contient l'identifiant

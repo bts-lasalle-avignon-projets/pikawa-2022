@@ -3,6 +3,15 @@
 #include "communication.h"
 #include <QDebug>
 
+/**
+ * @file cafetiere.cpp
+ *
+ * @brief Définitionde la classe Cafetiere
+ * @author
+ * @version 1.0
+ *
+ */
+
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(nullptr), preparation(nullptr),
     nomCapsules(0), nomBoissons(0), capsuleChoisie(0), boissonChoisie(0),

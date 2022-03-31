@@ -61,7 +61,7 @@ class IHMPikawa : public QMainWindow
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
-    Cafetiere*     cafetiere;
+    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
 
     void initialiserIHM();
     void gererEvenements();
@@ -69,9 +69,6 @@ class IHMPikawa : public QMainWindow
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
-
-    Cafetiere* getCafetiere();
-    void       setCafetiere(Cafetiere* cafetere);
 
   public slots:
     void afficherLongueurPreparation(int longueurPreparation);

@@ -1,8 +1,16 @@
 #include "preparation.h"
 #include <QDebug>
 
-Preparation::Preparation() :
-    nomCapsules(0), nomBoissons(0), capsulePresente(false), tassePresente(false)
+/**
+ * @file preparation.cpp
+ *
+ * @brief Définition de la classe Preparation
+ * @author
+ * @version 1.0
+ *
+ */
+
+Preparation::Preparation() : capsulePresente(false), tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
 }

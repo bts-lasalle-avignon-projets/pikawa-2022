@@ -13,6 +13,13 @@
  *
  */
 
+/**
+ * @brief Constructeur de la classe IHMPikawa
+ *
+ * @fn IHMPikawa::IHMPikawa
+ * @param parent L'adresse de l'objet parent, si nullptr IHMPikawa sera la
+ * fenêtre principale de l'application
+ */
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa)
 {
@@ -36,6 +43,13 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 // showMaximized();
 #endif
 }
+
+/**
+ * @brief Destructeur de la classe IHMPikawa
+ *
+ * @fn IHMPikawa::~IHMPikawa
+ * @details Libère les ressources de l'application
+ */
 
 IHMPikawa::~IHMPikawa()
 {
