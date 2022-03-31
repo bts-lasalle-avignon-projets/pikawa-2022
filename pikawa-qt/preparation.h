@@ -15,8 +15,6 @@ class Preparation
   public:
     Preparation();
     ~Preparation();
-
-    void chercherESP();
 };
 
 #endif // PREPARATION_H

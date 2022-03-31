@@ -5,14 +5,15 @@
 #include <QString>
 #include <QDebug>
 
-Communication::Communication() : active(false), connecte(false)
+Communication::Communication(QObject* parent) :
+    QObject(parent), active(false), connecte(false)
 {
-    QBluetoothLocalDevice appareilLocal;
-    QString               nomAppareilLocal;
+    qDebug() << Q_FUNC_INFO;
 }
 
 Communication::~Communication()
 {
+    qDebug() << Q_FUNC_INFO;
 }
 
 void Communication::activerLaDecouverte()
@@ -20,15 +21,20 @@ void Communication::activerLaDecouverte()
     QBluetoothDeviceDiscoveryAgent* agentDecouvreur =
       new QBluetoothDeviceDiscoveryAgent(this);
     connect(agentDecouvreur,
-            SIGNAL(estESPDecourverts(QBluetoothDeviceInfo)),
+            SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
             this,
-            SLOT(estESPDecourverts(QBluetoothDeviceInfo)));
+            SLOT(decouvrirCafetiere(QBluetoothDeviceInfo)));
 
     agentDecouvreur->start();
 }
 
-void Communication::estESPDecourverts(const QBluetoothDeviceInfo& esp)
+void Communication::decouvrirCafetiere(
+  const QBluetoothDeviceInfo& appareilBluetooth)
 {
-    qDebug() << "Decouverte d'un nouvel appareil: " << esp.name() << '('
-             << esp.address().toString() << ')';
+    qDebug() << Q_FUNC_INFO << "appareil Bluettoth" << appareilBluetooth.name()
+             << '[' << appareilBluetooth.address().toString() << ']';
+    /**
+     * @todo Vérifier que le nom de l'appareil Bluetooth contient l'identifiant
+     * PIKAWA, si c'est le cas conserver cet appareil
+     */
 }

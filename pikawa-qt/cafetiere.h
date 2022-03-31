@@ -27,18 +27,11 @@ class Cafetiere : public QObject
     bool             tassePresente;
 
   public:
-    Cafetiere();
-    ~Cafetiere();
+    Cafetiere(IHMPikawa* ihm);
+    virtual ~Cafetiere();
 
-    IHMPikawa* getIHMPikaw();
-    void       setIHMPikawa(IHMPikawa* ihm);
-
-    Communication* getCommunication();
-    void           setCommunication(Communication* communication);
-
-    Preparation* getPreparation();
-    void         setPreparation(Preparation* preparation);
-    void         activerLaDecouverte();
+  public slots:
+    void connecter();
 };
 
 #endif // CAFETIERE_H
