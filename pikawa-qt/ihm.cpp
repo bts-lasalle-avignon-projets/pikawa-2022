@@ -32,10 +32,31 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
+
     connect(ui->bouttonEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
+
+    connect(ui->bouttonParametres,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageParametres()));
+
+    connect(ui->bouttonAcceuilInformation,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageAcceuil()));
+
+    connect(ui->bouttonEntretienInformation,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageEntretien()));
+
+    connect(ui->bouttonParametresInformation,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageParametres()));
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -81,22 +102,28 @@ void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
       labelsLongueurPreparation.at(longueurPreparation));
 }
 
-void IHMPikawa::afficherEcran(IHMPikawa::Ecran ecran)
+void IHMPikawa::afficherPage(IHMPikawa::Page page)
 {
-    qDebug() << Q_FUNC_INFO << "ecran" << ecran;
-    ui->ecrans->setCurrentIndex(ecran);
+    qDebug() << Q_FUNC_INFO << "page" << page;
+    ui->ecrans->setCurrentIndex(page);
+}
+
+void IHMPikawa::afficherPageAcceuil()
+{
+    afficherPage(IHMPikawa::Page(0));
 }
 
 void IHMPikawa::afficherPageInformations()
 {
-    afficherEcran(IHMPikawa::Ecran(1));
+    afficherPage(IHMPikawa::Page(1));
 }
 
 void IHMPikawa::afficherPageEntretien()
 {
-    afficherEcran(IHMPikawa::Ecran(2));
+    afficherPage(IHMPikawa::Page(2));
 }
 
 void IHMPikawa::afficherPageParametres()
 {
+    afficherPage(IHMPikawa::Page(3));
 }
