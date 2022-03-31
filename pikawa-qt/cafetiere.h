@@ -1,10 +1,15 @@
 #ifndef PIKAWA_H
 #define PIKAWA_H
+
 #include <QVector>
+
+class IHMPikawa;
 
 class Cafetiere
 {
   private:
+    IHMPikawa* ihm;
+
     QVector<QString> nomCapsules;
     QVector<QString> nomBoissons;
     int              capsuleChoisie;
@@ -17,6 +22,9 @@ class Cafetiere
 
   public:
     Cafetiere();
+
+    IHMPikawa* getIHMPikaw();
+    void       setIHMPikawa(IHMPikawa ihm);
 };
 
 #endif // PIKAWA_H
