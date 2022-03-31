@@ -1,6 +1,7 @@
 #include "cafetiere.h"
 #include "ihm.h"
 #include "communication.h"
+#include "preparation.h"
 #include <QDebug>
 
 /**
@@ -19,9 +20,8 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
-    /**
-     * @todo Instancier les objets preparation et communication
-     */
+   Communication* communication = new Communication(this);
+   Preparation* preparation = new Preparation(this);
 }
 
 Cafetiere::~Cafetiere()

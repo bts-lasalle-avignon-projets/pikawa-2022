@@ -1,0 +1,12 @@
+window_sizes 1848 1016 450 1392 843 120
+cleanlooks_style
+diagrams
+  active  sequencediagram_ref 134658 // Diagramme séquence système
+    1113 674 100 A4-Landscape 145 0
+end
+show_stereotypes
+selected sequencediagram_ref 134658 // Diagramme séquence système
+open
+  usecaseview_ref 128002 // Vue cas d'utilisation
+end
+end
