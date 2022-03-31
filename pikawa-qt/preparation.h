@@ -1,6 +1,8 @@
 #ifndef PREPARATION_H
 #define PREPARATION_H
 
+#include <QVector>
+
 class Cafetiere;
 
 class Preparation
