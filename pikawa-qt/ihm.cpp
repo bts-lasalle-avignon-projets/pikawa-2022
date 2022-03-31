@@ -1,6 +1,7 @@
 #include "ihm.h"
 #include "ui_ihm.h"
 #include "basededonnees.h"
+#include "cafetiere.h"
 #include <QDebug>
 
 /**
@@ -12,6 +13,13 @@
  *
  */
 
+/**
+ * @brief Constructeur de la classe IHMPikawa
+ *
+ * @fn IHMPikawa::IHMPikawa
+ * @param parent L'adresse de l'objet parent, si nullptr IHMPikawa sera la
+ * fenêtre principale de l'application
+ */
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa)
 {
@@ -24,9 +32,49 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     baseDeDonnees = BaseDeDonnees::getInstance();
     baseDeDonnees->ouvrir("pikawa.sqlite");
 
+    cafetiere = new Cafetiere(this);
+
     gererEvenements();
 
     initialiserIHM();
+
+#ifdef PLEIN_ECRAN
+    showFullScreen();
+// showMaximized();
+#endif
+}
+
+/**
+ * @brief Destructeur de la classe IHMPikawa
+ *
+ * @fn IHMPikawa::~IHMPikawa
+ * @details Libère les ressources de l'application
+ */
+
+IHMPikawa::~IHMPikawa()
+{
+    delete ui;
+    BaseDeDonnees::detruireInstance();
+    qDebug() << Q_FUNC_INFO;
+}
+
+void IHMPikawa::initialiserIHM()
+{
+    /**
+     * @todo Mettre des constantes pour le NOM et la VERSION
+     */
+    ui->statusbar->showMessage(QString::fromUtf8("Pikawa 2022"));
+
+    ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
+    afficherLongueurPreparation(LongueurCafe::Court);
+}
+
+void IHMPikawa::gererEvenements()
+{
+    connect(ui->selectionLongueurPreparation,
+            SIGNAL(valueChanged(int)),
+            this,
+            SLOT(afficherLongueurPreparation(int)));
 
     connect(ui->bouttonInformations,
             SIGNAL(clicked()),
@@ -58,36 +106,10 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
             this,
             SLOT(afficherPageParametres()));
 
-#ifdef PLEIN_ECRAN
-    showFullScreen();
-// showMaximized();
-#endif
-}
-
-IHMPikawa::~IHMPikawa()
-{
-    delete ui;
-    BaseDeDonnees::detruireInstance();
-    qDebug() << Q_FUNC_INFO;
-}
-
-void IHMPikawa::initialiserIHM()
-{
-    /**
-     * @todo Mettre des constantes pour le NOM et la VERSION
-     */
-    ui->statusbar->showMessage(QString::fromUtf8("Pikawa 2022"));
-
-    ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
-    afficherLongueurPreparation(LongueurCafe::Court);
-}
-
-void IHMPikawa::gererEvenements()
-{
-    connect(ui->selectionLongueurPreparation,
-            SIGNAL(valueChanged(int)),
-            this,
-            SLOT(afficherLongueurPreparation(int)));
+    connect(ui->bouttonConnecter,
+            SIGNAL(clicked()),
+            cafetiere,
+            SLOT(connecter()));
 }
 
 void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)

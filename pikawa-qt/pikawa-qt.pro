@@ -1,6 +1,6 @@
 QT       += core gui widgets sql
-
-CONFIG += c++11
+QT       += bluetooth
+CONFIG   += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -10,13 +10,15 @@ SOURCES += \
     cafetiere.cpp \
     communication.cpp \
     main.cpp \
-    ihm.cpp
+    ihm.cpp \
+    preparation.cpp
 
 HEADERS += \
     basededonnees.h \
     cafetiere.h \
     communication.h \
-    ihm.h
+    ihm.h \
+    preparation.h
 
 FORMS += \
     ihm.ui

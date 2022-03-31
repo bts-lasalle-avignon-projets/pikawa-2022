@@ -12,6 +12,8 @@
 
 #include <QtWidgets>
 
+class Cafetiere;
+
 /**
  * @def PLEIN_ECRAN
  * @brief Pour le mode plein écran
@@ -56,16 +58,17 @@ class IHMPikawa : public QMainWindow
         NbEcrans
     };
 
-  public:
-    IHMPikawa(QWidget* parent = nullptr);
-    ~IHMPikawa();
-
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
+    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
 
     void initialiserIHM();
     void gererEvenements();
+
+  public:
+    IHMPikawa(QWidget* parent = nullptr);
+    ~IHMPikawa();
 
   public slots:
     void afficherLongueurPreparation(int longueurPreparation);

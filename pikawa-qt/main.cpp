@@ -6,7 +6,7 @@
  * @brief Programme principal
  * @details Crée et affiche la fenêtre principale de l'application Pikawa
  * @author
- * @version 1.0
+ * @version 0.1
  *
  * @param argc
  * @param argv[]
