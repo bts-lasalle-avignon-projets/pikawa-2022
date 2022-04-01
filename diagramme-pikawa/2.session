@@ -1,11 +1,13 @@
 window_sizes 1864 1016 436 1422 843 120
 cleanlooks_style
 diagrams
-  active  sequencediagram_ref 134658 // Diagramme séquence système
+  sequencediagram_ref 134658 // Diagramme séquence système
     1422 843 100 A4 91 0
+  active  classdiagram_ref 128002 // Diagramme de classe
+    1422 843 100 A4 48 0
 end
 show_stereotypes
-selected attribute_ref 128642 // nomsBoissons
+selected attribute_ref 129538 // nomsBoissons
 open
   class_ref 128130 // Pikawa
   class_ref 128258 // Preparation
