@@ -30,11 +30,12 @@ class Communication : public QObject
 {
     Q_OBJECT
   private:
-    bool active;
-    bool connecte;
+    QBluetoothLocalDevice interfaceLocale;
+    bool                  active;
+    bool                  connecte;
 
-    bool estBluetoothDisponible(QBluetoothLocalDevice& interfaceLocal);
-    void activerBluetooth(QBluetoothLocalDevice& interfaceLocal);
+    bool estBluetoothDisponible();
+    void activerBluetooth();
 
   public:
     Communication(QObject* parent = nullptr);
