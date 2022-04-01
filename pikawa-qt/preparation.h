@@ -10,15 +10,18 @@
  *
  */
 
+#include <QObject>
 #include <QStringList>
+
 
 /**
  * @class Preparation
  * @brief
  * @details
  */
-class Preparation
+class Preparation : public QObject
 {
+    Q_OBJECT
   private:
     QStringList nomCapsules;
     QStringList nomBoissons;
@@ -26,7 +29,7 @@ class Preparation
     bool        tassePresente;
 
   public:
-    Preparation();
+    Preparation(QObject *parent = nullptr);
     ~Preparation();
 };
 
