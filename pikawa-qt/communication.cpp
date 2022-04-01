@@ -25,6 +25,15 @@ Communication::~Communication()
     qDebug() << Q_FUNC_INFO;
 }
 
+bool Communication::getActive() const
+{
+    return active;
+}
+bool Communication::getConnecte() const
+{
+    return connecte;
+}
+
 void Communication::activerLaDecouverte()
 {
     QBluetoothDeviceDiscoveryAgent* agentDecouvreur =

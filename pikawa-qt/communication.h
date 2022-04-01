@@ -32,6 +32,9 @@ class Communication : public QObject
     bool active;
     bool connecte;
 
+    bool getActive() const;
+    bool getConnecte() const;
+
   public:
     Communication(QObject* parent = nullptr);
     ~Communication();
