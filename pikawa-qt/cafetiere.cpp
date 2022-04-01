@@ -14,9 +14,8 @@
 
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(nullptr), preparation(nullptr),
-    nomCapsules(0), nomBoissons(0), capsuleChoisie(0), boissonChoisie(0),
-    niveauEau(0), connectee(false), activee(false), capsulePresente(false),
-    tassePresente(false)
+    capsuleChoisie(0), boissonChoisie(0), niveauEau(0), connectee(false),
+    activee(false), capsulePresente(false), tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
     /**
@@ -29,12 +28,12 @@ Cafetiere::~Cafetiere()
     qDebug() << Q_FUNC_INFO;
 }
 
-QVector<QString> Cafetiere::getNomcapsules() const
+QStringList Cafetiere::getNomcapsules() const
 {
     return nomCapsules;
 }
 
-QVector<QString> Cafetiere::getNomBoissons() const
+QStringList Cafetiere::getNomBoissons() const
 {
     return nomBoissons;
 }
@@ -74,16 +73,16 @@ bool Cafetiere::getTassePresente() const
     return tassePresente;
 }
 
-void Cafetiere::setCapsuleChoisie(int& capsuleChoisie)
+void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
 {
     this->capsuleChoisie = capsuleChoisie;
 }
 
-void Cafetiere::setBoissonChoisie(int& boissonChoisie)
+void Cafetiere::setBoissonChoisie(const int& boissonChoisie)
 {
     this->boissonChoisie = boissonChoisie;
 }
-void Cafetiere::setNiveauEau(int& niveauEau)
+void Cafetiere::setNiveauEau(const int& niveauEau)
 {
     this->niveauEau = niveauEau;
 }
