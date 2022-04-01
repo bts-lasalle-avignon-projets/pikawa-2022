@@ -12,6 +12,7 @@
 
 #include <QObject>
 #include <QBluetoothDeviceInfo>
+#include <QBluetoothLocalDevice>
 
 /**
  * @def PREFIXE_NOM_CAFETIERE
@@ -31,6 +32,9 @@ class Communication : public QObject
   private:
     bool active;
     bool connecte;
+
+    bool estBluetoothDisponible(QBluetoothLocalDevice& interfaceLocal);
+    void activerBluetooth(QBluetoothLocalDevice& interfaceLocal);
 
   public:
     Communication(QObject* parent = nullptr);

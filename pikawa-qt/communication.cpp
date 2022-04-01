@@ -25,6 +25,24 @@ Communication::~Communication()
     qDebug() << Q_FUNC_INFO;
 }
 
+bool Communication::estBluetoothDisponible(
+  QBluetoothLocalDevice& interfaceLocal)
+{
+    if(interfaceLocal.isValid())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Communication::activerBluetooth(QBluetoothLocalDevice& interfaceLocal)
+{
+    interfaceLocal.powerOn();
+}
+
 void Communication::activerLaDecouverte()
 {
     QBluetoothDeviceDiscoveryAgent* agentDecouvreur =
