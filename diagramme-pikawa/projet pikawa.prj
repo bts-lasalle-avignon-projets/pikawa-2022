@@ -65,11 +65,37 @@ format 224
     activitydiagramsettings
      end
     classdiagram 128002 "Diagramme de classe"
-      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+      classdiagramsettings draw_all_relations no member_max_width 0 end
       size A4
     end
 
-    class 128130 "Pikawa"
+    class 128002 "Eau"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 128002 "niveauEau"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128642 // <aggregation>
+	relation_ref 128258 // <aggregation>
+      end
+    end
+
+    class 128130 "Cafetiere"
       visibility package 
       cpp_decl ""
       java_decl ""
@@ -80,7 +106,7 @@ format 224
       mysql_decl ""
       
       attribute 129538 "nomsBoissons"
-	private explicit_type "QVector"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -91,7 +117,7 @@ format 224
       end
 
       attribute 129410 "nomsCapsules"
-	private explicit_type "QVector"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -102,7 +128,7 @@ format 224
       end
 
       attribute 130050 "capsulePresente"
-	private explicit_type "bool"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -113,7 +139,7 @@ format 224
       end
 
       attribute 129922 "tassePresente"
-	private explicit_type "bool"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -124,7 +150,7 @@ format 224
       end
 
       attribute 130434 "capsuleChoisie"
-	private explicit_type "int"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -134,8 +160,8 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130562 "longueurChoisie"
-	private explicit_type "int"
+      attribute 130562 "boisonChoisie"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -146,7 +172,7 @@ format 224
       end
 
       attribute 129154 "niveauEau"
-	private explicit_type "int"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -156,8 +182,8 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130178 "connecté"
-	private explicit_type "bool"
+      attribute 130178 "connecte"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -167,8 +193,8 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130306 "activé"
-	private explicit_type "bool"
+      attribute 130306 "active"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -194,6 +220,14 @@ format 224
 	    classrelation_ref 128386 // <aggregation>
       end
 
+      classrelation 128514 // <aggregation>
+	relation 128258 o---
+	  a role_name "" private
+	    classrelation_ref 128514 // <aggregation>
+	  b role_name "" private
+	    classrelation_ref 128642 // <aggregation>
+      end
+
       classrelation 128770 // <aggregation>
 	relation 128386 o---
 	  a role_name "" private
@@ -208,6 +242,13 @@ format 224
 	    classrelation_ref 135426 // <directional aggregation>
 	  b parent class_ref 128386 // Communication
       end
+
+      classrelation 141954 // <directional aggregation>
+	relation 141442 o-->
+	  a role_name "" private
+	    classrelation_ref 141954 // <directional aggregation>
+	  b parent class_ref 128258 // Preparation
+      end
     end
 
     class 128258 "Preparation"
@@ -221,7 +262,7 @@ format 224
       mysql_decl ""
       
       attribute 128386 "nomsCapsules"
-	private explicit_type "QVector"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -232,7 +273,7 @@ format 224
       end
 
       attribute 128642 "nomsBoissons"
-	private explicit_type "QVector"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -243,7 +284,7 @@ format 224
       end
 
       attribute 128514 "capsulePresente"
-	private explicit_type "bool"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -254,7 +295,7 @@ format 224
       end
 
       attribute 128258 "tassePresente"
-	private explicit_type "bool"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -280,7 +321,7 @@ format 224
       mysql_decl ""
       
       attribute 128770 "adresseMac"
-	private explicit_type "const"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -291,7 +332,7 @@ format 224
       end
 
       attribute 128898 "connecté"
-	private explicit_type "bool"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -302,7 +343,7 @@ format 224
       end
 
       attribute 129026 "activé"
-	private explicit_type "bool"
+	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
