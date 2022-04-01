@@ -29,6 +29,65 @@ Cafetiere::~Cafetiere()
     qDebug() << Q_FUNC_INFO;
 }
 
+QVector<QString> Cafetiere::getNomcapsules() const
+{
+    return nomCapsules;
+}
+
+QVector<QString> Cafetiere::getNomBoissons() const
+{
+    return nomBoissons;
+}
+
+int Cafetiere::getCaspuleChoisie() const
+{
+    return capsuleChoisie;
+}
+
+int Cafetiere::getBoissonChoisie() const
+{
+    return boissonChoisie;
+}
+
+int Cafetiere::getNiveauEau() const
+{
+    return niveauEau;
+}
+
+bool Cafetiere::getConnectee() const
+{
+    return connectee;
+}
+
+bool Cafetiere::getActivee() const
+{
+    return activee;
+}
+
+bool Cafetiere::getCapsulePresente() const
+{
+    return capsulePresente;
+}
+
+bool Cafetiere::getTassePresente() const
+{
+    return tassePresente;
+}
+
+void Cafetiere::setCapsuleChoisie(int& capsuleChoisie)
+{
+    this->capsuleChoisie = capsuleChoisie;
+}
+
+void Cafetiere::setBoissonChoisie(int& boissonChoisie)
+{
+    this->boissonChoisie = boissonChoisie;
+}
+void Cafetiere::setNiveauEau(int& niveauEau)
+{
+    this->niveauEau = niveauEau;
+}
+
 void Cafetiere::connecter()
 {
     qDebug() << Q_FUNC_INFO;
