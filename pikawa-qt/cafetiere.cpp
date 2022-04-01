@@ -14,10 +14,10 @@
  */
 
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
-    QObject(ihm), ihm(ihm), communication(communication), preparation(preparation),
-    nomCapsules(0), nomBoissons(0), capsuleChoisie(0), boissonChoisie(0),
-    niveauEau(0), connectee(false), activee(false), capsulePresente(false),
-    tassePresente(false)
+    QObject(ihm), ihm(ihm), communication(new Communication(this)),
+    preparation(new Preparation(this)), nomCapsules(0), nomBoissons(0),
+    capsuleChoisie(0), boissonChoisie(0), niveauEau(0), connectee(false),
+    activee(false), capsulePresente(false), tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
