@@ -9,7 +9,6 @@
  *
  */
 
-#include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QString>
 #include <QDebug>
@@ -17,12 +16,34 @@
 Communication::Communication(QObject* parent) :
     QObject(parent), active(false), connecte(false)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
 }
 
 Communication::~Communication()
 {
     qDebug() << Q_FUNC_INFO;
+}
+
+bool Communication::getActive() const
+{
+    return active;
+}
+bool Communication::getConnecte() const
+{
+    return connecte;
+  
+bool Communication::estBluetoothDisponible()
+{
+    return interfaceLocale.isValid();
+}
+
+void Communication::activerBluetooth()
+{
+    if(estBluetoothDisponible())
+    {
+        interfaceLocale.powerOn();
+        this->active = true;
+    }
 }
 
 void Communication::activerLaDecouverte()

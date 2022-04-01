@@ -10,8 +10,8 @@
  *
  */
 
-#include <QVector>
 #include <QObject>
+#include <QStringList>
 
 class IHMPikawa;
 class Communication;
@@ -30,15 +30,29 @@ class Cafetiere : public QObject
     Communication* communication; //!<
     Preparation*   preparation;   //!<
 
-    QVector<QString> nomCapsules;     //!<
-    QVector<QString> nomBoissons;     //!<
-    int              capsuleChoisie;  //!<
-    int              boissonChoisie;  //!<
-    int              niveauEau;       //!<
-    bool             connectee;       //!<
-    bool             activee;         //!<
-    bool             capsulePresente; //!<
-    bool             tassePresente;   //!<
+    QStringList nomCapsules;     //!<
+    QStringList nomBoissons;     //!<
+    int         capsuleChoisie;  //!<
+    int         boissonChoisie;  //!<
+    int         niveauEau;       //!<
+    bool        connectee;       //!<
+    bool        activee;         //!<
+    bool        capsulePresente; //!<
+    bool        tassePresente;   //!<
+
+    QStringList getNomcapsules() const;
+    QStringList getNomBoissons() const;
+    int         getCaspuleChoisie() const;
+    int         getBoissonChoisie() const;
+    int         getNiveauEau() const;
+    bool        getConnectee() const;
+    bool        getActivee() const;
+    bool        getCapsulePresente() const;
+    bool        getTassePresente() const;
+
+    void setCapsuleChoisie(const int& capsuleChoisie);
+    void setBoissonChoisie(const int& boissonChoisie);
+    void setNiveauEau(const int& niveauEau);
 
   public:
     Cafetiere(IHMPikawa* ihm);
