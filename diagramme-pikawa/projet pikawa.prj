@@ -182,7 +182,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130178 "connecte"
+      attribute 130178 "connecté"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -193,7 +193,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130306 "active"
+      attribute 130306 "activé"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -244,7 +244,7 @@ format 224
       end
 
       classrelation 141954 // <directional aggregation>
-	relation 141442 o-->
+	relation 141570 o-->
 	  a role_name "" private
 	    classrelation_ref 141954 // <directional aggregation>
 	  b parent class_ref 128258 // Preparation
