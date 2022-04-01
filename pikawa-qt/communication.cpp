@@ -41,6 +41,7 @@ bool Communication::estBluetoothDisponible(
 void Communication::activerBluetooth(QBluetoothLocalDevice& interfaceLocal)
 {
     interfaceLocal.powerOn();
+    this->active = true;
 }
 
 void Communication::activerLaDecouverte()
