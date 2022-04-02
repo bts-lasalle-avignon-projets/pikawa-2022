@@ -24,16 +24,16 @@ Communication::~Communication()
     qDebug() << Q_FUNC_INFO;
 }
 
-bool Communication::getActive() const
+bool Communication::estActive() const
 {
     return active;
 }
 
-bool Communication::getConnecte() const
+bool Communication::estConnecte() const
 {
     return connecte;
 }
-  
+
 bool Communication::estBluetoothDisponible()
 {
     return interfaceLocale.isValid();
