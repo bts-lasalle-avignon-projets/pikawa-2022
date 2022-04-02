@@ -37,8 +37,8 @@ class Communication : public QObject
     bool estBluetoothDisponible();
     void activerBluetooth();
 
-    bool getActive() const;
-    bool getConnecte() const;
+    bool estActive() const;
+    bool estConnecte() const;
 
   public:
     Communication(QObject* parent = nullptr);
