@@ -14,24 +14,17 @@
 #include <QDebug>
 
 Communication::Communication(QObject* parent) :
-    QObject(parent), active(false), connecte(false)
+    QObject(parent), agentDecouvreur(nullptr), pikawaDetecte(false),
+    socketBluetoothPikawa(nullptr)
 {
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
+    activerBluetooth();
 }
 
 Communication::~Communication()
 {
+    deconnecter();
     qDebug() << Q_FUNC_INFO;
-}
-
-bool Communication::estActive() const
-{
-    return active;
-}
-
-bool Communication::estConnecte() const
-{
-    return connecte;
 }
 
 bool Communication::estBluetoothDisponible()
@@ -43,21 +36,47 @@ void Communication::activerBluetooth()
 {
     if(estBluetoothDisponible())
     {
+        qDebug() << Q_FUNC_INFO << interfaceLocale.name();
         interfaceLocale.powerOn();
-        this->active = true;
+
+        activerLaDecouverte();
     }
+    else
+        qDebug() << Q_FUNC_INFO << "Pas de bluetooh !";
+}
+
+/**
+ * @brief
+ *
+ * @fn bool Communication::estConnecte()
+ */
+bool Communication::estConnecte() const
+{
+    if(!estBluetoothDisponible())
+        return false;
+    if(socketBluetoothPikawa == nullptr)
+        return false;
+    qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->isOpen();
+    return socketBluetoothPikawa->isOpen();
 }
 
 void Communication::activerLaDecouverte()
 {
-    QBluetoothDeviceDiscoveryAgent* agentDecouvreur =
-      new QBluetoothDeviceDiscoveryAgent(this);
-    connect(agentDecouvreur,
-            SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
-            this,
-            SLOT(decouvrirCafetiere(QBluetoothDeviceInfo)));
+    if(estBluetoothDisponible())
+    {
+        qDebug() << Q_FUNC_INFO;
+        agentDecouvreur = new QBluetoothDeviceDiscoveryAgent(this);
+        if(agentDecouvreur != nullptr)
+        {
+            connect(agentDecouvreur,
+                    SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
+                    this,
+                    SLOT(decouvrirCafetiere(QBluetoothDeviceInfo)));
 
-    agentDecouvreur->start();
+            pikawaDetecte = false;
+            agentDecouvreur->start();
+        }
+    }
 }
 
 void Communication::decouvrirCafetiere(
@@ -65,8 +84,34 @@ void Communication::decouvrirCafetiere(
 {
     qDebug() << Q_FUNC_INFO << "appareil Bluetooth" << appareilBluetooth.name()
              << '[' << appareilBluetooth.address().toString() << ']';
-    /**
-     * @todo Vérifier que le nom de l'appareil Bluetooth contient l'identifiant
-     * PIKAWA, si c'est le cas conserver cet appareil
-     */
+
+    if(appareilBluetooth.name().contains(PREFIXE_NOM_CAFETIERE))
+    {
+        qDebug() << Q_FUNC_INFO << "machine à café pikawa détectée"
+                 << appareilBluetooth.name() << '['
+                 << appareilBluetooth.address().toString() << ']';
+        agentDecouvreur->stop();
+        pikawa        = appareilBluetooth;
+        pikawaDetecte = true;
+        emit cafetiereDetectee(appareilBluetooth.name(),
+                               appareilBluetooth.address().toString());
+    }
+}
+
+/**
+ * @brief Slot de déconnexion
+ *
+ * @fn void Communication::deconnecter()
+ */
+void Communication::deconnecter()
+{
+    if(!estBluetoothDisponible())
+        return;
+    if(socketBluetoothPikawa == nullptr)
+        return;
+    if(socketBluetoothPikawa->isOpen())
+    {
+        qDebug() << Q_FUNC_INFO;
+        socketBluetoothPikawa->close();
+    }
 }
