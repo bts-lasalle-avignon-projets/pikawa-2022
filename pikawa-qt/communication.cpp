@@ -1,4 +1,5 @@
 #include "communication.h"
+#include <unistd.h>
 
 /**
  * @file communication.cpp
@@ -10,6 +11,7 @@
  */
 
 #include <QBluetoothDeviceDiscoveryAgent>
+ #include <QBluetoothSocket>
 #include <QString>
 #include <QDebug>
 
@@ -97,6 +99,68 @@ void Communication::decouvrirCafetiere(
                                appareilBluetooth.address().toString());
     }
 }
+
+void Communication::socketConnectee()
+{
+    qDebug() << Q_FUNC_INFO;
+    QString message = QString::fromUtf8("Périphérique connecté ") + socketBluetoothPikawa->peerName() + " [" + socketBluetoothPikawa->peerAddress().toString() + "]";
+    qDebug() << message;
+}
+
+void Communication::socketDeconnectee()
+{
+    qDebug() << Q_FUNC_INFO;
+    QString message = QString::fromUtf8("Périphérique déconnecté ");
+    qDebug() << message;
+}
+
+void Communication::socketPretALire()
+{
+    qDebug() << Q_FUNC_INFO;
+    QByteArray donnees;
+
+    while (socketBluetoothPikawa->bytesAvailable())
+    {
+        donnees += socketBluetoothPikawa->readAll();
+        usleep(150000); // cf. timeout
+    }
+
+    qDebug() << QString::fromUtf8("Données reçues : ") << QString(donnees);
+}
+
+
+void Communication::connecter()
+{
+    if(!estConnecte())
+    {
+        socketBluetoothPikawa = new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
+
+        connect(socketBluetoothPikawa, SIGNAL(connected()), this, SLOT(socketConnectee()));
+        connect(socketBluetoothPikawa, SIGNAL(disconnected()), this, SLOT(socketDeconnectee()));
+        connect(socketBluetoothPikawa, SIGNAL(readyRead()), this, SLOT(socketPretALire()));
+
+        QBluetoothAddress adresse = QBluetoothAddress(pikawa.address());
+        QBluetoothUuid uuid = QBluetoothUuid(QBluetoothUuid::SerialPort);
+
+        socketBluetoothPikawa->connectToService(adresse, uuid);
+        socketBluetoothPikawa->open(QIODevice::ReadWrite);
+
+    }
+}
+
+
+void Communication::envoyerTrame(QString trame)
+{
+    qDebug() << Q_FUNC_INFO;
+    if (socketBluetoothPikawa == NULL || !socketBluetoothPikawa->isOpen())
+    {
+        return;
+    }
+    trame += "\r\n";
+    socketBluetoothPikawa->write(trame.toLatin1());
+}
+
+
 
 /**
  * @brief Slot de déconnexion
