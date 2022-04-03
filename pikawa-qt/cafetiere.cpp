@@ -90,4 +90,5 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
 void Cafetiere::connecter()
 {
     qDebug() << Q_FUNC_INFO;
+    communication->connecter();
 }

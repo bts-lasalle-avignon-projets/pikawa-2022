@@ -1,4 +1,5 @@
 #include "communication.h"
+#include <QDebug>
 
 /**
  * @file communication.cpp
@@ -8,10 +9,6 @@
  * @version 1.0
  *
  */
-
-#include <QBluetoothDeviceDiscoveryAgent>
-#include <QString>
-#include <QDebug>
 
 Communication::Communication(QObject* parent) :
     QObject(parent), agentDecouvreur(nullptr), pikawaDetecte(false),
@@ -96,6 +93,74 @@ void Communication::decouvrirCafetiere(
         emit cafetiereDetectee(appareilBluetooth.name(),
                                appareilBluetooth.address().toString());
     }
+}
+
+void Communication::socketConnectee()
+{
+    qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->peerName()
+             << socketBluetoothPikawa->peerAddress().toString();
+    emit cafetiereConnecte(socketBluetoothPikawa->peerName(),
+                           socketBluetoothPikawa->peerAddress().toString());
+}
+
+void Communication::socketDeconnectee()
+{
+    qDebug() << Q_FUNC_INFO;
+    emit cafetiereDeconnecte();
+}
+
+void Communication::recevoir()
+{
+    qDebug() << Q_FUNC_INFO;
+    QByteArray donnees;
+    donnees = socketBluetoothPikawa->readAll();
+    qDebug() << Q_FUNC_INFO << donnees;
+    trameRecue += QString(donnees.data());
+    qDebug() << Q_FUNC_INFO << trameRecue;
+
+    /**
+     * @todo Définir un protocole et le traiter ici
+     */
+}
+
+void Communication::connecter()
+{
+    if(!estConnecte())
+    {
+        socketBluetoothPikawa =
+          new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
+
+        connect(socketBluetoothPikawa,
+                SIGNAL(connected()),
+                this,
+                SLOT(socketConnectee()));
+        connect(socketBluetoothPikawa,
+                SIGNAL(disconnected()),
+                this,
+                SLOT(socketDeconnectee()));
+        connect(socketBluetoothPikawa,
+                SIGNAL(readyRead()),
+                this,
+                SLOT(recevoir()));
+
+        QBluetoothAddress adresse = QBluetoothAddress(pikawa.address());
+        QBluetoothUuid    uuid    = QBluetoothUuid(QBluetoothUuid::SerialPort);
+
+        socketBluetoothPikawa->connectToService(adresse, uuid);
+        socketBluetoothPikawa->open(QIODevice::ReadWrite);
+    }
+}
+
+void Communication::envoyerTrame(QString trame)
+{
+    qDebug() << Q_FUNC_INFO << trame;
+    if(!estConnecte())
+    {
+        return;
+    }
+    if(!trame.endsWith("\r\n"))
+        trame += "\r\n";
+    socketBluetoothPikawa->write(trame.toLatin1());
 }
 
 /**
