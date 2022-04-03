@@ -34,8 +34,7 @@ class Communication : public QObject
   private:
     QBluetoothLocalDevice interfaceLocale; //!< l'interface Bluetooth locale
     QBluetoothDeviceDiscoveryAgent*
-      agentDecouvreur; //!< agent permettant de découvrir des interfaces
-                       //!< Bluetooth
+      agentDecouvreur; //!< pour découvrir des interfaces Bluetooth
     QBluetoothDeviceInfo
          pikawa;        //!< l'interface Bluetooth de la cafetière pikawa
     bool pikawaDetecte; //!< état de détection de l'interface pikawa
