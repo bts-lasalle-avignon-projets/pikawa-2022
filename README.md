@@ -1,4 +1,4 @@
-# pikawa-2022
+# Le projet pikawa-2022
 
 ## Présentation
 
@@ -12,7 +12,6 @@ Le logiciel embarqué Pikawa permettra :
 * visualiser les alertes (eau, bac à capsule)
 * suivre l’entretien
 
-
 ## Analyse de l’existant
 
 L’année 2016 aura marqué l’arrivée de la machine à café automatique connectée, pilotable directement depuis un smartphone et/ou une tablette. 
@@ -21,6 +20,17 @@ Pour l'instant, la machine à café connectée reste limitée aux modèles “ha
 Exemples : la Delonghi, PrimaDonna Elite, la Saeco Granbaristo Avanti et les Jura Z6, E6 et E8.
 
 Actuellement, il n’existe pas de solutions équivalentes pour des machines à capsules.
+
+## Historique des versions
+
+- Version 0.1 : 03/04/2022
+  - affichage de l'écran d'accueil et d'informations
+  - mise en oeuvre de la recherche d'interfaces Bluetooth
+  - squelettes des classes Cafetiere et Preparation
+
+## Auteur
+
+- Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
 
 ## Kanban
 

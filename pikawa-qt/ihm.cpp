@@ -26,11 +26,8 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
 
-    /**
-     * @todo Mettre une constante pour le NOM de la base de données
-     */
     baseDeDonnees = BaseDeDonnees::getInstance();
-    baseDeDonnees->ouvrir("pikawa.sqlite");
+    baseDeDonnees->ouvrir(NOM_BDD);
 
     cafetiere = new Cafetiere(this);
 
@@ -60,13 +57,13 @@ IHMPikawa::~IHMPikawa()
 
 void IHMPikawa::initialiserIHM()
 {
-    /**
-     * @todo Mettre des constantes pour le NOM et la VERSION
-     */
-    ui->statusbar->showMessage(QString::fromUtf8("Pikawa 2022"));
+    ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
+                               QString::fromUtf8(VERSION));
 
     ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
     afficherLongueurPreparation(LongueurCafe::Court);
+
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::gererEvenements()

@@ -27,7 +27,7 @@ Communication::~Communication()
     qDebug() << Q_FUNC_INFO;
 }
 
-bool Communication::estBluetoothDisponible()
+bool Communication::estBluetoothDisponible() const
 {
     return interfaceLocale.isValid();
 }

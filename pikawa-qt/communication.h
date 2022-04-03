@@ -12,9 +12,6 @@
 
 #include <QObject>
 #include <QtBluetooth>
-//#include <QBluetoothDeviceInfo>
-//#include <QBluetoothLocalDevice>
-//#include <QBluetoothDeviceDiscoveryAgent>
 
 /**
  * @def PREFIXE_NOM_CAFETIERE
