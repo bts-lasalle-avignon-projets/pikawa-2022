@@ -15,6 +15,24 @@
 class Cafetiere;
 
 /**
+ * @def NOM
+ * @brief Le nom de l'application
+ */
+#define NOM "Pikawa"
+
+/**
+ * @def VERSION
+ * @brief La version de l'application
+ */
+#define VERSION "0.1"
+
+/**
+ * @def NOM_BDD
+ * @brief Le nom de la base de données SQLite
+ */
+#define NOM_BDD "pikawa.sqlite"
+
+/**
  * @def PLEIN_ECRAN
  * @brief Pour le mode plein écran
  */
