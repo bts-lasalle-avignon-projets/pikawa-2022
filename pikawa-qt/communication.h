@@ -50,14 +50,14 @@ class Communication : public QObject
     void envoyerTrame(QString trame);
 
   public slots:
-    void connecter();
     void activerLaDecouverte();
     void decouvrirCafetiere(const QBluetoothDeviceInfo& appareilBluetooth);
+    void connecter();
     void deconnecter();
-
     void socketConnectee();
     void socketDeconnectee();
     void recevoir();
+    void lireEtatSocket();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
