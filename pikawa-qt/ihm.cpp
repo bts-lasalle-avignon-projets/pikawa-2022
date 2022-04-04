@@ -35,6 +35,8 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 
     initialiserIHM();
 
+    cafetiere->demarrer();
+
 #ifdef PLEIN_ECRAN
     showFullScreen();
 // showMaximized();
@@ -107,6 +109,11 @@ void IHMPikawa::gererEvenements()
             SIGNAL(clicked()),
             cafetiere,
             SLOT(connecter()));
+    ui->bouttonConnecter->setEnabled(false);
+    connect(cafetiere,
+            SIGNAL(cafetiereDetectee(QString, QString)),
+            this,
+            SLOT(activerBoutonConnecter(QString, QString)));
 }
 
 void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
@@ -145,4 +152,14 @@ void IHMPikawa::afficherPageEntretien()
 void IHMPikawa::afficherPageParametres()
 {
     afficherPage(IHMPikawa::Page(3));
+}
+
+void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
+{
+    qDebug() << Q_FUNC_INFO << nom << adresse;
+    // si une cafetère pikawa a été détectée
+    ui->bouttonConnecter->setEnabled(true);
+    /**
+     * @todo Gérer l'état connexion/déconnexion Bluetooth et du bouton associée
+     */
 }

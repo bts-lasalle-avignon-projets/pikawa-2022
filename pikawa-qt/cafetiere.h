@@ -59,7 +59,11 @@ class Cafetiere : public QObject
     virtual ~Cafetiere();
 
   public slots:
+    void demarrer();
     void connecter();
+
+  signals:
+    void cafetiereDetectee(QString nom, QString adresse);
 };
 
 #endif // CAFETIERE_H

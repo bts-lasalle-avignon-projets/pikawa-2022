@@ -21,6 +21,10 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     activee(false), capsulePresente(false), tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
+    connect(communication,
+            SIGNAL(cafetiereDetectee(QString, QString)),
+            this,
+            SIGNAL(cafetiereDetectee(QString, QString)));
 }
 
 Cafetiere::~Cafetiere()
@@ -85,6 +89,12 @@ void Cafetiere::setBoissonChoisie(const int& boissonChoisie)
 void Cafetiere::setNiveauEau(const int& niveauEau)
 {
     this->niveauEau = niveauEau;
+}
+
+void Cafetiere::demarrer()
+{
+    qDebug() << Q_FUNC_INFO;
+    communication->activerLaDecouverte();
 }
 
 void Cafetiere::connecter()
