@@ -3,6 +3,8 @@
 #include "basededonnees.h"
 #include "cafetiere.h"
 #include <QDebug>
+#include <QIcon>
+
 
 /**
  * @file ihm.cpp
@@ -28,6 +30,9 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 
     baseDeDonnees = BaseDeDonnees::getInstance();
     baseDeDonnees->ouvrir(NOM_BDD);
+
+    QIcon bouttonConnecte(":/images/cafetiere-on.png");
+    QIcon bouttonDeconnecte(":/images/cafetiere-off.png");
 
     cafetiere = new Cafetiere(this);
 
@@ -159,7 +164,17 @@ void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été détectée
     ui->bouttonConnecter->setEnabled(true);
-    /**
-     * @todo Gérer l'état connexion/déconnexion Bluetooth et du bouton associée
-     */
+    setBouttonConnecte();
+    ui->labelEtatConnexion->setText("Cafetiere connectée");
 }
+
+void IHMPikawa::setBouttonConnecte()
+{
+    ui->bouttonConnecter->setIcon(bouttonConnecte);
+}
+
+void IHMPikawa::setBouttonDeconnecte()
+{
+    ui->bouttonConnecter->setIcon(bouttonDeconnecte);
+}
+

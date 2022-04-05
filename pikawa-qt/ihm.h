@@ -11,6 +11,7 @@
  */
 
 #include <QtWidgets>
+#include <QIcon>
 
 class Cafetiere;
 
@@ -81,8 +82,13 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
 
+    QIcon bouttonConnecte;
+    QIcon bouttonDeconnecte;
+
     void initialiserIHM();
     void gererEvenements();
+    void setBouttonConnecte();
+    void setBouttonDeconnecte();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
