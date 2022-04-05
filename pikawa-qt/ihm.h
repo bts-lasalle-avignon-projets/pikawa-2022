@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMPikawa
  * @author
- * @version 1.0
+ * @version 0.2
  *
  */
 
@@ -70,9 +70,10 @@ class IHMPikawa : public QMainWindow
     enum Page
     {
         Accueil     = 0,
-        Information = 1,
-        Entretien   = 2,
-        Parametre   = 3,
+        selectionCafe = 1,
+        Information = 2,
+        Entretien   = 3,
+        Parametre   = 4,
         NbEcrans
     };
 
@@ -95,6 +96,7 @@ class IHMPikawa : public QMainWindow
     void afficherPageInformations();
     void afficherPageEntretien();
     void afficherPageParametres();
+    void afficherPageSelectionCafe();
     void activerBoutonConnecter(QString nom, QString adresse);
 };
 

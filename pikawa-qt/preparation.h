@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe Preparation
  * @author
- * @version 1.0
+ * @version 0.2
  *
  */
 

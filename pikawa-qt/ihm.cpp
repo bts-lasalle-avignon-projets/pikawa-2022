@@ -9,7 +9,7 @@
  *
  * @brief Définition de la classe IHMPikawa
  * @author
- * @version 1.0
+ * @version 0.2
  *
  */
 
@@ -114,6 +114,16 @@ void IHMPikawa::gererEvenements()
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SLOT(activerBoutonConnecter(QString, QString)));
+
+    connect(ui->bonttonChangerCafe,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageSelectionCafe()));
+
+    connect(ui->bouttonAcceuilSelectionCafe,
+             SIGNAL(clicked()),
+             this,
+             SLOT(afficherPageAcceuil()));
 }
 
 void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
@@ -141,17 +151,22 @@ void IHMPikawa::afficherPageAcceuil()
 
 void IHMPikawa::afficherPageInformations()
 {
-    afficherPage(IHMPikawa::Page(1));
+    afficherPage(IHMPikawa::Page(2));
 }
 
 void IHMPikawa::afficherPageEntretien()
 {
-    afficherPage(IHMPikawa::Page(2));
+    afficherPage(IHMPikawa::Page(3));
 }
 
 void IHMPikawa::afficherPageParametres()
 {
-    afficherPage(IHMPikawa::Page(3));
+    afficherPage(IHMPikawa::Page(4));
+}
+
+void IHMPikawa::afficherPageSelectionCafe()
+{
+    afficherPage(IHMPikawa::Page(1));
 }
 
 void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
