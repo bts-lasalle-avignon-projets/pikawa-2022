@@ -11,6 +11,7 @@
  */
 
 #include <QtWidgets>
+#include <QIcon>
 
 class Cafetiere;
 
@@ -73,7 +74,7 @@ class IHMPikawa : public QMainWindow
      */
     enum Page
     {
-        Accueil = 0,
+        Accueil,
         SelectionCafe,
         Information,
         Entretien,
@@ -85,6 +86,10 @@ class IHMPikawa : public QMainWindow
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
+
+    QIcon* iconeBoutonConnecte;
+    QIcon* iconeBoutonDetectee;
+    QIcon* iconeBoutonDeconnecte;
 
     void initialiserIHM();
     void gererEvenements();
@@ -102,6 +107,8 @@ class IHMPikawa : public QMainWindow
     void afficherPageParametres();
     void afficherPageSelectionCafe();
     void activerBoutonConnecter(QString nom, QString adresse);
+    void activerBoutonDeconnecter(QString nom, QString adresse);
+    void desactiverBoutonDeconnecter();
 };
 
 #endif // IHM_H

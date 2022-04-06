@@ -3,6 +3,7 @@
 #include "basededonnees.h"
 #include "cafetiere.h"
 #include <QDebug>
+#include <QIcon>
 
 /**
  * @file ihm.cpp
@@ -21,7 +22,8 @@
  * fenêtre principale de l'application
  */
 IHMPikawa::IHMPikawa(QWidget* parent) :
-    QMainWindow(parent), ui(new Ui::IHMPikawa)
+    QMainWindow(parent), ui(new Ui::IHMPikawa), iconeBoutonConnecte(nullptr),
+    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -53,6 +55,9 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 IHMPikawa::~IHMPikawa()
 {
     delete ui;
+    delete iconeBoutonDetectee;
+    delete iconeBoutonConnecte;
+    delete iconeBoutonDeconnecte;
     BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
@@ -61,6 +66,13 @@ void IHMPikawa::initialiserIHM()
 {
     ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
                                QString::fromUtf8(VERSION));
+
+    iconeBoutonDetectee   = new QIcon(":/images/cafetiere-rouge.png");
+    iconeBoutonConnecte   = new QIcon(":/images/cafetiere-verte.png");
+    iconeBoutonDeconnecte = new QIcon(":/images/cafetiere-noire.png");
+
+    ui->boutonConnecter->setIcon(*iconeBoutonDeconnecte);
+    ui->labelEtatConnexion->setText("Cafetière déconnectée");
 
     ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
     afficherLongueurPreparation(LongueurCafe::Court);
@@ -125,6 +137,15 @@ void IHMPikawa::gererEvenements()
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
+
+    connect(cafetiere,
+            SIGNAL(cafetiereConnectee(QString, QString)),
+            this,
+            SLOT(activerBoutonDeconnecter(QString, QString)));
+    connect(cafetiere,
+            SIGNAL(cafetiereDeconnectee(QString, QString)),
+            this,
+            SLOT(desactiverBoutonConnecter(QString, QString)));
 }
 
 void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
@@ -175,7 +196,24 @@ void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été détectée
     ui->boutonConnecter->setEnabled(true);
-    /**
-     * @todo Gérer l'état connexion/déconnexion Bluetooth et du bouton associée
-     */
+    ui->boutonConnecter->setIcon(*iconeBoutonDetectee);
+    ui->labelEtatConnexion->setText("Cafetière détectée");
+}
+
+void IHMPikawa::activerBoutonDeconnecter(QString nom, QString adresse)
+{
+    qDebug() << Q_FUNC_INFO << nom << adresse;
+    // si une cafetère pikawa a été connectée
+    ui->boutonConnecter->setEnabled(true);
+    ui->boutonConnecter->setIcon(*iconeBoutonDeconnecte);
+    ui->labelEtatConnexion->setText("Cafetière connectée");
+}
+
+void IHMPikawa::desactiverBoutonDeconnecter()
+{
+    qDebug() << Q_FUNC_INFO;
+    // si une cafetère pikawa a été déconnectée
+    ui->boutonConnecter->setEnabled(false);
+    ui->boutonConnecter->setIcon(*iconeBoutonConnecte);
+    ui->labelEtatConnexion->setText("Cafetière déconnectée");
 }

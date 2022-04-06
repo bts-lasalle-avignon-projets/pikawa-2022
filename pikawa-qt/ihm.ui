@@ -111,7 +111,8 @@
                <number>50</number>
               </property>
               <item>
-               <widget class="QPushButton" name="boutonInformationsAccueil">
+
+               <widget class="QPushButton" name="boutonInformations">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -136,7 +137,8 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="boutonEntretienAccueil">
+
+               <widget class="QPushButton" name="boutonEntretien">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -158,7 +160,8 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="boutonParametresAccueil">
+
+               <widget class="QPushButton" name="boutonParametres">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -469,7 +472,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Connecter</string>
+               <string>Cafetière déconnectée</string>
               </property>
              </widget>
             </item>

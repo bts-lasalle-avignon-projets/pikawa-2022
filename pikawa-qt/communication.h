@@ -61,8 +61,8 @@ class Communication : public QObject
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
-    void cafetiereConnecte(QString nom, QString adresse);
-    void cafetiereDeconnecte();
+    void cafetiereConnectee(QString nom, QString adresse);
+    void cafetiereDeconnectee();
 };
 
 #endif // COMMUNICATION_H

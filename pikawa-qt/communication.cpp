@@ -178,14 +178,14 @@ void Communication::socketConnectee()
 {
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->peerName()
              << socketBluetoothPikawa->peerAddress().toString();
-    emit cafetiereConnecte(socketBluetoothPikawa->peerName(),
-                           socketBluetoothPikawa->peerAddress().toString());
+    emit cafetiereConnectee(socketBluetoothPikawa->peerName(),
+                            socketBluetoothPikawa->peerAddress().toString());
 }
 
 void Communication::socketDeconnectee()
 {
     qDebug() << Q_FUNC_INFO;
-    emit cafetiereDeconnecte();
+    emit cafetiereDeconnectee();
 }
 
 void Communication::recevoir()
