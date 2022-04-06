@@ -82,13 +82,12 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
 
-    QIcon boutonConnecte;
-    QIcon boutonDeconnecte;
+    QIcon* iconeBoutonConnecte;
+    QIcon* iconeBoutonDetectee;
+    QIcon* iconeBoutonDeconnecte;
 
     void initialiserIHM();
     void gererEvenements();
-    void setBoutonConnecte();
-    void setBoutonDeconnecte();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
@@ -102,6 +101,8 @@ class IHMPikawa : public QMainWindow
     void afficherPageEntretien();
     void afficherPageParametres();
     void activerBoutonConnecter(QString nom, QString adresse);
+    void activerBoutonDeconnecter(QString nom, QString adresse);
+    void desactiverBoutonDeconnecter();
 };
 
 #endif // IHM_H
