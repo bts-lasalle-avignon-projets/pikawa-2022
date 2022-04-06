@@ -6,7 +6,7 @@
  *
  * @brief Définition de la classe Communication
  * @author
- * @version 1.0
+ * @version 0.2
  *
  */
 

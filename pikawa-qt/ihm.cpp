@@ -10,7 +10,7 @@
  *
  * @brief Définition de la classe IHMPikawa
  * @author
- * @version 1.0
+ * @version 0.2
  *
  */
 
@@ -87,17 +87,17 @@ void IHMPikawa::gererEvenements()
             this,
             SLOT(afficherLongueurPreparation(int)));
 
-    connect(ui->boutonInformations,
+    connect(ui->boutonInformationsAccueil,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
 
-    connect(ui->boutonEntretien,
+    connect(ui->boutonEntretienAccueil,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->boutonParametres,
+    connect(ui->boutonParametresAccueil,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
@@ -122,10 +122,22 @@ void IHMPikawa::gererEvenements()
             cafetiere,
             SLOT(connecter()));
     ui->boutonConnecter->setEnabled(false);
+
     connect(cafetiere,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SLOT(activerBoutonConnecter(QString, QString)));
+
+    connect(ui->bontonChangerCafe,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageSelectionCafe()));
+
+    connect(ui->boutonAcceuilSelectionCafe,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageAcceuil()));
+
     connect(cafetiere,
             SIGNAL(cafetiereConnectee(QString, QString)),
             this,
@@ -161,17 +173,22 @@ void IHMPikawa::afficherPageAcceuil()
 
 void IHMPikawa::afficherPageInformations()
 {
-    afficherPage(IHMPikawa::Page(1));
+    afficherPage(IHMPikawa::Page::Information);
 }
 
 void IHMPikawa::afficherPageEntretien()
 {
-    afficherPage(IHMPikawa::Page(2));
+    afficherPage(IHMPikawa::Page::Entretien);
 }
 
 void IHMPikawa::afficherPageParametres()
 {
-    afficherPage(IHMPikawa::Page(3));
+    afficherPage(IHMPikawa::Page::Parametres);
+}
+
+void IHMPikawa::afficherPageSelectionCafe()
+{
+    afficherPage(IHMPikawa::Page::SelectionCafe);
 }
 
 void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
