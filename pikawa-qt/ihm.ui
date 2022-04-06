@@ -111,7 +111,7 @@
                <number>50</number>
               </property>
               <item>
-               <widget class="QPushButton" name="bouttonInformations">
+               <widget class="QPushButton" name="boutonInformations">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -136,7 +136,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="bouttonEntretien">
+               <widget class="QPushButton" name="boutonEntretien">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -158,7 +158,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="bouttonParametres">
+               <widget class="QPushButton" name="boutonParametres">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -294,7 +294,7 @@
                </spacer>
               </item>
               <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-               <widget class="QPushButton" name="bonttonChangerCafe">
+               <widget class="QPushButton" name="bontonChangerCafe">
                 <property name="minimumSize">
                  <size>
                   <width>250</width>
@@ -363,7 +363,7 @@
                </spacer>
               </item>
               <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-               <widget class="QPushButton" name="bouttonLancerPreparation">
+               <widget class="QPushButton" name="boutonLancerPreparation">
                 <property name="minimumSize">
                  <size>
                   <width>150</width>
@@ -429,7 +429,7 @@
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="bouttonConnecter">
+             <widget class="QPushButton" name="boutonConnecter">
               <property name="minimumSize">
                <size>
                 <width>100</width>
@@ -717,7 +717,7 @@ background: rgb(193, 125, 17);
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="bouttonInformationsInformation">
+             <widget class="QPushButton" name="boutonInformationsInformation">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -742,7 +742,7 @@ background: rgb(193, 125, 17);
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="bouttonParametresInformation">
+             <widget class="QPushButton" name="boutonParametresInformation">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -764,7 +764,7 @@ background: rgb(193, 125, 17);
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="bouttonEntretienInformation">
+             <widget class="QPushButton" name="boutonEntretienInformation">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -786,7 +786,7 @@ background: rgb(193, 125, 17);
              </widget>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="bouttonAcceuilInformation">
+             <widget class="QPushButton" name="boutonAcceuilInformation">
               <property name="minimumSize">
                <size>
                 <width>50</width>

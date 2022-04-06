@@ -5,7 +5,6 @@
 #include <QDebug>
 #include <QIcon>
 
-
 /**
  * @file ihm.cpp
  *
@@ -23,16 +22,14 @@
  * fenêtre principale de l'application
  */
 IHMPikawa::IHMPikawa(QWidget* parent) :
-    QMainWindow(parent), ui(new Ui::IHMPikawa)
+    QMainWindow(parent), ui(new Ui::IHMPikawa), boutonConnecte(nullptr),
+    boutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
 
     baseDeDonnees = BaseDeDonnees::getInstance();
     baseDeDonnees->ouvrir(NOM_BDD);
-
-    QIcon bouttonConnecte(":/images/cafetiere-on.png");
-    QIcon bouttonDeconnecte(":/images/cafetiere-off.png");
 
     cafetiere = new Cafetiere(this);
 
@@ -80,41 +77,41 @@ void IHMPikawa::gererEvenements()
             this,
             SLOT(afficherLongueurPreparation(int)));
 
-    connect(ui->bouttonInformations,
+    connect(ui->boutonInformations,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
 
-    connect(ui->bouttonEntretien,
+    connect(ui->boutonEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->bouttonParametres,
+    connect(ui->boutonParametres,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
 
-    connect(ui->bouttonAcceuilInformation,
+    connect(ui->boutonAcceuilInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
 
-    connect(ui->bouttonEntretienInformation,
+    connect(ui->boutonEntretienInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->bouttonParametresInformation,
+    connect(ui->boutonParametresInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
 
-    connect(ui->bouttonConnecter,
+    connect(ui->boutonConnecter,
             SIGNAL(clicked()),
             cafetiere,
             SLOT(connecter()));
-    ui->bouttonConnecter->setEnabled(false);
+    ui->boutonConnecter->setEnabled(false);
     connect(cafetiere,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
@@ -141,7 +138,7 @@ void IHMPikawa::afficherPage(IHMPikawa::Page page)
 
 void IHMPikawa::afficherPageAcceuil()
 {
-    afficherPage(IHMPikawa::Page(0));
+    afficherPage(IHMPikawa::Page::Accueil);
 }
 
 void IHMPikawa::afficherPageInformations()
@@ -163,18 +160,17 @@ void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été détectée
-    ui->bouttonConnecter->setEnabled(true);
-    setBouttonConnecte();
+    ui->boutonConnecter->setEnabled(true);
+    // setBoutonConnecte();
     ui->labelEtatConnexion->setText("Cafetiere connectée");
 }
 
-void IHMPikawa::setBouttonConnecte()
+void IHMPikawa::setBoutonConnecte()
 {
-    ui->bouttonConnecter->setIcon(bouttonConnecte);
+    ui->boutonConnecter->setIcon(boutonConnecte);
 }
 
-void IHMPikawa::setBouttonDeconnecte()
+void IHMPikawa::setBoutonDeconnecte()
 {
-    ui->bouttonConnecter->setIcon(bouttonDeconnecte);
+    ui->boutonConnecter->setIcon(boutonDeconnecte);
 }
-

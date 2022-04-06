@@ -70,10 +70,10 @@ class IHMPikawa : public QMainWindow
 
     enum Page
     {
-        Accueil     = 0,
-        Information = 1,
-        Entretien   = 2,
-        Parametre   = 3,
+        Accueil,
+        Information,
+        Entretien,
+        Parametre,
         NbEcrans
     };
 
@@ -82,13 +82,13 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
 
-    QIcon bouttonConnecte;
-    QIcon bouttonDeconnecte;
+    QIcon boutonConnecte;
+    QIcon boutonDeconnecte;
 
     void initialiserIHM();
     void gererEvenements();
-    void setBouttonConnecte();
-    void setBouttonDeconnecte();
+    void setBoutonConnecte();
+    void setBoutonDeconnecte();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
