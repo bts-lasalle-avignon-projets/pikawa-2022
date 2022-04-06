@@ -75,52 +75,53 @@ void IHMPikawa::gererEvenements()
             this,
             SLOT(afficherLongueurPreparation(int)));
 
-    connect(ui->bouttonInformations,
+    connect(ui->boutonInformationsAccueil,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
 
-    connect(ui->bouttonEntretien,
+    connect(ui->boutonEntretienAccueil,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->bouttonParametres,
+    connect(ui->boutonParametresAccueil,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
 
-    connect(ui->bouttonAcceuilInformation,
+    connect(ui->boutonAcceuilInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
 
-    connect(ui->bouttonEntretienInformation,
+    connect(ui->boutonEntretienInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->bouttonParametresInformation,
+    connect(ui->boutonParametresInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
 
-    connect(ui->bouttonConnecter,
+    connect(ui->boutonConnecter,
             SIGNAL(clicked()),
             cafetiere,
             SLOT(connecter()));
-    ui->bouttonConnecter->setEnabled(false);
+    ui->boutonConnecter->setEnabled(false);
+
     connect(cafetiere,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SLOT(activerBoutonConnecter(QString, QString)));
 
-    connect(ui->bonttonChangerCafe,
+    connect(ui->bontonChangerCafe,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageSelectionCafe()));
 
-    connect(ui->bouttonAcceuilSelectionCafe,
+    connect(ui->boutonAcceuilSelectionCafe,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
@@ -146,34 +147,34 @@ void IHMPikawa::afficherPage(IHMPikawa::Page page)
 
 void IHMPikawa::afficherPageAcceuil()
 {
-    afficherPage(IHMPikawa::Page(Accueil));
+    afficherPage(IHMPikawa::Page::Accueil);
 }
 
 void IHMPikawa::afficherPageInformations()
 {
-    afficherPage(IHMPikawa::Page(Information));
+    afficherPage(IHMPikawa::Page::Information);
 }
 
 void IHMPikawa::afficherPageEntretien()
 {
-    afficherPage(IHMPikawa::Page(Entretien));
+    afficherPage(IHMPikawa::Page::Entretien);
 }
 
 void IHMPikawa::afficherPageParametres()
 {
-    afficherPage(IHMPikawa::Page(Parametre));
+    afficherPage(IHMPikawa::Page::Parametres);
 }
 
 void IHMPikawa::afficherPageSelectionCafe()
 {
-    afficherPage(IHMPikawa::Page(SelectionCafe));
+    afficherPage(IHMPikawa::Page::SelectionCafe);
 }
 
 void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été détectée
-    ui->bouttonConnecter->setEnabled(true);
+    ui->boutonConnecter->setEnabled(true);
     /**
      * @todo Gérer l'état connexion/déconnexion Bluetooth et du bouton associée
      */

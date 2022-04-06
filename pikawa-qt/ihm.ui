@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -111,7 +111,7 @@
                <number>50</number>
               </property>
               <item>
-               <widget class="QPushButton" name="bouttonInformations">
+               <widget class="QPushButton" name="boutonInformationsAccueil">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -136,7 +136,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="bouttonEntretien">
+               <widget class="QPushButton" name="boutonEntretienAccueil">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -158,7 +158,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="bouttonParametres">
+               <widget class="QPushButton" name="boutonParametresAccueil">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -294,7 +294,7 @@
                </spacer>
               </item>
               <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-               <widget class="QPushButton" name="bonttonChangerCafe">
+               <widget class="QPushButton" name="bontonChangerCafe">
                 <property name="minimumSize">
                  <size>
                   <width>250</width>
@@ -363,7 +363,7 @@
                </spacer>
               </item>
               <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-               <widget class="QPushButton" name="bouttonLancerPreparation">
+               <widget class="QPushButton" name="boutonLancerPreparation">
                 <property name="minimumSize">
                  <size>
                   <width>150</width>
@@ -429,7 +429,7 @@
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="bouttonConnecter">
+             <widget class="QPushButton" name="boutonConnecter">
               <property name="minimumSize">
                <size>
                 <width>100</width>
@@ -681,7 +681,7 @@ background: rgb(193, 125, 17);
         </property>
         <layout class="QHBoxLayout" name="LayoutMenu">
          <item>
-          <widget class="QPushButton" name="bouttonAcceuilSelectionCafe">
+          <widget class="QPushButton" name="boutonAcceuilSelectionCafe">
            <property name="minimumSize">
             <size>
              <width>50</width>
@@ -721,7 +721,7 @@ background: rgb(193, 125, 17);
          <item>
           <layout class="QGridLayout" name="LayoutSelectionCafe">
            <item row="8" column="2">
-            <widget class="QPushButton" name="bouttonScuro">
+            <widget class="QPushButton" name="boutonScuro">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -740,7 +740,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="4" column="4">
-            <widget class="QPushButton" name="bouttonVolluto">
+            <widget class="QPushButton" name="boutonVolluto">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -759,7 +759,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="8" column="0">
-            <widget class="QPushButton" name="bouttonCosi">
+            <widget class="QPushButton" name="boutonCosi">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -778,7 +778,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="8" column="3">
-            <widget class="QPushButton" name="bouttonVanilla">
+            <widget class="QPushButton" name="boutonVanilla">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -797,7 +797,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="4" column="3">
-            <widget class="QPushButton" name="bouttonEthiopia">
+            <widget class="QPushButton" name="boutonEthiopia">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -816,7 +816,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="8" column="4">
-            <widget class="QPushButton" name="bouttonCapriccio">
+            <widget class="QPushButton" name="boutonCapriccio">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -835,7 +835,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="4" column="2">
-            <widget class="QPushButton" name="bouttonIndonesia">
+            <widget class="QPushButton" name="boutonIndonesia">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -854,7 +854,7 @@ background: rgb(193, 125, 17);
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QPushButton" name="bouttonColombia">
+            <widget class="QPushButton" name="boutonColombia">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -944,7 +944,7 @@ background: rgb(193, 125, 17);
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="bouttonInformationsInformation">
+             <widget class="QPushButton" name="boutonInformationsInformation">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -969,7 +969,7 @@ background: rgb(193, 125, 17);
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="bouttonParametresInformation">
+             <widget class="QPushButton" name="boutonParametresInformation">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -991,7 +991,7 @@ background: rgb(193, 125, 17);
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="bouttonEntretienInformation">
+             <widget class="QPushButton" name="boutonEntretienInformation">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -1013,7 +1013,7 @@ background: rgb(193, 125, 17);
              </widget>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="bouttonAcceuilInformation">
+             <widget class="QPushButton" name="boutonAcceuilInformation">
               <property name="minimumSize">
                <size>
                 <width>50</width>

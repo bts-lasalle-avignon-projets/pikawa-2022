@@ -67,13 +67,17 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
+    /**
+     * @enum Page
+     * @brief Les différentes pages de l'application
+     */
     enum Page
     {
-        Accueil       = 0,
-        SelectionCafe = 1,
-        Information   = 2,
-        Entretien     = 3,
-        Parametre     = 4,
+        Accueil = 0,
+        SelectionCafe,
+        Information,
+        Entretien,
+        Parametres,
         NbEcrans
     };
 
