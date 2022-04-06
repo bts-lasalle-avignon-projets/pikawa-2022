@@ -87,17 +87,17 @@ void IHMPikawa::gererEvenements()
             this,
             SLOT(afficherLongueurPreparation(int)));
 
-    connect(ui->boutonInformationsAccueil,
+    connect(ui->boutonInformations,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
 
-    connect(ui->boutonEntretienAccueil,
+    connect(ui->boutonEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->boutonParametresAccueil,
+    connect(ui->boutonParametres,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
