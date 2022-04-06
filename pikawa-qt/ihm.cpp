@@ -121,9 +121,9 @@ void IHMPikawa::gererEvenements()
             SLOT(afficherPageSelectionCafe()));
 
     connect(ui->bouttonAcceuilSelectionCafe,
-             SIGNAL(clicked()),
-             this,
-             SLOT(afficherPageAcceuil()));
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageAcceuil()));
 }
 
 void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
@@ -146,27 +146,27 @@ void IHMPikawa::afficherPage(IHMPikawa::Page page)
 
 void IHMPikawa::afficherPageAcceuil()
 {
-    afficherPage(IHMPikawa::Page(0));
+    afficherPage(IHMPikawa::Page(Accueil));
 }
 
 void IHMPikawa::afficherPageInformations()
 {
-    afficherPage(IHMPikawa::Page(2));
+    afficherPage(IHMPikawa::Page(Information));
 }
 
 void IHMPikawa::afficherPageEntretien()
 {
-    afficherPage(IHMPikawa::Page(3));
+    afficherPage(IHMPikawa::Page(Entretien));
 }
 
 void IHMPikawa::afficherPageParametres()
 {
-    afficherPage(IHMPikawa::Page(4));
+    afficherPage(IHMPikawa::Page(Parametre));
 }
 
 void IHMPikawa::afficherPageSelectionCafe()
 {
-    afficherPage(IHMPikawa::Page(1));
+    afficherPage(IHMPikawa::Page(SelectionCafe));
 }
 
 void IHMPikawa::activerBoutonConnecter(QString nom, QString adresse)

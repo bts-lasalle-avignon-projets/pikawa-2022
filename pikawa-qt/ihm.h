@@ -69,11 +69,11 @@ class IHMPikawa : public QMainWindow
 
     enum Page
     {
-        Accueil     = 0,
-        selectionCafe = 1,
-        Information = 2,
-        Entretien   = 3,
-        Parametre   = 4,
+        Accueil       = 0,
+        SelectionCafe = 1,
+        Information   = 2,
+        Entretien     = 3,
+        Parametre     = 4,
         NbEcrans
     };
 
