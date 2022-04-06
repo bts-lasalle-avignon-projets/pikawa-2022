@@ -25,6 +25,16 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SIGNAL(cafetiereDetectee(QString, QString)));
+
+    connect(communication,
+            SIGNAL(cafetiereDeconnectee()),
+            this,
+            SIGNAL(cafetiereDeconnectee()));
+
+    connect(communication,
+            SIGNAL(cafetiereConnectee(QString, QString)),
+            this,
+            SIGNAL(cafetiereConnectee(QString, QString)));
 }
 
 Cafetiere::~Cafetiere()
@@ -101,4 +111,10 @@ void Cafetiere::connecter()
 {
     qDebug() << Q_FUNC_INFO;
     communication->connecter();
+}
+
+void Cafetiere::raffraichirDecouverte()
+{
+    communication->estConnecte();
+    communication->activerLaDecouverte();
 }

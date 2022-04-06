@@ -103,6 +103,10 @@ void Communication::decouvrirCafetiere(
         emit cafetiereDetectee(appareilBluetooth.name(),
                                appareilBluetooth.address().toString());
     }
+    else
+    {
+        emit cafetiereDeconnectee();
+    }
 }
 
 /**
@@ -146,6 +150,7 @@ void Communication::connecter()
 
                 socketBluetoothPikawa->connectToService(adresse, uuid);
                 socketBluetoothPikawa->open(QIODevice::ReadWrite);
+                emit cafetiereConnectee(pikawa.name(), pikawa.address().toString());
             }
             else
                 qDebug() << Q_FUNC_INFO << "erreur création socket";
@@ -185,8 +190,8 @@ void Communication::socketConnectee()
 void Communication::socketDeconnectee()
 {
     qDebug() << Q_FUNC_INFO;
-    emit cafetiereDeconnectee();
 }
+
 
 void Communication::recevoir()
 {

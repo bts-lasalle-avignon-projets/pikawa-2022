@@ -106,9 +106,10 @@ class IHMPikawa : public QMainWindow
     void afficherPageEntretien();
     void afficherPageParametres();
     void afficherPageSelectionCafe();
-    void activerBoutonConnecter(QString nom, QString adresse);
-    void activerBoutonDeconnecter(QString nom, QString adresse);
-    void desactiverBoutonDeconnecter();
+    void activerBoutonConnecterDetectee(QString nom, QString adresse);
+    void activerBoutonConnecterDeconnecte();
+    void activerBoutonConnecterConnecte(QString nom, QString adresse);
+
 };
 
 #endif // IHM_H

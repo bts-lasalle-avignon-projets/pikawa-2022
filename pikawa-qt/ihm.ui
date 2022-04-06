@@ -111,7 +111,6 @@
                <number>50</number>
               </property>
               <item>
-
                <widget class="QPushButton" name="boutonInformations">
                 <property name="enabled">
                  <bool>true</bool>
@@ -137,7 +136,6 @@
                </widget>
               </item>
               <item>
-
                <widget class="QPushButton" name="boutonEntretien">
                 <property name="minimumSize">
                  <size>
@@ -160,7 +158,6 @@
                </widget>
               </item>
               <item>
-
                <widget class="QPushButton" name="boutonParametres">
                 <property name="minimumSize">
                  <size>
@@ -443,7 +440,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="ressources.qrc">
+               <iconset>
                 <normaloff>:/cafetiere-off.png</normaloff>:/cafetiere-off.png</iconset>
               </property>
               <property name="iconSize">
@@ -451,6 +448,12 @@
                 <width>100</width>
                 <height>100</height>
                </size>
+              </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -473,6 +476,42 @@
               </property>
               <property name="text">
                <string>Cafetière déconnectée</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QPushButton" name="boutonRaffraichir">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/Raffraichir.png</normaloff>:/Raffraichir.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Raffraichir</string>
               </property>
              </widget>
             </item>

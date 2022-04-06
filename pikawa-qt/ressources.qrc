@@ -6,7 +6,7 @@
         <file alias="cafe.png">images/cafe.png</file>
         <file alias="RondVert.png">images/RondVert.png</file>
         <file alias="RondRouge.png">images/RondRouge.png</file>
-
+        <file alias="Raffraichir.png">images/Raffraichir.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>cafetiere.qss</file>
