@@ -82,6 +82,21 @@ class IHMPikawa : public QMainWindow
         NbEcrans
     };
 
+    /**
+     * @todo Utiliser la base de données
+     */
+    enum nomCaspule
+    {
+        Colombia,
+        Indonesia,
+        Ethiopia,
+        Volluto,
+        Cosi,
+        Scuro,
+        Vanilla,
+        Capriccio
+    };
+
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
@@ -99,7 +114,7 @@ class IHMPikawa : public QMainWindow
     ~IHMPikawa();
 
   public slots:
-    void afficherLongueurPreparation(int longueurPreparation);
+    void gererLongueurPreparation(int longueurPreparation);
     void afficherPage(IHMPikawa::Page page);
     void afficherPageAcceuil();
     void afficherPageInformations();
