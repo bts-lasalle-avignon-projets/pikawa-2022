@@ -50,13 +50,13 @@ class Cafetiere : public QObject
     bool        getCapsulePresente() const;
     bool        getTassePresente() const;
 
-    void setCapsuleChoisie(const int& capsuleChoisie);
-    void setBoissonChoisie(const int& boissonChoisie);
-    void setNiveauEau(const int& niveauEau);
-
   public:
     Cafetiere(IHMPikawa* ihm);
     virtual ~Cafetiere();
+
+    void setCapsuleChoisie(const int& capsuleChoisie);
+    void setBoissonChoisie(const int& boissonChoisie);
+    void setNiveauEau(const int& niveauEau);
 
   public slots:
     void demarrer();

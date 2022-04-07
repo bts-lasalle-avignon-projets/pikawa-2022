@@ -109,6 +109,16 @@ class IHMPikawa : public QMainWindow
     void activerBoutonConnecter(QString nom, QString adresse);
     void activerBoutonDeconnecter(QString nom, QString adresse);
     void desactiverBoutonDeconnecter();
+    void gererSelectionCafes();
+
+    void selectionnerColombia();
+    void selectionnerIndonesia();
+    void selectionnerEthiopia();
+    void selectionnerVolluto();
+    void selectionnerCosi();
+    void selectionnerScuro();
+    void selectionnerVanilla();
+    void selectionnerCapriccio();
 };
 
 #endif // IHM_H

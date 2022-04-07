@@ -34,6 +34,7 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     cafetiere = new Cafetiere(this);
 
     gererEvenements();
+    gererSelectionCafes();
 
     initialiserIHM();
 
@@ -76,8 +77,49 @@ void IHMPikawa::initialiserIHM()
 
     ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
     afficherLongueurPreparation(LongueurCafe::Court);
+    ui->capsuleChoisie->setText("Comlombia");
 
     afficherPageAcceuil();
+}
+
+void IHMPikawa::gererSelectionCafes()
+{
+    connect(ui->boutonColombia,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerColombia()));
+
+    connect(ui->boutonIndonesia,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerIndonesia()));
+
+    connect(ui->boutonEthiopia,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerEthiopia()));
+
+    connect(ui->boutonVolluto,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerVolluto()));
+
+    connect(ui->boutonCosi, SIGNAL(clicked()), this, SLOT(selectionnerCosi()));
+
+    connect(ui->boutonScuro,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerScuro()));
+
+    connect(ui->boutonVanilla,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerVanilla()));
+
+    connect(ui->boutonCapriccio,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerCapriccio()));
 }
 
 void IHMPikawa::gererEvenements()
@@ -87,17 +129,17 @@ void IHMPikawa::gererEvenements()
             this,
             SLOT(afficherLongueurPreparation(int)));
 
-    connect(ui->boutonInformationsAccueil,
+    connect(ui->boutonInformations,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
 
-    connect(ui->boutonEntretienAccueil,
+    connect(ui->boutonEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
 
-    connect(ui->boutonParametresAccueil,
+    connect(ui->boutonParametres,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
@@ -216,4 +258,52 @@ void IHMPikawa::desactiverBoutonDeconnecter()
     ui->boutonConnecter->setEnabled(false);
     ui->boutonConnecter->setIcon(*iconeBoutonConnecte);
     ui->labelEtatConnexion->setText("Cafetière déconnectée");
+}
+
+void IHMPikawa::selectionnerColombia()
+{
+    ui->capsuleChoisie->setText("Comlombia");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerIndonesia()
+{
+    ui->capsuleChoisie->setText("Indonesia");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerEthiopia()
+{
+    ui->capsuleChoisie->setText("Ethiopia");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerVolluto()
+{
+    ui->capsuleChoisie->setText("Volluto");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerCosi()
+{
+    ui->capsuleChoisie->setText("Cosi");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerScuro()
+{
+    ui->capsuleChoisie->setText("Scuro");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerVanilla()
+{
+    ui->capsuleChoisie->setText("Vanilla");
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerCapriccio()
+{
+    ui->capsuleChoisie->setText("Capriccio");
+    afficherPageAcceuil();
 }

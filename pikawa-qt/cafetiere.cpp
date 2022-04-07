@@ -25,6 +25,7 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SIGNAL(cafetiereDetectee(QString, QString)));
+    this->capsuleChoisie = 1;
 }
 
 Cafetiere::~Cafetiere()
