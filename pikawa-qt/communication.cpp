@@ -55,6 +55,11 @@ bool Communication::estConnecte() const
     return socketBluetoothPikawa->isOpen();
 }
 
+bool Communication::estCafetierDestectee() const
+{
+    return pikawaDetecte;
+}
+
 void Communication::envoyerTrame(QString trame)
 {
     qDebug() << Q_FUNC_INFO << trame;
@@ -79,10 +84,22 @@ void Communication::activerLaDecouverte()
                     SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
                     this,
                     SLOT(decouvrirCafetiere(QBluetoothDeviceInfo)));
-
+            connect(agentDecouvreur,
+                    SIGNAL(finished()),
+                    this,
+                    SLOT(terminerRecherche()));
             pikawaDetecte = false;
             agentDecouvreur->start();
         }
+    }
+}
+
+void Communication::desactiverLaDecouverte()
+{
+    qDebug() << Q_FUNC_INFO;
+    if(agentDecouvreur != nullptr)
+    {
+        agentDecouvreur->start();
     }
 }
 
@@ -100,13 +117,16 @@ void Communication::decouvrirCafetiere(
         agentDecouvreur->stop();
         pikawa        = appareilBluetooth;
         pikawaDetecte = true;
+        emit rechercheTerminee(pikawaDetecte);
         emit cafetiereDetectee(appareilBluetooth.name(),
                                appareilBluetooth.address().toString());
     }
-    else
-    {
-        emit cafetiereDeconnectee();
-    }
+}
+
+void Communication::terminerRecherche()
+{
+    qDebug() << Q_FUNC_INFO << "pikawaDetecte" << pikawaDetecte;
+    emit rechercheTerminee(pikawaDetecte);
 }
 
 /**
@@ -150,7 +170,6 @@ void Communication::connecter()
 
                 socketBluetoothPikawa->connectToService(adresse, uuid);
                 socketBluetoothPikawa->open(QIODevice::ReadWrite);
-                emit cafetiereConnectee(pikawa.name(), pikawa.address().toString());
             }
             else
                 qDebug() << Q_FUNC_INFO << "erreur création socket";
@@ -190,8 +209,8 @@ void Communication::socketConnectee()
 void Communication::socketDeconnectee()
 {
     qDebug() << Q_FUNC_INFO;
+    emit cafetiereDeconnectee();
 }
-
 
 void Communication::recevoir()
 {

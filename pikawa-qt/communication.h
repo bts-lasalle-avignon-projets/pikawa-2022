@@ -47,11 +47,14 @@ class Communication : public QObject
     ~Communication();
 
     bool estConnecte() const;
+    bool estCafetierDestectee() const;
     void envoyerTrame(QString trame);
 
   public slots:
     void activerLaDecouverte();
+    void desactiverLaDecouverte();
     void decouvrirCafetiere(const QBluetoothDeviceInfo& appareilBluetooth);
+    void terminerRecherche();
     void connecter();
     void deconnecter();
     void socketConnectee();
@@ -63,6 +66,7 @@ class Communication : public QObject
     void cafetiereDetectee(QString nom, QString adresse);
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
+    void rechercheTerminee(bool detecte);
 };
 
 #endif // COMMUNICATION_H

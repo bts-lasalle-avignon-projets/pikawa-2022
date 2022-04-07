@@ -25,16 +25,18 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SIGNAL(cafetiereDetectee(QString, QString)));
-
-    connect(communication,
-            SIGNAL(cafetiereDeconnectee()),
-            this,
-            SIGNAL(cafetiereDeconnectee()));
-
     connect(communication,
             SIGNAL(cafetiereConnectee(QString, QString)),
             this,
             SIGNAL(cafetiereConnectee(QString, QString)));
+    connect(communication,
+            SIGNAL(cafetiereDeconnectee()),
+            this,
+            SIGNAL(cafetiereDeconnectee()));
+    connect(communication,
+            SIGNAL(rechercheTerminee(bool)),
+            this,
+            SIGNAL(rechercheTerminee(bool)));
 }
 
 Cafetiere::~Cafetiere()
@@ -101,7 +103,7 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
     this->niveauEau = niveauEau;
 }
 
-void Cafetiere::demarrer()
+void Cafetiere::demarrerDecouverte()
 {
     qDebug() << Q_FUNC_INFO;
     communication->activerLaDecouverte();
@@ -113,8 +115,21 @@ void Cafetiere::connecter()
     communication->connecter();
 }
 
-void Cafetiere::raffraichirDecouverte()
+void Cafetiere::deconnecter()
 {
-    communication->estConnecte();
+    qDebug() << Q_FUNC_INFO;
+    communication->deconnecter();
+}
+
+void Cafetiere::arreterDecouverte()
+{
+    qDebug() << Q_FUNC_INFO;
+    communication->desactiverLaDecouverte();
+}
+
+void Cafetiere::rafraichirDecouverte()
+{
+    qDebug() << Q_FUNC_INFO;
+    communication->desactiverLaDecouverte();
     communication->activerLaDecouverte();
 }

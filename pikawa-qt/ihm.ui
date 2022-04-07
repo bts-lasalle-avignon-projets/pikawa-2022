@@ -429,7 +429,7 @@
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="boutonConnecter">
+             <widget class="QPushButton" name="boutonConnexion">
               <property name="minimumSize">
                <size>
                 <width>100</width>
@@ -480,7 +480,7 @@
              </widget>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="boutonRaffraichir">
+             <widget class="QPushButton" name="boutonRafraichir">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -498,20 +498,13 @@
               </property>
               <property name="icon">
                <iconset resource="ressources.qrc">
-                <normaloff>:/Raffraichir.png</normaloff>:/Raffraichir.png</iconset>
+                <normaloff>:/images/rafraichir.png</normaloff>:/images/rafraichir.png</iconset>
               </property>
               <property name="iconSize">
                <size>
                 <width>50</width>
                 <height>50</height>
                </size>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Raffraichir</string>
               </property>
              </widget>
             </item>

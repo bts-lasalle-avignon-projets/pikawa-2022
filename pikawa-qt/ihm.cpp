@@ -37,7 +37,7 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 
     initialiserIHM();
 
-    cafetiere->demarrer();
+    cafetiere->demarrerDecouverte();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -71,7 +71,7 @@ void IHMPikawa::initialiserIHM()
     iconeBoutonConnecte   = new QIcon(":/images/cafetiere-verte.png");
     iconeBoutonDeconnecte = new QIcon(":/images/cafetiere-noire.png");
 
-    ui->boutonConnecter->setIcon(*iconeBoutonDeconnecte);
+    ui->boutonConnexion->setIcon(*iconeBoutonDeconnecte);
     ui->labelEtatConnexion->setText("Cafetière déconnectée");
 
     ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
@@ -117,11 +117,11 @@ void IHMPikawa::gererEvenements()
             this,
             SLOT(afficherPageParametres()));
 
-    connect(ui->boutonConnecter,
+    connect(ui->boutonConnexion,
             SIGNAL(clicked()),
             cafetiere,
             SLOT(connecter()));
-    ui->boutonConnecter->setEnabled(false);
+    ui->boutonConnexion->setEnabled(false);
 
     connect(ui->bontonChangerCafe,
             SIGNAL(clicked()),
@@ -134,25 +134,26 @@ void IHMPikawa::gererEvenements()
             SLOT(afficherPageAcceuil()));
 
     connect(cafetiere,
-            SIGNAL(cafetiereDeconnectee()),
-            this,
-            SLOT(activerBoutonConnecterDeconnecte()));
-
-    connect(cafetiere,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
-            SLOT(activerBoutonConnecterDetectee(QString, QString)));
-
+            SLOT(activerBoutonConnexionEtatDetecte(QString, QString)));
     connect(cafetiere,
             SIGNAL(cafetiereConnectee(QString, QString)),
             this,
-            SLOT(activerBoutonConnecterConnecte(QString, QString)));
+            SLOT(activerBoutonConnexionEtatConnecte(QString, QString)));
+    connect(cafetiere,
+            SIGNAL(cafetiereDeconnectee()),
+            this,
+            SLOT(activerBoutonConnexionEtatDeconnecte()));
 
-
-    connect(ui->boutonRaffraichir,
+    connect(ui->boutonRafraichir,
             SIGNAL(clicked()),
-            cafetiere,
-            SLOT(raffraichirDecouverte()));
+            this,
+            SLOT(rafraichirDecouverte()));
+    connect(cafetiere,
+            SIGNAL(rechercheTerminee(bool)),
+            this,
+            SLOT(terminerDecouverte(bool)));
 }
 
 void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
@@ -198,29 +199,45 @@ void IHMPikawa::afficherPageSelectionCafe()
     afficherPage(IHMPikawa::Page::SelectionCafe);
 }
 
-void IHMPikawa::activerBoutonConnecterDetectee(QString nom, QString adresse)
+void IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été détectée
-    ui->boutonConnecter->setEnabled(true);
-    ui->boutonConnecter->setIcon(*iconeBoutonDetectee);
+    ui->boutonConnexion->setEnabled(true);
+    ui->boutonConnexion->setIcon(*iconeBoutonDetectee);
     ui->labelEtatConnexion->setText("Cafetière détectée");
 }
 
-void IHMPikawa::activerBoutonConnecterConnecte(QString nom, QString adresse)
+/**
+ * @todo revoir la gestion de la connexion/déconnexion
+ */
+void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été connectée
-    ui->boutonConnecter->setEnabled(true);
-    ui->boutonConnecter->setIcon(*iconeBoutonConnecte);
+    ui->boutonConnexion->setEnabled(true);
+    ui->boutonConnexion->setIcon(*iconeBoutonConnecte);
     ui->labelEtatConnexion->setText("Cafetière connectée");
 }
 
-void IHMPikawa::activerBoutonConnecterDeconnecte()
+void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
 {
     qDebug() << Q_FUNC_INFO;
     // si une cafetère pikawa a été déconnectée
-    ui->boutonConnecter->setEnabled(false);
-    ui->boutonConnecter->setIcon(*iconeBoutonDeconnecte);
-    ui->labelEtatConnexion->setText("Cafetière deconnectée");
+    ui->boutonConnexion->setEnabled(false);
+    ui->boutonConnexion->setIcon(*iconeBoutonDeconnecte);
+    ui->labelEtatConnexion->setText("Cafetière déconnectée");
+}
+
+void IHMPikawa::rafraichirDecouverte()
+{
+    qDebug() << Q_FUNC_INFO;
+    ui->boutonRafraichir->setEnabled(false);
+    cafetiere->demarrerDecouverte();
+}
+
+void IHMPikawa::terminerDecouverte(bool detecte)
+{
+    qDebug() << Q_FUNC_INFO << "detecte" << detecte;
+    ui->boutonRafraichir->setEnabled(true);
 }
