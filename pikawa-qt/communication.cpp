@@ -11,12 +11,12 @@
  */
 
 Communication::Communication(QObject* parent) :
-    QObject(parent), agentDecouvreur(nullptr), pikawaDetecte(false),
-    socketBluetoothPikawa(nullptr)
+    QObject(parent), agentDecouvreur(nullptr), connecte(false),
+    pikawaDetecte(false), socketBluetoothPikawa(nullptr)
 {
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
     activerBluetooth();
-    connecter();
+    activerLaDecouverte();
 }
 
 Communication::~Communication()
@@ -52,11 +52,14 @@ bool Communication::estConnecte() const
         return false;
     if(socketBluetoothPikawa == nullptr)
         return false;
-    qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->isOpen();
-    return socketBluetoothPikawa->isOpen();
+    qDebug() << Q_FUNC_INFO << "isOpen" << socketBluetoothPikawa->isOpen()
+             << "connecte" << connecte;
+    if(!socketBluetoothPikawa->isOpen())
+        return false;
+    return connecte;
 }
 
-bool Communication::estCafetierDestectee() const
+bool Communication::estCafetiereDetectee() const
 {
     return pikawaDetecte;
 }
@@ -108,10 +111,15 @@ void Communication::decouvrirCafetiere(
   const QBluetoothDeviceInfo& appareilBluetooth)
 {
     qDebug() << Q_FUNC_INFO << "appareil Bluetooth" << appareilBluetooth.name()
-             << '[' << appareilBluetooth.address().toString() << ']';
+             << '[' << appareilBluetooth.address().toString() << ']' << "rssi"
+             << appareilBluetooth.rssi();
 
-    if(appareilBluetooth.name().contains(PREFIXE_NOM_CAFETIERE))
+    if(appareilBluetooth.name().contains(PREFIXE_NOM_CAFETIERE) /*&&
+       appareilBluetooth.rssi() != 0*/)
     {
+        /**
+         * @see systemctl restart bluetooth
+         */
         qDebug() << Q_FUNC_INFO << "machine à café pikawa détectée"
                  << appareilBluetooth.name() << '['
                  << appareilBluetooth.address().toString() << ']';
@@ -121,10 +129,6 @@ void Communication::decouvrirCafetiere(
         emit rechercheTerminee(pikawaDetecte);
         emit cafetiereDetectee(appareilBluetooth.name(),
                                appareilBluetooth.address().toString());
-    }
-    else
-    {
-        pikawaDetecte = false;
     }
 }
 
@@ -142,8 +146,6 @@ void Communication::terminerRecherche()
 void Communication::connecter()
 {
     qDebug() << Q_FUNC_INFO;
-
-    activerLaDecouverte();
 
     if(!estConnecte())
     {
@@ -211,6 +213,7 @@ void Communication::socketConnectee()
 {
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->peerName()
              << socketBluetoothPikawa->peerAddress().toString();
+    connecte = true;
     emit cafetiereConnectee(socketBluetoothPikawa->peerName(),
                             socketBluetoothPikawa->peerAddress().toString());
 }
@@ -218,6 +221,7 @@ void Communication::socketConnectee()
 void Communication::socketDeconnectee()
 {
     qDebug() << Q_FUNC_INFO;
+    connecte = false;
     emit cafetiereDeconnectee();
 }
 

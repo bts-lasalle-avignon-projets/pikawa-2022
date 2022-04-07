@@ -109,17 +109,6 @@ void Cafetiere::demarrerDecouverte()
     communication->activerLaDecouverte();
 }
 
-void Cafetiere::gereConnection()
-{
-    communication->connecter();
-}
-
-void Cafetiere::deconnecter()
-{
-    qDebug() << Q_FUNC_INFO;
-    communication->deconnecter();
-}
-
 void Cafetiere::arreterDecouverte()
 {
     qDebug() << Q_FUNC_INFO;
@@ -131,4 +120,13 @@ void Cafetiere::rafraichirDecouverte()
     qDebug() << Q_FUNC_INFO;
     communication->desactiverLaDecouverte();
     communication->activerLaDecouverte();
+}
+
+void Cafetiere::gererConnexion()
+{
+    qDebug() << Q_FUNC_INFO;
+    if(communication->estConnecte())
+        communication->deconnecter();
+    else
+        communication->connecter();
 }
