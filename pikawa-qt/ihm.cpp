@@ -77,6 +77,9 @@ void IHMPikawa::initialiserIHM()
 
     ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
     gererLongueurPreparation(LongueurCafe::Court);
+    /**
+     * @todo selectionner le café préféré et disponible
+     */
     selectionnerColombia();
     afficherPageAcceuil();
 }
@@ -263,55 +266,55 @@ void IHMPikawa::desactiverBoutonDeconnecter()
 void IHMPikawa::selectionnerColombia()
 {
     ui->capsuleChoisie->setText("Colombia");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Colombia);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerIndonesia()
 {
     ui->capsuleChoisie->setText("Indonesia");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Indonesia);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerEthiopia()
 {
     ui->capsuleChoisie->setText("Ethiopia");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Ethiopia);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerVolluto()
 {
     ui->capsuleChoisie->setText("Volluto");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Volluto);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerCosi()
 {
     ui->capsuleChoisie->setText("Cosi");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Cosi);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerScuro()
 {
     ui->capsuleChoisie->setText("Scuro");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Scuro);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerVanilla()
 {
     ui->capsuleChoisie->setText("Vanilla");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Vanilla);
+    afficherPageAcceuil();
 }
 
 void IHMPikawa::selectionnerCapriccio()
 {
     ui->capsuleChoisie->setText("Capriccio");
-    afficherPageAcceuil();
     cafetiere->setCapsuleChoisie(Capriccio);
+    afficherPageAcceuil();
 }
