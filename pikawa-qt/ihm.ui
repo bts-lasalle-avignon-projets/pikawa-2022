@@ -429,7 +429,7 @@
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="boutonConnexion">
+             <widget class="QPushButton" name="boutonDeconnection">
               <property name="minimumSize">
                <size>
                 <width>100</width>

@@ -1,4 +1,4 @@
-#include "communication.h"
+﻿#include "communication.h"
 #include <QDebug>
 
 /**
@@ -16,6 +16,7 @@ Communication::Communication(QObject* parent) :
 {
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
     activerBluetooth();
+    connecter();
 }
 
 Communication::~Communication()
@@ -121,6 +122,10 @@ void Communication::decouvrirCafetiere(
         emit cafetiereDetectee(appareilBluetooth.name(),
                                appareilBluetooth.address().toString());
     }
+    else
+    {
+        pikawaDetecte = false;
+    }
 }
 
 void Communication::terminerRecherche()
@@ -136,6 +141,10 @@ void Communication::terminerRecherche()
  */
 void Communication::connecter()
 {
+    qDebug() << Q_FUNC_INFO;
+
+    activerLaDecouverte();
+
     if(!estConnecte())
     {
         if(pikawaDetecte)

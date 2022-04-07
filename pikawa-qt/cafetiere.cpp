@@ -109,9 +109,8 @@ void Cafetiere::demarrerDecouverte()
     communication->activerLaDecouverte();
 }
 
-void Cafetiere::connecter()
+void Cafetiere::gereConnection()
 {
-    qDebug() << Q_FUNC_INFO;
     communication->connecter();
 }
 

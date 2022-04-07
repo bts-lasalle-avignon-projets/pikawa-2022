@@ -60,7 +60,7 @@ class Cafetiere : public QObject
 
   public slots:
     void demarrerDecouverte();
-    void connecter();
+    void gereConnection();
     void deconnecter();
     void arreterDecouverte();
     void rafraichirDecouverte();
