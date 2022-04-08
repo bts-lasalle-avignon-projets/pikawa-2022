@@ -59,11 +59,16 @@ class Cafetiere : public QObject
     void setNiveauEau(const int& niveauEau);
 
   public slots:
-    void demarrer();
-    void connecter();
+    void demarrerDecouverte();
+    void arreterDecouverte();
+    void rafraichirDecouverte();
+    void gererConnexion();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
+    void cafetiereConnectee(QString nom, QString adresse);
+    void cafetiereDeconnectee();
+    void rechercheTerminee(bool detecte);
 };
 
 #endif // CAFETIERE_H

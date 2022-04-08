@@ -46,7 +46,7 @@
 #endif
 
 // Machine à café pikawa
-#define TITRE             "pikawa 2021"
+#define TITRE             "pikawa 2022"
 #define VERSION           "v1"
 #define VERSION_PIKAWA    "0.1"
 

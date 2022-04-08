@@ -121,9 +121,12 @@ class IHMPikawa : public QMainWindow
     void afficherPageEntretien();
     void afficherPageParametres();
     void afficherPageSelectionCafe();
-    void activerBoutonConnecter(QString nom, QString adresse);
-    void activerBoutonDeconnecter(QString nom, QString adresse);
-    void desactiverBoutonDeconnecter();
+    void activerboutonConnexionEtatDetecte(QString nom, QString adresse);
+    void activerboutonConnexionEtatConnecte(QString nom, QString adresse);
+    void activerboutonConnexionEtatDeconnecte();
+    void rafraichirDecouverte();
+    void terminerDecouverte(bool detecte);
+    
     void gererSelectionCafes();
 
     void selectionnerColombia();

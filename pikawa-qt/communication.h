@@ -34,6 +34,7 @@ class Communication : public QObject
       agentDecouvreur; //!< pour découvrir des interfaces Bluetooth
     QBluetoothDeviceInfo
          pikawa;        //!< l'interface Bluetooth de la cafetière pikawa
+    bool connecte;      //!< l'état de connexion de la socket Bluetooth
     bool pikawaDetecte; //!< état de détection de l'interface pikawa
     QBluetoothSocket*
             socketBluetoothPikawa; //!< socket cliente de communication Bluetooth
@@ -47,11 +48,14 @@ class Communication : public QObject
     ~Communication();
 
     bool estConnecte() const;
+    bool estCafetiereDetectee() const;
     void envoyerTrame(QString trame);
 
   public slots:
     void activerLaDecouverte();
+    void desactiverLaDecouverte();
     void decouvrirCafetiere(const QBluetoothDeviceInfo& appareilBluetooth);
+    void terminerRecherche();
     void connecter();
     void deconnecter();
     void socketConnectee();
@@ -63,6 +67,7 @@ class Communication : public QObject
     void cafetiereDetectee(QString nom, QString adresse);
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
+    void rechercheTerminee(bool detecte);
 };
 
 #endif // COMMUNICATION_H

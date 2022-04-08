@@ -429,7 +429,7 @@
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QPushButton" name="boutonConnecter">
+             <widget class="QPushButton" name="boutonConnexion">
               <property name="minimumSize">
                <size>
                 <width>100</width>
@@ -448,6 +448,12 @@
                 <width>100</width>
                 <height>100</height>
                </size>
+              </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -470,6 +476,35 @@
               </property>
               <property name="text">
                <string>Cafetière déconnectée</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QPushButton" name="boutonRafraichir">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/images/rafraichir.png</normaloff>:/images/rafraichir.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
               </property>
              </widget>
             </item>
