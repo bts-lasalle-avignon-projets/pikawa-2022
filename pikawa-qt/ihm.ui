@@ -334,11 +334,11 @@
                </widget>
               </item>
               <item alignment="Qt::AlignHCenter">
-               <widget class="QLabel" name="nomCafeChoisie">
+               <widget class="QLabel" name="capsuleChoisie">
                 <property name="maximumSize">
                  <size>
                   <width>200</width>
-                  <height>20</height>
+                  <height>50</height>
                  </size>
                 </property>
                 <property name="styleSheet">

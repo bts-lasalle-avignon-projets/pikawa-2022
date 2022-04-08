@@ -34,6 +34,7 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     cafetiere = new Cafetiere(this);
 
     gererEvenements();
+    gererSelectionCafes();
 
     initialiserIHM();
 
@@ -72,9 +73,52 @@ void IHMPikawa::initialiserIHM()
     activerboutonConnexionEtatDeconnecte();
 
     ui->selectionLongueurPreparation->setValue(LongueurCafe::Court);
-    afficherLongueurPreparation(LongueurCafe::Court);
-
+    gererLongueurPreparation(LongueurCafe::Court);
+    /**
+     * @todo selectionner le café préféré et disponible
+     */
+    selectionnerColombia();
     afficherPageAcceuil();
+}
+
+void IHMPikawa::gererSelectionCafes()
+{
+    connect(ui->boutonColombia,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerColombia()));
+
+    connect(ui->boutonIndonesia,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerIndonesia()));
+
+    connect(ui->boutonEthiopia,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerEthiopia()));
+
+    connect(ui->boutonVolluto,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerVolluto()));
+
+    connect(ui->boutonCosi, SIGNAL(clicked()), this, SLOT(selectionnerCosi()));
+
+    connect(ui->boutonScuro,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerScuro()));
+
+    connect(ui->boutonVanilla,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerVanilla()));
+
+    connect(ui->boutonCapriccio,
+            SIGNAL(clicked()),
+            this,
+            SLOT(selectionnerCapriccio()));
 }
 
 void IHMPikawa::gererEvenements()
@@ -82,7 +126,7 @@ void IHMPikawa::gererEvenements()
     connect(ui->selectionLongueurPreparation,
             SIGNAL(valueChanged(int)),
             this,
-            SLOT(afficherLongueurPreparation(int)));
+            SLOT(gererLongueurPreparation(int)));
 
     connect(ui->boutonInformations,
             SIGNAL(clicked()),
@@ -152,7 +196,7 @@ void IHMPikawa::gererEvenements()
             SLOT(terminerDecouverte(bool)));
 }
 
-void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
+void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
 {
     QStringList labelsLongueurPreparation;
     labelsLongueurPreparation << "Court"
@@ -162,6 +206,7 @@ void IHMPikawa::afficherLongueurPreparation(int longueurPreparation)
     qDebug() << Q_FUNC_INFO << "longueurPreparation" << longueurPreparation;
     ui->labelLongueurPreparation->setText(
       labelsLongueurPreparation.at(longueurPreparation));
+    cafetiere->setLongueurChoisie(longueurPreparation);
 }
 
 void IHMPikawa::afficherPage(IHMPikawa::Page page)
@@ -238,4 +283,60 @@ void IHMPikawa::terminerDecouverte(bool detecte)
 {
     qDebug() << Q_FUNC_INFO << "detecte" << detecte;
     ui->boutonRafraichir->setEnabled(true);
+}
+
+void IHMPikawa::selectionnerColombia()
+{
+    ui->capsuleChoisie->setText("Colombia");
+    cafetiere->setCapsuleChoisie(Colombia);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerIndonesia()
+{
+    ui->capsuleChoisie->setText("Indonesia");
+    cafetiere->setCapsuleChoisie(Indonesia);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerEthiopia()
+{
+    ui->capsuleChoisie->setText("Ethiopia");
+    cafetiere->setCapsuleChoisie(Ethiopia);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerVolluto()
+{
+    ui->capsuleChoisie->setText("Volluto");
+    cafetiere->setCapsuleChoisie(Volluto);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerCosi()
+{
+    ui->capsuleChoisie->setText("Cosi");
+    cafetiere->setCapsuleChoisie(Cosi);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerScuro()
+{
+    ui->capsuleChoisie->setText("Scuro");
+    cafetiere->setCapsuleChoisie(Scuro);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerVanilla()
+{
+    ui->capsuleChoisie->setText("Vanilla");
+    cafetiere->setCapsuleChoisie(Vanilla);
+    afficherPageAcceuil();
+}
+
+void IHMPikawa::selectionnerCapriccio()
+{
+    ui->capsuleChoisie->setText("Capriccio");
+    cafetiere->setCapsuleChoisie(Capriccio);
+    afficherPageAcceuil();
 }
