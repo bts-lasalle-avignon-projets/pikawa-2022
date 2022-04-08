@@ -33,7 +33,7 @@ class Cafetiere : public QObject
     QStringList nomCapsules;     //!<
     QStringList nomBoissons;     //!<
     int         capsuleChoisie;  //!<
-    int         boissonChoisie;  //!<
+    int         longueurChoisie;  //!<
     int         niveauEau;       //!<
     bool        connectee;       //!<
     bool        activee;         //!<
@@ -43,20 +43,20 @@ class Cafetiere : public QObject
     QStringList getNomcapsules() const;
     QStringList getNomBoissons() const;
     int         getCaspuleChoisie() const;
-    int         getBoissonChoisie() const;
+    int         getLongueurChoisie() const;
     int         getNiveauEau() const;
     bool        getConnectee() const;
     bool        getActivee() const;
     bool        getCapsulePresente() const;
     bool        getTassePresente() const;
 
-    void setCapsuleChoisie(const int& capsuleChoisie);
-    void setBoissonChoisie(const int& boissonChoisie);
-    void setNiveauEau(const int& niveauEau);
-
   public:
     Cafetiere(IHMPikawa* ihm);
     virtual ~Cafetiere();
+
+    void setCapsuleChoisie(const int& capsuleChoisie);
+    void setLongueurChoisie(const int& boissonChoisie);
+    void setNiveauEau(const int& niveauEau);
 
   public slots:
     void demarrer();

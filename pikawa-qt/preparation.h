@@ -1,6 +1,8 @@
 #ifndef PREPARATION_H
 #define PREPARATION_H
 
+#define NOM_BDD "pikawa.sqlite"
+
 /**
  * @file preparation.h
  *
@@ -13,6 +15,7 @@
 #include <QObject>
 #include <QStringList>
 
+class BaseDeDonnees;
 
 /**
  * @class Preparation
@@ -23,6 +26,8 @@ class Preparation : public QObject
 {
     Q_OBJECT
   private:
+    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
+
     QStringList nomCapsules;
     QStringList nomBoissons;
     bool        capsulePresente;
