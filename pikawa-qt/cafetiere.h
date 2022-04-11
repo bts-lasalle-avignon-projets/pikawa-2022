@@ -31,7 +31,7 @@ class Cafetiere : public QObject
     Preparation*   preparation;   //!<
 
     QStringList nomCapsules;     //!<
-    QStringList nomBoissons;     //!<
+    QStringList nomLongueurs;     //!<
     int         capsuleChoisie;  //!<
     int         longueurChoisie;  //!<
     int         niveauEau;       //!<
@@ -40,8 +40,11 @@ class Cafetiere : public QObject
     bool        capsulePresente; //!<
     bool        tassePresente;   //!<
 
+    void initialiserNomCapsules();
+    void initiatiserNomLongueurs();
+
     QStringList getNomcapsules() const;
-    QStringList getNomBoissons() const;
+    QStringList getNomLongueurs() const;
     int         getCaspuleChoisie() const;
     int         getLongueurChoisie() const;
     int         getNiveauEau() const;

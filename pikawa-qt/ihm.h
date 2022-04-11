@@ -31,7 +31,7 @@ class Cafetiere;
  * @def NOM_BDD
  * @brief Le nom de la base de données SQLite
  */
-#define NOM_BDD "pikawa.sqlite"
+#define NOM_BDD "pikawa.db"
 
 /**
  * @def PLEIN_ECRAN

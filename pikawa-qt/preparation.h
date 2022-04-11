@@ -29,13 +29,19 @@ class Preparation : public QObject
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
 
     QStringList nomCapsules;
-    QStringList nomBoissons;
+    QStringList nomLongueurs;
     bool        capsulePresente;
     bool        tassePresente;
+
+    void chargerNomCapsules();
+    void chargerLongeurBoissons();
 
   public:
     Preparation(QObject *parent = nullptr);
     ~Preparation();
+
+    QStringList getNomCapsules() const;
+    QStringList getNomLongueurs() const;
 };
 
 #endif // PREPARATION_H

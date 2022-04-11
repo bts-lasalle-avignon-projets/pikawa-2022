@@ -15,7 +15,7 @@
 
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(new Communication(this)),
-    preparation(new Preparation(this)), nomCapsules(0), nomBoissons(0),
+    preparation(new Preparation(this)), nomCapsules(0), nomLongueurs(0),
 
     capsuleChoisie(0), longueurChoisie(0), niveauEau(0), connectee(false),
     activee(false), capsulePresente(false), tassePresente(false)
@@ -37,6 +37,8 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(rechercheTerminee(bool)),
             this,
             SIGNAL(rechercheTerminee(bool)));
+    initialiserNomCapsules();
+    initiatiserNomLongueurs();
 }
 
 Cafetiere::~Cafetiere()
@@ -44,14 +46,25 @@ Cafetiere::~Cafetiere()
     qDebug() << Q_FUNC_INFO;
 }
 
+void Cafetiere::initialiserNomCapsules()
+{
+    this->nomCapsules = preparation->getNomCapsules();
+}
+
+void Cafetiere::initiatiserNomLongueurs()
+{
+    this->nomLongueurs = preparation->getNomLongueurs();
+}
+
+
 QStringList Cafetiere::getNomcapsules() const
 {
     return nomCapsules;
 }
 
-QStringList Cafetiere::getNomBoissons() const
+QStringList Cafetiere::getNomLongueurs() const
 {
-    return nomBoissons;
+    return nomLongueurs;
 }
 
 int Cafetiere::getCaspuleChoisie() const
