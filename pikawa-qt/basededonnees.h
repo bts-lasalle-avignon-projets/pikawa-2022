@@ -14,6 +14,12 @@
 #include <QString>
 
 /**
+ * @def NOM_BDD
+ * @brief Le nom de la base de données SQLite
+ */
+#define NOM_BDD "pikawa.db"
+
+/**
  * @brief
  * Class permettant de s'interfacer avec la base de données
  * @class BaseDeDonnees basededonnees.h "basededonnees.h"

@@ -28,12 +28,6 @@ class Cafetiere;
 #define VERSION "0.1"
 
 /**
- * @def NOM_BDD
- * @brief Le nom de la base de données SQLite
- */
-#define NOM_BDD "pikawa.db"
-
-/**
  * @def PLEIN_ECRAN
  * @brief Pour le mode plein écran
  */
@@ -126,7 +120,7 @@ class IHMPikawa : public QMainWindow
     void activerboutonConnexionEtatDeconnecte();
     void rafraichirDecouverte();
     void terminerDecouverte(bool detecte);
-    
+
     void gererSelectionCafes();
 
     void selectionnerColombia();
