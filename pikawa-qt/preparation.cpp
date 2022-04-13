@@ -24,6 +24,7 @@ Preparation::Preparation(QObject* parent) :
 
 Preparation::~Preparation()
 {
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
 
