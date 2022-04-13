@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS Capsule(
   idCapsule INTEGER PRIMARY KEY AUTOINCREMENT,
   marque VARCHAR NOT NULL,
   designation VARCHAR,
+  libelle VARCHAR,
   description VARCHAR,
   intensite INTEGER DEFAULT 0,
 );
