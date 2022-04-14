@@ -32,6 +32,9 @@ class Cafetiere;
  * @brief Pour le mode plein écran
  */
 #define PLEIN_ECRAN
+#define TAILLE_RISTRETO 30
+#define TAILLE_ESPRESSO 60
+#define TAILLE_LUNGO 110
 
 QT_BEGIN_NAMESPACE
 namespace Ui

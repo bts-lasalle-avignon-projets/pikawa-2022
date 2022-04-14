@@ -19,21 +19,27 @@
  * préfixe
  */
 #define PREFIXE_NOM_CAFETIERE "PIKAWA"
+#define DELIMITEUR ';'
+
+class Cafetiere;
 
 /**
  * @class Communication
  * @brief
  * @details
  */
+
 class Communication : public QObject
 {
     Q_OBJECT
   private:
+
+    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
     QBluetoothLocalDevice interfaceLocale; //!< l'interface Bluetooth locale
     QBluetoothDeviceDiscoveryAgent*
       agentDecouvreur; //!< pour découvrir des interfaces Bluetooth
     QBluetoothDeviceInfo
-         pikawa;        //!< l'interface Bluetooth de la cafetière pikawa
+         pikawa;        //!< l'int erface Bluetooth de la cafetière pikawa
     bool connecte;      //!< l'état de connexion de la socket Bluetooth
     bool pikawaDetecte; //!< état de détection de l'interface pikawa
     QBluetoothSocket*
@@ -50,6 +56,7 @@ class Communication : public QObject
     bool estConnecte() const;
     bool estCafetiereDetectee() const;
     void envoyerTrame(QString trame);
+    void obtenirEtatCafetiere();
 
   public slots:
     void activerLaDecouverte();

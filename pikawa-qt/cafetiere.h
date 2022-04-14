@@ -42,6 +42,7 @@ class Cafetiere : public QObject
     int  capsuleChoisie; //!<
     int  longueurChoisie; //!<
     int  niveauEau;       //!<
+    int  niveauEauNecessaire; //!<
     bool connectee;       //!<
     bool activee;         //!<
     bool capsulePresente; //!<
@@ -65,6 +66,7 @@ class Cafetiere : public QObject
     bool        getCapsulePresente() const;
     bool        getTassePresente() const;
     int         getIdCapsule(QString nomCapsule) const;
+    int         getniveauEauNecessaire() const;
     QStringList getPreferences() const;
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
@@ -72,6 +74,8 @@ class Cafetiere : public QObject
     void setCapsuleChoisie(const int& capsuleChoisie);
     void setLongueurChoisie(const int& boissonChoisie);
     void setNiveauEau(const int& niveauEau);
+    void setNiveauEauNecessaire(const int& niveauEauNecessaire);
+    bool estPret();
 
     /**
      * @enum ChampsTablePreferences

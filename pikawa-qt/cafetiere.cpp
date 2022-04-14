@@ -18,7 +18,7 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(new Communication(this)),
     preparation(new Preparation(this)), nomCapsules(0), nomLongueurs(0),
 
-    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), connectee(false),
+    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), niveauEauNecessaire(0), connectee(false),
     activee(false), capsulePresente(false), tassePresente(false)
 {
     qDebug() << Q_FUNC_INFO;
@@ -106,6 +106,11 @@ int Cafetiere::getLongueurChoisie() const
 int Cafetiere::getNiveauEau() const
 {
     return niveauEau;
+}
+
+int Cafetiere::getniveauEauNecessaire() const
+{
+    return niveauEauNecessaire;
 }
 
 bool Cafetiere::getConnectee() const
@@ -198,6 +203,11 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
     this->niveauEau = niveauEau;
 }
 
+void Cafetiere::setNiveauEauNecessaire(const int& niveauEauNecessaire)
+{
+    this->niveauEauNecessaire = niveauEauNecessaire;
+}
+
 void Cafetiere::demarrerDecouverte()
 {
     qDebug() << Q_FUNC_INFO;
@@ -225,3 +235,16 @@ void Cafetiere::gererConnexion()
     else
         communication->connecter();
 }
+
+bool Cafetiere::estPret()
+{
+    if(preparation->estPreparationPrete() && communication->estConnecte())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+

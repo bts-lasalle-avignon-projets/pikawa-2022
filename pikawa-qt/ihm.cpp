@@ -98,6 +98,18 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
     ui->labelLongueurPreparation->setText(
       labelsLongueurPreparation.at(longueurPreparation));
     cafetiere->setLongueurChoisie(longueurPreparation);
+
+    int niveauEauNecessaire = 0;
+    switch (longueurPreparation)
+    {
+        case 0 : niveauEauNecessaire = TAILLE_RISTRETO;
+            break;
+        case 1 : niveauEauNecessaire = TAILLE_ESPRESSO;
+            break;
+        case 2 : niveauEauNecessaire = TAILLE_LUNGO;
+            break;
+    }
+    cafetiere->setNiveauEauNecessaire(niveauEauNecessaire);
 }
 
 void IHMPikawa::gererSelectionCafes()

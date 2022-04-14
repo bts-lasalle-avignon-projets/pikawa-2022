@@ -1,5 +1,6 @@
 #include "preparation.h"
 #include "basededonnees.h"
+#include "cafetiere.h"
 #include <QDebug>
 
 /**
@@ -12,8 +13,8 @@
  */
 
 Preparation::Preparation(QObject* parent) :
-    QObject(parent), baseDeDonneesPikawa(nullptr), nomCapsules(0),
-    nomLongueurs(0), capsulePresente(false), tassePresente(false)
+    QObject(parent), cafetiere(nullptr), baseDeDonneesPikawa(nullptr), nomCapsules(0),
+    nomLongueurs(0), capsulePresente(false), bacPlein(false), tassePresente(false), niveauEau(0)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
@@ -46,6 +47,46 @@ QStringList Preparation::getNomLongueurs() const
     return listeNomLongueurs;
 }
 
+bool Preparation::getCapsulePresente() const
+{
+    return capsulePresente;
+}
+
+bool Preparation::getBacPlein() const
+{
+    return bacPlein;
+}
+
+bool Preparation::getTassePresente() const
+{
+    return tassePresente;
+}
+
+int Preparation::getNiveauEau() const
+{
+    return niveauEau;
+}
+
+void Preparation::setCapsulePresente(bool& caspulePresente)
+{
+    this->capsulePresente = caspulePresente;
+}
+
+void Preparation::setBacPlein(bool& bacPlein)
+{
+    this->bacPlein = bacPlein;
+}
+
+void Preparation::setTassePresente(bool& tassePresente)
+{
+    this->tassePresente = tassePresente;
+}
+
+void Preparation::setNiveauEau(int& niveauEau)
+{
+    this->niveauEau = niveauEau;
+}
+
 void Preparation::chargerNomCapsules()
 {
     qDebug() << Q_FUNC_INFO;
@@ -59,3 +100,17 @@ void Preparation::chargerLongeurBoissons()
     baseDeDonneesPikawa->recuperer("SELECT type FROM TypeBoisson;",
                                    nomLongueurs);
 }
+
+
+bool Preparation::estPreparationPrete()
+{
+    if((niveauEau - cafetiere->getniveauEauNecessaire()) <= 0 && bacPlein && !tassePresente)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+

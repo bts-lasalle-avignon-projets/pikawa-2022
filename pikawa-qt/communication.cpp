@@ -1,4 +1,5 @@
 ﻿#include "communication.h"
+#include "cafetiere.h"
 #include <QDebug>
 
 /**
@@ -11,7 +12,7 @@
  */
 
 Communication::Communication(QObject* parent) :
-    QObject(parent), agentDecouvreur(nullptr), connecte(false),
+    QObject(parent),cafetiere(nullptr),agentDecouvreur(nullptr), connecte(false),
     pikawaDetecte(false), socketBluetoothPikawa(nullptr)
 {
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
@@ -233,12 +234,35 @@ void Communication::recevoir()
     trameRecue += QString(donnees.data());
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
 
-    /**
-     * @todo Définir un protocole et le traiter ici
-     */
+    int i = 0;
+    for(i; i < trameRecue.size(); ++i)
+    {
+        if(trameRecue[i] == DELIMITEUR)
+        {
+            ++i;
+            if(trameRecue[i] == 'C')
+            {
+                obtenirEtatCafetiere();
+            }
+        }
+    }
 }
 
 void Communication::lireEtatSocket()
 {
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->state();
 }
+
+void Communication::obtenirEtatCafetiere()
+{
+    envoyerTrame("$PIKAWA;ETAT;C;");
+    //recevoir();
+    trameRecue = "$PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n";
+    int niveauEau = 0;
+    for(int i = 0; i < trameRecue.size(); ++i)
+    {
+
+    }
+    cafetiere->setNiveauEau(niveauEau);
+}
+
