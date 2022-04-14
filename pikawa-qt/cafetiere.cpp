@@ -181,10 +181,16 @@ void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
 
 void Cafetiere::setLongueurChoisie(const int& longueurChoisie)
 {
-    /**
-     * @todo Enregistrer le typeBoissonActuelle dans Preferences
-     */
     this->longueurChoisie = longueurChoisie;
+    if(this->longueurChoisie != capsuleChoisie)
+    {
+        this->longueurChoisie = longueurChoisie;
+        QString requete       = "UPDATE Preferences SET typeBoissonActuelle='" +
+                          QString::number(longueurChoisie + 1) +
+                          "' WHERE Preferences.idUtilisateur='" +
+                          IDENTIFIANT_UTILISATEUR_ID + "'";
+        baseDeDonneesPikawa->executer(requete);
+    }
 }
 
 void Cafetiere::setNiveauEau(const int& niveauEau)
