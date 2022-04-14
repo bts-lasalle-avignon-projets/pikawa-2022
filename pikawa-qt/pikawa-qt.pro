@@ -27,7 +27,7 @@ RESOURCES += \
     ressources.qrc
 
 COPIES += bd
-bd.files = pikawa.sqlite
+bd.files = pikawa.db
 bd.path = $$OUT_PWD/
 bd.base = $$PWD/
 

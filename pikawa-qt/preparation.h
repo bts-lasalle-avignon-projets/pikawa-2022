@@ -1,8 +1,6 @@
 #ifndef PREPARATION_H
 #define PREPARATION_H
 
-#define NOM_BDD "pikawa.sqlite"
-
 /**
  * @file preparation.h
  *
@@ -13,6 +11,8 @@
  */
 
 #include <QObject>
+#include <QVector>
+#include <QString>
 #include <QStringList>
 
 class BaseDeDonnees;
@@ -28,14 +28,20 @@ class Preparation : public QObject
   private:
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
 
-    QStringList nomCapsules;
-    QStringList nomBoissons;
-    bool        capsulePresente;
-    bool        tassePresente;
+    QVector<QString> nomCapsules;
+    QVector<QString> nomLongueurs;
+    bool             capsulePresente;
+    bool             tassePresente;
+
+    void chargerNomCapsules();
+    void chargerLongeurBoissons();
 
   public:
-    Preparation(QObject *parent = nullptr);
+    Preparation(QObject* parent = nullptr);
     ~Preparation();
+
+    QStringList getNomCapsules() const;
+    QStringList getNomLongueurs() const;
 };
 
 #endif // PREPARATION_H

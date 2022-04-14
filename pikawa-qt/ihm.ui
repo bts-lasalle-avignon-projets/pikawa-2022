@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -759,7 +759,7 @@ background: rgb(193, 125, 17);
             <widget class="QPushButton" name="boutonScuro">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -772,13 +772,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Scuro</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/scuro.png</normaloff>:/scuro.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="4" column="4">
             <widget class="QPushButton" name="boutonVolluto">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -791,13 +801,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Volluto</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/volluto.png</normaloff>:/volluto.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="8" column="0">
             <widget class="QPushButton" name="boutonCosi">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -810,13 +830,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Cosi</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/cosi.png</normaloff>:/cosi.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="8" column="3">
             <widget class="QPushButton" name="boutonVanilla">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -829,13 +859,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Vanilla</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/vanilla-eclair.png</normaloff>:/vanilla-eclair.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="4" column="3">
             <widget class="QPushButton" name="boutonEthiopia">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -848,13 +888,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Ethiopia</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/ethiopia.png</normaloff>:/ethiopia.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="8" column="4">
             <widget class="QPushButton" name="boutonCapriccio">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -867,13 +917,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Capriccio</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/capriccio.png</normaloff>:/capriccio.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="4" column="2">
             <widget class="QPushButton" name="boutonIndonesia">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -886,13 +946,23 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Indonesia</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/indonesia.png</normaloff>:/indonesia.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="4" column="0">
             <widget class="QPushButton" name="boutonColombia">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>190</width>
                <height>150</height>
               </size>
              </property>
@@ -904,6 +974,16 @@ background: rgb(193, 125, 17);
              </property>
              <property name="text">
               <string>Colombia</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/colombia.png</normaloff>:/colombia.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>

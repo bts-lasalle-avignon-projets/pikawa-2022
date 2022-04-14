@@ -28,12 +28,6 @@ class Cafetiere;
 #define VERSION "0.1"
 
 /**
- * @def NOM_BDD
- * @brief Le nom de la base de données SQLite
- */
-#define NOM_BDD "pikawa.sqlite"
-
-/**
  * @def PLEIN_ECRAN
  * @brief Pour le mode plein écran
  */
@@ -47,17 +41,6 @@ class IHMPikawa;
 QT_END_NAMESPACE
 
 class BaseDeDonnees;
-
-/**
- * @enum LongueurPreparation
- * @brief Long, Moyen ou Court
- */
-enum LongueurCafe
-{
-    Court = 0,
-    Moyen = 1,
-    Long  = 2
-};
 
 /**
  * @class IHMPikawa
@@ -82,21 +65,6 @@ class IHMPikawa : public QMainWindow
         NbEcrans
     };
 
-    /**
-     * @todo Utiliser la base de données
-     */
-    enum nomCaspule
-    {
-        Colombia,
-        Indonesia,
-        Ethiopia,
-        Volluto,
-        Cosi,
-        Scuro,
-        Vanilla,
-        Capriccio
-    };
-
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
@@ -106,15 +74,25 @@ class IHMPikawa : public QMainWindow
     QIcon* iconeBoutonDetectee;
     QIcon* iconeBoutonDeconnecte;
 
+    QIcon* iconeCapsuleColombia;
+    QIcon* iconeCapsuleIndonesia;
+    QIcon* iconeCapsuleEthiopia;
+    QIcon* iconeCapsuleVolluto;
+    QIcon* iconeCapsuleCapriccio;
+    QIcon* iconeCapsuleCosi;
+    QIcon* iconeCapsuleScuro;
+    QIcon* iconeCapsuleVanilla;
+
+    void initialiserIcones();
     void initialiserIHM();
     void gererEvenements();
+    void initialiserPreferences();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
 
   public slots:
-    void gererLongueurPreparation(int longueurPreparation);
     void afficherPage(IHMPikawa::Page page);
     void afficherPageAcceuil();
     void afficherPageInformations();
@@ -126,7 +104,8 @@ class IHMPikawa : public QMainWindow
     void activerboutonConnexionEtatDeconnecte();
     void rafraichirDecouverte();
     void terminerDecouverte(bool detecte);
-    
+
+    void gererLongueurPreparation(int longueurPreparation);
     void gererSelectionCafes();
 
     void selectionnerColombia();

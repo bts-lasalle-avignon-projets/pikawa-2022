@@ -13,9 +13,14 @@
 #include <QObject>
 #include <QStringList>
 
+// Pour les tests
+#define IDENTIFIANT_UTILISATEUR    "tvaira"
+#define IDENTIFIANT_UTILISATEUR_ID "1"
+
 class IHMPikawa;
 class Communication;
 class Preparation;
+class BaseDeDonnees;
 
 /**
  * @class Cafetiere
@@ -29,19 +34,29 @@ class Cafetiere : public QObject
     IHMPikawa*     ihm;           //!< association avec la fenêtre graphique
     Communication* communication; //!<
     Preparation*   preparation;   //!<
+    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
+    QStringList    nomCapsules;         //!<
+    QStringList    nomLongueurs;        //!<
+    QStringList
+         preferences;    //!< liste des préférences de l'utilisateur connecté
+    int  capsuleChoisie; //!<
+    int  longueurChoisie; //!<
+    int  niveauEau;       //!<
+    bool connectee;       //!<
+    bool activee;         //!<
+    bool capsulePresente; //!<
+    bool tassePresente;   //!<
 
-    QStringList nomCapsules;     //!<
-    QStringList nomBoissons;     //!<
-    int         capsuleChoisie;  //!<
-    int         longueurChoisie;  //!<
-    int         niveauEau;       //!<
-    bool        connectee;       //!<
-    bool        activee;         //!<
-    bool        capsulePresente; //!<
-    bool        tassePresente;   //!<
+    void initialiserNomCapsules();
+    void initiatiserNomLongueurs();
+    void chargerPreferences(QString identifiantUtilisateur);
+
+  public:
+    Cafetiere(IHMPikawa* ihm);
+    virtual ~Cafetiere();
 
     QStringList getNomcapsules() const;
-    QStringList getNomBoissons() const;
+    QStringList getNomLongueurs() const;
     int         getCaspuleChoisie() const;
     int         getLongueurChoisie() const;
     int         getNiveauEau() const;
@@ -49,14 +64,49 @@ class Cafetiere : public QObject
     bool        getActivee() const;
     bool        getCapsulePresente() const;
     bool        getTassePresente() const;
-
-  public:
-    Cafetiere(IHMPikawa* ihm);
-    virtual ~Cafetiere();
+    int         getIdCapsule(QString nomCapsule) const;
+    QStringList getPreferences() const;
+    QString     getCapsulePreferee() const;
+    QString     getLongueurPreferee() const;
 
     void setCapsuleChoisie(const int& capsuleChoisie);
     void setLongueurChoisie(const int& boissonChoisie);
     void setNiveauEau(const int& niveauEau);
+
+    /**
+     * @enum ChampsTablePreferences
+     * @brief Les différentes colonne de la table Preferences
+     */
+    enum ChampsTablePreferences
+    {
+        COLONNE_PREFERENCES_ID,                  //!< id
+        COLONNE_PREFERENCES_ID_UTILISATEUR,      //!< id de l'utilisateur
+        COLONNE_PREFERENCES_NOM_UTILISATEUR,     //!< nom de l'utilisateur
+        COLONNE_PREFERENCES_PRENOM_UTILISATEUR,  //!< prénom de l'utilisateur
+        COLONNE_PREFERENCES_ID_CAPSULE,          //!< id de la capsule
+        COLONNE_PREFERENCES_DESIGNATION_CAPSULE, //!< désignation de la capsule
+        COLONNE_PREFERENCES_LIBELLE_CAPSULE,     //!< libellé de la capsule
+        COLONNE_PREFERENCES_ID_TYPEBOISSON,      //!< id du type de boisson
+        COLONNE_PREFERENCES_TYPE_BOISSON,        //!< type de boisson
+        NB_COLONNES_PREFERENCES
+    };
+
+    /**
+     * @enum NomCaspule
+     * @brief Les différents noms de capsule connus
+     */
+    enum NomCaspule
+    {
+        Colombia,
+        Indonesia,
+        Ethiopia,
+        Volluto,
+        Capriccio,
+        Cosi,
+        Scuro,
+        Vanilla,
+        NbCapsules
+    };
 
   public slots:
     void demarrerDecouverte();
