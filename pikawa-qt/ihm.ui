@@ -772,6 +772,16 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Scuro</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/scuro.png</normaloff>:/scuro.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="4" column="4">
@@ -790,6 +800,16 @@ background: rgb(193, 125, 17);
              </property>
              <property name="text">
               <string>Volluto</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/volluto.png</normaloff>:/volluto.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -810,6 +830,16 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Cosi</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/cosi.png</normaloff>:/cosi.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="8" column="3">
@@ -828,6 +858,16 @@ background: rgb(193, 125, 17);
              </property>
              <property name="text">
               <string>Vanilla</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/vanilla-eclair.png</normaloff>:/vanilla-eclair.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -848,6 +888,16 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Ethiopia</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/ethiopia.png</normaloff>:/ethiopia.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="8" column="4">
@@ -866,6 +916,16 @@ background: rgb(193, 125, 17);
              </property>
              <property name="text">
               <string>Capriccio</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/capriccio.png</normaloff>:/capriccio.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -886,6 +946,16 @@ background: rgb(193, 125, 17);
              <property name="text">
               <string>Indonesia</string>
              </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/indonesia.png</normaloff>:/indonesia.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
             </widget>
            </item>
            <item row="4" column="0">
@@ -904,6 +974,16 @@ background: rgb(193, 125, 17);
              </property>
              <property name="text">
               <string>Colombia</string>
+             </property>
+             <property name="icon">
+              <iconset resource="ressources.qrc">
+               <normaloff>:/colombia.png</normaloff>:/colombia.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
