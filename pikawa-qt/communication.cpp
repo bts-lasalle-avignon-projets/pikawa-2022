@@ -18,6 +18,7 @@ Communication::Communication(QObject* parent) :
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
     activerBluetooth();
     activerLaDecouverte();
+    obtenirEtatCafetiere();
 }
 
 Communication::~Communication()
@@ -233,18 +234,9 @@ void Communication::recevoir()
     qDebug() << Q_FUNC_INFO << "donnees" << donnees;
     trameRecue += QString(donnees.data());
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
-
-    int i = 0;
-    for(i; i < trameRecue.size(); ++i)
+    if(trameRecue.contains('C'));
     {
-        if(trameRecue[i] == DELIMITEUR)
-        {
-            ++i;
-            if(trameRecue[i] == 'C')
-            {
-                obtenirEtatCafetiere();
-            }
-        }
+        obtenirEtatCafetiere();
     }
 }
 
@@ -255,14 +247,24 @@ void Communication::lireEtatSocket()
 
 void Communication::obtenirEtatCafetiere()
 {
-    envoyerTrame("$PIKAWA;ETAT;C;");
-    //recevoir();
-    trameRecue = "$PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n";
+    trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
     int niveauEau = 0;
     for(int i = 0; i < trameRecue.size(); ++i)
     {
-
+        if(trameRecue[i] == DELIMITEUR)
+        {
+            ++i;
+            if(trameRecue[i].isDigit())
+            {
+                while(trameRecue[i] ==! DELIMITEUR)
+                {
+                    niveauEau =+ trameRecue[i].digitValue();
+                }
+                qDebug() << Q_FUNC_INFO << niveauEau;
+                cafetiere->setNiveauEau(niveauEau);
+            }
+        }
     }
-    cafetiere->setNiveauEau(niveauEau);
+
 }
 
