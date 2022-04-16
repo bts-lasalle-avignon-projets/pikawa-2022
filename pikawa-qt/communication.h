@@ -21,6 +21,8 @@
 #define PREFIXE_NOM_CAFETIERE "PIKAWA"
 #define DELIMITEUR ';'
 
+#define TEST_TRAMES
+
 class Cafetiere;
 
 /**
@@ -48,6 +50,9 @@ class Communication : public QObject
 
     bool estBluetoothDisponible() const;
     void activerBluetooth();
+    bool estTrameValide(QString trame);
+    QString extraireTypeTrame(QString trame);
+    bool traiterTrame(QString typeTrame, QString trame);
 
   public:
     Communication(QObject* parent = nullptr);
@@ -56,7 +61,6 @@ class Communication : public QObject
     bool estConnecte() const;
     bool estCafetiereDetectee() const;
     void envoyerTrame(QString trame);
-    void obtenirEtatCafetiere();
 
   public slots:
     void activerLaDecouverte();
@@ -75,6 +79,7 @@ class Communication : public QObject
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
+    void etatCafetiere(QString reservoirEau, QString bacCapsules, QString etatCapsule, QString etatTasse);
 };
 
 #endif // COMMUNICATION_H

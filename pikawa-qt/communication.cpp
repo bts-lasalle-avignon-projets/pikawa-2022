@@ -18,7 +18,10 @@ Communication::Communication(QObject* parent) :
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
     activerBluetooth();
     activerLaDecouverte();
-    obtenirEtatCafetiere();
+
+#ifdef TEST_TRAMES
+    recevoir();
+#endif
 }
 
 Communication::~Communication()
@@ -41,6 +44,36 @@ void Communication::activerBluetooth()
     }
     else
         qDebug() << Q_FUNC_INFO << "Pas de bluetooh !";
+}
+
+bool Communication::estTrameValide(QString trame)
+{
+    qDebug() << Q_FUNC_INFO << trame;
+    /**
+     * @todo
+     * 1. doit commencer par $PIKAWA
+     * 2. doit se terminer \r\n
+     */
+
+    return false;
+}
+
+QString Communication::extraireTypeTrame(QString trame)
+{
+    /**
+     * @todo extraire et retourner le champ type (avec split)
+     */
+    qDebug() << Q_FUNC_INFO << trame.split(";", QString::SkipEmptyParts);
+    return QString("");
+}
+
+bool Communication::traiterTrame(QString typeTrame, QString trame)
+{
+    qDebug() << Q_FUNC_INFO << typeTrame;
+    /**
+     * @todo extraire les champs en fonction du type de trame (avec split)
+     * @todo signaler les données avec emit
+     */
 }
 
 /**
@@ -229,42 +262,25 @@ void Communication::socketDeconnectee()
 
 void Communication::recevoir()
 {
+#ifndef TEST_TRAMES
     QByteArray donnees;
     donnees = socketBluetoothPikawa->readAll();
     qDebug() << Q_FUNC_INFO << "donnees" << donnees;
     trameRecue += QString(donnees.data());
+#else
+    // on peut simuler des trames reçues
+    trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
+#endif
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
-    if(trameRecue.contains('C'));
-    {
-        obtenirEtatCafetiere();
-    }
+    /**
+     * @todo 1. vérifier la validité de la trame
+     * @todo 2. si trame valide, identifier le type de trame
+     * @todo 3. si type de trame connue, traiter le type de trame (extraire les données) et signaler les données extraites avec emit
+     */
+
 }
 
 void Communication::lireEtatSocket()
 {
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->state();
 }
-
-void Communication::obtenirEtatCafetiere()
-{
-    trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
-    int niveauEau = 0;
-    for(int i = 0; i < trameRecue.size(); ++i)
-    {
-        if(trameRecue[i] == DELIMITEUR)
-        {
-            ++i;
-            if(trameRecue[i].isDigit())
-            {
-                while(trameRecue[i] ==! DELIMITEUR)
-                {
-                    niveauEau =+ trameRecue[i].digitValue();
-                }
-                qDebug() << Q_FUNC_INFO << niveauEau;
-                cafetiere->setNiveauEau(niveauEau);
-            }
-        }
-    }
-
-}
-
