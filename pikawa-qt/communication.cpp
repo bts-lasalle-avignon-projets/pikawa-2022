@@ -49,31 +49,57 @@ void Communication::activerBluetooth()
 bool Communication::estTrameValide(QString trame)
 {
     qDebug() << Q_FUNC_INFO << trame;
-    /**
-     * @todo
-     * 1. doit commencer par $PIKAWA
-     * 2. doit se terminer \r\n
-     */
+    return trame.startsWith("$PIKAWA") && trame.endsWith("/r/n");
+}
 
-    return false;
+bool Communication::estTypeTrameValide(QString typeTrame)
+{
+    return typeTrame == ETAT_CAFETIERE || typeTrame == ETAT_MAGASIN || typeTrame == ETAT_PREPARATION;
 }
 
 QString Communication::extraireTypeTrame(QString trame)
 {
-    /**
-     * @todo extraire et retourner le champ type (avec split)
-     */
+    QStringList champs = trame.split(QLatin1Char(';'));
+    QString type = champs[1];
+
     qDebug() << Q_FUNC_INFO << trame.split(";", QString::SkipEmptyParts);
-    return QString("");
+    return type;
 }
 
 bool Communication::traiterTrame(QString typeTrame, QString trame)
 {
+    QStringList champs = trame.split(QLatin1Char(';'));
+
     qDebug() << Q_FUNC_INFO << typeTrame;
-    /**
-     * @todo extraire les champs en fonction du type de trame (avec split)
-     * @todo signaler les données avec emit
-     */
+    if(typeTrame == "C")
+    {
+        int niveauEau = champs[2].toInt();
+        int niveauBac = champs[3].toInt();
+        bool caspulePresente = (champs[4] == '1');
+        bool tassePresente = (champs[5] == '1');
+
+        emit etatCafetiere(niveauEau, niveauBac, caspulePresente, tassePresente);
+    }
+    if(typeTrame == "M")
+    {
+        bool colombiaPresent = (champs[2] == '1');
+        bool indonesiaPresent = (champs[3] == '1');
+        bool ethiopiaPresent = (champs[4] == '1');
+        bool volutoPresent = (champs[5] == '1');
+        bool capriccioPresent = (champs[6] == '1');
+        bool cosiPresent = (champs[7] == '1');
+        bool scuroPresent = (champs[8] == '1');
+        bool vanillaPresent = (champs[9] == '1');
+
+        emit etatMagasin(colombiaPresent, indonesiaPresent, ethiopiaPresent, volutoPresent,
+                         capriccioPresent, cosiPresent, scuroPresent, vanillaPresent);
+    }
+
+    if(typeTrame == "P")
+    {
+        bool preparationCafe = (champs[2] == '1');
+        emit cafeEnPreparation(preparationCafe);
+    }
 }
 
 /**
@@ -272,12 +298,15 @@ void Communication::recevoir()
     trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
 #endif
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
-    /**
-     * @todo 1. vérifier la validité de la trame
-     * @todo 2. si trame valide, identifier le type de trame
-     * @todo 3. si type de trame connue, traiter le type de trame (extraire les données) et signaler les données extraites avec emit
-     */
 
+    if(estTrameValide(trameRecue))
+    {
+        QString typeTrame = extraireTypeTrame(trameRecue);
+        if(estTypeTrameValide(typeTrame))
+        {
+            traiterTrame(typeTrame, trameRecue);
+        }
+    }
 }
 
 void Communication::lireEtatSocket()

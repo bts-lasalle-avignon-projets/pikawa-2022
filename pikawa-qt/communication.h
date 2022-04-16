@@ -20,6 +20,9 @@
  */
 #define PREFIXE_NOM_CAFETIERE "PIKAWA"
 #define DELIMITEUR ';'
+#define ETAT_CAFETIERE 'C'
+#define ETAT_MAGASIN 'M'
+#define ETAT_PREPARATION 'P'
 
 #define TEST_TRAMES
 
@@ -51,8 +54,10 @@ class Communication : public QObject
     bool estBluetoothDisponible() const;
     void activerBluetooth();
     bool estTrameValide(QString trame);
+    bool estTypeTrameValide(QString typeTrame);
     QString extraireTypeTrame(QString trame);
     bool traiterTrame(QString typeTrame, QString trame);
+
 
   public:
     Communication(QObject* parent = nullptr);
@@ -79,7 +84,14 @@ class Communication : public QObject
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
-    void etatCafetiere(QString reservoirEau, QString bacCapsules, QString etatCapsule, QString etatTasse);
+    void etatCafetiere(int reservoirEau, int bacCapsules, bool etatCapsule, bool etatTasse);
+    void etatMagasin(bool colombiaPresent, bool indonesiaPresent, bool ethiopiaPresent,
+                     bool volutoPresent, bool capriccioPresent, bool cosiPresent, bool scuroPresent, bool vanillaPresent);
+
+    void cafeEnPreparation(bool preparationCafe);
+
+
+
 };
 
 #endif // COMMUNICATION_H
