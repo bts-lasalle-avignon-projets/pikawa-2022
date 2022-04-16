@@ -80,7 +80,8 @@ bool Communication::traiterTrame(QString typeTrame, QString trame)
 
         emit etatCafetiere(niveauEau, niveauBac, caspulePresente, tassePresente);
     }
-    if(typeTrame == "M")
+
+    else if(typeTrame == "M")
     {
         bool colombiaPresent = (champs[2] == '1');
         bool indonesiaPresent = (champs[3] == '1');
@@ -95,7 +96,7 @@ bool Communication::traiterTrame(QString typeTrame, QString trame)
                          capriccioPresent, cosiPresent, scuroPresent, vanillaPresent);
     }
 
-    if(typeTrame == "P")
+    else
     {
         bool preparationCafe = (champs[2] == '1');
         emit cafeEnPreparation(preparationCafe);
