@@ -114,3 +114,7 @@ bool Preparation::estPreparationPrete()
     }
 }
 
+
+
+
+

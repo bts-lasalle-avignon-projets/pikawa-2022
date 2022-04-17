@@ -83,14 +83,14 @@ bool Communication::traiterTrame(QString typeTrame, QString trame)
 
     else if(typeTrame == "M")
     {
-        bool colombiaPresent = (champs[2] == '1');
-        bool indonesiaPresent = (champs[3] == '1');
-        bool ethiopiaPresent = (champs[4] == '1');
-        bool volutoPresent = (champs[5] == '1');
-        bool capriccioPresent = (champs[6] == '1');
-        bool cosiPresent = (champs[7] == '1');
-        bool scuroPresent = (champs[8] == '1');
-        bool vanillaPresent = (champs[9] == '1');
+        QString colombiaPresent = champs[2];
+        QString indonesiaPresent = champs[3];
+        QString ethiopiaPresent = champs[4];
+        QString volutoPresent = champs[5];
+        QString capriccioPresent = champs[6];
+        QString cosiPresent = champs[7];
+        QString scuroPresent = champs[8];
+        QString vanillaPresent = champs[9];
 
         emit etatMagasin(colombiaPresent, indonesiaPresent, ethiopiaPresent, volutoPresent,
                          capriccioPresent, cosiPresent, scuroPresent, vanillaPresent);

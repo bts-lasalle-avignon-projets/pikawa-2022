@@ -24,22 +24,32 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     qDebug() << Q_FUNC_INFO;
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
+
     connect(communication,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
             SIGNAL(cafetiereDetectee(QString, QString)));
+
     connect(communication,
             SIGNAL(cafetiereConnectee(QString, QString)),
             this,
             SIGNAL(cafetiereConnectee(QString, QString)));
+
     connect(communication,
             SIGNAL(cafetiereDeconnectee()),
             this,
             SIGNAL(cafetiereDeconnectee()));
+
     connect(communication,
             SIGNAL(rechercheTerminee(bool)),
             this,
             SIGNAL(rechercheTerminee(bool)));
+
+    connect(communication,
+            SIGNAL(etatMagasin(bool, bool, bool, bool, bool, bool, bool, bool)),
+            this,
+            SLOT(mettreAJourMagasin(bool, bool, bool, bool, bool, bool, bool, bool)));
+
 
     /**
      * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
@@ -247,4 +257,21 @@ bool Cafetiere::estPret()
         return false;
     }
 }
+
+void Cafetiere::mettreAJourMagasin(QString colombiaPresent, QString indonesiaPresent, QString ethiopiaPresent,
+                            QString volutoPresent, QString capriccioPresent, QString cosiPresent, QString scuroPresent,
+                            QString vanillaPresent)
+{
+    QString requette = "UPDATE Capsule SET quantite = " + colombiaPresent + "WHERE rangee = 1";
+    QString requette = "UPDATE Capsule SET quantite = " + indonesiaPresent + "WHERE rangee = 2";
+    QString requette = "UPDATE Capsule SET quantite = " + ethiopiaPresent + "WHERE rangee = 3";
+    QString requette = "UPDATE Capsule SET quantite = " + volutoPresent + "WHERE rangee = 4";
+    QString requette = "UPDATE Capsule SET quantite = " + capriccioPresent + "WHERE rangee = 5";
+    QString requette = "UPDATE Capsule SET quantite = " + cosiPresent + "WHERE rangee = 6";
+    QString requette = "UPDATE Capsule SET quantite = " + scuroPresent + "WHERE rangee = 7";
+    QString requette = "UPDATE Capsule SET quantite = " + vanillaPresent + "WHERE rangee = 8";
+
+    baseDeDonneesPikawa->executer(requette);
+}
+
 

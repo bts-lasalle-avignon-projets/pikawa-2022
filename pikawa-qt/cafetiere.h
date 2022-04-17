@@ -117,6 +117,10 @@ class Cafetiere : public QObject
     void arreterDecouverte();
     void rafraichirDecouverte();
     void gererConnexion();
+    void mettreAJourMagasin(QString colombiaPresent, QString indonesiaPresent, QString ethiopiaPresent,
+                            QString volutoPresent, QString capriccioPresent, QString cosiPresent, QString scuroPresent,
+                            QString vanillaPresent);
+
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);

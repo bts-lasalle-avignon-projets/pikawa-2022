@@ -64,6 +64,7 @@ class Preparation : public QObject
     void setNiveauEau(int& niveauEau);
 
     bool estPreparationPrete();
+
 };
 
 #endif // PREPARATION_H

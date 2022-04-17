@@ -85,8 +85,8 @@ class Communication : public QObject
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
     void etatCafetiere(int reservoirEau, int bacCapsules, bool etatCapsule, bool etatTasse);
-    void etatMagasin(bool colombiaPresent, bool indonesiaPresent, bool ethiopiaPresent,
-                     bool volutoPresent, bool capriccioPresent, bool cosiPresent, bool scuroPresent, bool vanillaPresent);
+    void etatMagasin(QString colombiaPresent, QString indonesiaPresent, QString ethiopiaPresent,
+                     QString volutoPresent, QString capriccioPresent, QString cosiPresent, QString scuroPresent, QString vanillaPresent);
 
     void cafeEnPreparation(bool preparationCafe);
 
