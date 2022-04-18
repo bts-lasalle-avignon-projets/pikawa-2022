@@ -49,8 +49,8 @@ void Communication::activerBluetooth()
 bool Communication::estTrameValide(QString trame)
 {
     qDebug() << Q_FUNC_INFO << trame
-             << (trame.startsWith("$PIKAWA") && trame.endsWith("/r/n"));
-    return trame.startsWith("$PIKAWA") && trame.endsWith("/r/n");
+             << (trame.startsWith("$PIKAWA") && trame.endsWith("\r\n"));
+    return trame.startsWith("$PIKAWA") && trame.endsWith("\r\n");
 }
 
 TypeTrame Communication::extraireTypeTrame(QString trame)
@@ -323,9 +323,9 @@ void Communication::recevoir()
     trameRecue += QString(donnees.data());
 #else
     // on peut simuler des trames reçues
-    // trameRecue = "$PIKAWA;C;50;60;1;1;/r/n";
-    trameRecue = "$PIKAWA;M;0;1;1;0;1;0;1;0;/r/n";
-    // trameRecue = "$PIKAWA;P;1;/r/n";
+    // trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
+    trameRecue = "$PIKAWA;M;0;1;1;0;1;0;1;0;\r\n";
+    // trameRecue = "$PIKAWA;P;1;\r\n";
 #endif
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
     if(estTrameValide(trameRecue))
