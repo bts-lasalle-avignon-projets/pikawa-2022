@@ -19,12 +19,26 @@
  * préfixe
  */
 #define PREFIXE_NOM_CAFETIERE "PIKAWA"
-#define DELIMITEUR ';'
-#define ETAT_CAFETIERE 'C'
-#define ETAT_MAGASIN 'M'
-#define ETAT_PREPARATION 'P'
+#define DELIMITEUR            ';'
+#define ETAT_CAFETIERE        "C"
+#define ETAT_MAGASIN          "M"
+#define ETAT_PREPARATION      "P"
+#define CHAMP_TYPE_TRAME      1
 
 #define TEST_TRAMES
+
+/**
+ * @enum TypeTrame
+ * @brief Les différents types de trame
+ */
+enum TypeTrame
+{
+    Inconnue = -1,
+    EtatCafetiere,
+    EtatMagasin,
+    EtatPreparation,
+    NbTrames
+};
 
 class Cafetiere;
 
@@ -38,8 +52,7 @@ class Communication : public QObject
 {
     Q_OBJECT
   private:
-
-    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
+    Cafetiere*            cafetiere;       //!< instance d'un objet Cafetiere
     QBluetoothLocalDevice interfaceLocale; //!< l'interface Bluetooth locale
     QBluetoothDeviceDiscoveryAgent*
       agentDecouvreur; //!< pour découvrir des interfaces Bluetooth
@@ -48,16 +61,14 @@ class Communication : public QObject
     bool connecte;      //!< l'état de connexion de la socket Bluetooth
     bool pikawaDetecte; //!< état de détection de l'interface pikawa
     QBluetoothSocket*
-            socketBluetoothPikawa; //!< socket cliente de communication Bluetooth
-    QString trameRecue;            //!< la trame reçue
+      socketBluetoothPikawa; //!< socket cliente de communication Bluetooth
+    QString trameRecue;      //!< la trame reçue
 
-    bool estBluetoothDisponible() const;
-    void activerBluetooth();
-    bool estTrameValide(QString trame);
-    bool estTypeTrameValide(QString typeTrame);
-    QString extraireTypeTrame(QString trame);
-    bool traiterTrame(QString typeTrame, QString trame);
-
+    bool      estBluetoothDisponible() const;
+    void      activerBluetooth();
+    bool      estTrameValide(QString trame);
+    TypeTrame extraireTypeTrame(QString trame);
+    bool      traiterTrame(TypeTrame typeTrame, QString trame);
 
   public:
     Communication(QObject* parent = nullptr);
@@ -66,6 +77,44 @@ class Communication : public QObject
     bool estConnecte() const;
     bool estCafetiereDetectee() const;
     void envoyerTrame(QString trame);
+
+    /**
+     * @enum ChampEtatCafetiere
+     * @brief Les différents champs de la trame EtatCafetiere
+     */
+    enum ChampEtatCafetiere
+    {
+        NiveauEau = 2,
+        NiveauBac,
+        CaspulePresente,
+        TassePresente,
+        NbChampsEtatCafetiere
+    };
+    /**
+     * @enum ChampEtatMagasin
+     * @brief Les différents champs de la trame EtatMagasin
+     */
+    enum ChampEtatMagasin
+    {
+        Colombia = 2,
+        Indonesia,
+        Ethiopia,
+        Volluto,
+        Capriccio,
+        Cosi,
+        Scuro,
+        Vanilla,
+        NbChampsEtatMagasin
+    };
+    /**
+     * @enum ChampEtatPreparation
+     * @brief Les différents champs de la trame EtatPreparation
+     */
+    enum ChampEtatPreparation
+    {
+        Cafe = 2,
+        NbChampsEtatPreparation
+    };
 
   public slots:
     void activerLaDecouverte();
@@ -84,14 +133,19 @@ class Communication : public QObject
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
-    void etatCafetiere(int reservoirEau, int bacCapsules, bool etatCapsule, bool etatTasse);
-    void etatMagasin(QString colombiaPresent, QString indonesiaPresent, QString ethiopiaPresent,
-                     QString volutoPresent, QString capriccioPresent, QString cosiPresent, QString scuroPresent, QString vanillaPresent);
-
-    void cafeEnPreparation(bool preparationCafe);
-
-
-
+    void etatCafetiere(int  reservoirEau,
+                       int  bacCapsules,
+                       bool etatCapsule,
+                       bool etatTasse);
+    void etatMagasin(QString colombiaPresent,
+                     QString indonesiaPresent,
+                     QString ethiopiaPresent,
+                     QString vollutoPresent,
+                     QString capriccioPresent,
+                     QString cosiPresent,
+                     QString scuroPresent,
+                     QString vanillaPresent);
+    void cafeEnPreparation(int preparationCafe);
 };
 
 #endif // COMMUNICATION_H

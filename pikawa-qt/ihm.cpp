@@ -100,13 +100,16 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
     cafetiere->setLongueurChoisie(longueurPreparation);
 
     int niveauEauNecessaire = 0;
-    switch (longueurPreparation)
+    switch(longueurPreparation)
     {
-        case 0 : niveauEauNecessaire = TAILLE_RISTRETO;
+        case 0:
+            niveauEauNecessaire = TAILLE_RISTRETO;
             break;
-        case 1 : niveauEauNecessaire = TAILLE_ESPRESSO;
+        case 1:
+            niveauEauNecessaire = TAILLE_ESPRESSO;
             break;
-        case 2 : niveauEauNecessaire = TAILLE_LUNGO;
+        case 2:
+            niveauEauNecessaire = TAILLE_LUNGO;
             break;
     }
     cafetiere->setNiveauEauNecessaire(niveauEauNecessaire);
@@ -231,48 +234,51 @@ void IHMPikawa::initialiserPreferences()
 {
     QStringList preferences = cafetiere->getPreferences();
 
-    ui->selectionLongueurPreparation->setValue(
-      preferences
-        .at(
-          Cafetiere::ChampsTablePreferences::COLONNE_PREFERENCES_ID_TYPEBOISSON)
-        .toInt() -
-      1);
-    gererLongueurPreparation(
-      preferences
-        .at(
-          Cafetiere::ChampsTablePreferences::COLONNE_PREFERENCES_ID_TYPEBOISSON)
-        .toInt() -
-      1);
-    switch(
-      preferences
-        .at(Cafetiere::ChampsTablePreferences::COLONNE_PREFERENCES_ID_CAPSULE)
-        .toInt() -
-      1)
+    if(preferences.size() > 0)
     {
-        case Cafetiere::NomCaspule::Colombia:
-            selectionnerColombia();
-            break;
-        case Cafetiere::NomCaspule::Indonesia:
-            selectionnerIndonesia();
-            break;
-        case Cafetiere::NomCaspule::Ethiopia:
-            selectionnerEthiopia();
-            break;
-        case Cafetiere::NomCaspule::Volluto:
-            selectionnerVolluto();
-            break;
-        case Cafetiere::NomCaspule::Capriccio:
-            selectionnerCapriccio();
-            break;
-        case Cafetiere::NomCaspule::Cosi:
-            selectionnerCosi();
-            break;
-        case Cafetiere::NomCaspule::Scuro:
-            selectionnerScuro();
-            break;
-        case Cafetiere::NomCaspule::Vanilla:
-            selectionnerVanilla();
-            break;
+        ui->selectionLongueurPreparation->setValue(
+          preferences
+            .at(Cafetiere::ChampsTablePreferences::
+                  COLONNE_PREFERENCES_ID_TYPEBOISSON)
+            .toInt() -
+          1);
+        gererLongueurPreparation(preferences
+                                   .at(Cafetiere::ChampsTablePreferences::
+                                         COLONNE_PREFERENCES_ID_TYPEBOISSON)
+                                   .toInt() -
+                                 1);
+        switch(
+          preferences
+            .at(
+              Cafetiere::ChampsTablePreferences::COLONNE_PREFERENCES_ID_CAPSULE)
+            .toInt() -
+          1)
+        {
+            case Cafetiere::NomCaspule::Colombia:
+                selectionnerColombia();
+                break;
+            case Cafetiere::NomCaspule::Indonesia:
+                selectionnerIndonesia();
+                break;
+            case Cafetiere::NomCaspule::Ethiopia:
+                selectionnerEthiopia();
+                break;
+            case Cafetiere::NomCaspule::Volluto:
+                selectionnerVolluto();
+                break;
+            case Cafetiere::NomCaspule::Capriccio:
+                selectionnerCapriccio();
+                break;
+            case Cafetiere::NomCaspule::Cosi:
+                selectionnerCosi();
+                break;
+            case Cafetiere::NomCaspule::Scuro:
+                selectionnerScuro();
+                break;
+            case Cafetiere::NomCaspule::Vanilla:
+                selectionnerVanilla();
+                break;
+        }
     }
 }
 

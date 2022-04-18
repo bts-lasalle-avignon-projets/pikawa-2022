@@ -40,13 +40,13 @@ class Cafetiere : public QObject
     QStringList
          preferences;    //!< liste des préférences de l'utilisateur connecté
     int  capsuleChoisie; //!<
-    int  longueurChoisie; //!<
-    int  niveauEau;       //!<
+    int  longueurChoisie;     //!<
+    int  niveauEau;           //!<
     int  niveauEauNecessaire; //!<
-    bool connectee;       //!<
-    bool activee;         //!<
-    bool capsulePresente; //!<
-    bool tassePresente;   //!<
+    bool connectee;           //!<
+    bool activee;             //!<
+    bool capsulePresente;     //!<
+    bool tassePresente;       //!<
 
     void initialiserNomCapsules();
     void initiatiserNomLongueurs();
@@ -117,10 +117,19 @@ class Cafetiere : public QObject
     void arreterDecouverte();
     void rafraichirDecouverte();
     void gererConnexion();
-    void mettreAJourMagasin(QString colombiaPresent, QString indonesiaPresent, QString ethiopiaPresent,
-                            QString volutoPresent, QString capriccioPresent, QString cosiPresent, QString scuroPresent,
+    void mettreAJourEtatCafetiere(int  reservoirEau,
+                                  int  bacCapsules,
+                                  bool etatCapsule,
+                                  bool etatTasse);
+    void mettreAJourMagasin(QString colombiaPresent,
+                            QString indonesiaPresent,
+                            QString ethiopiaPresent,
+                            QString vollutoPresent,
+                            QString capriccioPresent,
+                            QString cosiPresent,
+                            QString scuroPresent,
                             QString vanillaPresent);
-
+    void mettreAJourPreparationCafe(int preparationCafe);
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);

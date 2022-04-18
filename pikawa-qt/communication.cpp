@@ -12,8 +12,8 @@
  */
 
 Communication::Communication(QObject* parent) :
-    QObject(parent),cafetiere(nullptr),agentDecouvreur(nullptr), connecte(false),
-    pikawaDetecte(false), socketBluetoothPikawa(nullptr)
+    QObject(parent), cafetiere(nullptr), agentDecouvreur(nullptr),
+    connecte(false), pikawaDetecte(false), socketBluetoothPikawa(nullptr)
 {
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
     activerBluetooth();
@@ -48,59 +48,86 @@ void Communication::activerBluetooth()
 
 bool Communication::estTrameValide(QString trame)
 {
-    qDebug() << Q_FUNC_INFO << trame;
+    qDebug() << Q_FUNC_INFO << trame
+             << (trame.startsWith("$PIKAWA") && trame.endsWith("/r/n"));
     return trame.startsWith("$PIKAWA") && trame.endsWith("/r/n");
 }
 
-bool Communication::estTypeTrameValide(QString typeTrame)
+TypeTrame Communication::extraireTypeTrame(QString trame)
 {
-    return typeTrame == ETAT_CAFETIERE || typeTrame == ETAT_MAGASIN || typeTrame == ETAT_PREPARATION;
-}
+    QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
+    QString     type   = champs[CHAMP_TYPE_TRAME];
+    qDebug() << Q_FUNC_INFO << type;
 
-QString Communication::extraireTypeTrame(QString trame)
-{
-    QStringList champs = trame.split(QLatin1Char(';'));
-    QString type = champs[1];
-
-    qDebug() << Q_FUNC_INFO << trame.split(";", QString::SkipEmptyParts);
-    return type;
-}
-
-bool Communication::traiterTrame(QString typeTrame, QString trame)
-{
-    QStringList champs = trame.split(QLatin1Char(';'));
-
-    qDebug() << Q_FUNC_INFO << typeTrame;
-    if(typeTrame == "C")
-    {
-        int niveauEau = champs[2].toInt();
-        int niveauBac = champs[3].toInt();
-        bool caspulePresente = (champs[4] == '1');
-        bool tassePresente = (champs[5] == '1');
-
-        emit etatCafetiere(niveauEau, niveauBac, caspulePresente, tassePresente);
-    }
-
-    else if(typeTrame == "M")
-    {
-        QString colombiaPresent = champs[2];
-        QString indonesiaPresent = champs[3];
-        QString ethiopiaPresent = champs[4];
-        QString volutoPresent = champs[5];
-        QString capriccioPresent = champs[6];
-        QString cosiPresent = champs[7];
-        QString scuroPresent = champs[8];
-        QString vanillaPresent = champs[9];
-
-        emit etatMagasin(colombiaPresent, indonesiaPresent, ethiopiaPresent, volutoPresent,
-                         capriccioPresent, cosiPresent, scuroPresent, vanillaPresent);
-    }
-
+    if(type == ETAT_CAFETIERE)
+        return TypeTrame::EtatCafetiere;
+    else if(type == ETAT_MAGASIN)
+        return TypeTrame::EtatMagasin;
+    else if(type == ETAT_PREPARATION)
+        return TypeTrame::EtatPreparation;
     else
+        return TypeTrame::Inconnue;
+
+    return TypeTrame::Inconnue;
+}
+
+bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
+{
+    if(typeTrame == TypeTrame::Inconnue)
+        return false;
+    QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
+    qDebug() << Q_FUNC_INFO << typeTrame << champs;
+    int     niveauEau, niveauBac;
+    bool    caspulePresente, tassePresente;
+    QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
+      capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
+    int preparationCafe;
+    switch(typeTrame)
     {
-        bool preparationCafe = (champs[2] == '1');
-        emit cafeEnPreparation(preparationCafe);
+        case TypeTrame::EtatCafetiere:
+            niveauEau = champs[ChampEtatCafetiere::NiveauEau].toInt();
+            niveauBac = champs[ChampEtatCafetiere::NiveauBac].toInt();
+            caspulePresente =
+              (champs[ChampEtatCafetiere::CaspulePresente] == '1');
+            tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
+            emit etatCafetiere(niveauEau,
+                               niveauBac,
+                               caspulePresente,
+                               tassePresente);
+            return true;
+            // break;
+        case TypeTrame::EtatMagasin:
+            /**
+             * @todo Utiliser unQStringList et une boucle for
+             **/
+            colombiaPresent  = champs[ChampEtatMagasin::Colombia];
+            indonesiaPresent = champs[ChampEtatMagasin::Indonesia];
+            ethiopiaPresent  = champs[ChampEtatMagasin::Ethiopia];
+            vollutoPresent   = champs[ChampEtatMagasin::Volluto];
+            capriccioPresent = champs[ChampEtatMagasin::Capriccio];
+            cosiPresent      = champs[ChampEtatMagasin::Cosi];
+            scuroPresent     = champs[ChampEtatMagasin::Scuro];
+            vanillaPresent   = champs[ChampEtatMagasin::Vanilla];
+            qDebug() << Q_FUNC_INFO << colombiaPresent << indonesiaPresent
+                     << ethiopiaPresent << vollutoPresent << capriccioPresent
+                     << cosiPresent << scuroPresent << vanillaPresent;
+            emit etatMagasin(colombiaPresent,
+                             indonesiaPresent,
+                             ethiopiaPresent,
+                             vollutoPresent,
+                             capriccioPresent,
+                             cosiPresent,
+                             scuroPresent,
+                             vanillaPresent);
+            return true;
+            // break;
+        case TypeTrame::EtatPreparation:
+            preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
+            emit cafeEnPreparation(preparationCafe);
+            return true;
+            // break;
     }
+    return false;
 }
 
 /**
@@ -296,16 +323,16 @@ void Communication::recevoir()
     trameRecue += QString(donnees.data());
 #else
     // on peut simuler des trames reçues
-    trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
+    // trameRecue = "$PIKAWA;C;50;60;1;1;/r/n";
+    trameRecue = "$PIKAWA;M;0;1;1;0;1;0;1;0;/r/n";
+    // trameRecue = "$PIKAWA;P;1;/r/n";
 #endif
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
-
     if(estTrameValide(trameRecue))
     {
-        QString typeTrame = extraireTypeTrame(trameRecue);
-        if(estTypeTrameValide(typeTrame))
+        TypeTrame typeTrame = extraireTypeTrame(trameRecue);
+        if(traiterTrame(typeTrame, trameRecue))
         {
-            traiterTrame(typeTrame, trameRecue);
         }
     }
 }

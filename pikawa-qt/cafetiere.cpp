@@ -18,10 +18,11 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(new Communication(this)),
     preparation(new Preparation(this)), nomCapsules(0), nomLongueurs(0),
 
-    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), niveauEauNecessaire(0), connectee(false),
-    activee(false), capsulePresente(false), tassePresente(false)
+    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), niveauEauNecessaire(0),
+    connectee(false), activee(false), capsulePresente(false),
+    tassePresente(false)
 {
-    qDebug() << Q_FUNC_INFO;
+    // qDebug() << Q_FUNC_INFO << qApp->applicationFilePath();
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
 
@@ -46,10 +47,23 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(rechercheTerminee(bool)));
 
     connect(communication,
-            SIGNAL(etatMagasin(bool, bool, bool, bool, bool, bool, bool, bool)),
+            SIGNAL(etatMagasin(QString,
+                               QString,
+                               QString,
+                               QString,
+                               QString,
+                               QString,
+                               QString,
+                               QString)),
             this,
-            SLOT(mettreAJourMagasin(bool, bool, bool, bool, bool, bool, bool, bool)));
-
+            SLOT(mettreAJourMagasin(QString,
+                                    QString,
+                                    QString,
+                                    QString,
+                                    QString,
+                                    QString,
+                                    QString,
+                                    QString)));
 
     /**
      * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
@@ -258,20 +272,58 @@ bool Cafetiere::estPret()
     }
 }
 
-void Cafetiere::mettreAJourMagasin(QString colombiaPresent, QString indonesiaPresent, QString ethiopiaPresent,
-                            QString volutoPresent, QString capriccioPresent, QString cosiPresent, QString scuroPresent,
-                            QString vanillaPresent)
+void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
+                                         int  bacCapsules,
+                                         bool etatCapsule,
+                                         bool etatTasse)
 {
-    QString requette = "UPDATE Capsule SET quantite = " + colombiaPresent + "WHERE rangee = 1";
-    QString requette = "UPDATE Capsule SET quantite = " + indonesiaPresent + "WHERE rangee = 2";
-    QString requette = "UPDATE Capsule SET quantite = " + ethiopiaPresent + "WHERE rangee = 3";
-    QString requette = "UPDATE Capsule SET quantite = " + volutoPresent + "WHERE rangee = 4";
-    QString requette = "UPDATE Capsule SET quantite = " + capriccioPresent + "WHERE rangee = 5";
-    QString requette = "UPDATE Capsule SET quantite = " + cosiPresent + "WHERE rangee = 6";
-    QString requette = "UPDATE Capsule SET quantite = " + scuroPresent + "WHERE rangee = 7";
-    QString requette = "UPDATE Capsule SET quantite = " + vanillaPresent + "WHERE rangee = 8";
-
-    baseDeDonneesPikawa->executer(requette);
+    qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
+             << etatTasse;
 }
 
+void Cafetiere::mettreAJourMagasin(QString colombiaPresent,
+                                   QString indonesiaPresent,
+                                   QString ethiopiaPresent,
+                                   QString vollutoPresent,
+                                   QString capriccioPresent,
+                                   QString cosiPresent,
+                                   QString scuroPresent,
+                                   QString vanillaPresent)
+{
+    qDebug() << Q_FUNC_INFO << colombiaPresent << indonesiaPresent
+             << ethiopiaPresent << vollutoPresent << capriccioPresent
+             << cosiPresent << scuroPresent << vanillaPresent;
+    /**
+     * @todo Une boucle for !?
+     */
+    QString requete;
+    requete =
+      "UPDATE Capsule SET quantite = " + colombiaPresent + "WHERE rangee = 1";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + indonesiaPresent + "WHERE rangee = 2";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + ethiopiaPresent + "WHERE rangee = 3";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + vollutoPresent + "WHERE rangee = 4";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + capriccioPresent + "WHERE rangee = 5";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + cosiPresent + "WHERE rangee = 6";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + scuroPresent + "WHERE rangee = 7";
+    baseDeDonneesPikawa->executer(requete);
+    requete =
+      "UPDATE Capsule SET quantite = " + vanillaPresent + "WHERE rangee = 8";
+    baseDeDonneesPikawa->executer(requete);
+}
 
+void Cafetiere::mettreAJourPreparationCafe(int preparationCafe)
+{
+    qDebug() << Q_FUNC_INFO << preparationCafe;
+}
