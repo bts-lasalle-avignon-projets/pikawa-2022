@@ -82,6 +82,9 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
     QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
       capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
     int preparationCafe;
+
+    QStringList caspulesDisponibles;
+
     switch(typeTrame)
     {
         case TypeTrame::EtatCafetiere:
@@ -97,28 +100,18 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             return true;
             // break;
         case TypeTrame::EtatMagasin:
-            /**
-             * @todo Utiliser unQStringList et une boucle for
-             **/
-            colombiaPresent  = champs[ChampEtatMagasin::Colombia];
-            indonesiaPresent = champs[ChampEtatMagasin::Indonesia];
-            ethiopiaPresent  = champs[ChampEtatMagasin::Ethiopia];
-            vollutoPresent   = champs[ChampEtatMagasin::Volluto];
-            capriccioPresent = champs[ChampEtatMagasin::Capriccio];
-            cosiPresent      = champs[ChampEtatMagasin::Cosi];
-            scuroPresent     = champs[ChampEtatMagasin::Scuro];
-            vanillaPresent   = champs[ChampEtatMagasin::Vanilla];
-            qDebug() << Q_FUNC_INFO << colombiaPresent << indonesiaPresent
-                     << ethiopiaPresent << vollutoPresent << capriccioPresent
-                     << cosiPresent << scuroPresent << vanillaPresent;
-            emit etatMagasin(colombiaPresent,
-                             indonesiaPresent,
-                             ethiopiaPresent,
-                             vollutoPresent,
-                             capriccioPresent,
-                             cosiPresent,
-                             scuroPresent,
-                             vanillaPresent);
+
+        for(int i = Colombia; i < NbChampsEtatMagasin ; ++i)
+        {
+            caspulesDisponibles << champs.at(i);
+
+        }
+        qDebug() << Q_FUNC_INFO << " capulesDisponibles " << caspulesDisponibles;
+
+
+
+            emit etatMagasin(caspulesDisponibles);
+
             return true;
             // break;
         case TypeTrame::EtatPreparation:

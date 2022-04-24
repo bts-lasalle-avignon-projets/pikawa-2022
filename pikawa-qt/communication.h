@@ -137,14 +137,7 @@ class Communication : public QObject
                        int  bacCapsules,
                        bool etatCapsule,
                        bool etatTasse);
-    void etatMagasin(QString colombiaPresent,
-                     QString indonesiaPresent,
-                     QString ethiopiaPresent,
-                     QString vollutoPresent,
-                     QString capriccioPresent,
-                     QString cosiPresent,
-                     QString scuroPresent,
-                     QString vanillaPresent);
+    void etatMagasin(QStringList caspulesDisponibles);
     void cafeEnPreparation(int preparationCafe);
 };
 

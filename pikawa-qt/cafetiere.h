@@ -121,14 +121,7 @@ class Cafetiere : public QObject
                                   int  bacCapsules,
                                   bool etatCapsule,
                                   bool etatTasse);
-    void mettreAJourMagasin(QString colombiaPresent,
-                            QString indonesiaPresent,
-                            QString ethiopiaPresent,
-                            QString vollutoPresent,
-                            QString capriccioPresent,
-                            QString cosiPresent,
-                            QString scuroPresent,
-                            QString vanillaPresent);
+    void mettreAJourMagasin(QStringList caspulesDisponibles);
     void mettreAJourPreparationCafe(int preparationCafe);
 
   signals:

@@ -47,23 +47,9 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(rechercheTerminee(bool)));
 
     connect(communication,
-            SIGNAL(etatMagasin(QString,
-                               QString,
-                               QString,
-                               QString,
-                               QString,
-                               QString,
-                               QString,
-                               QString)),
+            SIGNAL(etatMagasin(QStringList)),
             this,
-            SLOT(mettreAJourMagasin(QString,
-                                    QString,
-                                    QString,
-                                    QString,
-                                    QString,
-                                    QString,
-                                    QString,
-                                    QString)));
+            SLOT(mettreAJourMagasin(QStringList)));
 
     /**
      * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
@@ -281,46 +267,15 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
              << etatTasse;
 }
 
-void Cafetiere::mettreAJourMagasin(QString colombiaPresent,
-                                   QString indonesiaPresent,
-                                   QString ethiopiaPresent,
-                                   QString vollutoPresent,
-                                   QString capriccioPresent,
-                                   QString cosiPresent,
-                                   QString scuroPresent,
-                                   QString vanillaPresent)
+void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
 {
-    qDebug() << Q_FUNC_INFO << colombiaPresent << indonesiaPresent
-             << ethiopiaPresent << vollutoPresent << capriccioPresent
-             << cosiPresent << scuroPresent << vanillaPresent;
-    /**
-     * @todo Une boucle for !?
-     */
     QString requete;
-    requete =
-      "UPDATE Capsule SET quantite = " + colombiaPresent + "WHERE rangee = 1";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + indonesiaPresent + "WHERE rangee = 2";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + ethiopiaPresent + "WHERE rangee = 3";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + vollutoPresent + "WHERE rangee = 4";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + capriccioPresent + "WHERE rangee = 5";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + cosiPresent + "WHERE rangee = 6";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + scuroPresent + "WHERE rangee = 7";
-    baseDeDonneesPikawa->executer(requete);
-    requete =
-      "UPDATE Capsule SET quantite = " + vanillaPresent + "WHERE rangee = 8";
-    baseDeDonneesPikawa->executer(requete);
+    for(int i = 0; i < 8; ++i)
+    {
+        requete =
+          "UPDATE Capsule SET quantite = " + caspulesDisponibles.at(i) + "WHERE rangee = " + i;
+        baseDeDonneesPikawa->executer(requete);
+    }
 }
 
 void Cafetiere::mettreAJourPreparationCafe(int preparationCafe)
