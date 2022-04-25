@@ -117,6 +117,8 @@ class Cafetiere : public QObject
     void arreterDecouverte();
     void rafraichirDecouverte();
     void gererConnexion();
+    void mettreAJourConnexion(QString nom, QString adresse);
+    void recupererEtatCafetiere();
     void mettreAJourEtatCafetiere(int  reservoirEau,
                                   int  bacCapsules,
                                   bool etatCapsule,

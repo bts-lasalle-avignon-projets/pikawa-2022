@@ -324,7 +324,11 @@ void Communication::recevoir()
     if(estTrameValide(trameRecue))
     {
         TypeTrame typeTrame = extraireTypeTrame(trameRecue);
-        if(!traiterTrame(typeTrame, trameRecue))
+        if(traiterTrame(typeTrame, trameRecue))
+        {
+            trameRecue.clear();
+        }
+        else
         {
             qDebug() << Q_FUNC_INFO << "erreur traitement";
         }

@@ -26,6 +26,9 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
 
+    /**
+     * @todo Créer une méthode privée pour les signals/slots
+     */
     connect(communication,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
@@ -34,7 +37,7 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     connect(communication,
             SIGNAL(cafetiereConnectee(QString, QString)),
             this,
-            SIGNAL(cafetiereConnectee(QString, QString)));
+            SLOT(mettreAJourConnexion(QString, QString)));
 
     connect(communication,
             SIGNAL(cafetiereDeconnectee()),
@@ -47,9 +50,16 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
             SIGNAL(rechercheTerminee(bool)));
 
     connect(communication,
+            SIGNAL(etatCafetiere(int, int, bool, bool)),
+            this,
+            SLOT(mettreAJourEtatCafetiere(int, int, bool, bool)));
+    connect(communication,
             SIGNAL(etatMagasin(QStringList)),
             this,
             SLOT(mettreAJourMagasin(QStringList)));
+    /**
+     * @todo Gérer le signal cafeEnPreparation
+     */
 
     /**
      * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
@@ -256,6 +266,20 @@ bool Cafetiere::estPret()
     {
         return false;
     }
+}
+
+void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
+{
+    emit cafetiereConnectee(nom, adresse);
+    recupererEtatCafetiere();
+    /**
+     * @todo Récupérer l'état du magasin
+     */
+}
+
+void Cafetiere::recupererEtatCafetiere()
+{
+    communication->envoyerTrame("$PIKAWA;ETAT;C;\r\n");
 }
 
 void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
