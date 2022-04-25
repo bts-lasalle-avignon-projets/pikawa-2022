@@ -15,11 +15,12 @@ static bool connecte = false;                           //!< état de la connexi
 static int rssi = 0;                                    //!< le niveau RSSI du Bluetooth
 static uint8_t adresseMAC[ESP_BD_ADDR_LEN] = {0, 0, 0, 0, 0, 0}; //!< l'adresse MAC du Bluetooth connecté
 SSD1306Wire  display(ADRESSE_I2C_OLED, I2C_SDA_OLED, I2C_SCL_OLED); //!< l'objet OLED
-//String entete = String(EN_TETE) + String(DELIMITEUR_CHAMP); //!< entête d'une trame pikawa
-String entete;
+String entete = String(EN_TETE) + String(DELIMITEUR_CHAMP); //!< entête d'une trame pikawa
 String delimiteursFin = String(DELIMITEURS_FIN);        //!< délimiteur de trame pikawa
 int erreurTrame = 0;                                    //!< code d'erreur de trame
-bool changementEtat = false;                            //!< indique un changement d'état
+bool changementEtatCafetiere = false;                            //!< indique un changement d'état
+bool changementEtatMagasin = false;                            //!< indique un changement d'état
+bool changementEtatPreparation = false;                            //!< indique un changement d'état
 bool changementCommandeCafe = false;                    //!< indique un changement de commande du café
 EtatTasse etatTasse = (EtatTasse)Inconnu;               //!< l'état de la détecion d'une tasse (état simulé)
 EtatBac etatBac = (EtatBac)Inconnu;                     //!< l'état du bac de récupération de capsules (état simulé)
@@ -150,7 +151,27 @@ void traiterTrames()
   {
     typeTrame = verifierTrame(trame);
 
-    if(typeTrame == String(TRAME_SERVICE))
+    if(typeTrame == String(TRAME_REQUETE_ETAT_CAFETIERE))
+    {
+      envoyerTrame(TRAME_REQUETE_ETAT_CAFETIERE); // réponse C
+    }
+    else if(typeTrame == String(TRAME_REQUETE_ETAT_MAGASIN))
+    {
+      envoyerTrame(TRAME_REQUETE_ETAT_MAGASIN); // réponse M
+    }
+    else if(typeTrame == String(TRAME_COMMANDE_PREPARATION))
+    {
+      // Format : $PIKAWA;P;NUMERO_RANGE;LONGUEUR;\r\n
+      if(traiterCommandeCafe(extraireChamp(trame, 3), extraireChamp(trame, 2)))
+      {
+        envoyerTrame(TRAME_REPONSE_ETAT_PREPARATION); // réponse P
+      }
+      else
+      {
+        envoyerTrame(typeTrame, true); // réponse P
+      }
+    }
+    else if(typeTrame == String(TRAME_SERVICE))
     {
       envoyerTrame(typeTrame); // réponse Alive
     }
@@ -173,22 +194,59 @@ void envoyerTrame(String type, bool erreur/*=false*/)
   char trameEnvoi[64];
   char contenuMagasin[64] = "";
 
-  if(type == String(TRAME_SERVICE))
+  if(type == String(TRAME_REQUETE_ETAT_CAFETIERE))
+  {
+    // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
+    sprintf((char *)trameEnvoi, "%sC;%d;%d;%d;%d;\r\n", entete.c_str(), (contenanceEau*40), (int)etatBac, (int)etatCommande, (int)etatTasse);
+    SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
+  }
+  else if(type == String(TRAME_REQUETE_ETAT_MAGASIN))
+  {
+    // Format : $PIKAWA;M;R1;R2;R3;R4;R5;R6;R7;R8;\r\n
+    for(unsigned int i = 0; i < NB_COLONNES; ++i)
+    {
+      // sprintf((char *)contenuMagasin, "%s;1", contenuMagasin, (int)i, (int)magasin[i]);
+      if(magasin[i] > 0)
+        sprintf((char *)contenuMagasin, "%s;1", contenuMagasin);
+      else
+        sprintf((char *)contenuMagasin, "%s;0", contenuMagasin);
+    }
+    sprintf((char *)trameEnvoi, "%sM%s;\r\n", entete.c_str(), contenuMagasin);
+    SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
+  }
+  else if(type == String(TRAME_REPONSE_ETAT_PREPARATION))
+  {
+    // Format : $PIKAWA;P;ETAT;\r\n
+    // r Booléen : réponse (1 = possible / 2 = impossible)
+    if(erreur)
+    {
+      sprintf((char *)trameEnvoi, "%sP;2;\r\n", entete.c_str());
+    }
+    else
+    {
+      if(etatCommande == Repos)
+        sprintf((char *)trameEnvoi, "%sP;0;\r\n", entete.c_str());
+      else
+        sprintf((char *)trameEnvoi, "%sP;1;\r\n", entete.c_str());
+    }
+    SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
+  }
+  else if(type == String(TRAME_SERVICE))
   {
     // Trame réponse Alive
-    sprintf((char *)trameEnvoi, "%sA\r\n", entete.c_str());
+    sprintf((char *)trameEnvoi, "%sA;\r\n", entete.c_str());
     SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
   }
   else if(type == String(TRAME_ERREUR))
   {
     //
-    sprintf((char *)trameEnvoi, "%s%s;%d\r\n", entete.c_str(), String(TRAME_ERREUR).c_str(), erreurTrame);
+    sprintf((char *)trameEnvoi, "%s%s;%d;\r\n", entete.c_str(), String(TRAME_ERREUR).c_str(), erreurTrame);
     SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
     erreurTrame = 0;
   }
 
   #ifdef DEBUG
-  Serial.print(String("-> ") + String(trameEnvoi));
+  Serial.print(String(".") + String(trameEnvoi));
   #endif
 }
 
@@ -257,6 +315,42 @@ String verifierTrame(String &trame)
     #endif
   #endif
 
+  type = entete + String(TRAME_REQUETE_ETAT_CAFETIERE);
+  if(trame.startsWith(type))
+  {
+    if(compterParametres(trame) == NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE)
+      return String(TRAME_REQUETE_ETAT_CAFETIERE);
+    else
+    {
+      erreurTrame = ERREUR_NB_PARAMETRES;
+      return String(TRAME_ERREUR);
+    }
+  }
+
+  type = entete + String(TRAME_REQUETE_ETAT_MAGASIN);
+  if(trame.startsWith(type))
+  {
+    if(compterParametres(trame) == NB_PARAMETRES_TRAME_REQUETE_ETAT_MAGASIN)
+      return String(TRAME_REQUETE_ETAT_MAGASIN);
+    else
+    {
+      erreurTrame = ERREUR_NB_PARAMETRES;
+      return String(TRAME_ERREUR);
+    }
+  }
+
+  type = entete + String(TRAME_COMMANDE_PREPARATION);
+  if(trame.startsWith(type))
+  {
+    if(compterParametres(trame) == NB_PARAMETRES_TRAME_COMMANDE_PREPARATION)
+      return String(TRAME_COMMANDE_PREPARATION);
+    else
+    {
+      erreurTrame = ERREUR_NB_PARAMETRES;
+      return String(TRAME_ERREUR);
+    }
+  }
+
   type = entete + String(TRAME_SERVICE);
   if(trame.startsWith(type))
   {
@@ -281,7 +375,11 @@ String verifierTrame(String &trame)
 void envoyerEtats()
 {
   // Envoie les états au démarrage
-
+  envoyerTrame(TRAME_REQUETE_ETAT_CAFETIERE); // réponse C
+  delay(100);
+  envoyerTrame(TRAME_REQUETE_ETAT_MAGASIN); // réponse M
+  delay(100);
+  envoyerTrame(TRAME_REPONSE_ETAT_PREPARATION); // réponse P
 }
 
 /**
@@ -387,10 +485,22 @@ void traiterChangements()
     commanderCafe(Repos);
   }
 
-  if(changementEtat)
+  if(changementEtatCafetiere)
   {
-    //envoyerTrame();
-    changementEtat = false;
+    envoyerTrame(String(TRAME_REQUETE_ETAT_CAFETIERE)); // génère réponse S1
+    changementEtatCafetiere = false;
+  }
+
+  if(changementEtatMagasin)
+  {
+    envoyerTrame(String(TRAME_REQUETE_ETAT_MAGASIN)); // génère réponse S2
+    changementEtatMagasin = false;
+  }
+
+  if(changementEtatPreparation)
+  {
+    envoyerTrame(String(TRAME_COMMANDE_PREPARATION)); // génère réponse S2
+    changementEtatPreparation = false;
   }
 }
 
@@ -405,7 +515,7 @@ void setEtatCommande(int etat)
   if(etatCommande != (EtatCommande)etat)
   {
     etatCommande = (EtatCommande)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne3();
   }
 }
@@ -421,7 +531,7 @@ void setEtatNiveauEau(int etat)
   if(etatNiveauEau != (EtatNiveauEau)etat)
   {
     etatNiveauEau = (EtatNiveauEau)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne4();
   }
 }
@@ -437,7 +547,7 @@ void setEtatBac(int etat)
   if(etatBac != (EtatBac)etat)
   {
     etatBac = (EtatBac)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne4();
   }
 }
@@ -453,7 +563,7 @@ void setEtatTasse(int etat)
   if(etatTasse != (EtatTasse)etat)
   {
     etatTasse = (EtatTasse)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne5();
   }
 }
@@ -469,7 +579,7 @@ void setEtatCapsule(int etat)
   if(etatCapsule != (EtatCapsule)etat)
   {
     etatCapsule = (EtatCapsule)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne5();
   }
 }
@@ -485,7 +595,7 @@ void setEtatMagasin(int etat)
   if(etatMagasin != (EtatMagasin)etat)
   {
     etatMagasin = (EtatMagasin)etat;
-    changementEtat = true;
+    changementEtatMagasin = true;
     setLigne5();
   }
 }
@@ -586,8 +696,14 @@ void gererEtatsMachine(int numeroColonne)
   {
     --contenanceEau;
   }
+  else if(longueurCafeCommande == Moyen)
+  {
+    --contenanceEau;
+    --contenanceEau;
+  }
   else if(longueurCafeCommande == Long)
   {
+    --contenanceEau;
     --contenanceEau;
     --contenanceEau;
   }
@@ -706,7 +822,7 @@ bool commanderCafe(int etat)
     changementCommandeCafe = false;
     if(etat == Repos)
     {
-      changementEtat = true;
+      changementEtatPreparation = true;
       #ifdef DEBUG
       Serial.println("<Cafe> terminé !");
       #endif
@@ -738,7 +854,7 @@ bool traiterCommandeCafe(String longueurCafe, String typeCafe)
   // Préparer un café ?
   if(!verifierEtatsMachine(numeroColonne, longueurCafe))
   {
-    changementEtat = true;
+    changementEtatPreparation = true;
     if(erreurTrame == ERREUR_LONGUEUR_CAFE || erreurTrame == ERREUR_TYPE_CAFE)
       envoyerTrame(String(TRAME_ERREUR));
     return false;
@@ -839,7 +955,7 @@ void simuler()
             simulation = true;
           }
         }
-        if(changementEtat)
+        if(changementEtatCafetiere)
           simulation = true;
       }
 
@@ -969,6 +1085,8 @@ void setLigne3()
       char message[64] = "";
       if(longueurCafeCommande == Long)
         sprintf((char *)message, "Cafe %d long : encours\r\n", numeroCapsuleCommande);
+      else if(longueurCafeCommande == Moyen)
+        sprintf((char *)message, "Cafe %d moyen : encours\r\n", numeroCapsuleCommande);
       else
         sprintf((char *)message, "Cafe %d court : encours\r\n", numeroCapsuleCommande);
       ligne3 = String(message);

@@ -52,7 +52,7 @@ Autres réglages possibles :
 - Capacité du réservoir d'eau (ne tient pas compte des cafés court ou long) :
 
 ```c
-#define CAPACITE_EAU      10 // capsules
+#define CAPACITE_EAU      20 // capsules en café court
 ```
 
 - Capacité du bac de récupération de capsules :

@@ -57,7 +57,7 @@
 
 // Niveau d'eau
 // SIMULATION_CONSOMMATION
-#define CAPACITE_EAU      10 // capsules
+#define CAPACITE_EAU      20 // capsules en café court
 
 // Bac à capsules
 // SIMULATION_REMPLISSAGE
@@ -81,7 +81,7 @@
 #define DELIMITEURS_FIN         "\r\n"
 #define DELIMITEUR_DATAS        ';'
 #define DELIMITEUR_FIN          '\n'
-#define EN_TETE                 ""
+#define EN_TETE                 "$PIKAWA"
 #define LONGUEUR_CHAMP          16
 
 // Trame de commande (application vers système) :
@@ -176,6 +176,15 @@ enum LongueurCafe
 #define CAFE_LONG  "3"
 
 // Trame de requête/réponse :
+#define TRAME_REQUETE_ETAT_CAFETIERE                "ETAT;C;" // Format : $PIKAWA;ETAT;C;\r\n
+#define NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE  3   // 
+#define TRAME_REQUETE_ETAT_MAGASIN                  "ETAT;M;" // Format : $PIKAWA;ETAT;M;\r\n
+#define NB_PARAMETRES_TRAME_REQUETE_ETAT_MAGASIN    3   // 
+#define TRAME_COMMANDE_PREPARATION                  "P" // Format : $PIKAWA;P;NUMERO_RANGE;LONGUEUR;\r\n
+#define NB_PARAMETRES_TRAME_COMMANDE_PREPARATION    4   // 
+#define TRAME_REPONSE_ETAT_CAFETIERE                "C" // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
+#define TRAME_REPONSE_ETAT_MAGASIN                  "M" // Format : $PIKAWA;M;R1;R2;R3;R4;R5;R6;R7;R8;\r\n
+#define TRAME_REPONSE_ETAT_PREPARATION              "P" // Format : $PIKAWA;P;ETAT;\r\n
 
 // Trame de service (application vers système) : périodique toutes les secondes
 #define TRAME_SERVICE                   "A" // Alive / Acquittement
