@@ -100,15 +100,14 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             return true;
             // break;
         case TypeTrame::EtatMagasin:
-
-        for(int i = Colombia; i < NbChampsEtatMagasin ; ++i)
-        {
-            caspulesDisponibles << champs.at(i);
-
-        }
-        qDebug() << Q_FUNC_INFO << " capulesDisponibles " << caspulesDisponibles;
-
-
+            for(int i = ChampEtatMagasin::Colombia;
+                i < ChampEtatMagasin::NbChampsEtatMagasin;
+                ++i)
+            {
+                caspulesDisponibles << champs.at(i);
+            }
+            qDebug() << Q_FUNC_INFO << " capulesDisponibles "
+                     << caspulesDisponibles;
 
             emit etatMagasin(caspulesDisponibles);
 
@@ -319,13 +318,15 @@ void Communication::recevoir()
     // trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
     trameRecue = "$PIKAWA;M;0;1;1;0;1;0;1;0;\r\n";
     // trameRecue = "$PIKAWA;P;1;\r\n";
+    // trameRecue = "$PIKAWA;W;50;60;1;1;\r\n"; // trame invalide
 #endif
     qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
     if(estTrameValide(trameRecue))
     {
         TypeTrame typeTrame = extraireTypeTrame(trameRecue);
-        if(traiterTrame(typeTrame, trameRecue))
+        if(!traiterTrame(typeTrame, trameRecue))
         {
+            qDebug() << Q_FUNC_INFO << "erreur traitement";
         }
     }
 }

@@ -25,7 +25,11 @@
 #define ETAT_PREPARATION      "P"
 #define CHAMP_TYPE_TRAME      1
 
-#define TEST_TRAMES
+/**
+ * @def TEST_TRAMES
+ * @brief Pour les tests de trames
+ */
+//#define TEST_TRAMES
 
 /**
  * @enum TypeTrame
@@ -61,8 +65,8 @@ class Communication : public QObject
     bool connecte;      //!< l'état de connexion de la socket Bluetooth
     bool pikawaDetecte; //!< état de détection de l'interface pikawa
     QBluetoothSocket*
-      socketBluetoothPikawa; //!< socket cliente de communication Bluetooth
-    QString trameRecue;      //!< la trame reçue
+            socketBluetoothPikawa; //!< socket cliente de communication Bluetooth
+    QString trameRecue;            //!< la trame reçue
 
     bool      estBluetoothDisponible() const;
     void      activerBluetooth();

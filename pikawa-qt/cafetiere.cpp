@@ -265,20 +265,30 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
 {
     qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
              << etatTasse;
+    /**
+     * @todo Signaler les changements de l'état de la cafetière à l'IHM
+     */
 }
 
 void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
 {
+    qDebug() << Q_FUNC_INFO << caspulesDisponibles;
     QString requete;
-    for(int i = 0; i < 8; ++i)
+    for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
-        requete =
-          "UPDATE Capsule SET quantite = " + caspulesDisponibles.at(i) + "WHERE rangee = " + i;
+        requete = "UPDATE Capsule SET quantite=" + caspulesDisponibles.at(i) +
+                  "WHERE rangee=" + (i + 1);
         baseDeDonneesPikawa->executer(requete);
     }
+    /**
+     * @todo Signaler les changements du magasin à l'IHM
+     */
 }
 
 void Cafetiere::mettreAJourPreparationCafe(int preparationCafe)
 {
     qDebug() << Q_FUNC_INFO << preparationCafe;
+    /**
+     * @todo Signaler les changements de la préparation à l'IHM
+     */
 }
