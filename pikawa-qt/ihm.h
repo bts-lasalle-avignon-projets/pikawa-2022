@@ -68,6 +68,19 @@ class IHMPikawa : public QMainWindow
         NbEcrans
     };
 
+    enum BoutonCafe
+    {
+        boutonColombia = 0,
+        boutonIndonesia,
+        boutonEthiopia,
+        boutonVolluto,
+        boutonCapriccio,
+        boutonCosi,
+        boutonScuro,
+        boutonVanilla,
+        nbCafe
+    };
+
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
@@ -119,6 +132,13 @@ class IHMPikawa : public QMainWindow
     void selectionnerScuro();
     void selectionnerVanilla();
     void selectionnerCapriccio();
+    void afficherCafePret();
+    void mettreAJourEtatCafetiere(int reservoirEau, int bacCapsules,
+                                  int etatCapsule, int etatTasse);
+    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
+    void afficherCafetierePrete();
+    void afficherCafetierePasPrete();
+    void afficherAvertissement(int niveau, bool bacPlein, bool tassePresente, bool capsulePresente);
 };
 
 #endif // IHM_H

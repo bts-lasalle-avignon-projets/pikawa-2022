@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -346,6 +346,13 @@
                 </property>
                 <property name="text">
                  <string>Cafe</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelAvertisseur">
+                <property name="text">
+                 <string/>
                 </property>
                </widget>
               </item>

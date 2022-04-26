@@ -65,6 +65,8 @@ class Preparation : public QObject
 
     bool estPreparationPrete();
 
+signals:
+        void preparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente, bool capsulePresente);
 };
 
 #endif // PREPARATION_H

@@ -17,6 +17,10 @@
 #define IDENTIFIANT_UTILISATEUR    "tvaira"
 #define IDENTIFIANT_UTILISATEUR_ID "1"
 
+#define CAFE_PRET 1
+#define CAFE_EN_PREPARATION 2
+#define ERREUR_PREPARATION_CAFE 3
+
 class IHMPikawa;
 class Communication;
 class Preparation;
@@ -47,10 +51,12 @@ class Cafetiere : public QObject
     bool activee;             //!<
     bool capsulePresente;     //!<
     bool tassePresente;       //!<
+    bool estCafeEnPreparation;
 
     void initialiserNomCapsules();
     void initiatiserNomLongueurs();
     void chargerPreferences(QString identifiantUtilisateur);
+    void gererCommunication();
 
   public:
     Cafetiere(IHMPikawa* ihm);
@@ -116,21 +122,33 @@ class Cafetiere : public QObject
     void demarrerDecouverte();
     void arreterDecouverte();
     void rafraichirDecouverte();
+    void gererEvenement();
     void gererConnexion();
     void mettreAJourConnexion(QString nom, QString adresse);
     void recupererEtatCafetiere();
+    void recupererEtatMagasin();
     void mettreAJourEtatCafetiere(int  reservoirEau,
-                                  int  bacCapsules,
+                                  bool  bacCapsules,
                                   bool etatCapsule,
                                   bool etatTasse);
     void mettreAJourMagasin(QStringList caspulesDisponibles);
     void mettreAJourPreparationCafe(int preparationCafe);
+    void gererEtatPreparationCafe(int preparation);
+    void preparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente, bool capsulePresente);
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
+    void cafePret();
+    void erreurPreparation();
+    void mettreAJourEtatCafetiere(int reservoirEau, int bacCapsules, int etatCapsule, int etatTasse);
+    void cafetierePrete();
+    void cafetierePasPrete();
+    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
+    void signalPreparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente,
+                                 bool capsulePresente);
 };
 
 #endif // CAFETIERE_H

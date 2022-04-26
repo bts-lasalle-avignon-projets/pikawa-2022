@@ -17,50 +17,15 @@
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(new Communication(this)),
     preparation(new Preparation(this)), nomCapsules(0), nomLongueurs(0),
-
     capsuleChoisie(0), longueurChoisie(0), niveauEau(0), niveauEauNecessaire(0),
     connectee(false), activee(false), capsulePresente(false),
-    tassePresente(false)
+    tassePresente(false), estCafeEnPreparation(false)
 {
     // qDebug() << Q_FUNC_INFO << qApp->applicationFilePath();
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
-
-    /**
-     * @todo Créer une méthode privée pour les signals/slots
-     */
-    connect(communication,
-            SIGNAL(cafetiereDetectee(QString, QString)),
-            this,
-            SIGNAL(cafetiereDetectee(QString, QString)));
-
-    connect(communication,
-            SIGNAL(cafetiereConnectee(QString, QString)),
-            this,
-            SLOT(mettreAJourConnexion(QString, QString)));
-
-    connect(communication,
-            SIGNAL(cafetiereDeconnectee()),
-            this,
-            SIGNAL(cafetiereDeconnectee()));
-
-    connect(communication,
-            SIGNAL(rechercheTerminee(bool)),
-            this,
-            SIGNAL(rechercheTerminee(bool)));
-
-    connect(communication,
-            SIGNAL(etatCafetiere(int, int, bool, bool)),
-            this,
-            SLOT(mettreAJourEtatCafetiere(int, int, bool, bool)));
-    connect(communication,
-            SIGNAL(etatMagasin(QStringList)),
-            this,
-            SLOT(mettreAJourMagasin(QStringList)));
-    /**
-     * @todo Gérer le signal cafeEnPreparation
-     */
-
+    gererEvenement();
+    gererCommunication();
     /**
      * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
      * cafetière
@@ -101,6 +66,51 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
       identifiantUtilisateur + "';";
     baseDeDonneesPikawa->recuperer(requete, preferences);
     qDebug() << Q_FUNC_INFO << preferences;
+}
+
+void Cafetiere::gererEvenement()
+{
+    connect(preparation,
+            SIGNAL(preparationPasPrete(int, bool, bool, bool)),
+            this,
+            SLOT(preparationPasPrete(int, bool, bool, bool)));
+}
+
+void Cafetiere::gererCommunication()
+{
+    connect(communication,
+            SIGNAL(cafetiereDetectee(QString, QString)),
+            this,
+            SIGNAL(cafetiereDetectee(QString, QString)));
+
+    connect(communication,
+            SIGNAL(cafetiereConnectee(QString, QString)),
+            this,
+            SLOT(mettreAJourConnexion(QString, QString)));
+
+    connect(communication,
+            SIGNAL(cafetiereDeconnectee()),
+            this,
+            SIGNAL(cafetiereDeconnectee()));
+
+    connect(communication,
+            SIGNAL(rechercheTerminee(bool)),
+            this,
+            SIGNAL(rechercheTerminee(bool)));
+
+    connect(communication,
+            SIGNAL(etatCafetiere(int, bool, bool, bool)),
+            this,
+            SLOT(mettreAJourEtatCafetiere(int, bool, bool, bool)));
+    connect(communication,
+            SIGNAL(etatMagasin(QStringList)),
+            this,
+            SLOT(mettreAJourMagasin(QStringList)));
+
+    connect(communication,
+            SIGNAL(cafeEnPreparation(int)),
+            this,
+            SLOT(gererEtatPreparationCafe(int)));
 }
 
 QStringList Cafetiere::getNomcapsules() const
@@ -258,13 +268,15 @@ void Cafetiere::gererConnexion()
 
 bool Cafetiere::estPret()
 {
-    if(preparation->estPreparationPrete() && communication->estConnecte())
+    if(preparation->estPreparationPrete() && communication->estConnecte() && !estCafeEnPreparation)
     {
         return true;
+        emit cafetierePrete();
     }
     else
     {
         return false;
+        emit cafetierePasPrete();
     }
 }
 
@@ -272,9 +284,7 @@ void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 {
     emit cafetiereConnectee(nom, adresse);
     recupererEtatCafetiere();
-    /**
-     * @todo Récupérer l'état du magasin
-     */
+    recupererEtatMagasin();
 }
 
 void Cafetiere::recupererEtatCafetiere()
@@ -282,16 +292,27 @@ void Cafetiere::recupererEtatCafetiere()
     communication->envoyerTrame("$PIKAWA;ETAT;C;\r\n");
 }
 
+void Cafetiere::recupererEtatMagasin()
+{
+    communication->envoyerTrame("$PIKAWA;ETAT;M;\r\n");
+}
+
 void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
-                                         int  bacCapsules,
+                                         bool  bacCapsules,
                                          bool etatCapsule,
                                          bool etatTasse)
 {
     qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
              << etatTasse;
-    /**
-     * @todo Signaler les changements de l'état de la cafetière à l'IHM
-     */
+
+    preparation->setNiveauEau(reservoirEau);
+    preparation->setBacPlein(bacCapsules);
+
+    preparation->setCapsulePresente(etatCapsule);
+    preparation->setTassePresente(etatTasse);
+
+
+    emit mettreAJourEtatCafetiere(reservoirEau, bacCapsules, etatCapsule, etatTasse);
 }
 
 void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
@@ -304,9 +325,7 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
                   "WHERE rangee=" + (i + 1);
         baseDeDonneesPikawa->executer(requete);
     }
-    /**
-     * @todo Signaler les changements du magasin à l'IHM
-     */
+    emit mettreAJourMagasinIHM(caspulesDisponibles);
 }
 
 void Cafetiere::mettreAJourPreparationCafe(int preparationCafe)
@@ -316,3 +335,32 @@ void Cafetiere::mettreAJourPreparationCafe(int preparationCafe)
      * @todo Signaler les changements de la préparation à l'IHM
      */
 }
+
+void Cafetiere::gererEtatPreparationCafe(int preparation)
+{
+    if(preparation = CAFE_PRET)
+    {
+        emit(cafePret());
+        this->estCafeEnPreparation = false;
+    }
+
+    else if(preparation = CAFE_EN_PREPARATION)
+    {
+        this->estCafeEnPreparation = true;
+    }
+
+    else
+    {
+        emit(erreurPreparation());
+        this->estCafeEnPreparation = false;
+    }
+}
+
+void Cafetiere::preparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente,
+                                    bool capsulePresente)
+{
+    emit signalPreparationPasPrete(niveauEau, bacPlein, tassePresente,
+                              capsulePresente);
+}
+
+

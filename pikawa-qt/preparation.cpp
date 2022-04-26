@@ -104,10 +104,13 @@ void Preparation::chargerLongeurBoissons()
 
 bool Preparation::estPreparationPrete()
 {
-    if((niveauEau - cafetiere->getniveauEauNecessaire()) <= 0 && bacPlein && !tassePresente)
+    if((niveauEau - cafetiere->getniveauEauNecessaire()) <= 0 && !bacPlein && tassePresente && capsulePresente)
     {
+        emit preparationPasPrete(niveauEau, bacPlein,
+                tassePresente, capsulePresente);
         return false;
     }
+
     else
     {
         return true;

@@ -77,8 +77,8 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
         return false;
     QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
     qDebug() << Q_FUNC_INFO << typeTrame << champs;
-    int     niveauEau, niveauBac;
-    bool    caspulePresente, tassePresente;
+    int     niveauEau;
+    bool    caspulePresente, tassePresente, bacPlein;
     QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
       capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
     int preparationCafe;
@@ -89,12 +89,12 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
     {
         case TypeTrame::EtatCafetiere:
             niveauEau = champs[ChampEtatCafetiere::NiveauEau].toInt();
-            niveauBac = champs[ChampEtatCafetiere::NiveauBac].toInt();
+            bacPlein = (champs[ChampEtatCafetiere::NiveauBac] == '1');
             caspulePresente =
               (champs[ChampEtatCafetiere::CaspulePresente] == '1');
             tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
             emit etatCafetiere(niveauEau,
-                               niveauBac,
+                               bacPlein,
                                caspulePresente,
                                tassePresente);
             return true;

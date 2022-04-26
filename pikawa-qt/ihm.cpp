@@ -153,6 +153,11 @@ void IHMPikawa::gererSelectionCafes()
             SIGNAL(clicked()),
             this,
             SLOT(selectionnerCapriccio()));
+
+    connect(cafetiere,
+            SIGNAL(cafePret()),
+            this,
+            SLOT(afficherCafePret()));
 }
 
 void IHMPikawa::gererEvenements()
@@ -228,6 +233,31 @@ void IHMPikawa::gererEvenements()
             SIGNAL(rechercheTerminee(bool)),
             this,
             SLOT(terminerDecouverte(bool)));
+
+    connect(cafetiere,
+            SIGNAL(mettreAJourEtatCafetiere(int, int, int, int)),
+            this,
+            SLOT(mettreAJourEtatCafetiere(int, int , int, int)));
+
+    connect(cafetiere,
+            SIGNAL(mettreAJourMagasinIHM(QStringList)),
+            this,
+            SLOT(mettreAJourMagasinIHM(QStringList)));
+
+    connect(cafetiere,
+            SIGNAL(cafetierePrete()),
+            this,
+            SLOT(afficherCafetierePrete()));
+
+    connect(cafetiere,
+            SIGNAL(preparationPasPrete()),
+            this,
+            SLOT(afficherAvertissement()));
+
+    connect(cafetiere,
+            SIGNAL(signalPreparationPasPrete(int, bool, bool, bool)),
+            this,
+            SLOT(afficherAvertissement(int, bool, bool, bool)));
 }
 
 void IHMPikawa::initialiserPreferences()
@@ -437,3 +467,67 @@ void IHMPikawa::selectionnerCapriccio()
     cafetiere->setCapsuleChoisie(idCapsule);
     afficherPageAcceuil();
 }
+
+void IHMPikawa::afficherCafePret()
+{
+}
+
+void IHMPikawa::mettreAJourEtatCafetiere(int reservoirEau, int bacCapsules,
+                                         int etatCapsule, int etatTasse)
+{
+    ui->niveauEau->setValue(reservoirEau);
+    ui->niveauBac->setValue(bacCapsules);
+}
+
+void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
+{
+    QStringList nomCafe = cafetiere->getNomcapsules();
+    for(int i = 0; i < caspulesDisponibles.size(); ++i)
+    {
+        if(caspulesDisponibles.at(i) == "1")
+        {
+
+        }
+        else
+        {
+        }
+    }
+}
+
+
+void IHMPikawa::afficherCafetierePrete()
+{
+    ui->boutonLancerPreparation->setEnabled(true);
+}
+
+void IHMPikawa::afficherCafetierePasPrete()
+{
+
+}
+
+void IHMPikawa::afficherAvertissement(int niveauEau, bool bacPlein, bool tassePresente, bool capsulePresente)
+{
+    QString message;
+
+    if((niveauEau - cafetiere->getniveauEauNecessaire()) <= 0)
+    {
+        message.append("Eau insufisante");
+    }
+
+    if(!bacPlein)
+    {
+        message.append("Bac plein");
+    }
+
+    if(tassePresente)
+    {
+        message.append("Tasse non présente");
+    }
+
+    if(capsulePresente)
+    {
+        message.append("Caspule non présente");
+    }
+    ui->labelAvertisseur->setText(message);
+}
+

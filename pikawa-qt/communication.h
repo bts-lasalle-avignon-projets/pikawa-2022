@@ -138,7 +138,7 @@ class Communication : public QObject
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
     void etatCafetiere(int  reservoirEau,
-                       int  bacCapsules,
+                       bool bacPlein,
                        bool etatCapsule,
                        bool etatTasse);
     void etatMagasin(QStringList caspulesDisponibles);
