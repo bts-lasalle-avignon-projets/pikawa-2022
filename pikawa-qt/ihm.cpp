@@ -26,6 +26,16 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
+
+    boutonsCafes.push_back(ui->boutonColombia);
+    boutonsCafes.push_back(ui->boutonIndonesia);
+    boutonsCafes.push_back(ui->boutonEthiopia);
+    boutonsCafes.push_back(ui->boutonVolluto);
+    boutonsCafes.push_back(ui->boutonCapriccio);
+    boutonsCafes.push_back(ui->boutonCosi);
+    boutonsCafes.push_back(ui->boutonScuro);
+    boutonsCafes.push_back(ui->boutonVanilla);
+
     qDebug() << Q_FUNC_INFO;
 
     baseDeDonnees = BaseDeDonnees::getInstance();
@@ -75,6 +85,8 @@ void IHMPikawa::initialiserIcones()
     iconeCapsuleCosi      = new QIcon(":cosi.png");
     iconeCapsuleScuro     = new QIcon(":scuro.png");
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
+    iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
+    iconeBacVide          = new QPixmap(":/images/bacVide.png");
 }
 
 void IHMPikawa::initialiserIHM()
@@ -232,9 +244,9 @@ void IHMPikawa::gererEvenements()
             SLOT(terminerDecouverte(bool)));
 
     connect(cafetiere,
-            SIGNAL(etatCafetiere(int, int, int, int)),
+            SIGNAL(etatCafetiere(int, bool, bool, bool)),
             this,
-            SLOT(mettreAJourEtatCafetiere(int, int, int, int)));
+            SLOT(mettreAJourEtatCafetiere(int, bool, bool, bool)));
 
     connect(cafetiere,
             SIGNAL(etatMagasin(QStringList)),
@@ -459,25 +471,37 @@ void IHMPikawa::afficherCafePret()
 {
 }
 
-void IHMPikawa::mettreAJourEtatCafetiere(int reservoirEau,
-                                         int bacCapsules,
-                                         int etatCapsule,
-                                         int etatTasse)
+void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
+                                         bool bacCapsules,
+                                         bool etatCapsule,
+                                         bool etatTasse)
 {
-    ui->niveauEau->setValue(reservoirEau);
-    ui->niveauBac->setValue(bacCapsules);
+    int reservoirEauPourcentage = (reservoirEau * 100) / TAILLE_RESERVOIR;
+
+    ui->niveauEau->setValue(reservoirEauPourcentage);
+    if(bacCapsules = true)
+    {
+        ui->etatBac->setPixmap(*iconeBacPlein);
+    }
+    else
+    {
+        ui->etatBac->setPixmap(*iconeBacVide);
+    }
 }
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
-    QStringList nomCafe = cafetiere->getNomcapsules();
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
         {
+            // Activer le bouton
+            boutonsCafes.at(i)->setEnabled(true);
         }
         else
         {
+            // Desactiver bouton
+            boutonsCafes.at(i)->setEnabled(false);
         }
     }
 }

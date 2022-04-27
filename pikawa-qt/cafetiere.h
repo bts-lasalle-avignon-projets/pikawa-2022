@@ -141,10 +141,10 @@ class Cafetiere : public QObject
     void rechercheTerminee(bool detecte);
     void cafePret();
     void erreurPreparation();
-    void etatCafetiere(int reservoirEau,
-                       int bacCapsules,
-                       int etatCapsule,
-                       int etatTasse);
+    void etatCafetiere(int  reservoirEau,
+                       bool bacCapsules,
+                       bool etatCapsule,
+                       bool etatTasse);
     void cafetierePrete();
     void cafetierePasPrete();
     void etatMagasin(QStringList caspulesDisponibles);

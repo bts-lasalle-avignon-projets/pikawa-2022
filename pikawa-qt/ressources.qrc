@@ -15,6 +15,8 @@
         <file alias="ethiopia.png">images/capsule-ethiopia.png</file>
         <file alias="scuro.png">images/capsule-scuro.png</file>
         <file alias="volluto.png">images/capsule-volluto.png</file>
+        <file>images/bacPlein.png</file>
+        <file>images/bacVide.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>cafetiere.qss</file>

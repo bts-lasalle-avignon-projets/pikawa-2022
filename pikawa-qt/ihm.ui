@@ -593,7 +593,7 @@ background: rgb(114, 159, 207);
 }</string>
                   </property>
                   <property name="value">
-                   <number>50</number>
+                   <number>0</number>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -628,7 +628,7 @@ background: rgb(114, 159, 207);
                </spacer>
               </item>
               <item>
-               <layout class="QVBoxLayout" name="layoutBac">
+               <layout class="QVBoxLayout" name="verticalLayout_4">
                 <item>
                  <spacer name="verticalSpace">
                   <property name="orientation">
@@ -659,42 +659,43 @@ background: rgb(114, 159, 207);
                  </widget>
                 </item>
                 <item>
-                 <widget class="QProgressBar" name="niveauBac">
-                  <property name="enabled">
-                   <bool>true</bool>
+                 <spacer name="verticalSpacer_6">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
                   </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Fixed</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>45</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="etatBac">
                   <property name="minimumSize">
                    <size>
-                    <width>100</width>
-                    <height>200</height>
+                    <width>150</width>
+                    <height>150</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>100</width>
-                    <height>130</height>
+                    <width>150</width>
+                    <height>150</height>
                    </size>
                   </property>
-                  <property name="font">
-                   <font>
-                    <weight>50</weight>
-                    <bold>false</bold>
-                    <kerning>true</kerning>
-                   </font>
+                  <property name="text">
+                   <string/>
                   </property>
-                  <property name="styleSheet">
-                   <string notr="true">QProgressBar::chunk:vertical {
-background: rgb(193, 125, 17);
-}</string>
+                  <property name="pixmap">
+                   <pixmap resource="ressources.qrc">:/images/bacVide.png</pixmap>
                   </property>
-                  <property name="value">
-                   <number>30</number>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignHCenter|Qt::AlignTop</set>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                  <property name="scaledContents">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>

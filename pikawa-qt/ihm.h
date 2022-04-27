@@ -32,9 +32,10 @@ class Cafetiere;
  * @brief Pour le mode plein écran
  */
 #define PLEIN_ECRAN
-#define TAILLE_RISTRETO 30
-#define TAILLE_ESPRESSO 60
-#define TAILLE_LUNGO 110
+#define TAILLE_RISTRETO  30
+#define TAILLE_ESPRESSO  60
+#define TAILLE_LUNGO     110
+#define TAILLE_RESERVOIR 800
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -99,6 +100,11 @@ class IHMPikawa : public QMainWindow
     QIcon* iconeCapsuleScuro;
     QIcon* iconeCapsuleVanilla;
 
+    QPixmap* iconeBacPlein;
+    QPixmap* iconeBacVide;
+
+    QVector<QPushButton*> boutonsCafes;
+
     void initialiserIcones();
     void initialiserIHM();
     void gererEvenements();
@@ -133,12 +139,17 @@ class IHMPikawa : public QMainWindow
     void selectionnerVanilla();
     void selectionnerCapriccio();
     void afficherCafePret();
-    void mettreAJourEtatCafetiere(int reservoirEau, int bacCapsules,
-                                  int etatCapsule, int etatTasse);
+    void mettreAJourEtatCafetiere(int  reservoirEau,
+                                  bool bacCapsules,
+                                  bool etatCapsule,
+                                  bool etatTasse);
     void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
-    void afficherAvertissement(int niveau, bool bacPlein, bool tassePresente, bool capsulePresente);
+    void afficherAvertissement(int  niveau,
+                               bool bacPlein,
+                               bool tassePresente,
+                               bool capsulePresente);
 };
 
 #endif // IHM_H
