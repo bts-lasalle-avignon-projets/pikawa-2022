@@ -81,6 +81,7 @@ class Communication : public QObject
     bool estConnecte() const;
     bool estCafetiereDetectee() const;
     void envoyerTrame(QString trame);
+    void envoyerTramePreparation(int nomCafe, int longueur);
 
     /**
      * @enum ChampEtatCafetiere

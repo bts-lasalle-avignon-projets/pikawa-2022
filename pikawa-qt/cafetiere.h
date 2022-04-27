@@ -83,6 +83,7 @@ class Cafetiere : public QObject
     void setNiveauEau(const int& niveauEau);
     void setNiveauEauNecessaire(const int& niveauEauNecessaire);
     bool estPret();
+    QStringList getDisponibiliteCapsules();
 
     /**
      * @enum ChampsTablePreferences
@@ -119,7 +120,9 @@ class Cafetiere : public QObject
         NbCapsules
     };
 
-  public slots:
+    void ouvrirBaseDeDonnees();
+    
+public slots:
     void demarrerDecouverte();
     void arreterDecouverte();
     void rafraichirDecouverte();
@@ -133,6 +136,7 @@ class Cafetiere : public QObject
                                   bool etatTasse);
     void mettreAJourMagasin(QStringList caspulesDisponibles);
     void gererEtatPreparationCafe(int preparation);
+    void lancerLaPreparationCafe();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
@@ -147,7 +151,7 @@ class Cafetiere : public QObject
                        bool etatTasse);
     void cafetierePrete();
     void cafetierePasPrete();
-    void etatMagasin(QStringList caspulesDisponibles);
+    void etatMagasinIHM(QStringList caspulesDisponibles);
 };
 
 #endif // CAFETIERE_H

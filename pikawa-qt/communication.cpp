@@ -339,3 +339,10 @@ void Communication::lireEtatSocket()
 {
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->state();
 }
+
+void Communication::envoyerTramePreparation(int nomCafe, int longueur)
+{
+    envoyerTrame("$PIKAWA;P; " + QString::number(nomCafe) + " ; " + QString::number(longueur) + ";\r\n");
+    qDebug() << Q_FUNC_INFO;
+}
+

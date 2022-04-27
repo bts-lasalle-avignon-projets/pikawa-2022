@@ -21,25 +21,18 @@
  * @param parent L'adresse de l'objet parent, si nullptr IHMPikawa sera la
  * fenêtre principale de l'application
  */
+
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa), iconeBoutonConnecte(nullptr),
     iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
 
-    boutonsCafes.push_back(ui->boutonColombia);
-    boutonsCafes.push_back(ui->boutonIndonesia);
-    boutonsCafes.push_back(ui->boutonEthiopia);
-    boutonsCafes.push_back(ui->boutonVolluto);
-    boutonsCafes.push_back(ui->boutonCapriccio);
-    boutonsCafes.push_back(ui->boutonCosi);
-    boutonsCafes.push_back(ui->boutonScuro);
-    boutonsCafes.push_back(ui->boutonVanilla);
+    chargerBoutonCafe();
 
     qDebug() << Q_FUNC_INFO;
 
-    baseDeDonnees = BaseDeDonnees::getInstance();
-    baseDeDonnees->ouvrir(NOM_BDD);
+    ouvrirBaseDeDonnees();
 
     cafetiere = new Cafetiere(this);
 
@@ -89,6 +82,25 @@ void IHMPikawa::initialiserIcones()
     iconeBacVide          = new QPixmap(":/images/bacVide.png");
 }
 
+void IHMPikawa::chargerBoutonCafe()
+{
+    boutonsCafes.push_back(ui->boutonColombia);
+    boutonsCafes.push_back(ui->boutonIndonesia);
+    boutonsCafes.push_back(ui->boutonEthiopia);
+    boutonsCafes.push_back(ui->boutonVolluto);
+    boutonsCafes.push_back(ui->boutonCapriccio);
+    boutonsCafes.push_back(ui->boutonCosi);
+    boutonsCafes.push_back(ui->boutonScuro);
+    boutonsCafes.push_back(ui->boutonVanilla);
+}
+
+
+void IHMPikawa::ouvrirBaseDeDonnees()
+{
+    baseDeDonnees = BaseDeDonnees::getInstance();
+    baseDeDonnees->ouvrir(NOM_BDD);
+}
+
 void IHMPikawa::initialiserIHM()
 {
     ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
@@ -116,12 +128,15 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
     {
         case 0:
             niveauEauNecessaire = TAILLE_RISTRETO;
+            qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
             break;
         case 1:
             niveauEauNecessaire = TAILLE_ESPRESSO;
+            qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
             break;
         case 2:
             niveauEauNecessaire = TAILLE_LUNGO;
+            qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
             break;
     }
     cafetiere->setNiveauEauNecessaire(niveauEauNecessaire);
@@ -249,7 +264,7 @@ void IHMPikawa::gererEvenements()
             SLOT(mettreAJourEtatCafetiere(int, bool, bool, bool)));
 
     connect(cafetiere,
-            SIGNAL(etatMagasin(QStringList)),
+            SIGNAL(etatMagasinIHM(QStringList)),
             this,
             SLOT(mettreAJourMagasinIHM(QStringList)));
 
@@ -257,6 +272,16 @@ void IHMPikawa::gererEvenements()
             SIGNAL(cafetierePrete()),
             this,
             SLOT(afficherCafetierePrete()));
+
+    connect(cafetiere,
+            SIGNAL(cafetierePasPrete()),
+            this,
+            SLOT(afficherCafetierePasPrete()));
+
+    connect(ui->boutonLancerPreparation,
+            SIGNAL(clicked()),
+            cafetiere,
+            SLOT(lancerLaPreparationCafe()));
 }
 
 void IHMPikawa::initialiserPreferences()
@@ -471,20 +496,28 @@ void IHMPikawa::afficherCafePret()
 {
 }
 
+int IHMPikawa::convertirPourcentageEau(int reservoirEau)
+{
+    int reservoirEauPourcentage = 0;
+    return reservoirEauPourcentage = (reservoirEau * 100) / TAILLE_RESERVOIR;
+}
+
 void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
                                          bool bacCapsules,
                                          bool etatCapsule,
                                          bool etatTasse)
 {
-    int reservoirEauPourcentage = (reservoirEau * 100) / TAILLE_RESERVOIR;
-
+    int reservoirEauPourcentage = convertirPourcentageEau(reservoirEau);
     ui->niveauEau->setValue(reservoirEauPourcentage);
+
     if(bacCapsules = true)
     {
         ui->etatBac->setPixmap(*iconeBacPlein);
+        ui->labelBac->setText("Bac Plein");
     }
     else
     {
+        ui->labelBac->setText("Bac OK");
         ui->etatBac->setPixmap(*iconeBacVide);
     }
 }
@@ -495,12 +528,10 @@ void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
     {
         if(caspulesDisponibles.at(i) == "1")
         {
-            // Activer le bouton
             boutonsCafes.at(i)->setEnabled(true);
         }
         else
         {
-            // Desactiver bouton
             boutonsCafes.at(i)->setEnabled(false);
         }
     }
@@ -513,6 +544,7 @@ void IHMPikawa::afficherCafetierePrete()
 
 void IHMPikawa::afficherCafetierePasPrete()
 {
+    ui->boutonLancerPreparation->setEnabled(false);
 }
 
 void IHMPikawa::afficherAvertissement(int  niveauEau,

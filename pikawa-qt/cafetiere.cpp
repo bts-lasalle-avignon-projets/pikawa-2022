@@ -22,8 +22,7 @@ Cafetiere::Cafetiere(IHMPikawa* ihm) :
     tassePresente(false), estCafeEnPreparation(false)
 {
     // qDebug() << Q_FUNC_INFO << qApp->applicationFilePath();
-    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
-    baseDeDonneesPikawa->ouvrir(NOM_BDD);
+    ouvrirBaseDeDonnees();
     gererEvenements();
     gererEvenementsCommunication();
     /**
@@ -51,6 +50,12 @@ void Cafetiere::initiatiserNomLongueurs()
     this->nomLongueurs = preparation->getNomLongueurs();
 }
 
+void Cafetiere::ouvrirBaseDeDonnees()
+{
+    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
+    baseDeDonneesPikawa->ouvrir(NOM_BDD);
+}
+
 void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 {
     qDebug() << Q_FUNC_INFO << identifiantUtilisateur;
@@ -70,6 +75,7 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 
 void Cafetiere::gererEvenements()
 {
+
 }
 
 void Cafetiere::gererEvenementsCommunication()
@@ -262,10 +268,12 @@ bool Cafetiere::estPret()
     if(preparation->estPreparationPrete() && communication->estConnecte() &&
        !estCafeEnPreparation)
     {
+        emit cafetierePrete();
         return true;
     }
     else
     {
+        emit cafetierePasPrete();
         return false;
     }
 }
@@ -280,11 +288,13 @@ void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 void Cafetiere::recupererEtatCafetiere()
 {
     communication->envoyerTrame("$PIKAWA;ETAT;C;\r\n");
+    communication->recevoir();
 }
 
 void Cafetiere::recupererEtatMagasin()
 {
     communication->envoyerTrame("$PIKAWA;ETAT;M;\r\n");
+    communication->recevoir();
 }
 
 void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
@@ -314,7 +324,7 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
           " WHERE rangee=" + QString::number((i + 1));
         baseDeDonneesPikawa->executer(requete);
     }
-    emit etatMagasin(caspulesDisponibles);
+    emit etatMagasinIHM(caspulesDisponibles);
 }
 
 void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
@@ -337,3 +347,21 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
         this->estCafeEnPreparation = false;
     }
 }
+
+void Cafetiere::lancerLaPreparationCafe()
+{
+    communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
+    recupererEtatCafetiere();
+    recupererEtatMagasin();
+}
+
+QStringList Cafetiere::getDisponibiliteCapsules()
+{
+    QString requete = "SELECT quantite FROM StockMagasin";
+    QStringList caspuleDisponibles;
+    baseDeDonneesPikawa->recuperer(requete, caspuleDisponibles);
+    return caspuleDisponibles;
+}
+
+
+

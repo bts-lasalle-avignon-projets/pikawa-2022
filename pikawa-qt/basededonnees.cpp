@@ -349,3 +349,4 @@ bool BaseDeDonnees::recuperer(QString requete, QVector<QStringList>& donnees)
     else
         return false;
 }
+

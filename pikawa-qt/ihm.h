@@ -114,7 +114,13 @@ class IHMPikawa : public QMainWindow
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
 
-  public slots:
+    int convertirPourcentageEau(int reservoirEau);
+
+    void chargerBoutonCafe();
+    
+    void ouvrirBaseDeDonnees();
+    
+public slots:
     void afficherPage(IHMPikawa::Page page);
     void afficherPageAcceuil();
     void afficherPageInformations();

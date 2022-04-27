@@ -25,8 +25,8 @@ int main(int argc, char* argv[])
         a.setStyleSheet(styleSheet);
     }
 
-    IHMPikawa w;
-    w.show();
+    IHMPikawa fenetrePikawa;
+    fenetrePikawa.show();
 
     return a.exec();
 }
