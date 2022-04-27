@@ -17,8 +17,8 @@
 #define IDENTIFIANT_UTILISATEUR    "tvaira"
 #define IDENTIFIANT_UTILISATEUR_ID "1"
 
-#define CAFE_PRET 1
-#define CAFE_EN_PREPARATION 2
+#define CAFE_PRET               1
+#define CAFE_EN_PREPARATION     2
 #define ERREUR_PREPARATION_CAFE 3
 
 class IHMPikawa;
@@ -56,7 +56,8 @@ class Cafetiere : public QObject
     void initialiserNomCapsules();
     void initiatiserNomLongueurs();
     void chargerPreferences(QString identifiantUtilisateur);
-    void gererCommunication();
+    void gererEvenements();
+    void gererEvenementsCommunication();
 
   public:
     Cafetiere(IHMPikawa* ihm);
@@ -122,19 +123,16 @@ class Cafetiere : public QObject
     void demarrerDecouverte();
     void arreterDecouverte();
     void rafraichirDecouverte();
-    void gererEvenement();
     void gererConnexion();
     void mettreAJourConnexion(QString nom, QString adresse);
     void recupererEtatCafetiere();
     void recupererEtatMagasin();
     void mettreAJourEtatCafetiere(int  reservoirEau,
-                                  bool  bacCapsules,
+                                  bool bacCapsules,
                                   bool etatCapsule,
                                   bool etatTasse);
     void mettreAJourMagasin(QStringList caspulesDisponibles);
-    void mettreAJourPreparationCafe(int preparationCafe);
     void gererEtatPreparationCafe(int preparation);
-    void preparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente, bool capsulePresente);
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
@@ -143,12 +141,13 @@ class Cafetiere : public QObject
     void rechercheTerminee(bool detecte);
     void cafePret();
     void erreurPreparation();
-    void mettreAJourEtatCafetiere(int reservoirEau, int bacCapsules, int etatCapsule, int etatTasse);
+    void etatCafetiere(int reservoirEau,
+                       int bacCapsules,
+                       int etatCapsule,
+                       int etatTasse);
     void cafetierePrete();
     void cafetierePasPrete();
-    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
-    void signalPreparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente,
-                                 bool capsulePresente);
+    void etatMagasin(QStringList caspulesDisponibles);
 };
 
 #endif // CAFETIERE_H

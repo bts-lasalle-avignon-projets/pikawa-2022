@@ -154,10 +154,7 @@ void IHMPikawa::gererSelectionCafes()
             this,
             SLOT(selectionnerCapriccio()));
 
-    connect(cafetiere,
-            SIGNAL(cafePret()),
-            this,
-            SLOT(afficherCafePret()));
+    connect(cafetiere, SIGNAL(cafePret()), this, SLOT(afficherCafePret()));
 }
 
 void IHMPikawa::gererEvenements()
@@ -235,12 +232,12 @@ void IHMPikawa::gererEvenements()
             SLOT(terminerDecouverte(bool)));
 
     connect(cafetiere,
-            SIGNAL(mettreAJourEtatCafetiere(int, int, int, int)),
+            SIGNAL(etatCafetiere(int, int, int, int)),
             this,
-            SLOT(mettreAJourEtatCafetiere(int, int , int, int)));
+            SLOT(mettreAJourEtatCafetiere(int, int, int, int)));
 
     connect(cafetiere,
-            SIGNAL(mettreAJourMagasinIHM(QStringList)),
+            SIGNAL(etatMagasin(QStringList)),
             this,
             SLOT(mettreAJourMagasinIHM(QStringList)));
 
@@ -248,16 +245,6 @@ void IHMPikawa::gererEvenements()
             SIGNAL(cafetierePrete()),
             this,
             SLOT(afficherCafetierePrete()));
-
-    connect(cafetiere,
-            SIGNAL(preparationPasPrete()),
-            this,
-            SLOT(afficherAvertissement()));
-
-    connect(cafetiere,
-            SIGNAL(signalPreparationPasPrete(int, bool, bool, bool)),
-            this,
-            SLOT(afficherAvertissement(int, bool, bool, bool)));
 }
 
 void IHMPikawa::initialiserPreferences()
@@ -472,8 +459,10 @@ void IHMPikawa::afficherCafePret()
 {
 }
 
-void IHMPikawa::mettreAJourEtatCafetiere(int reservoirEau, int bacCapsules,
-                                         int etatCapsule, int etatTasse)
+void IHMPikawa::mettreAJourEtatCafetiere(int reservoirEau,
+                                         int bacCapsules,
+                                         int etatCapsule,
+                                         int etatTasse)
 {
     ui->niveauEau->setValue(reservoirEau);
     ui->niveauBac->setValue(bacCapsules);
@@ -486,14 +475,12 @@ void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
     {
         if(caspulesDisponibles.at(i) == "1")
         {
-
         }
         else
         {
         }
     }
 }
-
 
 void IHMPikawa::afficherCafetierePrete()
 {
@@ -502,10 +489,12 @@ void IHMPikawa::afficherCafetierePrete()
 
 void IHMPikawa::afficherCafetierePasPrete()
 {
-
 }
 
-void IHMPikawa::afficherAvertissement(int niveauEau, bool bacPlein, bool tassePresente, bool capsulePresente)
+void IHMPikawa::afficherAvertissement(int  niveauEau,
+                                      bool bacPlein,
+                                      bool tassePresente,
+                                      bool capsulePresente)
 {
     QString message;
 
@@ -530,4 +519,3 @@ void IHMPikawa::afficherAvertissement(int niveauEau, bool bacPlein, bool tassePr
     }
     ui->labelAvertisseur->setText(message);
 }
-
