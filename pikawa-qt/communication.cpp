@@ -65,6 +65,8 @@ TypeTrame Communication::extraireTypeTrame(QString trame)
         return TypeTrame::EtatMagasin;
     else if(type == ETAT_PREPARATION)
         return TypeTrame::EtatPreparation;
+    else if(type == TRAME_ERREUR)
+        return TypeTrame::ErreurPreparation;
     else
         return TypeTrame::Inconnue;
 
@@ -81,7 +83,7 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
     bool    caspulePresente, tassePresente, bacPlein;
     QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
       capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
-    int preparationCafe;
+    int preparationCafe, codeErreur;
 
     QStringList caspulesDisponibles;
 
@@ -119,8 +121,9 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             return true;
             // break;
         case TypeTrame::ErreurPreparation:
-            preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
-            emit erreurPreparationCafe();
+            codeErreur = champs[ChampEtatPreparation::Cafe].toInt();
+            qDebug() << Q_FUNC_INFO << " codeErreur " << codeErreur;
+            emit erreurPreparationCafe(codeErreur);
             return true;
     }
     return false;
@@ -346,7 +349,7 @@ void Communication::lireEtatSocket()
 
 void Communication::envoyerTramePreparation(int nomCafe, int longueur)
 {
+    qDebug() << Q_FUNC_INFO << nomCafe << longueur;
     envoyerTrame("$PIKAWA;P;" + QString::number(nomCafe) + ";" +
-                 QString::number(longueur) + ";\r\n");
-    qDebug() << Q_FUNC_INFO;
+                 QString::number(longueur + 1) + ";\r\n");
 }

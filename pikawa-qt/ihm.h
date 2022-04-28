@@ -109,20 +109,17 @@ class IHMPikawa : public QMainWindow
     void initialiserIHM();
     void gererEvenements();
     void initialiserPreferences();
+    int  convertirPourcentageEau(int reservoirEau);
+    void chargerBoutonsCafe();
+    void ouvrirBaseDeDonnees();
+    void afficherAvertissement(int  niveau,
+                               bool bacPasPlein,
+                               bool tassePresente,
+                               bool capsulePresente);
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
-
-    int convertirPourcentageEau(int reservoirEau);
-
-    void chargerBoutonCafe();
-
-    void ouvrirBaseDeDonnees();
-    void afficherAvertissement(int  niveau,
-                               bool bacPlein,
-                               bool tassePresente,
-                               bool capsulePresente);
 
   public slots:
     void afficherPage(IHMPikawa::Page page);
@@ -131,15 +128,13 @@ class IHMPikawa : public QMainWindow
     void afficherPageEntretien();
     void afficherPageParametres();
     void afficherPageSelectionCafe();
-    void activerboutonConnexionEtatDetecte(QString nom, QString adresse);
-    void activerboutonConnexionEtatConnecte(QString nom, QString adresse);
-    void activerboutonConnexionEtatDeconnecte();
+    void activerBoutonConnexionEtatDetecte(QString nom, QString adresse);
+    void activerBoutonConnexionEtatConnecte(QString nom, QString adresse);
+    void activerBoutonConnexionEtatDeconnecte();
     void rafraichirDecouverte();
     void terminerDecouverte(bool detecte);
-
     void gererLongueurPreparation(int longueurPreparation);
     void gererSelectionCafes();
-
     void selectionnerColombia();
     void selectionnerIndonesia();
     void selectionnerEthiopia();

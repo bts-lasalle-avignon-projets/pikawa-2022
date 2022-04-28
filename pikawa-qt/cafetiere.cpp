@@ -134,7 +134,7 @@ int Cafetiere::getNiveauEau() const
     return niveauEau;
 }
 
-int Cafetiere::getniveauEauNecessaire() const
+int Cafetiere::getNiveauEauNecessaire() const
 {
     return niveauEauNecessaire;
 }
@@ -262,8 +262,9 @@ void Cafetiere::gererConnexion()
         communication->connecter();
 }
 
-bool Cafetiere::estPret()
+bool Cafetiere::estPrete()
 {
+    qDebug() << Q_FUNC_INFO;
     if(preparation->estPreparationPrete() && communication->estConnecte() &&
        !estCafeEnPreparation && estCapsuleChoisieDisponible())
     {
@@ -275,7 +276,6 @@ bool Cafetiere::estPret()
         emit cafetierePasPrete();
         return false;
     }
-    qDebug() << Q_FUNC_INFO;
 }
 
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
@@ -302,12 +302,13 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
 {
     qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
              << etatTasse;
-    qDebug() << Q_FUNC_INFO << estPret();
 
     preparation->setNiveauEau(reservoirEau);
-    preparation->setBacPlein(bacCapsules);
+    preparation->setBacPlein(!bacCapsules);
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);
+
+    qDebug() << Q_FUNC_INFO << estPrete();
 
     emit etatCafetiere(reservoirEau, bacCapsules, etatCapsule, etatTasse);
 }
@@ -324,7 +325,7 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
         baseDeDonneesPikawa->executer(requete);
     }
     emit etatMagasinIHM(caspulesDisponibles);
-    estPret();
+    estPrete();
 }
 
 void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
@@ -332,8 +333,8 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
     qDebug() << Q_FUNC_INFO << preparationCafe;
     if(preparationCafe == CAFE_PRET)
     {
-        emit cafePret();
         this->estCafeEnPreparation = false;
+        emit cafePret();
     }
 
     else if(preparationCafe == CAFE_EN_PREPARATION)
@@ -343,14 +344,18 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
 
     else
     {
-        emit erreurPreparation();
         this->estCafeEnPreparation = false;
+        emit erreurPreparation();
     }
 }
 
 void Cafetiere::lancerLaPreparationCafe()
 {
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
+    /**
+     * @todo Est-ce vraiment utile ? Les trames d'états sont envoyées
+     * automatiquement par la cafetière !
+     */
     recupererEtatCafetiere();
     recupererEtatMagasin();
 }

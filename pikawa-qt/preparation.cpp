@@ -68,22 +68,22 @@ int Preparation::getNiveauEau() const
     return niveauEau;
 }
 
-void Preparation::setCapsulePresente(bool& caspulePresente)
+void Preparation::setCapsulePresente(bool caspulePresente)
 {
     this->capsulePresente = caspulePresente;
 }
 
-void Preparation::setBacPlein(bool& bacPlein)
+void Preparation::setBacPlein(bool bacPlein)
 {
     this->bacPlein = bacPlein;
 }
 
-void Preparation::setTassePresente(bool& tassePresente)
+void Preparation::setTassePresente(bool tassePresente)
 {
     this->tassePresente = tassePresente;
 }
 
-void Preparation::setNiveauEau(int& niveauEau)
+void Preparation::setNiveauEau(int niveauEau)
 {
     this->niveauEau = niveauEau;
 }
@@ -102,7 +102,7 @@ void Preparation::chargerLongeurBoissons()
                                    nomLongueurs);
 }
 
-bool Preparation::estPreparationPrete()
+bool Preparation::estPreparationPrete() const
 {
     /**
      * @todo A reparer
@@ -114,7 +114,7 @@ bool Preparation::estPreparationPrete()
     qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
     qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
 
-    if(!bacPlein || !tassePresente || !capsulePresente)
+    if(bacPlein || !tassePresente || !capsulePresente)
     {
         return false;
     }

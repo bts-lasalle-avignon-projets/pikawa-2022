@@ -23,7 +23,15 @@
 #define ETAT_CAFETIERE        "C"
 #define ETAT_MAGASIN          "M"
 #define ETAT_PREPARATION      "P"
+#define TRAME_ERREUR          "ERREUR"
 #define CHAMP_TYPE_TRAME      1
+
+// Code erreur
+#define ERREUR_PROTOCOLE      1
+#define ERREUR_NB_PARAMETRES  2
+#define ERREUR_TRAME_INCONNUE 3
+#define ERREUR_TYPE_CAFE      4
+#define ERREUR_LONGUEUR_CAFE  5
 
 /**
  * @def TEST_TRAMES
@@ -145,7 +153,7 @@ class Communication : public QObject
                        bool etatTasse);
     void etatMagasin(QStringList caspulesDisponibles);
     void cafeEnPreparation(int preparationCafe);
-    void erreurPreparationCafe();
+    void erreurPreparationCafe(int codeErreur);
 };
 
 #endif // COMMUNICATION_H

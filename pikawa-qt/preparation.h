@@ -32,8 +32,8 @@ class Preparation : public QObject
 {
     Q_OBJECT
   private:
-    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
+    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
 
     /**
      * Cafetiere* getCafetiere() const;
@@ -60,13 +60,11 @@ class Preparation : public QObject
     bool        getBacPlein() const;
     bool        getTassePresente() const;
     int         getNiveauEau() const;
-
-    void setCapsulePresente(bool& capsulePresente);
-    void setBacPlein(bool& bacPlein);
-    void setTassePresente(bool& tassePresente);
-    void setNiveauEau(int& niveauEau);
-
-    bool estPreparationPrete();
+    void        setCapsulePresente(bool capsulePresente);
+    void        setBacPlein(bool bacPlein);
+    void        setTassePresente(bool tassePresente);
+    void        setNiveauEau(int niveauEau);
+    bool        estPreparationPrete() const;
 
   signals:
     void preparationPasPrete(int  niveauEau,
