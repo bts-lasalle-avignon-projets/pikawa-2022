@@ -23,9 +23,7 @@ class BaseDeDonnees;
  * @details
  */
 
-
-
-#define NIVEAU_EAU_MAX 800
+#define NIVEAU_EAU_MAX      800
 #define NIVEAU_EAU_MIN_CAFE 30
 
 class Cafetiere;
@@ -35,7 +33,12 @@ class Preparation : public QObject
     Q_OBJECT
   private:
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
-    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
+    Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
+
+    /**
+     * Cafetiere* getCafetiere() const;
+    void       setCafetiere(Cafetiere* cafetiere);
+    */
 
     QVector<QString> nomCapsules;
     QVector<QString> nomLongueurs;
@@ -53,10 +56,10 @@ class Preparation : public QObject
 
     QStringList getNomCapsules() const;
     QStringList getNomLongueurs() const;
-    bool getCapsulePresente() const;
-    bool getBacPlein() const;
-    bool getTassePresente() const;
-    int getNiveauEau() const;
+    bool        getCapsulePresente() const;
+    bool        getBacPlein() const;
+    bool        getTassePresente() const;
+    int         getNiveauEau() const;
 
     void setCapsulePresente(bool& capsulePresente);
     void setBacPlein(bool& bacPlein);
@@ -65,8 +68,11 @@ class Preparation : public QObject
 
     bool estPreparationPrete();
 
-signals:
-        void preparationPasPrete(int niveauEau, bool bacPlein, bool tassePresente, bool capsulePresente);
+  signals:
+    void preparationPasPrete(int  niveauEau,
+                             bool bacPlein,
+                             bool tassePresente,
+                             bool capsulePresente);
 };
 
 #endif // PREPARATION_H

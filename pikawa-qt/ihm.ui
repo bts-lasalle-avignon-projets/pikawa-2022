@@ -350,6 +350,22 @@
                </widget>
               </item>
               <item>
+               <spacer name="verticalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>30</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
                <widget class="QLabel" name="labelAvertisseur">
                 <property name="text">
                  <string/>
@@ -609,6 +625,22 @@ background: rgb(114, 159, 207);
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <spacer name="verticalSpacer_15">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Fixed</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </item>
               <item>
@@ -642,7 +674,7 @@ background: rgb(114, 159, 207);
                   </property>
                  </spacer>
                 </item>
-                <item alignment="Qt::AlignHCenter">
+                <item alignment="Qt::AlignHCenter|Qt::AlignTop">
                  <widget class="QLabel" name="labelBac">
                   <property name="maximumSize">
                    <size>
@@ -669,7 +701,7 @@ background: rgb(114, 159, 207);
                   <property name="sizeHint" stdset="0">
                    <size>
                     <width>20</width>
-                    <height>45</height>
+                    <height>80</height>
                    </size>
                   </property>
                  </spacer>

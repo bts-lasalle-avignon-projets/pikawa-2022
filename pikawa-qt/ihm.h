@@ -117,10 +117,14 @@ class IHMPikawa : public QMainWindow
     int convertirPourcentageEau(int reservoirEau);
 
     void chargerBoutonCafe();
-    
+
     void ouvrirBaseDeDonnees();
-    
-public slots:
+    void afficherAvertissement(int  niveau,
+                               bool bacPlein,
+                               bool tassePresente,
+                               bool capsulePresente);
+
+  public slots:
     void afficherPage(IHMPikawa::Page page);
     void afficherPageAcceuil();
     void afficherPageInformations();
@@ -152,10 +156,6 @@ public slots:
     void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
-    void afficherAvertissement(int  niveau,
-                               bool bacPlein,
-                               bool tassePresente,
-                               bool capsulePresente);
 };
 
 #endif // IHM_H

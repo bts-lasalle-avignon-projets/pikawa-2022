@@ -75,7 +75,6 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 
 void Cafetiere::gererEvenements()
 {
-
 }
 
 void Cafetiere::gererEvenementsCommunication()
@@ -266,7 +265,7 @@ void Cafetiere::gererConnexion()
 bool Cafetiere::estPret()
 {
     if(preparation->estPreparationPrete() && communication->estConnecte() &&
-       !estCafeEnPreparation)
+       !estCafeEnPreparation && estCapsuleChoisieDisponible())
     {
         emit cafetierePrete();
         return true;
@@ -276,6 +275,7 @@ bool Cafetiere::estPret()
         emit cafetierePasPrete();
         return false;
     }
+    qDebug() << Q_FUNC_INFO;
 }
 
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
@@ -288,13 +288,11 @@ void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 void Cafetiere::recupererEtatCafetiere()
 {
     communication->envoyerTrame("$PIKAWA;ETAT;C;\r\n");
-    communication->recevoir();
 }
 
 void Cafetiere::recupererEtatMagasin()
 {
     communication->envoyerTrame("$PIKAWA;ETAT;M;\r\n");
-    communication->recevoir();
 }
 
 void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
@@ -304,6 +302,7 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
 {
     qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
              << etatTasse;
+    qDebug() << Q_FUNC_INFO << estPret();
 
     preparation->setNiveauEau(reservoirEau);
     preparation->setBacPlein(bacCapsules);
@@ -325,6 +324,7 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
         baseDeDonneesPikawa->executer(requete);
     }
     emit etatMagasinIHM(caspulesDisponibles);
+    estPret();
 }
 
 void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
@@ -355,13 +355,29 @@ void Cafetiere::lancerLaPreparationCafe()
     recupererEtatMagasin();
 }
 
-QStringList Cafetiere::getDisponibiliteCapsules()
+QStringList Cafetiere::getDisponibiliteCapsules() const
 {
-    QString requete = "SELECT quantite FROM StockMagasin";
+    QString     requete = "SELECT quantite FROM StockMagasin";
     QStringList caspuleDisponibles;
     baseDeDonneesPikawa->recuperer(requete, caspuleDisponibles);
     return caspuleDisponibles;
 }
 
+bool Cafetiere::estCapsuleChoisieDisponible()
+{
+    QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
+                      QString::number(capsuleChoisie + 1);
+    QString reponseQuantite = "";
 
-
+    baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
+    qDebug() << Q_FUNC_INFO << "cafeChoisie" << capsuleChoisie
+             << "reponseQuantite " << reponseQuantite;
+    if(reponseQuantite.toInt() <= 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

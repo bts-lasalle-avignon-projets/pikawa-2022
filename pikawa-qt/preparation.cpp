@@ -13,8 +13,9 @@
  */
 
 Preparation::Preparation(QObject* parent) :
-    QObject(parent), cafetiere(nullptr), baseDeDonneesPikawa(nullptr), nomCapsules(0),
-    nomLongueurs(0), capsulePresente(false), bacPlein(false), tassePresente(false), niveauEau(0)
+    QObject(parent), cafetiere(nullptr), baseDeDonneesPikawa(nullptr),
+    nomCapsules(0), nomLongueurs(0), capsulePresente(false), bacPlein(false),
+    tassePresente(false), niveauEau(0)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
@@ -101,13 +102,20 @@ void Preparation::chargerLongeurBoissons()
                                    nomLongueurs);
 }
 
-
 bool Preparation::estPreparationPrete()
 {
-    if((niveauEau - cafetiere->getniveauEauNecessaire()) <= 0 &&!bacPlein && tassePresente && capsulePresente)
+    /**
+     * @todo A reparer
+     * int niveauEau = cafetiere->getniveauEauNecessaire();
+    qDebug() << Q_FUNC_INFO << "niveau Eau cafetiere" << niveauEau;
+    //(niveauEau - cafetiere->getniveauEauNecessaire()) <= 0 &&
+    */
+    qDebug() << Q_FUNC_INFO << "bacPlein" << bacPlein;
+    qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
+    qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
+
+    if(!bacPlein || !tassePresente || !capsulePresente)
     {
-        emit preparationPasPrete(niveauEau, bacPlein,
-                tassePresente, capsulePresente);
         return false;
     }
 
@@ -117,7 +125,13 @@ bool Preparation::estPreparationPrete()
     }
 }
 
+/** Cafetiere* Preparation::getCafetiere() const
+{
+    return cafetiere;
+}
 
-
-
-
+void Preparation::setCafetiere(Cafetiere* cafetiere)
+{
+    this->cafetiere = cafetiere;
+}
+*/

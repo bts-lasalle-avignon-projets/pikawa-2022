@@ -41,6 +41,7 @@ enum TypeTrame
     EtatCafetiere,
     EtatMagasin,
     EtatPreparation,
+    ErreurPreparation,
     NbTrames
 };
 
@@ -144,6 +145,7 @@ class Communication : public QObject
                        bool etatTasse);
     void etatMagasin(QStringList caspulesDisponibles);
     void cafeEnPreparation(int preparationCafe);
+    void erreurPreparationCafe();
 };
 
 #endif // COMMUNICATION_H

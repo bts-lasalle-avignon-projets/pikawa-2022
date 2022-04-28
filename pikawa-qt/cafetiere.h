@@ -58,6 +58,7 @@ class Cafetiere : public QObject
     void chargerPreferences(QString identifiantUtilisateur);
     void gererEvenements();
     void gererEvenementsCommunication();
+    void ouvrirBaseDeDonnees();
 
   public:
     Cafetiere(IHMPikawa* ihm);
@@ -78,13 +79,13 @@ class Cafetiere : public QObject
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
 
-    void setCapsuleChoisie(const int& capsuleChoisie);
-    void setLongueurChoisie(const int& boissonChoisie);
-    void setNiveauEau(const int& niveauEau);
-    void setNiveauEauNecessaire(const int& niveauEauNecessaire);
-    bool estPret();
-    QStringList getDisponibiliteCapsules();
-
+    void        setCapsuleChoisie(const int& capsuleChoisie);
+    void        setLongueurChoisie(const int& boissonChoisie);
+    void        setNiveauEau(const int& niveauEau);
+    void        setNiveauEauNecessaire(const int& niveauEauNecessaire);
+    bool        estPret();
+    QStringList getDisponibiliteCapsules() const;
+    bool        estCapsuleChoisieDisponible();
     /**
      * @enum ChampsTablePreferences
      * @brief Les différentes colonne de la table Preferences
@@ -120,9 +121,7 @@ class Cafetiere : public QObject
         NbCapsules
     };
 
-    void ouvrirBaseDeDonnees();
-    
-public slots:
+  public slots:
     void demarrerDecouverte();
     void arreterDecouverte();
     void rafraichirDecouverte();

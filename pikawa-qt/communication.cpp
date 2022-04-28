@@ -89,7 +89,7 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
     {
         case TypeTrame::EtatCafetiere:
             niveauEau = champs[ChampEtatCafetiere::NiveauEau].toInt();
-            bacPlein = (champs[ChampEtatCafetiere::NiveauBac] == '1');
+            bacPlein  = (champs[ChampEtatCafetiere::NiveauBac] == '1');
             caspulePresente =
               (champs[ChampEtatCafetiere::CaspulePresente] == '1');
             tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
@@ -118,6 +118,10 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             emit cafeEnPreparation(preparationCafe);
             return true;
             // break;
+        case TypeTrame::ErreurPreparation:
+            preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
+            emit erreurPreparationCafe();
+            return true;
     }
     return false;
 }
@@ -326,12 +330,12 @@ void Communication::recevoir()
         TypeTrame typeTrame = extraireTypeTrame(trameRecue);
         if(traiterTrame(typeTrame, trameRecue))
         {
-            trameRecue.clear();
         }
         else
         {
             qDebug() << Q_FUNC_INFO << "erreur traitement";
         }
+        trameRecue.clear();
     }
 }
 
@@ -342,7 +346,7 @@ void Communication::lireEtatSocket()
 
 void Communication::envoyerTramePreparation(int nomCafe, int longueur)
 {
-    envoyerTrame("$PIKAWA;P; " + QString::number(nomCafe) + " ; " + QString::number(longueur) + ";\r\n");
+    envoyerTrame("$PIKAWA;P;" + QString::number(nomCafe) + ";" +
+                 QString::number(longueur) + ";\r\n");
     qDebug() << Q_FUNC_INFO;
 }
-

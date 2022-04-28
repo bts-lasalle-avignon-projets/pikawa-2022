@@ -94,7 +94,6 @@ void IHMPikawa::chargerBoutonCafe()
     boutonsCafes.push_back(ui->boutonVanilla);
 }
 
-
 void IHMPikawa::ouvrirBaseDeDonnees()
 {
     baseDeDonnees = BaseDeDonnees::getInstance();
@@ -113,6 +112,8 @@ void IHMPikawa::initialiserIHM()
     initialiserPreferences();
 
     afficherPageAcceuil();
+
+    ui->boutonLancerPreparation->setEnabled(false);
 }
 
 void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
@@ -476,7 +477,7 @@ void IHMPikawa::selectionnerVanilla()
 {
     ui->bontonChangerCafe->setIcon(*iconeCapsuleVanilla);
     ui->capsuleChoisie->setText("Vanilla");
-    int idCapsule = cafetiere->getIdCapsule("Colombia");
+    int idCapsule = cafetiere->getIdCapsule("Vanilla");
     qDebug() << Q_FUNC_INFO << "idCapsule" << idCapsule;
     cafetiere->setCapsuleChoisie(idCapsule);
     afficherPageAcceuil();
@@ -498,7 +499,7 @@ void IHMPikawa::afficherCafePret()
 
 int IHMPikawa::convertirPourcentageEau(int reservoirEau)
 {
-    int reservoirEauPourcentage = 0;
+    int reservoirEauPourcentage    = 0;
     return reservoirEauPourcentage = (reservoirEau * 100) / TAILLE_RESERVOIR;
 }
 
@@ -510,16 +511,18 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     int reservoirEauPourcentage = convertirPourcentageEau(reservoirEau);
     ui->niveauEau->setValue(reservoirEauPourcentage);
 
-    if(bacCapsules = true)
+    if(!bacCapsules)
     {
         ui->etatBac->setPixmap(*iconeBacPlein);
-        ui->labelBac->setText("Bac Plein");
+        ui->labelBac->setStyleSheet("font-size:25px;color : red;");
     }
     else
     {
-        ui->labelBac->setText("Bac OK");
+        ui->labelBac->setText("Bac");
         ui->etatBac->setPixmap(*iconeBacVide);
     }
+
+    afficherAvertissement(reservoirEau, bacCapsules, etatCapsule, etatTasse);
 }
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
@@ -549,29 +552,40 @@ void IHMPikawa::afficherCafetierePasPrete()
 
 void IHMPikawa::afficherAvertissement(int  niveauEau,
                                       bool bacPlein,
-                                      bool tassePresente,
-                                      bool capsulePresente)
+                                      bool capsulePresente,
+                                      bool tassePresente)
 {
-    QString message;
+    QString message = "";
 
     if((niveauEau - cafetiere->getniveauEauNecessaire()) <= 0)
     {
-        message.append("Eau insufisante");
+        message.append("Eau insuffisante ");
     }
 
     if(!bacPlein)
     {
-        message.append("Bac plein");
+        message.append("Bac plein ");
     }
 
-    if(tassePresente)
+    if(!capsulePresente)
     {
-        message.append("Tasse non présente");
+        message.append("Caspule non présente ");
     }
 
-    if(capsulePresente)
+    if(!tassePresente)
     {
-        message.append("Caspule non présente");
+        message.append("Tasse non présente ");
     }
+
+    if(!cafetiere->estCapsuleChoisieDisponible())
+    {
+        message.append("Caspule choisie Indisponible ");
+        ui->capsuleChoisie->setStyleSheet("font-size:25px; color:red;");
+    }
+
     ui->labelAvertisseur->setText(message);
+    qDebug() << Q_FUNC_INFO << "message" << message;
+    ui->labelAvertisseur->setAlignment(Qt::AlignCenter);
+    ui->labelAvertisseur->setAlignment(Qt::AlignBottom);
+    ui->labelAvertisseur->setStyleSheet("font-size:25px; color:red");
 }
