@@ -12,8 +12,8 @@
  */
 
 Communication::Communication(QObject* parent) :
-    QObject(parent), cafetiere(nullptr), agentDecouvreur(nullptr),
-    connecte(false), pikawaDetecte(false), socketBluetoothPikawa(nullptr)
+    QObject(parent), agentDecouvreur(nullptr), connecte(false),
+    pikawaDetecte(false), socketBluetoothPikawa(nullptr)
 {
     qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
     activerBluetooth();
@@ -95,12 +95,14 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             caspulePresente =
               (champs[ChampEtatCafetiere::CaspulePresente] == '1');
             tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
+            qDebug() << Q_FUNC_INFO << " niveauEau " << niveauEau
+                     << " bacPlein " << bacPlein << " caspulePresente "
+                     << caspulePresente << " tassePresente " << tassePresente;
             emit etatCafetiere(niveauEau,
                                bacPlein,
                                caspulePresente,
                                tassePresente);
             return true;
-            // break;
         case TypeTrame::EtatMagasin:
             for(int i = ChampEtatMagasin::Colombia;
                 i < ChampEtatMagasin::NbChampsEtatMagasin;
@@ -110,19 +112,13 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             }
             qDebug() << Q_FUNC_INFO << " capulesDisponibles "
                      << caspulesDisponibles;
-
             emit etatMagasin(caspulesDisponibles);
-
             return true;
-            // break;
         case TypeTrame::EtatPreparation:
             preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
-            /**
-            @todo Avertir l'IHM de la preparation du café
-            */
+            qDebug() << Q_FUNC_INFO << " preparationCafe " << preparationCafe;
             emit cafeEnPreparation(preparationCafe);
             return true;
-            // break;
         case TypeTrame::ErreurPreparation:
             codeErreur = champs[ChampEtatPreparation::Cafe].toInt();
             qDebug() << Q_FUNC_INFO << " codeErreur " << codeErreur;

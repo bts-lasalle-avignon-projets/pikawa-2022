@@ -15,6 +15,10 @@
 #include <QString>
 #include <QStringList>
 
+#define TAILLE_RISTRETTO 30
+#define TAILLE_ESPRESSO  60
+#define TAILLE_LUNGO     110
+
 class BaseDeDonnees;
 
 /**
@@ -54,13 +58,14 @@ class Preparation : public QObject
     bool        getBacPlein() const;
     bool        getTassePresente() const;
     int         getNiveauEauNecessaire() const;
+    int         getNiveauEauNecessaire(const int& longueurChoisie) const;
     void        setCapsulePresente(bool capsulePresente);
     void        setBacPlein(bool bacPlein);
     void        setTassePresente(bool tassePresente);
     bool        estPreparationPrete() const;
+    void        setNiveauEauNecessaire(const int& longueurChoisie);
 
   public slots:
-    void setNiveauEauNecessaire(int niveauEau);
 
   signals:
     void preparationPasPrete(int  niveauEau,

@@ -26,7 +26,6 @@ Preparation::Preparation(Cafetiere* cafetiere) :
 
 Preparation::~Preparation()
 {
-    delete cafetiere;
     BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
@@ -69,6 +68,19 @@ int Preparation::getNiveauEauNecessaire() const
     return niveauEauNecessaire;
 }
 
+int Preparation::getNiveauEauNecessaire(const int& longueurChoisie) const
+{
+    switch(longueurChoisie)
+    {
+        case 0:
+            return TAILLE_RISTRETTO;
+        case 1:
+            return TAILLE_ESPRESSO;
+        case 2:
+            return TAILLE_LUNGO;
+    }
+}
+
 void Preparation::setCapsulePresente(bool caspulePresente)
 {
     this->capsulePresente = caspulePresente;
@@ -82,12 +94,6 @@ void Preparation::setBacPlein(bool bacPlein)
 void Preparation::setTassePresente(bool tassePresente)
 {
     this->tassePresente = tassePresente;
-}
-
-void Preparation::setNiveauEauNecessaire(int niveauEauNecessaire)
-{
-    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
-    this->niveauEauNecessaire = niveauEauNecessaire;
 }
 
 void Preparation::chargerNomCapsules()
@@ -106,23 +112,31 @@ void Preparation::chargerLongeurBoissons()
 
 bool Preparation::estPreparationPrete() const
 {
-    qDebug() << Q_FUNC_INFO << "niveau Eau cafetiere"
-             << cafetiere->getNiveauEau();
-
+    qDebug() << Q_FUNC_INFO << "niveauEau" << cafetiere->getNiveauEau();
+    qDebug() << Q_FUNC_INFO << "niveauEauNecessaire" << niveauEauNecessaire;
     qDebug() << Q_FUNC_INFO << "bacPlein" << bacPlein;
     qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
     qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
 
-    if((cafetiere->getNiveauEau() - niveauEauNecessaire) <= 0 || bacPlein ||
-       !tassePresente || !capsulePresente)
+    /**
+     * @todo Gérer le niveau nécessaire ?
+     */
+    // if((cafetiere->getNiveauEau() - niveauEauNecessaire) < 0 || bacPlein ||
+    // !tassePresente || !capsulePresente)
+    if(bacPlein || !tassePresente || !capsulePresente)
     {
         qDebug() << Q_FUNC_INFO << "Pas prête";
         return false;
     }
-
     else
     {
         qDebug() << Q_FUNC_INFO << "Prête";
         return true;
     }
+}
+
+void Preparation::setNiveauEauNecessaire(const int& longueurChoisie)
+{
+    this->niveauEauNecessaire = getNiveauEauNecessaire(longueurChoisie);
+    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
 }

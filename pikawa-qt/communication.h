@@ -53,8 +53,6 @@ enum TypeTrame
     NbTrames
 };
 
-class Cafetiere;
-
 /**
  * @class Communication
  * @brief
@@ -65,7 +63,6 @@ class Communication : public QObject
 {
     Q_OBJECT
   private:
-    Cafetiere*            cafetiere;       //!< instance d'un objet Cafetiere
     QBluetoothLocalDevice interfaceLocale; //!< l'interface Bluetooth locale
     QBluetoothDeviceDiscoveryAgent*
       agentDecouvreur; //!< pour découvrir des interfaces Bluetooth

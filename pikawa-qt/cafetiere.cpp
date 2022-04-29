@@ -75,10 +75,6 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 
 void Cafetiere::gererEvenements()
 {
-    connect(ihm,
-            SIGNAL(niveauEauNecessaireCafe(int)),
-            preparation,
-            SLOT(setNiveauEauNecessaire(int)));
 }
 
 void Cafetiere::gererEvenementsCommunication()
@@ -216,6 +212,7 @@ void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
 
 void Cafetiere::setLongueurChoisie(const int& longueurChoisie)
 {
+    preparation->setNiveauEauNecessaire(longueurChoisie);
     this->longueurChoisie = longueurChoisie;
     if(this->longueurChoisie != capsuleChoisie)
     {
@@ -263,7 +260,10 @@ void Cafetiere::gererConnexion()
 
 bool Cafetiere::estPrete()
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "estPreparationPrete"
+             << preparation->estPreparationPrete() << "estCafeEnPreparation"
+             << estCafeEnPreparation << "estCapsuleChoisieDisponible"
+             << estCapsuleChoisieDisponible();
     if(preparation->estPreparationPrete() && communication->estConnecte() &&
        !estCafeEnPreparation && estCapsuleChoisieDisponible())
     {
@@ -337,12 +337,11 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
         this->estCafeEnPreparation = false;
         emit cafePret();
     }
-
     else if(preparationCafe == CAFE_EN_PREPARATION)
     {
         this->estCafeEnPreparation = true;
+        emit cafeEnCours();
     }
-
     else
     {
         this->estCafeEnPreparation = false;

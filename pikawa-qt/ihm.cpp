@@ -141,22 +141,6 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
     ui->labelLongueurPreparation->setText(
       labelsLongueurPreparation.at(longueurPreparation));
     cafetiere->setLongueurChoisie(longueurPreparation);
-
-    int niveauEauNecessaire = 0;
-    switch(longueurPreparation)
-    {
-        case 0:
-            niveauEauNecessaire = TAILLE_RISTRETO;
-            break;
-        case 1:
-            niveauEauNecessaire = TAILLE_ESPRESSO;
-            break;
-        case 2:
-            niveauEauNecessaire = TAILLE_LUNGO;
-            break;
-    }
-    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
-    emit niveauEauNecessaireCafe(niveauEauNecessaire);
 }
 
 void IHMPikawa::gererSelectionCafes()
@@ -191,6 +175,14 @@ void IHMPikawa::gererSelectionCafes()
             this,
             SLOT(selectionnerCapriccio()));
     connect(cafetiere, SIGNAL(cafePret()), this, SLOT(afficherCafePret()));
+    connect(cafetiere,
+            SIGNAL(cafeEnCours()),
+            this,
+            SLOT(afficherCafeEnCours()));
+    connect(cafetiere,
+            SIGNAL(erreurPreparation()),
+            this,
+            SLOT(afficherErreurPreparation()));
 }
 
 void IHMPikawa::selectionnerColombia()
@@ -276,6 +268,20 @@ void IHMPikawa::selectionnerCapriccio()
 void IHMPikawa::afficherCafePret()
 {
     qDebug() << Q_FUNC_INFO;
+    afficherMessage("Café prêt", "green");
+    cafetiere->estPrete();
+}
+
+void IHMPikawa::afficherCafeEnCours()
+{
+    qDebug() << Q_FUNC_INFO;
+    afficherMessage("Café en cours", "orange");
+}
+
+void IHMPikawa::afficherErreurPreparation()
+{
+    qDebug() << Q_FUNC_INFO;
+    afficherMessage("Préparation impossible !", "red");
 }
 
 void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
@@ -293,8 +299,8 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     }
     else
     {
-        ui->labelBac->setText("Bac");
         ui->etatBac->setPixmap(*iconeBacVide);
+        ui->labelBac->setStyleSheet("font-size: 25px; color: black;");
     }
 
     afficherAvertissement(reservoirEau, bacCapsules, etatCapsule, etatTasse);
@@ -302,6 +308,9 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
+    /**
+     * @todo Et la capsule choisie ?
+     */
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
@@ -575,9 +584,14 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         ui->capsuleChoisie->setStyleSheet("font-size:25px; color:red;");
     }
 
-    ui->labelAvertisseur->setText(message);
+    afficherMessage(message, "red");
+}
+
+void IHMPikawa::afficherMessage(QString message, QString couleur)
+{
     qDebug() << Q_FUNC_INFO << "message" << message;
-    ui->labelAvertisseur->setAlignment(Qt::AlignCenter);
-    ui->labelAvertisseur->setAlignment(Qt::AlignBottom);
-    ui->labelAvertisseur->setStyleSheet("font-size:25px; color:red");
+    ui->labelAvertisseur->setText(message);
+    ui->labelAvertisseur->setAlignment(Qt::AlignCenter | Qt::AlignBottom);
+    ui->labelAvertisseur->setStyleSheet("font-size:25px; color:" + couleur +
+                                        ";");
 }

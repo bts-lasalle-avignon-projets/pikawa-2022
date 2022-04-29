@@ -32,17 +32,13 @@ class Cafetiere;
  * @brief Pour le mode plein écran
  */
 #define PLEIN_ECRAN
-#define TAILLE_RISTRETO  30
-#define TAILLE_ESPRESSO  60
-#define TAILLE_LUNGO     110
-#define TAILLE_RESERVOIR 800
 
-QT_BEGIN_NAMESPACE
+// QT_BEGIN_NAMESPACE
 namespace Ui
 {
 class IHMPikawa;
 }
-QT_END_NAMESPACE
+// QT_END_NAMESPACE
 
 class BaseDeDonnees;
 
@@ -116,6 +112,7 @@ class IHMPikawa : public QMainWindow
                                bool bacPasPlein,
                                bool tassePresente,
                                bool capsulePresente);
+    void afficherMessage(QString message, QString couleur);
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
@@ -144,6 +141,8 @@ class IHMPikawa : public QMainWindow
     void selectionnerVanilla();
     void selectionnerCapriccio();
     void afficherCafePret();
+    void afficherCafeEnCours();
+    void afficherErreurPreparation();
     void mettreAJourEtatCafetiere(int  reservoirEau,
                                   bool bacCapsules,
                                   bool etatCapsule,
@@ -153,7 +152,6 @@ class IHMPikawa : public QMainWindow
     void afficherCafetierePasPrete();
 
   signals:
-    void niveauEauNecessaireCafe(int niveauEauNecessaire);
 };
 
 #endif // IHM_H

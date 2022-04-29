@@ -17,9 +17,11 @@
 #define IDENTIFIANT_UTILISATEUR    "tvaira"
 #define IDENTIFIANT_UTILISATEUR_ID "1"
 
-#define CAFE_PRET               1
-#define CAFE_EN_PREPARATION     2
-#define ERREUR_PREPARATION_CAFE 3
+#define TAILLE_RESERVOIR 800
+
+#define CAFE_PRET               0
+#define CAFE_EN_PREPARATION     1
+#define ERREUR_PREPARATION_CAFE 2
 
 class IHMPikawa;
 class Communication;
@@ -140,6 +142,7 @@ class Cafetiere : public QObject
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
     void cafePret();
+    void cafeEnCours();
     void erreurPreparation();
     void etatCafetiere(int  reservoirEau,
                        bool bacCapsules,
