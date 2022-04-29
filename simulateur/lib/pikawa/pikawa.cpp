@@ -67,6 +67,11 @@ void initialiserPikawa()
   qualiteEau = preferences.getInt("qualiteEau");
   contenanceBac = preferences.getInt("contenanceBac");
   contenanceEau = preferences.getInt("contenanceEau", CAPACITE_EAU);
+  if(contenanceEau <= 0)
+  {
+    contenanceEau = CAPACITE_EAU;
+    preferences.putInt("contenanceEau", contenanceEau);
+  }
   char cleMagasin[64] = "";
   for(int i=0;i<NB_COLONNES;++i)
   {
@@ -114,13 +119,17 @@ void initialiserPikawa()
     setEtatBac(Plein);
   }
   else
+  {
     setEtatBac(PasPlein);
-    if(contenanceEau == 0)
+  }
+  if(contenanceEau <= 0)
   {
     setEtatNiveauEau(Vide);
   }
   else
+  {
     setEtatNiveauEau(PasVide);
+  }
   setEtatCommande(Repos);
 
   if(estMagasinVide())
@@ -713,12 +722,33 @@ void gererEtatsMachine(int numeroColonne)
   Serial.print(contenanceEau);
   Serial.println(" capsules restantes");
   #endif
-  if(contenanceEau == 0)
+  if(contenanceEau <= 0)
   {
+    contenanceEau = 0;
     setEtatNiveauEau(Vide);
   }
 
   setLigne5();
+}
+
+int getNiveauNecessaire(String longueurCafe)
+{
+  if(longueurCafe.equals(CAFE_COURT))
+  {
+    return TAILLE_RISTRETTO;
+  }
+  else if(longueurCafe.equals(CAFE_MOYEN))
+  {
+    return TAILLE_ESPRESSO;
+  }
+  else if(longueurCafe.equals(CAFE_LONG))
+  {
+    return TAILLE_LUNGO;
+  }
+  else
+  {
+    return CAPACITE_EAU+1; // impossible
+  }
 }
 
 /**
@@ -785,10 +815,10 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
     return false;
   }
 
-  if(etatNiveauEau == Vide)
+  if(etatNiveauEau == Vide || ((contenanceEau - getNiveauNecessaire(longueurCafe)) < 0))
   {
     #ifdef DEBUG
-    Serial.println(String("<Erreur> Niveau eau vide !"));
+    Serial.println(String("<Erreur> Niveau eau vide ou insuffisant !"));
     #endif
     return false;
   }
@@ -936,31 +966,8 @@ void simuler()
   {
     if(etatCommande == Repos)
     {
-      // Simulation détection tasse
-      if ((temps - attente) >= SIMULATION_TASSE)
-      {
-        if(etatTasse == Absente)
-        {
-          setEtatTasse(Presente);
-        }
-        else
-        {
-          taus = random(0, 10); // 1 fois sur 10 pour simuler Tasse absente
-          if(taus == 0)
-          {
-            setEtatTasse(Absente);
-          }
-          else
-          {
-            simulation = true;
-          }
-        }
-        if(changementEtatCafetiere)
-          simulation = true;
-      }
-
       // Simulation remplissage eau
-      if(etatNiveauEau == Vide)
+      if(etatNiveauEau == Vide || contenanceEau <= 0)
       {
         //taus = random(0, 3)%2; // 1 chance sur 3
         //if(taus == 0)
@@ -1013,6 +1020,29 @@ void simuler()
         #ifdef DEBUG
         Serial.println(String("<Simulation> Remplissage magasin !"));
         #endif
+      }
+
+      // Simulation détection tasse
+      if ((temps - attente) >= SIMULATION_TASSE)
+      {
+        if(etatTasse == Absente)
+        {
+          setEtatTasse(Presente);
+        }
+        else
+        {
+          taus = random(0, 10); // 1 fois sur 10 pour simuler Tasse absente
+          if(taus == 0)
+          {
+            setEtatTasse(Absente);
+          }
+          else
+          {
+            //simulation = true;
+          }
+        }
+        //if(changementEtatCafetiere)
+          simulation = true;
       }
 
       if(simulation)
@@ -1104,10 +1134,10 @@ void setLigne4()
   String ligne4a;
   String ligne4b;
 
-  if(etatNiveauEau == PasVide)
-    ligne4a = String("Eau : ok");
-  else
+  if(etatNiveauEau == Vide || contenanceEau <= 0)
     ligne4a = String("Eau : vide");
+  else
+    ligne4a = String("Eau : ok");
   if(etatBac == PasPlein)
     ligne4b = String("Bac : ok");
   else

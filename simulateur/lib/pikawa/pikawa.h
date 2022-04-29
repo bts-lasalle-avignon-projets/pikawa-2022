@@ -30,7 +30,8 @@
  * @def PERIPHERIQUE_BLUETOOTH
  * @brief Définit le nom du périphérique Bluetooth (et son id)
  */
-#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
+//#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
+#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-2"
 
 // Machine à café pikawa
 #define TITRE             PERIPHERIQUE_BLUETOOTH
@@ -175,6 +176,10 @@ enum LongueurCafe
 #define CAFE_MOYEN "2"
 #define CAFE_LONG  "3"
 
+#define TAILLE_RISTRETTO 1
+#define TAILLE_ESPRESSO  2
+#define TAILLE_LUNGO     3
+
 // Trame de requête/réponse :
 #define TRAME_REQUETE_ETAT_CAFETIERE                "ETAT;C;" // Format : $PIKAWA;ETAT;C;\r\n
 #define NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE  3   // 
@@ -226,6 +231,7 @@ bool estCapsuleVide(String &typeCafe);
 bool estMagasinVide();
 void mettreAJourMagasin(int numeroColonne);
 void gererEtatsMachine(int numeroColonne);
+int getNiveauNecessaire(String longueurCafe);
 bool verifierEtatsMachine(int numeroColonne, String longueurCafe);
 bool commanderCafe(int etat);
 bool traiterCommandeCafe(String longueurCafe, String typeCafe);
