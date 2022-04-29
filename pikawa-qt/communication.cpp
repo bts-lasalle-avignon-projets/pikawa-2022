@@ -117,6 +117,9 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             // break;
         case TypeTrame::EtatPreparation:
             preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
+            /**
+            @todo Avertir l'IHM de la preparation du café
+            */
             emit cafeEnPreparation(preparationCafe);
             return true;
             // break;

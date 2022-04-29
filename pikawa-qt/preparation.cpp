@@ -12,10 +12,10 @@
  *
  */
 
-Preparation::Preparation(QObject* parent) :
-    QObject(parent), cafetiere(nullptr), baseDeDonneesPikawa(nullptr),
+Preparation::Preparation(Cafetiere* cafetiere) :
+    QObject(cafetiere), cafetiere(cafetiere), baseDeDonneesPikawa(nullptr),
     nomCapsules(0), nomLongueurs(0), capsulePresente(false), bacPlein(false),
-    tassePresente(false), niveauEau(0)
+    tassePresente(false), niveauEauNecessaire(0)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
@@ -26,6 +26,7 @@ Preparation::Preparation(QObject* parent) :
 
 Preparation::~Preparation()
 {
+    delete cafetiere;
     BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
@@ -63,9 +64,9 @@ bool Preparation::getTassePresente() const
     return tassePresente;
 }
 
-int Preparation::getNiveauEau() const
+int Preparation::getNiveauEauNecessaire() const
 {
-    return niveauEau;
+    return niveauEauNecessaire;
 }
 
 void Preparation::setCapsulePresente(bool caspulePresente)
@@ -83,9 +84,10 @@ void Preparation::setTassePresente(bool tassePresente)
     this->tassePresente = tassePresente;
 }
 
-void Preparation::setNiveauEau(int niveauEau)
+void Preparation::setNiveauEauNecessaire(int niveauEauNecessaire)
 {
-    this->niveauEau = niveauEau;
+    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
+    this->niveauEauNecessaire = niveauEauNecessaire;
 }
 
 void Preparation::chargerNomCapsules()
@@ -104,34 +106,23 @@ void Preparation::chargerLongeurBoissons()
 
 bool Preparation::estPreparationPrete() const
 {
-    /**
-     * @todo A reparer
-     * int niveauEau = cafetiere->getniveauEauNecessaire();
-    qDebug() << Q_FUNC_INFO << "niveau Eau cafetiere" << niveauEau;
-    //(niveauEau - cafetiere->getniveauEauNecessaire()) <= 0 &&
-    */
+    qDebug() << Q_FUNC_INFO << "niveau Eau cafetiere"
+             << cafetiere->getNiveauEau();
+
     qDebug() << Q_FUNC_INFO << "bacPlein" << bacPlein;
     qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
     qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
 
-    if(bacPlein || !tassePresente || !capsulePresente)
+    if((cafetiere->getNiveauEau() - niveauEauNecessaire) <= 0 || bacPlein ||
+       !tassePresente || !capsulePresente)
     {
+        qDebug() << Q_FUNC_INFO << "Pas prête";
         return false;
     }
 
     else
     {
+        qDebug() << Q_FUNC_INFO << "Prête";
         return true;
     }
 }
-
-/** Cafetiere* Preparation::getCafetiere() const
-{
-    return cafetiere;
-}
-
-void Preparation::setCafetiere(Cafetiere* cafetiere)
-{
-    this->cafetiere = cafetiere;
-}
-*/

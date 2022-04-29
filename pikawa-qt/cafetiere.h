@@ -44,13 +44,12 @@ class Cafetiere : public QObject
     QStringList
          preferences;    //!< liste des préférences de l'utilisateur connecté
     int  capsuleChoisie; //!<
-    int  longueurChoisie;     //!<
-    int  niveauEau;           //!<
-    int  niveauEauNecessaire; //!<
-    bool connectee;           //!<
-    bool activee;             //!<
-    bool capsulePresente;     //!<
-    bool tassePresente;       //!<
+    int  longueurChoisie; //!<
+    int  niveauEau;       //!<
+    bool connectee;       //!<
+    bool activee;         //!<
+    bool capsulePresente; //!<
+    bool tassePresente;   //!<
     bool estCafeEnPreparation;
 
     void initialiserNomCapsules();
@@ -69,19 +68,18 @@ class Cafetiere : public QObject
     int         getCaspuleChoisie() const;
     int         getLongueurChoisie() const;
     int         getNiveauEau() const;
+    int         getNiveauEauNecessaire() const;
     bool        getConnectee() const;
     bool        getActivee() const;
     bool        getCapsulePresente() const;
     bool        getTassePresente() const;
     int         getIdCapsule(QString nomCapsule) const;
-    int         getNiveauEauNecessaire() const;
     QStringList getPreferences() const;
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
     void        setCapsuleChoisie(const int& capsuleChoisie);
     void        setLongueurChoisie(const int& boissonChoisie);
     void        setNiveauEau(const int& niveauEau);
-    void        setNiveauEauNecessaire(const int& niveauEauNecessaire);
     bool        estPrete();
     QStringList getDisponibiliteCapsules() const;
     bool        estCapsuleChoisieDisponible();

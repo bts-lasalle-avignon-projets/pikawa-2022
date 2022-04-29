@@ -151,6 +151,9 @@ class IHMPikawa : public QMainWindow
     void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
+
+  signals:
+    void niveauEauNecessaireCafe(int niveauEauNecessaire);
 };
 
 #endif // IHM_H

@@ -17,9 +17,9 @@
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
     QObject(ihm), ihm(ihm), communication(new Communication(this)),
     preparation(new Preparation(this)), nomCapsules(0), nomLongueurs(0),
-    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), niveauEauNecessaire(0),
-    connectee(false), activee(false), capsulePresente(false),
-    tassePresente(false), estCafeEnPreparation(false)
+    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), connectee(false),
+    activee(false), capsulePresente(false), tassePresente(false),
+    estCafeEnPreparation(false)
 {
     // qDebug() << Q_FUNC_INFO << qApp->applicationFilePath();
     ouvrirBaseDeDonnees();
@@ -75,6 +75,10 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 
 void Cafetiere::gererEvenements()
 {
+    connect(ihm,
+            SIGNAL(niveauEauNecessaireCafe(int)),
+            preparation,
+            SLOT(setNiveauEauNecessaire(int)));
 }
 
 void Cafetiere::gererEvenementsCommunication()
@@ -136,7 +140,7 @@ int Cafetiere::getNiveauEau() const
 
 int Cafetiere::getNiveauEauNecessaire() const
 {
-    return niveauEauNecessaire;
+    return preparation->getNiveauEauNecessaire();
 }
 
 bool Cafetiere::getConnectee() const
@@ -229,11 +233,6 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
     this->niveauEau = niveauEau;
 }
 
-void Cafetiere::setNiveauEauNecessaire(const int& niveauEauNecessaire)
-{
-    this->niveauEauNecessaire = niveauEauNecessaire;
-}
-
 void Cafetiere::demarrerDecouverte()
 {
     qDebug() << Q_FUNC_INFO;
@@ -269,11 +268,13 @@ bool Cafetiere::estPrete()
        !estCafeEnPreparation && estCapsuleChoisieDisponible())
     {
         emit cafetierePrete();
+        qDebug() << Q_FUNC_INFO << "Prête";
         return true;
     }
     else
     {
         emit cafetierePasPrete();
+        qDebug() << Q_FUNC_INFO << "Pas prête";
         return false;
     }
 }
@@ -303,7 +304,7 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
     qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
              << etatTasse;
 
-    preparation->setNiveauEau(reservoirEau);
+    this->setNiveauEau(reservoirEau);
     preparation->setBacPlein(!bacCapsules);
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);

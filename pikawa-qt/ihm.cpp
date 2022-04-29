@@ -156,7 +156,7 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
             break;
     }
     qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
-    cafetiere->setNiveauEauNecessaire(niveauEauNecessaire);
+    emit niveauEauNecessaireCafe(niveauEauNecessaire);
 }
 
 void IHMPikawa::gererSelectionCafes()
@@ -549,7 +549,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
 {
     QString message = "";
 
-    if((niveauEau - cafetiere->getNiveauEauNecessaire()) <= 0)
+    if((cafetiere->getNiveauEau() - cafetiere->getNiveauEauNecessaire()) <= 0)
     {
         message.append("Eau insuffisante ");
     }

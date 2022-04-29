@@ -32,26 +32,20 @@ class Preparation : public QObject
 {
     Q_OBJECT
   private:
-    Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
-    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
-
-    /**
-     * Cafetiere* getCafetiere() const;
-    void       setCafetiere(Cafetiere* cafetiere);
-    */
-
+    Cafetiere*       cafetiere;           //!< instance d'un objet Cafetiere
+    BaseDeDonnees*   baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     QVector<QString> nomCapsules;
     QVector<QString> nomLongueurs;
     bool             capsulePresente;
     bool             bacPlein;
     bool             tassePresente;
-    int              niveauEau;
+    int              niveauEauNecessaire; //!<
 
     void chargerNomCapsules();
     void chargerLongeurBoissons();
 
   public:
-    Preparation(QObject* parent = nullptr);
+    Preparation(Cafetiere* cafetiere = nullptr);
     ~Preparation();
 
     QStringList getNomCapsules() const;
@@ -59,12 +53,14 @@ class Preparation : public QObject
     bool        getCapsulePresente() const;
     bool        getBacPlein() const;
     bool        getTassePresente() const;
-    int         getNiveauEau() const;
+    int         getNiveauEauNecessaire() const;
     void        setCapsulePresente(bool capsulePresente);
     void        setBacPlein(bool bacPlein);
     void        setTassePresente(bool tassePresente);
-    void        setNiveauEau(int niveauEau);
     bool        estPreparationPrete() const;
+
+  public slots:
+    void setNiveauEauNecessaire(int niveauEau);
 
   signals:
     void preparationPasPrete(int  niveauEau,
