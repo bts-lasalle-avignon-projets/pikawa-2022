@@ -26,6 +26,17 @@
  */
 //#define DEBUG_PREFERENCES
 
+/**
+ * @def PERIPHERIQUE_BLUETOOTH
+ * @brief Définit le nom du périphérique Bluetooth (et son id)
+ */
+#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
+
+// Machine à café pikawa
+#define TITRE             PERIPHERIQUE_BLUETOOTH
+#define VERSION           "v1"
+#define VERSION_PIKAWA    "0.1"
+
 // OLED 8 lignes x 16 colonnes
 #define ADRESSE_I2C_OLED 0x3c
 #define I2C_SDA_OLED     5
@@ -44,11 +55,6 @@
 #ifdef AFFICHAGE_TRAME_RECUE
   //#define AFFICHAGE_NB_TRAMES_RECUES
 #endif
-
-// Machine à café pikawa
-#define TITRE             "pikawa 2022"
-#define VERSION           "v1"
-#define VERSION_PIKAWA    "0.1"
 
 // Magasin
 #define NB_COLONNES       8
@@ -69,12 +75,6 @@
 #define SIMULATION_TASSE        (TEMPO_SIMULATION) // en ms
 #define SIMULATION_VIDAGE       (TEMPO_SIMULATION*2) // en ms
 #define SIMULATION_REMPLISSAGE  (TEMPO_SIMULATION*2) // en ms
-
-/**
- * @def PERIPHERIQUE_BLUETOOTH
- * @brief Définit le nom du périphérique Bluetooth (et son id)
- */
-#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
 
 // Protocole (cf. Google Drive)
 #define DELIMITEUR_CHAMP        ";"
