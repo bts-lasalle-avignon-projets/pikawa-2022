@@ -197,7 +197,7 @@ void envoyerTrame(String type, bool erreur/*=false*/)
   if(type == String(TRAME_REQUETE_ETAT_CAFETIERE))
   {
     // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
-    sprintf((char *)trameEnvoi, "%sC;%d;%d;%d;%d;\r\n", entete.c_str(), (contenanceEau*40), (int)etatBac, (int)etatCommande, (int)etatTasse);
+    sprintf((char *)trameEnvoi, "%sC;%d;%d;%d;%d;\r\n", entete.c_str(), (contenanceEau*40), (int)etatBac, !((int)etatMagasin), (int)etatTasse);
     SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
   }
   else if(type == String(TRAME_REQUETE_ETAT_MAGASIN))
@@ -1002,21 +1002,17 @@ void simuler()
       // Simulation remplissage magasin
       if(etatMagasin == Indisponible)
       {
-        if ((temps - attente) >= SIMULATION_REMPLISSAGE)
+        char cleMagasin[64] = "";
+        for(int i=0;i<NB_COLONNES;++i)
         {
-          char cleMagasin[64] = "";
-          for(int i=0;i<NB_COLONNES;++i)
-          {
-            sprintf((char *)cleMagasin, "%s%d", "colonne", i);
-            magasin[i] = TAILLE_COLONNE;
-            preferences.putInt(cleMagasin, TAILLE_COLONNE);
-          }
-          setEtatMagasin(Disponible);
-          #ifdef DEBUG
-          Serial.println(String("<Simulation> Remplissage magasin !"));
-          #endif
-          simulation = true;
+          sprintf((char *)cleMagasin, "%s%d", "colonne", i);
+          magasin[i] = TAILLE_COLONNE;
+          preferences.putInt(cleMagasin, TAILLE_COLONNE);
         }
+        setEtatMagasin(Disponible);
+        #ifdef DEBUG
+        Serial.println(String("<Simulation> Remplissage magasin !"));
+        #endif
       }
 
       if(simulation)
