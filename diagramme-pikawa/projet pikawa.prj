@@ -1,7 +1,7 @@
 format 224
 "projet pikawa"
   revision 7
-  modified_by 2 "btssn2"
+  modified_by 23 "tv"
 
 
   
@@ -95,7 +95,7 @@ format 224
       end
     end
 
-    class 128130 "Cafetiere"
+    class 128130 "Pikawa"
       visibility package 
       cpp_decl ""
       java_decl ""
@@ -241,13 +241,6 @@ format 224
 	  a role_name "" private
 	    classrelation_ref 135426 // <directional aggregation>
 	  b parent class_ref 128386 // Communication
-      end
-
-      classrelation 141954 // <directional aggregation>
-	relation 141570 o-->
-	  a role_name "" private
-	    classrelation_ref 141954 // <directional aggregation>
-	  b parent class_ref 128258 // Preparation
       end
     end
 
@@ -708,4 +701,6 @@ format 224
       end
     end
   end
+
+  package_ref 128023 // pikawa-qt
 end
