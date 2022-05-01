@@ -41,7 +41,7 @@ class Preparation : public QObject
     QVector<QString> nomCapsules;
     QVector<QString> nomLongueurs;
     bool             capsulePresente;
-    bool             bacPlein;
+    bool             bacVide;
     bool             tassePresente;
     int              niveauEauNecessaire; //!<
 
@@ -55,12 +55,12 @@ class Preparation : public QObject
     QStringList getNomCapsules() const;
     QStringList getNomLongueurs() const;
     bool        getCapsulePresente() const;
-    bool        getBacPlein() const;
+    bool        getbacVide() const;
     bool        getTassePresente() const;
     int         getNiveauEauNecessaire() const;
     int         getNiveauEauNecessaire(const int& longueurChoisie) const;
     void        setCapsulePresente(bool capsulePresente);
-    void        setBacPlein(bool bacPlein);
+    void        setbacVide(bool bacVide);
     void        setTassePresente(bool tassePresente);
     bool        estPreparationPrete() const;
     void        setNiveauEauNecessaire(const int& longueurChoisie);
@@ -69,7 +69,7 @@ class Preparation : public QObject
 
   signals:
     void preparationPasPrete(int  niveauEau,
-                             bool bacPlein,
+                             bool bacVide,
                              bool tassePresente,
                              bool capsulePresente);
 };

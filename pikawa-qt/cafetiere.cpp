@@ -305,7 +305,7 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
              << etatTasse;
 
     this->setNiveauEau(reservoirEau);
-    preparation->setBacPlein(!bacCapsules);
+    preparation->setbacVide(bacCapsules);
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);
 
