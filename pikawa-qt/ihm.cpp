@@ -187,7 +187,7 @@ void IHMPikawa::gererSelectionCafes()
 
 void IHMPikawa::selectionnerColombia()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleColombia);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleColombia);
     ui->capsuleChoisie->setText("Colombia");
     int idCapsule = cafetiere->getIdCapsule("Colombia");
     qDebug() << Q_FUNC_INFO << "idCapsule Colombia" << idCapsule;
@@ -197,7 +197,7 @@ void IHMPikawa::selectionnerColombia()
 
 void IHMPikawa::selectionnerIndonesia()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleIndonesia);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleIndonesia);
     ui->capsuleChoisie->setText("Indonesia");
     int idCapsule = cafetiere->getIdCapsule("Indonesia");
     qDebug() << Q_FUNC_INFO << "idCapsule Indonesia" << idCapsule;
@@ -207,7 +207,7 @@ void IHMPikawa::selectionnerIndonesia()
 
 void IHMPikawa::selectionnerEthiopia()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleEthiopia);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleEthiopia);
     ui->capsuleChoisie->setText("Ethiopia");
     int idCapsule = cafetiere->getIdCapsule("Ethiopia");
     qDebug() << Q_FUNC_INFO << "idCapsule Ethiopia" << idCapsule;
@@ -217,7 +217,7 @@ void IHMPikawa::selectionnerEthiopia()
 
 void IHMPikawa::selectionnerVolluto()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleVolluto);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleVolluto);
     ui->capsuleChoisie->setText("Volluto");
     int idCapsule = cafetiere->getIdCapsule("Volluto");
     qDebug() << Q_FUNC_INFO << "idCapsule Volluto" << idCapsule;
@@ -227,7 +227,7 @@ void IHMPikawa::selectionnerVolluto()
 
 void IHMPikawa::selectionnerCosi()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleCosi);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleCosi);
     ui->capsuleChoisie->setText("Cosi");
     int idCapsule = cafetiere->getIdCapsule("Cosi");
     qDebug() << Q_FUNC_INFO << "idCapsule Cosi" << idCapsule;
@@ -237,7 +237,7 @@ void IHMPikawa::selectionnerCosi()
 
 void IHMPikawa::selectionnerScuro()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleScuro);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleScuro);
     ui->capsuleChoisie->setText("Scuro");
     int idCapsule = cafetiere->getIdCapsule("Scuro");
     qDebug() << Q_FUNC_INFO << "idCapsule Scuro" << idCapsule;
@@ -247,7 +247,7 @@ void IHMPikawa::selectionnerScuro()
 
 void IHMPikawa::selectionnerVanilla()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleVanilla);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleVanilla);
     ui->capsuleChoisie->setText("Vanilla");
     int idCapsule = cafetiere->getIdCapsule("Vanilla");
     qDebug() << Q_FUNC_INFO << "idCapsule Vanilla" << idCapsule;
@@ -257,7 +257,7 @@ void IHMPikawa::selectionnerVanilla()
 
 void IHMPikawa::selectionnerCapriccio()
 {
-    ui->bontonChangerCafe->setIcon(*iconeCapsuleCapriccio);
+    ui->boutonChangerCafe->setIcon(*iconeCapsuleCapriccio);
     ui->capsuleChoisie->setText("Capriccio");
     int idCapsule = cafetiere->getIdCapsule("Capriccio");
     qDebug() << Q_FUNC_INFO << "idCapsule Capriccio" << idCapsule;
@@ -308,9 +308,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
-    /**
-     * @todo Et la capsule choisie ?
-     */
+
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
@@ -415,7 +413,7 @@ void IHMPikawa::gererEvenements()
             cafetiere,
             SLOT(gererConnexion()));
 
-    connect(ui->bontonChangerCafe,
+    connect(ui->boutonChangerCafe,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageSelectionCafe()));
@@ -582,6 +580,12 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
     {
         message.append("Caspule choisie indisponible ");
         ui->capsuleChoisie->setStyleSheet("font-size:25px; color:red;");
+        ui->boutonChangerCafe->setStyleSheet("background-color:#A9A9A9;");
+    }
+    else if(cafetiere->estCapsuleChoisieDisponible())
+    {
+        ui->capsuleChoisie->setStyleSheet("font-size:25px; color:black;");
+        ui->boutonChangerCafe->setStyleSheet("background-color:#FC924B;");
     }
 
     afficherMessage(message, "red");
