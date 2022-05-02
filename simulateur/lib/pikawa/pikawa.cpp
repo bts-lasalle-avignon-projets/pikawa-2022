@@ -687,6 +687,10 @@ void gererEtatsMachine(int numeroColonne)
 {
   // Une capsule de moins dans le magasin !
   mettreAJourMagasin(numeroColonne);
+  #ifdef DEBUG
+  Serial.print("<Machine> Magasin : ");
+  Serial.println(!estMagasinVide());
+  #endif
 
   // Une capsule de plus dans le bac !
   ++contenanceBac;
@@ -856,6 +860,14 @@ bool commanderCafe(int etat)
       #ifdef DEBUG
       Serial.println("<Cafe> terminé !");
       #endif
+      if(estMagasinVide())
+      {
+        #ifdef DEBUG
+        Serial.println(String("<Erreur> Le magasin est vide !"));
+        #endif
+        setEtatMagasin(Indisponible);
+        return false;
+      }
       #ifdef AFFICHAGE_TRAME_RECUE
       trameRecue = "";
       setLigne6();
@@ -956,56 +968,68 @@ void reinitialiserParametresMachine(String &trame)
  */
 void simuler()
 {
-  unsigned long temps = millis();
-  static unsigned long attente = millis();
+  int etatSimulation = Tasse;
   int taus = 0; // Tirage au sort pour simuler !
-  bool simulation = false;
 
   // tous les TEMPO_SIMULATION
-  if ((temps - attente) >= TEMPO_SIMULATION)
+  if(estEcheance(TEMPO_SIMULATION))
   {
-    if(etatCommande == Repos)
+    // pas de simulation pendant une préparation !
+    if(etatCommande != Repos)
+      return;
+    // à qui le tour ?
+    etatSimulation = random(Tasse, NbEtatsSimulation);
+    switch(etatSimulation)
     {
-      // Simulation remplissage eau
-      if(etatNiveauEau == Vide || contenanceEau <= 0)
+      case Tasse:
+      // Simulation détection tasse
+      if(etatTasse == Absente)
       {
-        //taus = random(0, 3)%2; // 1 chance sur 3
-        //if(taus == 0)
-        if ((temps - attente) >= SIMULATION_REMPLISSAGE)
+        setEtatTasse(Presente);
+      }
+      else
+      {
+        taus = random(0, 10); // 1 fois sur 10 pour simuler Tasse absente
+        if(taus == 0)
         {
-          setEtatNiveauEau(PasVide);
-          contenanceEau = CAPACITE_EAU;
-          nbTotalRemplissage++;
-          preferences.putInt("nbTotalEau", nbTotalRemplissage);
-          preferences.putInt("contenanceEau", contenanceEau);
-          setLigne1();
+          setEtatTasse(Absente);
           #ifdef DEBUG
-          Serial.println(String("<Simulation> Remplissage eau !"));
+          Serial.println(String("<Simulation> Tasse absente !"));
           #endif
-          simulation = true;
         }
       }
-
+      break;
+      case Bac:
       // Simulation vidage bac
       if(etatBac == Plein)
       {
-        //taus = random(0, 3)%2; // 1 chance sur 3
-        //if(taus == 0)
-        if ((temps - attente) >= SIMULATION_VIDAGE)
-        {
-          setEtatBac(PasPlein);
-          contenanceBac = 0;
-          nbTotalBacsVides++;
-          preferences.putInt("nbTotalBacs", nbTotalBacsVides);
-          preferences.putInt("contenanceBac", contenanceBac);
-          setLigne1();
-          #ifdef DEBUG
-          Serial.println(String("<Simulation> Vidage du bac !"));
-          #endif
-          simulation = true;
-        }
+        setEtatBac(PasPlein);
+        contenanceBac = 0;
+        nbTotalBacsVides++;
+        preferences.putInt("nbTotalBacs", nbTotalBacsVides);
+        preferences.putInt("contenanceBac", contenanceBac);
+        setLigne1();
+        #ifdef DEBUG
+        Serial.println(String("<Simulation> Vidage du bac !"));
+        #endif
       }
-
+      break;
+      case Eau:
+      // Simulation remplissage eau
+      if(etatNiveauEau == Vide || contenanceEau <= 0)
+      {
+        setEtatNiveauEau(PasVide);
+        contenanceEau = CAPACITE_EAU;
+        nbTotalRemplissage++;
+        preferences.putInt("nbTotalEau", nbTotalRemplissage);
+        preferences.putInt("contenanceEau", contenanceEau);
+        setLigne1();
+        #ifdef DEBUG
+        Serial.println(String("<Simulation> Remplissage eau !"));
+        #endif
+      }
+      break;
+      case Magasin:
       // Simulation remplissage magasin
       if(etatMagasin == Indisponible)
       {
@@ -1021,35 +1045,7 @@ void simuler()
         Serial.println(String("<Simulation> Remplissage magasin !"));
         #endif
       }
-
-      // Simulation détection tasse
-      if ((temps - attente) >= SIMULATION_TASSE)
-      {
-        if(etatTasse == Absente)
-        {
-          setEtatTasse(Presente);
-        }
-        else
-        {
-          taus = random(0, 10); // 1 fois sur 10 pour simuler Tasse absente
-          if(taus == 0)
-          {
-            setEtatTasse(Absente);
-          }
-          else
-          {
-            //simulation = true;
-          }
-        }
-        //if(changementEtatCafetiere)
-          simulation = true;
-      }
-
-      if(simulation)
-      {
-        attente = millis();
-        return;
-      }
+      break;
     }
   }
 }
@@ -1326,4 +1322,16 @@ void lireNiveauBluetooth()
       #endif
     }
   }
+}
+
+bool estEcheance(unsigned long intervalle)
+{
+  static unsigned long tempsPrecedent = millis();
+  unsigned long temps = millis();
+  if (temps - tempsPrecedent >= intervalle)
+  {
+      tempsPrecedent = temps;
+      return true;
+  }
+  return false;
 }
