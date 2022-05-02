@@ -11,11 +11,12 @@ class Communication
         qDebug() << Q_FUNC_INFO << "Pas de bluetooh !";
 !!!136087.cpp!!!	estTrameValide(in trame : QString) : bool
     qDebug() << Q_FUNC_INFO << trame
-             << (trame.startsWith("$PIKAWA") && trame.endsWith("\r\n"));
-    return trame.startsWith("$PIKAWA") && trame.endsWith("\r\n");
+             << (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
+    return (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
 !!!136215.cpp!!!	extraireTypeTrame(in trame : QString) : TypeTrame
-    QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
-    QString     type   = champs[CHAMP_TYPE_TRAME];
+    QStringList champs =
+      trame.split(QLatin1Char(DELIMITEUR), QString::SkipEmptyParts);
+    QString type = champs[CHAMP_TYPE_TRAME];
     qDebug() << Q_FUNC_INFO << type;
 
     if(type == ETAT_CAFETIERE)
@@ -33,10 +34,11 @@ class Communication
 !!!136343.cpp!!!	traiterTrame(in typeTrame : TypeTrame, in trame : QString) : bool
     if(typeTrame == TypeTrame::Inconnue)
         return false;
-    QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
+    QStringList champs =
+      trame.split(QLatin1Char(DELIMITEUR), QString::SkipEmptyParts);
     qDebug() << Q_FUNC_INFO << typeTrame << champs;
     int     niveauEau;
-    bool    caspulePresente, tassePresente, bacPlein;
+    bool    caspulePresente, tassePresente, bacPasPlein;
     QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
       capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
     int preparationCafe, codeErreur;
@@ -45,17 +47,20 @@ class Communication
 
     switch(typeTrame)
     {
+        case TypeTrame::Inconnue:
+            qDebug() << Q_FUNC_INFO << "type de trame inconnue !";
+            break;
         case TypeTrame::EtatCafetiere:
-            niveauEau = champs[ChampEtatCafetiere::NiveauEau].toInt();
-            bacPlein  = (champs[ChampEtatCafetiere::NiveauBac] == '1');
+            niveauEau   = champs[ChampEtatCafetiere::NiveauEau].toInt();
+            bacPasPlein = (champs[ChampEtatCafetiere::NiveauBac] == '1');
             caspulePresente =
               (champs[ChampEtatCafetiere::CaspulePresente] == '1');
             tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
             qDebug() << Q_FUNC_INFO << " niveauEau " << niveauEau
-                     << " bacPlein " << bacPlein << " caspulePresente "
+                     << " bacPasPlein " << bacPasPlein << " caspulePresente "
                      << caspulePresente << " tassePresente " << tassePresente;
             emit etatCafetiere(niveauEau,
-                               bacPlein,
+                               bacPasPlein,
                                caspulePresente,
                                tassePresente);
             return true;
@@ -111,13 +116,14 @@ class Communication
     {
         return;
     }
-    if(!trame.endsWith("\r\n"))
-        trame += "\r\n";
+    if(!trame.endsWith(FIN_TRAME))
+        trame += QString(FIN_TRAME);
     socketBluetoothPikawa->write(trame.toLatin1());
 !!!137111.cpp!!!	envoyerTramePreparation(in nomCafe : int, in longueur : int) : void
     qDebug() << Q_FUNC_INFO << nomCafe << longueur;
-    envoyerTrame("$PIKAWA;P;" + QString::number(nomCafe) + ";" +
-                 QString::number(longueur + 1) + ";\r\n");
+    envoyerTrame(QString(DEBUT_TRAME_PREPARATION) + QString::number(nomCafe) +
+                 QString(DELIMITEUR) + QString::number(longueur + 1) +
+                 QString(DELIMITEUR) + QString(FIN_TRAME));
 !!!137239.cpp!!!	activerLaDecouverte() : void
     if(estBluetoothDisponible())
     {
@@ -188,11 +194,11 @@ class Communication
                 connect(socketBluetoothPikawa,
                         SIGNAL(connected()),
                         this,
-                        SLOT(socketConnectee()));
+                        SLOT(recupererEtatConnexion()));
                 connect(socketBluetoothPikawa,
                         SIGNAL(disconnected()),
                         this,
-                        SLOT(socketDeconnectee()));
+                        SLOT(recupererEtatDeconnexion()));
                 connect(socketBluetoothPikawa,
                         SIGNAL(readyRead()),
                         this,
@@ -222,13 +228,13 @@ class Communication
         qDebug() << Q_FUNC_INFO;
         socketBluetoothPikawa->close();
     }
-!!!138007.cpp!!!	socketConnectee() : void
+!!!153495.cpp!!!	recupererEtatConnexion() : void
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->peerName()
              << socketBluetoothPikawa->peerAddress().toString();
     connecte = true;
     emit cafetiereConnectee(socketBluetoothPikawa->peerName(),
                             socketBluetoothPikawa->peerAddress().toString());
-!!!138135.cpp!!!	socketDeconnectee() : void
+!!!153623.cpp!!!	recupererEtatDeconnexion() : void
     qDebug() << Q_FUNC_INFO;
     connecte = false;
     emit cafetiereDeconnectee();

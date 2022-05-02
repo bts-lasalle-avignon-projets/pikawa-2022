@@ -1,7 +1,8 @@
 format 224
-"projet pikawa"
-  revision 6
-  modified_by 2 "btssn2"
+"diagramme-pikawa"
+  revision 8
+  modified_by 23 "tv"
+  cpp_root_dir "../pikawa-qt/"
 
 
   
@@ -701,4 +702,6 @@ format 224
       end
     end
   end
+
+  package_ref 128023 // pikawa-qt
 end

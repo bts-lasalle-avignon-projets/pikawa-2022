@@ -56,7 +56,7 @@ class Cafetiere
     gererEvenementsCommunication();
     /**
      * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
-     * cafetière
+     * cafetière (cf. Etudiant IR 4)
      */
     chargerPreferences(IDENTIFIANT_UTILISATEUR);
     initialiserNomCapsules();
@@ -76,14 +76,14 @@ class Cafetiere
     return niveauEau;
 !!!131095.cpp!!!	getNiveauEauNecessaire() : int
     return preparation->getNiveauEauNecessaire();
-!!!131223.cpp!!!	getConnectee() : bool
+!!!153111.cpp!!!	estConnectee() : bool
     return connectee;
-!!!131351.cpp!!!	getActivee() : bool
-    return activee;
 !!!131479.cpp!!!	getCapsulePresente() : bool
     return capsulePresente;
 !!!131607.cpp!!!	getTassePresente() : bool
     return tassePresente;
+!!!153239.cpp!!!	estCafeEnPreparation() : bool
+    return cafeEnPreparation;
 !!!131735.cpp!!!	getIdCapsule(in nomCapsule : QString) : int
     if(nomCapsules.isEmpty() || nomCapsule.isEmpty())
         return -1;
@@ -113,12 +113,15 @@ class Cafetiere
 !!!132247.cpp!!!	setCapsuleChoisie(in capsuleChoisie : int) : void
     if(this->capsuleChoisie != capsuleChoisie)
     {
-        this->capsuleChoisie = capsuleChoisie;
-        QString requete      = "UPDATE Preferences SET capsuleActuelle='" +
-                          QString::number(capsuleChoisie + 1) +
-                          "' WHERE Preferences.idUtilisateur='" +
-                          IDENTIFIANT_UTILISATEUR_ID + "'";
-        baseDeDonneesPikawa->executer(requete);
+        if(estCapsuleChoisieDisponible(capsuleChoisie))
+        {
+            this->capsuleChoisie = capsuleChoisie;
+            QString requete      = "UPDATE Preferences SET capsuleActuelle='" +
+                              QString::number(capsuleChoisie + 1) +
+                              "' WHERE Preferences.idUtilisateur='" +
+                              IDENTIFIANT_UTILISATEUR_ID + "'";
+            baseDeDonneesPikawa->executer(requete);
+        }
     }
 !!!132375.cpp!!!	setLongueurChoisie(in longueurChoisie : int) : void
     preparation->setNiveauEauNecessaire(longueurChoisie);
@@ -137,10 +140,10 @@ class Cafetiere
 !!!132631.cpp!!!	estPrete() : bool
     qDebug() << Q_FUNC_INFO << "estPreparationPrete"
              << preparation->estPreparationPrete() << "estCafeEnPreparation"
-             << estCafeEnPreparation << "estCapsuleChoisieDisponible"
+             << cafeEnPreparation << "estCapsuleChoisieDisponible"
              << estCapsuleChoisieDisponible();
     if(preparation->estPreparationPrete() && communication->estConnecte() &&
-       !estCafeEnPreparation && estCapsuleChoisieDisponible())
+       !cafeEnPreparation && estCapsuleChoisieDisponible())
     {
         emit cafetierePrete();
         qDebug() << Q_FUNC_INFO << "Prête";
@@ -163,9 +166,25 @@ class Cafetiere
     QString reponseQuantite = "";
 
     baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
-    qDebug() << Q_FUNC_INFO << "cafeChoisie" << capsuleChoisie
+    qDebug() << Q_FUNC_INFO << "capsuleChoisie" << capsuleChoisie
              << "reponseQuantite " << reponseQuantite;
-    if(reponseQuantite.toInt() <= 1)
+    if(reponseQuantite.toInt() >= 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+!!!153367.cpp!!!	estCapsuleChoisieDisponible(in capsule : int) : bool
+    QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
+                      QString::number(capsule + 1);
+    QString reponseQuantite = "";
+
+    baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
+    qDebug() << Q_FUNC_INFO << "capsule" << capsule << "reponseQuantite "
+             << reponseQuantite;
+    if(reponseQuantite.toInt() >= 1)
     {
         return true;
     }
@@ -194,21 +213,21 @@ class Cafetiere
     recupererEtatCafetiere();
     recupererEtatMagasin();
 !!!133655.cpp!!!	recupererEtatCafetiere() : void
-    communication->envoyerTrame("$PIKAWA;ETAT;C;\r\n");
+    communication->envoyerTrame(TRAME_DEMANDE_ETAT_CAFETIERE);
 !!!133783.cpp!!!	recupererEtatMagasin() : void
-    communication->envoyerTrame("$PIKAWA;ETAT;M;\r\n");
-!!!133911.cpp!!!	mettreAJourEtatCafetiere(in reservoirEau : int, in bacCapsules : bool, in etatCapsule : bool, in etatTasse : bool) : void
-    qDebug() << Q_FUNC_INFO << reservoirEau << bacCapsules << etatCapsule
+    communication->envoyerTrame(TRAME_DEMANDE_ETAT_MAGASIN);
+!!!133911.cpp!!!	mettreAJourEtatCafetiere(in reservoirEau : int, in bacPasPlein : bool, in etatCapsule : bool, in etatTasse : bool) : void
+    qDebug() << Q_FUNC_INFO << reservoirEau << bacPasPlein << etatCapsule
              << etatTasse;
 
     this->setNiveauEau(reservoirEau);
-    preparation->setBacPlein(!bacCapsules);
+    preparation->setBacPasPlein(bacPasPlein);
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);
 
     qDebug() << Q_FUNC_INFO << estPrete();
 
-    emit etatCafetiere(reservoirEau, bacCapsules, etatCapsule, etatTasse);
+    emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 !!!134039.cpp!!!	mettreAJourMagasin(in caspulesDisponibles : QStringList) : void
     qDebug() << Q_FUNC_INFO << caspulesDisponibles;
     QString requete;
@@ -223,26 +242,29 @@ class Cafetiere
     estPrete();
 !!!134167.cpp!!!	gererEtatPreparationCafe(in preparationCafe : int) : void
     qDebug() << Q_FUNC_INFO << preparationCafe;
+    /**
+     * @brief Changement d'état :
+     * EnAttente -> EnCours -> Pret
+     * EnAttente -> Impossible -> EnAttente
+     * Remarque : l'état Pret passera EnAttente pour un prochain café puisque la
+     * tasse sera détectée
+     */
     if(preparationCafe == CAFE_PRET)
     {
-        this->estCafeEnPreparation = false;
+        this->cafeEnPreparation = false;
         emit cafePret();
     }
     else if(preparationCafe == CAFE_EN_PREPARATION)
     {
-        this->estCafeEnPreparation = true;
+        this->cafeEnPreparation = true;
         emit cafeEnCours();
     }
     else
     {
-        this->estCafeEnPreparation = false;
+        this->cafeEnPreparation = false;
         emit erreurPreparation();
     }
 !!!134295.cpp!!!	lancerLaPreparationCafe() : void
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
-    /**
-     * @todo Est-ce vraiment utile ? Les trames d'états sont envoyées
-     * automatiquement par la cafetière !
-     */
-    recupererEtatCafetiere();
+    // recupererEtatCafetiere();
     recupererEtatMagasin();
