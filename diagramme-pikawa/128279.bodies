@@ -1,359 +1,9 @@
-#include "cafetiere.h"
-#include "ihm.h"
-#include "protocole.h"
-#include "communication.h"
-#include "preparation.h"
-#include "basededonnees.h"
-#include <QDebug>
-
-/**
- * @file cafetiere.cpp
- *
- * @brief Définitionde la classe Cafetiere
- * @author Anthony BRYCKAERT
- * @version 0.2
- */
-
-Cafetiere::Cafetiere(IHMPikawa* ihm) :
-    QObject(ihm), ihm(ihm), communication(new Communication(this)),
-    preparation(new Preparation(this)), nomCapsules(0), nomLongueurs(0),
-    capsuleChoisie(0), longueurChoisie(0), niveauEau(0), connectee(false),
-    capsulePresente(false), tassePresente(false), cafeEnPreparation(false)
-{
-    // qDebug() << Q_FUNC_INFO << qApp->applicationFilePath();
-    ouvrirBaseDeDonnees();
-    gererEvenements();
-    gererEvenementsCommunication();
-    /**
-     * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
-     * cafetière (cf. Etudiant IR 4)
-     */
-    chargerPreferences(IDENTIFIANT_UTILISATEUR);
-    initialiserNomCapsules();
-    initiatiserNomLongueurs();
-}
-
-Cafetiere::~Cafetiere()
-{
-    BaseDeDonnees::detruireInstance();
-    qDebug() << Q_FUNC_INFO;
-}
-
-QStringList Cafetiere::getNomcapsules() const
-{
-    return nomCapsules;
-}
-
-QStringList Cafetiere::getNomLongueurs() const
-{
-    return nomLongueurs;
-}
-
-int Cafetiere::getCaspuleChoisie() const
-{
-    return capsuleChoisie;
-}
-
-int Cafetiere::getLongueurChoisie() const
-{
-    return longueurChoisie;
-}
-
-int Cafetiere::getNiveauEau() const
-{
-    return niveauEau;
-}
-
-int Cafetiere::getNiveauEauNecessaire() const
-{
-    return preparation->getNiveauEauNecessaire();
-}
-
-bool Cafetiere::estConnectee() const
-{
-    return connectee;
-}
-
-bool Cafetiere::getCapsulePresente() const
-{
-    return capsulePresente;
-}
-
-bool Cafetiere::getTassePresente() const
-{
-    return tassePresente;
-}
-
-bool Cafetiere::estCafeEnPreparation() const
-{
-    return cafeEnPreparation;
-}
-
-int Cafetiere::getIdCapsule(QString nomCapsule) const
-{
-    if(nomCapsules.isEmpty() || nomCapsule.isEmpty())
-        return -1;
-    return nomCapsules.indexOf(nomCapsule);
-}
-
-QStringList Cafetiere::getPreferences() const
-{
-    return preferences;
-}
-
-QString Cafetiere::getCapsulePreferee() const
-{
-    if(!preferences.isEmpty())
-    {
-        qDebug() << Q_FUNC_INFO
-                 << preferences.at(Cafetiere::ChampsTablePreferences::
-                                     COLONNE_PREFERENCES_DESIGNATION_CAPSULE);
-        return preferences.at(Cafetiere::ChampsTablePreferences::
-                                COLONNE_PREFERENCES_DESIGNATION_CAPSULE);
-    }
-    return QString();
-}
-
-QString Cafetiere::getLongueurPreferee() const
-{
-    if(!preferences.isEmpty())
-    {
-        qDebug() << Q_FUNC_INFO
-                 << preferences.at(Cafetiere::ChampsTablePreferences::
-                                     COLONNE_PREFERENCES_TYPE_BOISSON);
-        return preferences.at(
-          Cafetiere::ChampsTablePreferences::COLONNE_PREFERENCES_TYPE_BOISSON);
-    }
-    return QString();
-}
-
-void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
-{
-    if(this->capsuleChoisie != capsuleChoisie)
-    {
-        if(estCapsuleChoisieDisponible(capsuleChoisie))
-        {
-            this->capsuleChoisie = capsuleChoisie;
-            QString requete      = "UPDATE Preferences SET capsuleActuelle='" +
-                              QString::number(capsuleChoisie + 1) +
-                              "' WHERE Preferences.idUtilisateur='" +
-                              IDENTIFIANT_UTILISATEUR_ID + "'";
-            baseDeDonneesPikawa->executer(requete);
-        }
-    }
-}
-
-void Cafetiere::setLongueurChoisie(const int& longueurChoisie)
-{
-    preparation->setNiveauEauNecessaire(longueurChoisie);
-    this->longueurChoisie = longueurChoisie;
-    if(this->longueurChoisie != capsuleChoisie)
-    {
-        this->longueurChoisie = longueurChoisie;
-        QString requete       = "UPDATE Preferences SET typeBoissonActuelle='" +
-                          QString::number(longueurChoisie + 1) +
-                          "' WHERE Preferences.idUtilisateur='" +
-                          IDENTIFIANT_UTILISATEUR_ID + "'";
-        baseDeDonneesPikawa->executer(requete);
-    }
-}
-
-void Cafetiere::setNiveauEau(const int& niveauEau)
-{
-    this->niveauEau = niveauEau;
-}
-
-bool Cafetiere::estPrete()
-{
-    qDebug() << Q_FUNC_INFO << "estPreparationPrete"
-             << preparation->estPreparationPrete() << "estCafeEnPreparation"
-             << cafeEnPreparation << "estCapsuleChoisieDisponible"
-             << estCapsuleChoisieDisponible();
-    if(preparation->estPreparationPrete() && communication->estConnecte() &&
-       !cafeEnPreparation && estCapsuleChoisieDisponible())
-    {
-        emit cafetierePrete();
-        qDebug() << Q_FUNC_INFO << "Prête";
-        return true;
-    }
-    else
-    {
-        emit cafetierePasPrete();
-        qDebug() << Q_FUNC_INFO << "Pas prête";
-        return false;
-    }
-}
-
-QStringList Cafetiere::getDisponibiliteCapsules() const
-{
-    QString     requete = "SELECT quantite FROM StockMagasin";
-    QStringList caspuleDisponibles;
-    baseDeDonneesPikawa->recuperer(requete, caspuleDisponibles);
-    return caspuleDisponibles;
-}
-
-bool Cafetiere::estCapsuleChoisieDisponible()
-{
-    QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
-                      QString::number(capsuleChoisie + 1);
-    QString reponseQuantite = "";
-
-    baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
-    qDebug() << Q_FUNC_INFO << "capsuleChoisie" << capsuleChoisie
-             << "reponseQuantite " << reponseQuantite;
-    if(reponseQuantite.toInt() >= 1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool Cafetiere::estCapsuleChoisieDisponible(int capsule)
-{
-    QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
-                      QString::number(capsule + 1);
-    QString reponseQuantite = "";
-
-    baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
-    qDebug() << Q_FUNC_INFO << "capsule" << capsule << "reponseQuantite "
-             << reponseQuantite;
-    if(reponseQuantite.toInt() >= 1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void Cafetiere::demarrerDecouverte()
-{
-    qDebug() << Q_FUNC_INFO;
-    communication->activerLaDecouverte();
-}
-
-void Cafetiere::arreterDecouverte()
-{
-    qDebug() << Q_FUNC_INFO;
-    communication->desactiverLaDecouverte();
-}
-
-void Cafetiere::rafraichirDecouverte()
-{
-    qDebug() << Q_FUNC_INFO;
-    communication->desactiverLaDecouverte();
-    communication->activerLaDecouverte();
-}
-
-void Cafetiere::gererConnexion()
-{
-    qDebug() << Q_FUNC_INFO;
-    if(communication->estConnecte())
-        communication->deconnecter();
-    else
-        communication->connecter();
-}
-
-void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
-{
-    emit cafetiereConnectee(nom, adresse);
-    recupererEtatCafetiere();
-    recupererEtatMagasin();
-}
-
-void Cafetiere::recupererEtatCafetiere()
-{
-    communication->envoyerTrame(TRAME_DEMANDE_ETAT_CAFETIERE);
-}
-
-void Cafetiere::recupererEtatMagasin()
-{
-    communication->envoyerTrame(TRAME_DEMANDE_ETAT_MAGASIN);
-}
-
-void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
-                                         bool bacPasPlein,
-                                         bool etatCapsule,
-                                         bool etatTasse)
-{
-    qDebug() << Q_FUNC_INFO << reservoirEau << bacPasPlein << etatCapsule
-             << etatTasse;
-
-    this->setNiveauEau(reservoirEau);
-    preparation->setBacPasPlein(bacPasPlein);
-    preparation->setCapsulePresente(etatCapsule);
-    preparation->setTassePresente(etatTasse);
-
-    qDebug() << Q_FUNC_INFO << estPrete();
-
-    emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
-}
-
-void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
-{
-    qDebug() << Q_FUNC_INFO << caspulesDisponibles;
-    QString requete;
-    for(int i = 0; i < caspulesDisponibles.size(); ++i)
-    {
-        requete =
-          "UPDATE StockMagasin SET quantite=" + caspulesDisponibles.at(i) +
-          " WHERE rangee=" + QString::number((i + 1));
-        baseDeDonneesPikawa->executer(requete);
-    }
-    emit etatMagasinIHM(caspulesDisponibles);
-    estPrete();
-}
-
-void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
-{
-    qDebug() << Q_FUNC_INFO << preparationCafe;
-    /**
-     * @brief Changement d'état :
-     * EnAttente -> EnCours -> Pret
-     * EnAttente -> Impossible -> EnAttente
-     * Remarque : l'état Pret passera EnAttente pour un prochain café puisque la
-     * tasse sera détectée
-     */
-    if(preparationCafe == CAFE_PRET)
-    {
-        this->cafeEnPreparation = false;
-        emit cafePret();
-    }
-    else if(preparationCafe == CAFE_EN_PREPARATION)
-    {
-        this->cafeEnPreparation = true;
-        emit cafeEnCours();
-    }
-    else
-    {
-        this->cafeEnPreparation = false;
-        emit erreurPreparation();
-    }
-}
-
-void Cafetiere::lancerLaPreparationCafe()
-{
-    communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
-    // recupererEtatCafetiere();
-    recupererEtatMagasin();
-}
-
-void Cafetiere::initialiserNomCapsules()
-{
+class Cafetiere
+!!!129431.cpp!!!	initialiserNomCapsules() : void
     this->nomCapsules = preparation->getNomCapsules();
-}
-
-void Cafetiere::initiatiserNomLongueurs()
-{
+!!!129559.cpp!!!	initiatiserNomLongueurs() : void
     this->nomLongueurs = preparation->getNomLongueurs();
-}
-
-void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
-{
+!!!129687.cpp!!!	chargerPreferences(in identifiantUtilisateur : QString) : void
     qDebug() << Q_FUNC_INFO << identifiantUtilisateur;
     QString requete =
       "SELECT Preferences.idPreferences, Utilisateur.idUtilisateur, "
@@ -367,14 +17,7 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
       identifiantUtilisateur + "';";
     baseDeDonneesPikawa->recuperer(requete, preferences);
     qDebug() << Q_FUNC_INFO << preferences;
-}
-
-void Cafetiere::gererEvenements()
-{
-}
-
-void Cafetiere::gererEvenementsCommunication()
-{
+!!!129943.cpp!!!	gererEvenementsCommunication() : void
     connect(communication,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
@@ -403,10 +46,225 @@ void Cafetiere::gererEvenementsCommunication()
             SIGNAL(cafeEnPreparation(int)),
             this,
             SLOT(gererEtatPreparationCafe(int)));
-}
-
-void Cafetiere::ouvrirBaseDeDonnees()
-{
+!!!130071.cpp!!!	ouvrirBaseDeDonnees() : void
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
-}
+!!!130199.cpp!!!	Cafetiere(inout ihm : IHMPikawa)
+    // qDebug() << Q_FUNC_INFO << qApp->applicationFilePath();
+    ouvrirBaseDeDonnees();
+    gererEvenements();
+    gererEvenementsCommunication();
+    /**
+     * @todo Gérer l'utilisateur connecté (identifiant ou badge) à cette
+     * cafetière (cf. Etudiant IR 4)
+     */
+    chargerPreferences(IDENTIFIANT_UTILISATEUR);
+    initialiserNomCapsules();
+    initiatiserNomLongueurs();
+!!!130327.cpp!!!	~Cafetiere()
+    BaseDeDonnees::detruireInstance();
+    qDebug() << Q_FUNC_INFO;
+!!!130455.cpp!!!	getNomcapsules() : QStringList
+    return nomCapsules;
+!!!130583.cpp!!!	getNomLongueurs() : QStringList
+    return nomLongueurs;
+!!!130711.cpp!!!	getCaspuleChoisie() : int
+    return capsuleChoisie;
+!!!130839.cpp!!!	getLongueurChoisie() : int
+    return longueurChoisie;
+!!!130967.cpp!!!	getNiveauEau() : int
+    return niveauEau;
+!!!131095.cpp!!!	getNiveauEauNecessaire() : int
+    return preparation->getNiveauEauNecessaire();
+!!!153111.cpp!!!	estConnectee() : bool
+    return connectee;
+!!!131479.cpp!!!	getCapsulePresente() : bool
+    return capsulePresente;
+!!!131607.cpp!!!	getTassePresente() : bool
+    return tassePresente;
+!!!153239.cpp!!!	estCafeEnPreparation() : bool
+    return cafeEnPreparation;
+!!!131735.cpp!!!	getIdCapsule(in nomCapsule : QString) : int
+    if(nomCapsules.isEmpty() || nomCapsule.isEmpty())
+        return -1;
+    return nomCapsules.indexOf(nomCapsule);
+!!!131863.cpp!!!	getPreferences() : QStringList
+    return preferences;
+!!!131991.cpp!!!	getCapsulePreferee() : QString
+    if(!preferences.isEmpty())
+    {
+        qDebug() << Q_FUNC_INFO
+                 << preferences.at(Cafetiere::ChampsTablePreferences::
+                                     COLONNE_PREFERENCES_DESIGNATION_CAPSULE);
+        return preferences.at(Cafetiere::ChampsTablePreferences::
+                                COLONNE_PREFERENCES_DESIGNATION_CAPSULE);
+    }
+    return QString();
+!!!132119.cpp!!!	getLongueurPreferee() : QString
+    if(!preferences.isEmpty())
+    {
+        qDebug() << Q_FUNC_INFO
+                 << preferences.at(Cafetiere::ChampsTablePreferences::
+                                     COLONNE_PREFERENCES_TYPE_BOISSON);
+        return preferences.at(
+          Cafetiere::ChampsTablePreferences::COLONNE_PREFERENCES_TYPE_BOISSON);
+    }
+    return QString();
+!!!132247.cpp!!!	setCapsuleChoisie(in capsuleChoisie : int) : void
+    if(this->capsuleChoisie != capsuleChoisie)
+    {
+        if(estCapsuleChoisieDisponible(capsuleChoisie))
+        {
+            this->capsuleChoisie = capsuleChoisie;
+            QString requete      = "UPDATE Preferences SET capsuleActuelle='" +
+                              QString::number(capsuleChoisie + 1) +
+                              "' WHERE Preferences.idUtilisateur='" +
+                              IDENTIFIANT_UTILISATEUR_ID + "'";
+            baseDeDonneesPikawa->executer(requete);
+        }
+    }
+!!!132375.cpp!!!	setLongueurChoisie(in longueurChoisie : int) : void
+    preparation->setNiveauEauNecessaire(longueurChoisie);
+    this->longueurChoisie = longueurChoisie;
+    if(this->longueurChoisie != capsuleChoisie)
+    {
+        this->longueurChoisie = longueurChoisie;
+        QString requete       = "UPDATE Preferences SET typeBoissonActuelle='" +
+                          QString::number(longueurChoisie + 1) +
+                          "' WHERE Preferences.idUtilisateur='" +
+                          IDENTIFIANT_UTILISATEUR_ID + "'";
+        baseDeDonneesPikawa->executer(requete);
+    }
+!!!132503.cpp!!!	setNiveauEau(in niveauEau : int) : void
+    this->niveauEau = niveauEau;
+!!!132631.cpp!!!	estPrete() : bool
+    qDebug() << Q_FUNC_INFO << "estPreparationPrete"
+             << preparation->estPreparationPrete() << "estCafeEnPreparation"
+             << cafeEnPreparation << "estCapsuleChoisieDisponible"
+             << estCapsuleChoisieDisponible();
+    if(preparation->estPreparationPrete() && communication->estConnecte() &&
+       !cafeEnPreparation && estCapsuleChoisieDisponible())
+    {
+        emit cafetierePrete();
+        qDebug() << Q_FUNC_INFO << "Prête";
+        return true;
+    }
+    else
+    {
+        emit cafetierePasPrete();
+        qDebug() << Q_FUNC_INFO << "Pas prête";
+        return false;
+    }
+!!!132759.cpp!!!	getDisponibiliteCapsules() : QStringList
+    QString     requete = "SELECT quantite FROM StockMagasin";
+    QStringList caspuleDisponibles;
+    baseDeDonneesPikawa->recuperer(requete, caspuleDisponibles);
+    return caspuleDisponibles;
+!!!132887.cpp!!!	estCapsuleChoisieDisponible() : bool
+    QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
+                      QString::number(capsuleChoisie + 1);
+    QString reponseQuantite = "";
+
+    baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
+    qDebug() << Q_FUNC_INFO << "capsuleChoisie" << capsuleChoisie
+             << "reponseQuantite " << reponseQuantite;
+    if(reponseQuantite.toInt() >= 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+!!!153367.cpp!!!	estCapsuleChoisieDisponible(in capsule : int) : bool
+    QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
+                      QString::number(capsule + 1);
+    QString reponseQuantite = "";
+
+    baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
+    qDebug() << Q_FUNC_INFO << "capsule" << capsule << "reponseQuantite "
+             << reponseQuantite;
+    if(reponseQuantite.toInt() >= 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+!!!133015.cpp!!!	demarrerDecouverte() : void
+    qDebug() << Q_FUNC_INFO;
+    communication->activerLaDecouverte();
+!!!133143.cpp!!!	arreterDecouverte() : void
+    qDebug() << Q_FUNC_INFO;
+    communication->desactiverLaDecouverte();
+!!!133271.cpp!!!	rafraichirDecouverte() : void
+    qDebug() << Q_FUNC_INFO;
+    communication->desactiverLaDecouverte();
+    communication->activerLaDecouverte();
+!!!133399.cpp!!!	gererConnexion() : void
+    qDebug() << Q_FUNC_INFO;
+    if(communication->estConnecte())
+        communication->deconnecter();
+    else
+        communication->connecter();
+!!!133527.cpp!!!	mettreAJourConnexion(in nom : QString, in adresse : QString) : void
+    emit cafetiereConnectee(nom, adresse);
+    recupererEtatCafetiere();
+    recupererEtatMagasin();
+!!!133655.cpp!!!	recupererEtatCafetiere() : void
+    communication->envoyerTrame(TRAME_DEMANDE_ETAT_CAFETIERE);
+!!!133783.cpp!!!	recupererEtatMagasin() : void
+    communication->envoyerTrame(TRAME_DEMANDE_ETAT_MAGASIN);
+!!!133911.cpp!!!	mettreAJourEtatCafetiere(in reservoirEau : int, in bacPasPlein : bool, in etatCapsule : bool, in etatTasse : bool) : void
+    qDebug() << Q_FUNC_INFO << reservoirEau << bacPasPlein << etatCapsule
+             << etatTasse;
+
+    this->setNiveauEau(reservoirEau);
+    preparation->setBacPasPlein(bacPasPlein);
+    preparation->setCapsulePresente(etatCapsule);
+    preparation->setTassePresente(etatTasse);
+
+    qDebug() << Q_FUNC_INFO << estPrete();
+
+    emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
+!!!134039.cpp!!!	mettreAJourMagasin(in caspulesDisponibles : QStringList) : void
+    qDebug() << Q_FUNC_INFO << caspulesDisponibles;
+    QString requete;
+    for(int i = 0; i < caspulesDisponibles.size(); ++i)
+    {
+        requete =
+          "UPDATE StockMagasin SET quantite=" + caspulesDisponibles.at(i) +
+          " WHERE rangee=" + QString::number((i + 1));
+        baseDeDonneesPikawa->executer(requete);
+    }
+    emit etatMagasinIHM(caspulesDisponibles);
+    estPrete();
+!!!134167.cpp!!!	gererEtatPreparationCafe(in preparationCafe : int) : void
+    qDebug() << Q_FUNC_INFO << preparationCafe;
+    /**
+     * @brief Changement d'état :
+     * EnAttente -> EnCours -> Pret
+     * EnAttente -> Impossible -> EnAttente
+     * Remarque : l'état Pret passera EnAttente pour un prochain café puisque la
+     * tasse sera détectée
+     */
+    if(preparationCafe == CAFE_PRET)
+    {
+        this->cafeEnPreparation = false;
+        emit cafePret();
+    }
+    else if(preparationCafe == CAFE_EN_PREPARATION)
+    {
+        this->cafeEnPreparation = true;
+        emit cafeEnCours();
+    }
+    else
+    {
+        this->cafeEnPreparation = false;
+        emit erreurPreparation();
+    }
+!!!134295.cpp!!!	lancerLaPreparationCafe() : void
+    communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
+    // recupererEtatCafetiere();
+    recupererEtatMagasin();

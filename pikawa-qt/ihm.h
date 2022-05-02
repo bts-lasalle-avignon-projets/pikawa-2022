@@ -5,9 +5,8 @@
  * @file ihm.h
  *
  * @brief Déclaration de la classe IHMPikawa
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 #include <QtWidgets>
@@ -33,12 +32,10 @@ class Cafetiere;
  */
 #define PLEIN_ECRAN
 
-QT_BEGIN_NAMESPACE
 namespace Ui
 {
 class IHMPikawa;
 }
-QT_END_NAMESPACE
 
 class BaseDeDonnees;
 
@@ -65,28 +62,54 @@ class IHMPikawa : public QMainWindow
         NbEcrans
     };
 
+    enum BoutonCafe
+    {
+        boutonColombia = 0,
+        boutonIndonesia,
+        boutonEthiopia,
+        boutonVolluto,
+        boutonCapriccio,
+        boutonCosi,
+        boutonScuro,
+        boutonVanilla,
+        nbCafe
+    };
+
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
-
-    QIcon* iconeBoutonConnecte;
-    QIcon* iconeBoutonDetectee;
-    QIcon* iconeBoutonDeconnecte;
-
-    QIcon* iconeCapsuleColombia;
-    QIcon* iconeCapsuleIndonesia;
-    QIcon* iconeCapsuleEthiopia;
-    QIcon* iconeCapsuleVolluto;
-    QIcon* iconeCapsuleCapriccio;
-    QIcon* iconeCapsuleCosi;
-    QIcon* iconeCapsuleScuro;
-    QIcon* iconeCapsuleVanilla;
+    // GUI
+    QIcon*                iconeBoutonConnecte;
+    QIcon*                iconeBoutonDetectee;
+    QIcon*                iconeBoutonDeconnecte;
+    QIcon*                iconeCapsuleColombia;
+    QIcon*                iconeCapsuleIndonesia;
+    QIcon*                iconeCapsuleEthiopia;
+    QIcon*                iconeCapsuleVolluto;
+    QIcon*                iconeCapsuleCapriccio;
+    QIcon*                iconeCapsuleCosi;
+    QIcon*                iconeCapsuleScuro;
+    QIcon*                iconeCapsuleVanilla;
+    QPixmap*              iconeBacPlein;
+    QPixmap*              iconeBacPasPlein;
+    QVector<QPushButton*> boutonsCafes;
 
     void initialiserIcones();
     void initialiserIHM();
     void gererEvenements();
+    void gererEvenementsBoutons();
+    void gererEvenementsCafetiere();
     void initialiserPreferences();
+    int  convertirPourcentageEau(int reservoirEau);
+    void chargerBoutonsCafe();
+    void ouvrirBaseDeDonnees();
+    void afficherAvertissement(int  niveau,
+                               bool bacPasPlein,
+                               bool tassePresente,
+                               bool capsulePresente);
+    void afficherMessage(QString message, QString couleur);
+    void initialiserCafetiere();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
@@ -99,15 +122,14 @@ class IHMPikawa : public QMainWindow
     void afficherPageEntretien();
     void afficherPageParametres();
     void afficherPageSelectionCafe();
-    void activerboutonConnexionEtatDetecte(QString nom, QString adresse);
-    void activerboutonConnexionEtatConnecte(QString nom, QString adresse);
-    void activerboutonConnexionEtatDeconnecte();
+    void activerBoutonConnexionEtatDetecte(QString nom, QString adresse);
+    void activerBoutonConnexionEtatConnecte(QString nom, QString adresse);
+    void activerBoutonConnexionEtatDeconnecte();
     void rafraichirDecouverte();
     void terminerDecouverte(bool detecte);
-
     void gererLongueurPreparation(int longueurPreparation);
     void gererSelectionCafes();
-
+    void afficherCapsuleChoisie(int idCapsule);
     void selectionnerColombia();
     void selectionnerIndonesia();
     void selectionnerEthiopia();
@@ -116,6 +138,18 @@ class IHMPikawa : public QMainWindow
     void selectionnerScuro();
     void selectionnerVanilla();
     void selectionnerCapriccio();
+    void afficherCafePret();
+    void afficherCafeEnCours();
+    void afficherErreurPreparation();
+    void mettreAJourEtatCafetiere(int  reservoirEau,
+                                  bool bacPasPlein,
+                                  bool etatCapsule,
+                                  bool etatTasse);
+    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
+    void afficherCafetierePrete();
+    void afficherCafetierePasPrete();
+
+  signals:
 };
 
 #endif // IHM_H

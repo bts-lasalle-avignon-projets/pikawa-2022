@@ -1,73 +1,44 @@
-#include "preparation.h"
-#include "basededonnees.h"
-#include "cafetiere.h"
-#include <QDebug>
-
-/**
- * @file preparation.cpp
- *
- * @brief Définition de la classe Preparation
- * @author Anthony BRYCKAERT
- * @version 0.2
- */
-
-Preparation::Preparation(Cafetiere* cafetiere) :
-    QObject(cafetiere), cafetiere(cafetiere), baseDeDonneesPikawa(nullptr),
-    nomCapsules(0), nomLongueurs(0), capsulePresente(false), bacPasPlein(false),
-    tassePresente(false), niveauEauNecessaire(0)
-{
+class Preparation
+!!!144535.cpp!!!	chargerNomCapsules() : void
+    qDebug() << Q_FUNC_INFO;
+    baseDeDonneesPikawa->recuperer("SELECT designation FROM Capsule;",
+                                   nomCapsules);
+!!!144663.cpp!!!	chargerLongeurBoissons() : void
+    qDebug() << Q_FUNC_INFO;
+    baseDeDonneesPikawa->recuperer("SELECT type FROM TypeBoisson;",
+                                   nomLongueurs);
+!!!154263.cpp!!!	ouvrirBaseDeDonnees() : void
+    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
+    baseDeDonneesPikawa->ouvrir(NOM_BDD);
+!!!144791.cpp!!!	Preparation(inout cafetiere : Cafetiere = nullptr)
     qDebug() << Q_FUNC_INFO;
     ouvrirBaseDeDonnees();
     chargerNomCapsules();
     chargerLongeurBoissons();
-}
-
-Preparation::~Preparation()
-{
+!!!144919.cpp!!!	~Preparation()
     BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
-}
-
-QStringList Preparation::getNomCapsules() const
-{
+!!!145047.cpp!!!	getNomCapsules() : QStringList
     QStringList listeNomCapsules;
     for(int i = 0; i < nomCapsules.size(); ++i)
         listeNomCapsules << nomCapsules.at(i);
     qDebug() << Q_FUNC_INFO << listeNomCapsules;
     return listeNomCapsules;
-}
-
-QStringList Preparation::getNomLongueurs() const
-{
+!!!145175.cpp!!!	getNomLongueurs() : QStringList
     QStringList listeNomLongueurs;
     for(int i = 0; i < nomLongueurs.size(); ++i)
         listeNomLongueurs << nomLongueurs.at(i);
     qDebug() << Q_FUNC_INFO << listeNomLongueurs;
     return listeNomLongueurs;
-}
-
-bool Preparation::getCapsulePresente() const
-{
+!!!145303.cpp!!!	getCapsulePresente() : bool
     return capsulePresente;
-}
-
-bool Preparation::getBacPasPlein() const
-{
+!!!154391.cpp!!!	getBacPasPlein() : bool
     return bacPasPlein;
-}
-
-bool Preparation::getTassePresente() const
-{
+!!!145559.cpp!!!	getTassePresente() : bool
     return tassePresente;
-}
-
-int Preparation::getNiveauEauNecessaire() const
-{
+!!!145687.cpp!!!	getNiveauEauNecessaire() : int
     return niveauEauNecessaire;
-}
-
-int Preparation::getNiveauEauNecessaire(const int& longueurChoisie) const
-{
+!!!145815.cpp!!!	getNiveauEauNecessaire(in longueurChoisie : int) : int
     switch(longueurChoisie)
     {
         case 0:
@@ -78,25 +49,13 @@ int Preparation::getNiveauEauNecessaire(const int& longueurChoisie) const
             return TAILLE_LUNGO;
     }
     return TAILLE_INCONNUE;
-}
-
-void Preparation::setCapsulePresente(bool caspulePresente)
-{
+!!!145943.cpp!!!	setCapsulePresente(in caspulePresente : bool) : void
     this->capsulePresente = caspulePresente;
-}
-
-void Preparation::setBacPasPlein(bool bacPasPlein)
-{
+!!!154519.cpp!!!	setBacPasPlein(in bacPasPlein : bool) : void
     this->bacPasPlein = bacPasPlein;
-}
-
-void Preparation::setTassePresente(bool tassePresente)
-{
+!!!146199.cpp!!!	setTassePresente(in tassePresente : bool) : void
     this->tassePresente = tassePresente;
-}
-
-bool Preparation::estPreparationPrete() const
-{
+!!!146327.cpp!!!	estPreparationPrete() : bool
     qDebug() << Q_FUNC_INFO << "niveauEau" << cafetiere->getNiveauEau();
     qDebug() << Q_FUNC_INFO << "niveauEauNecessaire" << niveauEauNecessaire;
     qDebug() << Q_FUNC_INFO << "bacPasPlein" << bacPasPlein;
@@ -114,30 +73,6 @@ bool Preparation::estPreparationPrete() const
         qDebug() << Q_FUNC_INFO << "Prête";
         return true;
     }
-}
-
-void Preparation::setNiveauEauNecessaire(const int& longueurChoisie)
-{
+!!!146455.cpp!!!	setNiveauEauNecessaire(in longueurChoisie : int) : void
     this->niveauEauNecessaire = getNiveauEauNecessaire(longueurChoisie);
     qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
-}
-
-void Preparation::chargerNomCapsules()
-{
-    qDebug() << Q_FUNC_INFO;
-    baseDeDonneesPikawa->recuperer("SELECT designation FROM Capsule;",
-                                   nomCapsules);
-}
-
-void Preparation::chargerLongeurBoissons()
-{
-    qDebug() << Q_FUNC_INFO;
-    baseDeDonneesPikawa->recuperer("SELECT type FROM TypeBoisson;",
-                                   nomLongueurs);
-}
-
-void Preparation::ouvrirBaseDeDonnees()
-{
-    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
-    baseDeDonneesPikawa->ouvrir(NOM_BDD);
-}

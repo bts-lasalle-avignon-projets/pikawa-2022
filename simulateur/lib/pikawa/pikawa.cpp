@@ -15,11 +15,12 @@ static bool connecte = false;                           //!< état de la connexi
 static int rssi = 0;                                    //!< le niveau RSSI du Bluetooth
 static uint8_t adresseMAC[ESP_BD_ADDR_LEN] = {0, 0, 0, 0, 0, 0}; //!< l'adresse MAC du Bluetooth connecté
 SSD1306Wire  display(ADRESSE_I2C_OLED, I2C_SDA_OLED, I2C_SCL_OLED); //!< l'objet OLED
-//String entete = String(EN_TETE) + String(DELIMITEUR_CHAMP); //!< entête d'une trame pikawa
-String entete;
+String entete = String(EN_TETE) + String(DELIMITEUR_CHAMP); //!< entête d'une trame pikawa
 String delimiteursFin = String(DELIMITEURS_FIN);        //!< délimiteur de trame pikawa
 int erreurTrame = 0;                                    //!< code d'erreur de trame
-bool changementEtat = false;                            //!< indique un changement d'état
+bool changementEtatCafetiere = false;                            //!< indique un changement d'état
+bool changementEtatMagasin = false;                            //!< indique un changement d'état
+bool changementEtatPreparation = false;                            //!< indique un changement d'état
 bool changementCommandeCafe = false;                    //!< indique un changement de commande du café
 EtatTasse etatTasse = (EtatTasse)Inconnu;               //!< l'état de la détecion d'une tasse (état simulé)
 EtatBac etatBac = (EtatBac)Inconnu;                     //!< l'état du bac de récupération de capsules (état simulé)
@@ -66,6 +67,11 @@ void initialiserPikawa()
   qualiteEau = preferences.getInt("qualiteEau");
   contenanceBac = preferences.getInt("contenanceBac");
   contenanceEau = preferences.getInt("contenanceEau", CAPACITE_EAU);
+  if(contenanceEau <= 0)
+  {
+    contenanceEau = CAPACITE_EAU;
+    preferences.putInt("contenanceEau", contenanceEau);
+  }
   char cleMagasin[64] = "";
   for(int i=0;i<NB_COLONNES;++i)
   {
@@ -113,13 +119,17 @@ void initialiserPikawa()
     setEtatBac(Plein);
   }
   else
+  {
     setEtatBac(PasPlein);
-    if(contenanceEau == 0)
+  }
+  if(contenanceEau <= 0)
   {
     setEtatNiveauEau(Vide);
   }
   else
+  {
     setEtatNiveauEau(PasVide);
+  }
   setEtatCommande(Repos);
 
   if(estMagasinVide())
@@ -150,7 +160,27 @@ void traiterTrames()
   {
     typeTrame = verifierTrame(trame);
 
-    if(typeTrame == String(TRAME_SERVICE))
+    if(typeTrame == String(TRAME_REQUETE_ETAT_CAFETIERE))
+    {
+      envoyerTrame(TRAME_REQUETE_ETAT_CAFETIERE); // réponse C
+    }
+    else if(typeTrame == String(TRAME_REQUETE_ETAT_MAGASIN))
+    {
+      envoyerTrame(TRAME_REQUETE_ETAT_MAGASIN); // réponse M
+    }
+    else if(typeTrame == String(TRAME_COMMANDE_PREPARATION))
+    {
+      // Format : $PIKAWA;P;NUMERO_RANGE;LONGUEUR;\r\n
+      if(traiterCommandeCafe(extraireChamp(trame, 3), extraireChamp(trame, 2)))
+      {
+        envoyerTrame(TRAME_REPONSE_ETAT_PREPARATION); // réponse P
+      }
+      else
+      {
+        envoyerTrame(typeTrame, true); // réponse P
+      }
+    }
+    else if(typeTrame == String(TRAME_SERVICE))
     {
       envoyerTrame(typeTrame); // réponse Alive
     }
@@ -173,22 +203,59 @@ void envoyerTrame(String type, bool erreur/*=false*/)
   char trameEnvoi[64];
   char contenuMagasin[64] = "";
 
-  if(type == String(TRAME_SERVICE))
+  if(type == String(TRAME_REQUETE_ETAT_CAFETIERE))
+  {
+    // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
+    sprintf((char *)trameEnvoi, "%sC;%d;%d;%d;%d;\r\n", entete.c_str(), (contenanceEau*40), (int)etatBac, !((int)etatMagasin), (int)etatTasse);
+    SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
+  }
+  else if(type == String(TRAME_REQUETE_ETAT_MAGASIN))
+  {
+    // Format : $PIKAWA;M;R1;R2;R3;R4;R5;R6;R7;R8;\r\n
+    for(unsigned int i = 0; i < NB_COLONNES; ++i)
+    {
+      // sprintf((char *)contenuMagasin, "%s;1", contenuMagasin, (int)i, (int)magasin[i]);
+      if(magasin[i] > 0)
+        sprintf((char *)contenuMagasin, "%s;1", contenuMagasin);
+      else
+        sprintf((char *)contenuMagasin, "%s;0", contenuMagasin);
+    }
+    sprintf((char *)trameEnvoi, "%sM%s;\r\n", entete.c_str(), contenuMagasin);
+    SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
+  }
+  else if(type == String(TRAME_REPONSE_ETAT_PREPARATION))
+  {
+    // Format : $PIKAWA;P;ETAT;\r\n
+    // r Booléen : réponse (1 = possible / 2 = impossible)
+    if(erreur)
+    {
+      sprintf((char *)trameEnvoi, "%sP;2;\r\n", entete.c_str());
+    }
+    else
+    {
+      if(etatCommande == Repos)
+        sprintf((char *)trameEnvoi, "%sP;0;\r\n", entete.c_str());
+      else
+        sprintf((char *)trameEnvoi, "%sP;1;\r\n", entete.c_str());
+    }
+    SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
+  }
+  else if(type == String(TRAME_SERVICE))
   {
     // Trame réponse Alive
-    sprintf((char *)trameEnvoi, "%sA\r\n", entete.c_str());
+    sprintf((char *)trameEnvoi, "%sA;\r\n", entete.c_str());
     SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
   }
   else if(type == String(TRAME_ERREUR))
   {
     //
-    sprintf((char *)trameEnvoi, "%s%s;%d\r\n", entete.c_str(), String(TRAME_ERREUR).c_str(), erreurTrame);
+    sprintf((char *)trameEnvoi, "%s%s;%d;\r\n", entete.c_str(), String(TRAME_ERREUR).c_str(), erreurTrame);
     SerialBT.write((uint8_t*)trameEnvoi, strlen((char *)trameEnvoi));
     erreurTrame = 0;
   }
 
   #ifdef DEBUG
-  Serial.print(String("-> ") + String(trameEnvoi));
+  Serial.print(String(".") + String(trameEnvoi));
   #endif
 }
 
@@ -257,6 +324,42 @@ String verifierTrame(String &trame)
     #endif
   #endif
 
+  type = entete + String(TRAME_REQUETE_ETAT_CAFETIERE);
+  if(trame.startsWith(type))
+  {
+    if(compterParametres(trame) == NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE)
+      return String(TRAME_REQUETE_ETAT_CAFETIERE);
+    else
+    {
+      erreurTrame = ERREUR_NB_PARAMETRES;
+      return String(TRAME_ERREUR);
+    }
+  }
+
+  type = entete + String(TRAME_REQUETE_ETAT_MAGASIN);
+  if(trame.startsWith(type))
+  {
+    if(compterParametres(trame) == NB_PARAMETRES_TRAME_REQUETE_ETAT_MAGASIN)
+      return String(TRAME_REQUETE_ETAT_MAGASIN);
+    else
+    {
+      erreurTrame = ERREUR_NB_PARAMETRES;
+      return String(TRAME_ERREUR);
+    }
+  }
+
+  type = entete + String(TRAME_COMMANDE_PREPARATION);
+  if(trame.startsWith(type))
+  {
+    if(compterParametres(trame) == NB_PARAMETRES_TRAME_COMMANDE_PREPARATION)
+      return String(TRAME_COMMANDE_PREPARATION);
+    else
+    {
+      erreurTrame = ERREUR_NB_PARAMETRES;
+      return String(TRAME_ERREUR);
+    }
+  }
+
   type = entete + String(TRAME_SERVICE);
   if(trame.startsWith(type))
   {
@@ -281,7 +384,11 @@ String verifierTrame(String &trame)
 void envoyerEtats()
 {
   // Envoie les états au démarrage
-
+  envoyerTrame(TRAME_REQUETE_ETAT_CAFETIERE); // réponse C
+  delay(100);
+  envoyerTrame(TRAME_REQUETE_ETAT_MAGASIN); // réponse M
+  delay(100);
+  envoyerTrame(TRAME_REPONSE_ETAT_PREPARATION); // réponse P
 }
 
 /**
@@ -387,10 +494,22 @@ void traiterChangements()
     commanderCafe(Repos);
   }
 
-  if(changementEtat)
+  if(changementEtatCafetiere)
   {
-    //envoyerTrame();
-    changementEtat = false;
+    envoyerTrame(String(TRAME_REQUETE_ETAT_CAFETIERE)); // génère réponse S1
+    changementEtatCafetiere = false;
+  }
+
+  if(changementEtatMagasin)
+  {
+    envoyerTrame(String(TRAME_REQUETE_ETAT_MAGASIN)); // génère réponse S2
+    changementEtatMagasin = false;
+  }
+
+  if(changementEtatPreparation)
+  {
+    envoyerTrame(String(TRAME_COMMANDE_PREPARATION)); // génère réponse S2
+    changementEtatPreparation = false;
   }
 }
 
@@ -405,7 +524,7 @@ void setEtatCommande(int etat)
   if(etatCommande != (EtatCommande)etat)
   {
     etatCommande = (EtatCommande)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne3();
   }
 }
@@ -421,7 +540,7 @@ void setEtatNiveauEau(int etat)
   if(etatNiveauEau != (EtatNiveauEau)etat)
   {
     etatNiveauEau = (EtatNiveauEau)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne4();
   }
 }
@@ -437,7 +556,7 @@ void setEtatBac(int etat)
   if(etatBac != (EtatBac)etat)
   {
     etatBac = (EtatBac)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne4();
   }
 }
@@ -453,7 +572,7 @@ void setEtatTasse(int etat)
   if(etatTasse != (EtatTasse)etat)
   {
     etatTasse = (EtatTasse)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne5();
   }
 }
@@ -469,7 +588,7 @@ void setEtatCapsule(int etat)
   if(etatCapsule != (EtatCapsule)etat)
   {
     etatCapsule = (EtatCapsule)etat;
-    changementEtat = true;
+    changementEtatCafetiere = true;
     setLigne5();
   }
 }
@@ -485,7 +604,7 @@ void setEtatMagasin(int etat)
   if(etatMagasin != (EtatMagasin)etat)
   {
     etatMagasin = (EtatMagasin)etat;
-    changementEtat = true;
+    changementEtatMagasin = true;
     setLigne5();
   }
 }
@@ -568,6 +687,10 @@ void gererEtatsMachine(int numeroColonne)
 {
   // Une capsule de moins dans le magasin !
   mettreAJourMagasin(numeroColonne);
+  #ifdef DEBUG
+  Serial.print("<Machine> Magasin : ");
+  Serial.println(!estMagasinVide());
+  #endif
 
   // Une capsule de plus dans le bac !
   ++contenanceBac;
@@ -586,8 +709,14 @@ void gererEtatsMachine(int numeroColonne)
   {
     --contenanceEau;
   }
+  else if(longueurCafeCommande == Moyen)
+  {
+    --contenanceEau;
+    --contenanceEau;
+  }
   else if(longueurCafeCommande == Long)
   {
+    --contenanceEau;
     --contenanceEau;
     --contenanceEau;
   }
@@ -597,12 +726,33 @@ void gererEtatsMachine(int numeroColonne)
   Serial.print(contenanceEau);
   Serial.println(" capsules restantes");
   #endif
-  if(contenanceEau == 0)
+  if(contenanceEau <= 0)
   {
+    contenanceEau = 0;
     setEtatNiveauEau(Vide);
   }
 
   setLigne5();
+}
+
+int getNiveauNecessaire(String longueurCafe)
+{
+  if(longueurCafe.equals(CAFE_COURT))
+  {
+    return TAILLE_RISTRETTO;
+  }
+  else if(longueurCafe.equals(CAFE_MOYEN))
+  {
+    return TAILLE_ESPRESSO;
+  }
+  else if(longueurCafe.equals(CAFE_LONG))
+  {
+    return TAILLE_LUNGO;
+  }
+  else
+  {
+    return CAPACITE_EAU+1; // impossible
+  }
 }
 
 /**
@@ -669,10 +819,10 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
     return false;
   }
 
-  if(etatNiveauEau == Vide)
+  if(etatNiveauEau == Vide || ((contenanceEau - getNiveauNecessaire(longueurCafe)) < 0))
   {
     #ifdef DEBUG
-    Serial.println(String("<Erreur> Niveau eau vide !"));
+    Serial.println(String("<Erreur> Niveau eau vide ou insuffisant !"));
     #endif
     return false;
   }
@@ -706,10 +856,18 @@ bool commanderCafe(int etat)
     changementCommandeCafe = false;
     if(etat == Repos)
     {
-      changementEtat = true;
+      changementEtatPreparation = true;
       #ifdef DEBUG
       Serial.println("<Cafe> terminé !");
       #endif
+      if(estMagasinVide())
+      {
+        #ifdef DEBUG
+        Serial.println(String("<Erreur> Le magasin est vide !"));
+        #endif
+        setEtatMagasin(Indisponible);
+        return false;
+      }
       #ifdef AFFICHAGE_TRAME_RECUE
       trameRecue = "";
       setLigne6();
@@ -738,7 +896,7 @@ bool traiterCommandeCafe(String longueurCafe, String typeCafe)
   // Préparer un café ?
   if(!verifierEtatsMachine(numeroColonne, longueurCafe))
   {
-    changementEtat = true;
+    changementEtatPreparation = true;
     if(erreurTrame == ERREUR_LONGUEUR_CAFE || erreurTrame == ERREUR_TYPE_CAFE)
       envoyerTrame(String(TRAME_ERREUR));
     return false;
@@ -810,104 +968,84 @@ void reinitialiserParametresMachine(String &trame)
  */
 void simuler()
 {
-  unsigned long temps = millis();
-  static unsigned long attente = millis();
+  int etatSimulation = Tasse;
   int taus = 0; // Tirage au sort pour simuler !
-  bool simulation = false;
 
   // tous les TEMPO_SIMULATION
-  if ((temps - attente) >= TEMPO_SIMULATION)
+  if(estEcheance(TEMPO_SIMULATION))
   {
-    if(etatCommande == Repos)
+    // pas de simulation pendant une préparation !
+    if(etatCommande != Repos)
+      return;
+    // à qui le tour ?
+    etatSimulation = random(Tasse, NbEtatsSimulation);
+    switch(etatSimulation)
     {
+      case Tasse:
       // Simulation détection tasse
-      if ((temps - attente) >= SIMULATION_TASSE)
+      if(etatTasse == Absente)
       {
-        if(etatTasse == Absente)
-        {
-          setEtatTasse(Presente);
-        }
-        else
-        {
-          taus = random(0, 10); // 1 fois sur 10 pour simuler Tasse absente
-          if(taus == 0)
-          {
-            setEtatTasse(Absente);
-          }
-          else
-          {
-            simulation = true;
-          }
-        }
-        if(changementEtat)
-          simulation = true;
+        setEtatTasse(Presente);
       }
-
-      // Simulation remplissage eau
-      if(etatNiveauEau == Vide)
+      else
       {
-        //taus = random(0, 3)%2; // 1 chance sur 3
-        //if(taus == 0)
-        if ((temps - attente) >= SIMULATION_REMPLISSAGE)
+        taus = random(0, 10); // 1 fois sur 10 pour simuler Tasse absente
+        if(taus == 0)
         {
-          setEtatNiveauEau(PasVide);
-          contenanceEau = CAPACITE_EAU;
-          nbTotalRemplissage++;
-          preferences.putInt("nbTotalEau", nbTotalRemplissage);
-          preferences.putInt("contenanceEau", contenanceEau);
-          setLigne1();
+          setEtatTasse(Absente);
           #ifdef DEBUG
-          Serial.println(String("<Simulation> Remplissage eau !"));
+          Serial.println(String("<Simulation> Tasse absente !"));
           #endif
-          simulation = true;
         }
       }
-
+      break;
+      case Bac:
       // Simulation vidage bac
       if(etatBac == Plein)
       {
-        //taus = random(0, 3)%2; // 1 chance sur 3
-        //if(taus == 0)
-        if ((temps - attente) >= SIMULATION_VIDAGE)
-        {
-          setEtatBac(PasPlein);
-          contenanceBac = 0;
-          nbTotalBacsVides++;
-          preferences.putInt("nbTotalBacs", nbTotalBacsVides);
-          preferences.putInt("contenanceBac", contenanceBac);
-          setLigne1();
-          #ifdef DEBUG
-          Serial.println(String("<Simulation> Vidage du bac !"));
-          #endif
-          simulation = true;
-        }
+        setEtatBac(PasPlein);
+        contenanceBac = 0;
+        nbTotalBacsVides++;
+        preferences.putInt("nbTotalBacs", nbTotalBacsVides);
+        preferences.putInt("contenanceBac", contenanceBac);
+        setLigne1();
+        #ifdef DEBUG
+        Serial.println(String("<Simulation> Vidage du bac !"));
+        #endif
       }
-
+      break;
+      case Eau:
+      // Simulation remplissage eau
+      if(etatNiveauEau == Vide || contenanceEau <= 0)
+      {
+        setEtatNiveauEau(PasVide);
+        contenanceEau = CAPACITE_EAU;
+        nbTotalRemplissage++;
+        preferences.putInt("nbTotalEau", nbTotalRemplissage);
+        preferences.putInt("contenanceEau", contenanceEau);
+        setLigne1();
+        #ifdef DEBUG
+        Serial.println(String("<Simulation> Remplissage eau !"));
+        #endif
+      }
+      break;
+      case Magasin:
       // Simulation remplissage magasin
       if(etatMagasin == Indisponible)
       {
-        if ((temps - attente) >= SIMULATION_REMPLISSAGE)
+        char cleMagasin[64] = "";
+        for(int i=0;i<NB_COLONNES;++i)
         {
-          char cleMagasin[64] = "";
-          for(int i=0;i<NB_COLONNES;++i)
-          {
-            sprintf((char *)cleMagasin, "%s%d", "colonne", i);
-            magasin[i] = TAILLE_COLONNE;
-            preferences.putInt(cleMagasin, TAILLE_COLONNE);
-          }
-          setEtatMagasin(Disponible);
-          #ifdef DEBUG
-          Serial.println(String("<Simulation> Remplissage magasin !"));
-          #endif
-          simulation = true;
+          sprintf((char *)cleMagasin, "%s%d", "colonne", i);
+          magasin[i] = TAILLE_COLONNE;
+          preferences.putInt(cleMagasin, TAILLE_COLONNE);
         }
+        setEtatMagasin(Disponible);
+        #ifdef DEBUG
+        Serial.println(String("<Simulation> Remplissage magasin !"));
+        #endif
       }
-
-      if(simulation)
-      {
-        attente = millis();
-        return;
-      }
+      break;
     }
   }
 }
@@ -969,6 +1107,8 @@ void setLigne3()
       char message[64] = "";
       if(longueurCafeCommande == Long)
         sprintf((char *)message, "Cafe %d long : encours\r\n", numeroCapsuleCommande);
+      else if(longueurCafeCommande == Moyen)
+        sprintf((char *)message, "Cafe %d moyen : encours\r\n", numeroCapsuleCommande);
       else
         sprintf((char *)message, "Cafe %d court : encours\r\n", numeroCapsuleCommande);
       ligne3 = String(message);
@@ -990,10 +1130,10 @@ void setLigne4()
   String ligne4a;
   String ligne4b;
 
-  if(etatNiveauEau == PasVide)
-    ligne4a = String("Eau : ok");
-  else
+  if(etatNiveauEau == Vide || contenanceEau <= 0)
     ligne4a = String("Eau : vide");
+  else
+    ligne4a = String("Eau : ok");
   if(etatBac == PasPlein)
     ligne4b = String("Bac : ok");
   else
@@ -1182,4 +1322,16 @@ void lireNiveauBluetooth()
       #endif
     }
   }
+}
+
+bool estEcheance(unsigned long intervalle)
+{
+  static unsigned long tempsPrecedent = millis();
+  unsigned long temps = millis();
+  if (temps - tempsPrecedent >= intervalle)
+  {
+      tempsPrecedent = temps;
+      return true;
+  }
+  return false;
 }

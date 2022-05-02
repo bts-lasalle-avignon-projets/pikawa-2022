@@ -26,6 +26,18 @@
  */
 //#define DEBUG_PREFERENCES
 
+/**
+ * @def PERIPHERIQUE_BLUETOOTH
+ * @brief Définit le nom du périphérique Bluetooth (et son id)
+ */
+//#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
+#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-2"
+
+// Machine à café pikawa
+#define TITRE             PERIPHERIQUE_BLUETOOTH
+#define VERSION           "v1"
+#define VERSION_PIKAWA    "0.1"
+
 // OLED 8 lignes x 16 colonnes
 #define ADRESSE_I2C_OLED 0x3c
 #define I2C_SDA_OLED     5
@@ -45,11 +57,6 @@
   //#define AFFICHAGE_NB_TRAMES_RECUES
 #endif
 
-// Machine à café pikawa
-#define TITRE             "pikawa 2022"
-#define VERSION           "v1"
-#define VERSION_PIKAWA    "0.1"
-
 // Magasin
 #define NB_COLONNES       8
 #define TAILLE_COLONNE    4
@@ -57,7 +64,7 @@
 
 // Niveau d'eau
 // SIMULATION_CONSOMMATION
-#define CAPACITE_EAU      10 // capsules
+#define CAPACITE_EAU      20 // capsules en café court
 
 // Bac à capsules
 // SIMULATION_REMPLISSAGE
@@ -70,18 +77,12 @@
 #define SIMULATION_VIDAGE       (TEMPO_SIMULATION*2) // en ms
 #define SIMULATION_REMPLISSAGE  (TEMPO_SIMULATION*2) // en ms
 
-/**
- * @def PERIPHERIQUE_BLUETOOTH
- * @brief Définit le nom du périphérique Bluetooth (et son id)
- */
-#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
-
 // Protocole (cf. Google Drive)
 #define DELIMITEUR_CHAMP        ";"
 #define DELIMITEURS_FIN         "\r\n"
 #define DELIMITEUR_DATAS        ';'
 #define DELIMITEUR_FIN          '\n'
-#define EN_TETE                 ""
+#define EN_TETE                 "$PIKAWA"
 #define LONGUEUR_CHAMP          16
 
 // Trame de commande (application vers système) :
@@ -171,11 +172,37 @@ enum LongueurCafe
   Long = 3
 };
 
+/**
+ * @enum Simulation
+ * @brief Les differents états de simulation
+ */
+enum Simulation
+{
+  Tasse = 0,
+  Bac = 1,
+  Eau = 2,
+  Magasin,
+  NbEtatsSimulation
+};
+
 #define CAFE_COURT "1"
 #define CAFE_MOYEN "2"
 #define CAFE_LONG  "3"
 
+#define TAILLE_RISTRETTO 1
+#define TAILLE_ESPRESSO  2
+#define TAILLE_LUNGO     3
+
 // Trame de requête/réponse :
+#define TRAME_REQUETE_ETAT_CAFETIERE                "ETAT;C;" // Format : $PIKAWA;ETAT;C;\r\n
+#define NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE  3   // 
+#define TRAME_REQUETE_ETAT_MAGASIN                  "ETAT;M;" // Format : $PIKAWA;ETAT;M;\r\n
+#define NB_PARAMETRES_TRAME_REQUETE_ETAT_MAGASIN    3   // 
+#define TRAME_COMMANDE_PREPARATION                  "P" // Format : $PIKAWA;P;NUMERO_RANGE;LONGUEUR;\r\n
+#define NB_PARAMETRES_TRAME_COMMANDE_PREPARATION    4   // 
+#define TRAME_REPONSE_ETAT_CAFETIERE                "C" // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
+#define TRAME_REPONSE_ETAT_MAGASIN                  "M" // Format : $PIKAWA;M;R1;R2;R3;R4;R5;R6;R7;R8;\r\n
+#define TRAME_REPONSE_ETAT_PREPARATION              "P" // Format : $PIKAWA;P;ETAT;\r\n
 
 // Trame de service (application vers système) : périodique toutes les secondes
 #define TRAME_SERVICE                   "A" // Alive / Acquittement
@@ -217,6 +244,7 @@ bool estCapsuleVide(String &typeCafe);
 bool estMagasinVide();
 void mettreAJourMagasin(int numeroColonne);
 void gererEtatsMachine(int numeroColonne);
+int getNiveauNecessaire(String longueurCafe);
 bool verifierEtatsMachine(int numeroColonne, String longueurCafe);
 bool commanderCafe(int etat);
 bool traiterCommandeCafe(String longueurCafe, String typeCafe);
@@ -238,3 +266,4 @@ void forcerEtatsSimules();
 void getRSSI(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param);
 void getEtatBluetooth(esp_spp_cb_event_t event, esp_spp_cb_param_t *param);
 void lireNiveauBluetooth();
+bool estEcheance(unsigned long intervalle);

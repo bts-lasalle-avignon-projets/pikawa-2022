@@ -5,9 +5,8 @@
  * @file cafetiere.h
  *
  * @brief Déclaration de la classe Cafetiere
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 #include <QObject>
@@ -17,6 +16,12 @@
 #define IDENTIFIANT_UTILISATEUR    "tvaira"
 #define IDENTIFIANT_UTILISATEUR_ID "1"
 
+#define TAILLE_RESERVOIR 800
+
+#define CAFE_PRET               0
+#define CAFE_EN_PREPARATION     1
+#define ERREUR_PREPARATION_CAFE 2
+
 class IHMPikawa;
 class Communication;
 class Preparation;
@@ -24,32 +29,33 @@ class BaseDeDonnees;
 
 /**
  * @class Cafetiere
- * @brief
- * @details
+ * @brief Parmet de gérer la machine à café PIKAWA
  */
 class Cafetiere : public QObject
 {
     Q_OBJECT
   private:
     IHMPikawa*     ihm;           //!< association avec la fenêtre graphique
-    Communication* communication; //!<
-    Preparation*   preparation;   //!<
+    Communication* communication; //!< relation avec Communication
+    Preparation*   preparation;   //!< relation avec Preparation
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
-    QStringList    nomCapsules;         //!<
-    QStringList    nomLongueurs;        //!<
-    QStringList
-         preferences;    //!< liste des préférences de l'utilisateur connecté
-    int  capsuleChoisie; //!<
-    int  longueurChoisie; //!<
-    int  niveauEau;       //!<
-    bool connectee;       //!<
-    bool activee;         //!<
-    bool capsulePresente; //!<
-    bool tassePresente;   //!<
+    QStringList    nomCapsules;         //!< liste des noms de capsules
+    QStringList    nomLongueurs;        //!< liste des longueurs de préparation
+    QStringList    preferences;    //!< liste des préférences de l'utilisateur
+    int            capsuleChoisie; //!< id de la capsule sélectionnée
+    int  longueurChoisie; //!< la longueur de préparation sélectionnée
+    int  niveauEau;       //!< le nive d'eau dans la cafetière
+    bool connectee;       //!< état de connexion de la cafetière
+    bool capsulePresente; //!< au moins une capsule est présente dans le magasin
+    bool tassePresente;   //!< une tasse est détectée
+    bool cafeEnPreparation; //!< un café en préparation
 
     void initialiserNomCapsules();
     void initiatiserNomLongueurs();
     void chargerPreferences(QString identifiantUtilisateur);
+    void gererEvenements();
+    void gererEvenementsCommunication();
+    void ouvrirBaseDeDonnees();
 
   public:
     Cafetiere(IHMPikawa* ihm);
@@ -60,19 +66,22 @@ class Cafetiere : public QObject
     int         getCaspuleChoisie() const;
     int         getLongueurChoisie() const;
     int         getNiveauEau() const;
-    bool        getConnectee() const;
-    bool        getActivee() const;
+    int         getNiveauEauNecessaire() const;
+    bool        estConnectee() const;
     bool        getCapsulePresente() const;
     bool        getTassePresente() const;
+    bool        estCafeEnPreparation() const;
     int         getIdCapsule(QString nomCapsule) const;
     QStringList getPreferences() const;
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
-
-    void setCapsuleChoisie(const int& capsuleChoisie);
-    void setLongueurChoisie(const int& boissonChoisie);
-    void setNiveauEau(const int& niveauEau);
-
+    void        setCapsuleChoisie(const int& capsuleChoisie);
+    void        setLongueurChoisie(const int& boissonChoisie);
+    void        setNiveauEau(const int& niveauEau);
+    bool        estPrete();
+    QStringList getDisponibiliteCapsules() const;
+    bool        estCapsuleChoisieDisponible();
+    bool        estCapsuleChoisieDisponible(int capsule);
     /**
      * @enum ChampsTablePreferences
      * @brief Les différentes colonne de la table Preferences
@@ -113,12 +122,32 @@ class Cafetiere : public QObject
     void arreterDecouverte();
     void rafraichirDecouverte();
     void gererConnexion();
+    void mettreAJourConnexion(QString nom, QString adresse);
+    void recupererEtatCafetiere();
+    void recupererEtatMagasin();
+    void mettreAJourEtatCafetiere(int  reservoirEau,
+                                  bool bacPasPlein,
+                                  bool etatCapsule,
+                                  bool etatTasse);
+    void mettreAJourMagasin(QStringList caspulesDisponibles);
+    void gererEtatPreparationCafe(int preparation);
+    void lancerLaPreparationCafe();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
     void cafetiereConnectee(QString nom, QString adresse);
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
+    void cafePret();
+    void cafeEnCours();
+    void erreurPreparation();
+    void etatCafetiere(int  reservoirEau,
+                       bool bacPasPlein,
+                       bool etatCapsule,
+                       bool etatTasse);
+    void cafetierePrete();
+    void cafetierePasPrete();
+    void etatMagasinIHM(QStringList caspulesDisponibles);
 };
 
 #endif // CAFETIERE_H
