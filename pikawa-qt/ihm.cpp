@@ -9,9 +9,8 @@
  * @file ihm.cpp
  *
  * @brief Définition de la classe IHMPikawa
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 /**
@@ -27,19 +26,11 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
-
     ouvrirBaseDeDonnees();
-
-    cafetiere = new Cafetiere(this);
-
+    initialiserCafetiere();
     gererEvenements();
-
     initialiserIHM();
-
-#ifdef PLEIN_ECRAN
-    showFullScreen();
-// showMaximized();
-#endif
+    cafetiere->gererConnexion(); // connexion automatique
 }
 
 /**
@@ -60,7 +51,6 @@ IHMPikawa::~IHMPikawa()
 
 void IHMPikawa::afficherPage(IHMPikawa::Page page)
 {
-    // qDebug() << Q_FUNC_INFO << "page" << page;
     ui->ecrans->setCurrentIndex(page);
 }
 
@@ -95,19 +85,16 @@ void IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString adresse)
     // si une cafetère pikawa a été détectée
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonDetectee);
-    ui->labelEtatConnexion->setText("Cafetière détectée");
+    // ui->labelEtatConnexion->setText("Cafetière détectée");
 }
 
-/**
- * @todo revoir la gestion de la connexion/déconnexion
- */
 void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
     // si une cafetère pikawa a été connectée
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonConnecte);
-    ui->labelEtatConnexion->setText("Cafetière connectée");
+    // ui->labelEtatConnexion->setText("Cafetière connectée");
     ui->boutonRafraichir->setEnabled(false);
 }
 
@@ -117,7 +104,7 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
     // si une cafetère pikawa a été déconnectée
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonDeconnecte);
-    ui->labelEtatConnexion->setText("Cafetière déconnectée");
+    // ui->labelEtatConnexion->setText("Cafetière déconnectée");
     ui->boutonRafraichir->setEnabled(true);
 }
 
@@ -185,14 +172,23 @@ void IHMPikawa::gererSelectionCafes()
             SLOT(afficherErreurPreparation()));
 }
 
+void IHMPikawa::afficherCapsuleChoisie(int idCapsule)
+{
+    ui->capsuleChoisie->setStyleSheet("font-size:25px; color:black;");
+    ui->boutonChangerCafe->setStyleSheet("background-color:#FC924B;");
+    cafetiere->setCapsuleChoisie(idCapsule);
+    afficherMessage(" ", "red");
+    cafetiere->estPrete();
+    afficherPageAcceuil();
+}
+
 void IHMPikawa::selectionnerColombia()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleColombia);
     ui->capsuleChoisie->setText("Colombia");
     int idCapsule = cafetiere->getIdCapsule("Colombia");
     qDebug() << Q_FUNC_INFO << "idCapsule Colombia" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerIndonesia()
@@ -201,8 +197,7 @@ void IHMPikawa::selectionnerIndonesia()
     ui->capsuleChoisie->setText("Indonesia");
     int idCapsule = cafetiere->getIdCapsule("Indonesia");
     qDebug() << Q_FUNC_INFO << "idCapsule Indonesia" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerEthiopia()
@@ -211,8 +206,7 @@ void IHMPikawa::selectionnerEthiopia()
     ui->capsuleChoisie->setText("Ethiopia");
     int idCapsule = cafetiere->getIdCapsule("Ethiopia");
     qDebug() << Q_FUNC_INFO << "idCapsule Ethiopia" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerVolluto()
@@ -221,8 +215,7 @@ void IHMPikawa::selectionnerVolluto()
     ui->capsuleChoisie->setText("Volluto");
     int idCapsule = cafetiere->getIdCapsule("Volluto");
     qDebug() << Q_FUNC_INFO << "idCapsule Volluto" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerCosi()
@@ -231,8 +224,7 @@ void IHMPikawa::selectionnerCosi()
     ui->capsuleChoisie->setText("Cosi");
     int idCapsule = cafetiere->getIdCapsule("Cosi");
     qDebug() << Q_FUNC_INFO << "idCapsule Cosi" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerScuro()
@@ -241,8 +233,7 @@ void IHMPikawa::selectionnerScuro()
     ui->capsuleChoisie->setText("Scuro");
     int idCapsule = cafetiere->getIdCapsule("Scuro");
     qDebug() << Q_FUNC_INFO << "idCapsule Scuro" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerVanilla()
@@ -251,8 +242,7 @@ void IHMPikawa::selectionnerVanilla()
     ui->capsuleChoisie->setText("Vanilla");
     int idCapsule = cafetiere->getIdCapsule("Vanilla");
     qDebug() << Q_FUNC_INFO << "idCapsule Vanilla" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::selectionnerCapriccio()
@@ -261,8 +251,7 @@ void IHMPikawa::selectionnerCapriccio()
     ui->capsuleChoisie->setText("Capriccio");
     int idCapsule = cafetiere->getIdCapsule("Capriccio");
     qDebug() << Q_FUNC_INFO << "idCapsule Capriccio" << idCapsule;
-    cafetiere->setCapsuleChoisie(idCapsule);
-    afficherPageAcceuil();
+    afficherCapsuleChoisie(idCapsule);
 }
 
 void IHMPikawa::afficherCafePret()
@@ -275,7 +264,7 @@ void IHMPikawa::afficherCafePret()
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
-    afficherMessage("Café en cours", "orange");
+    afficherMessage("Café en cours", "red");
 }
 
 void IHMPikawa::afficherErreurPreparation()
@@ -285,30 +274,38 @@ void IHMPikawa::afficherErreurPreparation()
 }
 
 void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
-                                         bool bacCapsules,
+                                         bool bacPasPlein,
                                          bool etatCapsule,
                                          bool etatTasse)
 {
     int reservoirEauPourcentage = convertirPourcentageEau(reservoirEau);
     ui->niveauEau->setValue(reservoirEauPourcentage);
 
-    if(!bacCapsules)
+    if((cafetiere->getNiveauEau() - cafetiere->getNiveauEauNecessaire()) <= 0)
+    {
+        ui->labelEau->setStyleSheet("font-size: 25px; color: red;");
+    }
+    else
+    {
+        ui->labelEau->setStyleSheet("font-size: 25px; color: black;");
+    }
+
+    if(!bacPasPlein)
     {
         ui->etatBac->setPixmap(*iconeBacPlein);
         ui->labelBac->setStyleSheet("font-size: 25px; color: red;");
     }
     else
     {
-        ui->etatBac->setPixmap(*iconeBacVide);
+        ui->etatBac->setPixmap(*iconeBacPasPlein);
         ui->labelBac->setStyleSheet("font-size: 25px; color: black;");
     }
 
-    afficherAvertissement(reservoirEau, bacCapsules, etatCapsule, etatTasse);
+    afficherAvertissement(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
-
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
@@ -337,7 +334,6 @@ void IHMPikawa::initialiserIcones()
     iconeBoutonDetectee   = new QIcon(":/images/cafetiere-rouge.png");
     iconeBoutonConnecte   = new QIcon(":/images/cafetiere-verte.png");
     iconeBoutonDeconnecte = new QIcon(":/images/cafetiere-noire.png");
-
     iconeCapsuleColombia  = new QIcon(":colombia.png");
     iconeCapsuleIndonesia = new QIcon(":indonesia.png");
     iconeCapsuleEthiopia  = new QIcon(":ethiopia.png");
@@ -347,82 +343,85 @@ void IHMPikawa::initialiserIcones()
     iconeCapsuleScuro     = new QIcon(":scuro.png");
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
     iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
-    iconeBacVide          = new QPixmap(":/images/bacVide.png");
+    iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
 }
 
 void IHMPikawa::initialiserIHM()
 {
     ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
                                QString::fromUtf8(VERSION));
-
     chargerBoutonsCafe();
-
     initialiserIcones();
-
     activerBoutonConnexionEtatDeconnecte();
-
     initialiserPreferences();
-
     afficherPageAcceuil();
-
-    ui->boutonLancerPreparation->setEnabled(false);
+#ifdef PLEIN_ECRAN
+    showFullScreen();
+// showMaximized();
+#endif
 }
 
 void IHMPikawa::gererEvenements()
 {
-    /**
-     * @todo A remanier
-     */
+    gererEvenementsBoutons();
+    gererEvenementsCafetiere();
+    gererSelectionCafes();
+}
+
+void IHMPikawa::gererEvenementsBoutons()
+{
     connect(ui->selectionLongueurPreparation,
             SIGNAL(valueChanged(int)),
             this,
             SLOT(gererLongueurPreparation(int)));
-
     connect(ui->boutonInformations,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
-
     connect(ui->boutonEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
-
     connect(ui->boutonParametres,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
-
     connect(ui->boutonAcceuilInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
-
     connect(ui->boutonEntretienInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
-
     connect(ui->boutonParametresInformation,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
-
     connect(ui->boutonConnexion,
             SIGNAL(clicked()),
             cafetiere,
             SLOT(gererConnexion()));
-
     connect(ui->boutonChangerCafe,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageSelectionCafe()));
-
     connect(ui->boutonAcceuilSelectionCafe,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
+    connect(ui->boutonRafraichir,
+            SIGNAL(clicked()),
+            this,
+            SLOT(rafraichirDecouverte()));
+    connect(ui->boutonLancerPreparation,
+            SIGNAL(clicked()),
+            cafetiere,
+            SLOT(lancerLaPreparationCafe()));
+}
 
+void IHMPikawa::gererEvenementsCafetiere()
+{
     connect(cafetiere,
             SIGNAL(cafetiereDetectee(QString, QString)),
             this,
@@ -435,42 +434,26 @@ void IHMPikawa::gererEvenements()
             SIGNAL(cafetiereDeconnectee()),
             this,
             SLOT(activerBoutonConnexionEtatDeconnecte()));
-
-    connect(ui->boutonRafraichir,
-            SIGNAL(clicked()),
-            this,
-            SLOT(rafraichirDecouverte()));
     connect(cafetiere,
             SIGNAL(rechercheTerminee(bool)),
             this,
             SLOT(terminerDecouverte(bool)));
-
     connect(cafetiere,
             SIGNAL(etatCafetiere(int, bool, bool, bool)),
             this,
             SLOT(mettreAJourEtatCafetiere(int, bool, bool, bool)));
-
     connect(cafetiere,
             SIGNAL(etatMagasinIHM(QStringList)),
             this,
             SLOT(mettreAJourMagasinIHM(QStringList)));
-
     connect(cafetiere,
             SIGNAL(cafetierePrete()),
             this,
             SLOT(afficherCafetierePrete()));
-
     connect(cafetiere,
             SIGNAL(cafetierePasPrete()),
             this,
             SLOT(afficherCafetierePasPrete()));
-
-    connect(ui->boutonLancerPreparation,
-            SIGNAL(clicked()),
-            cafetiere,
-            SLOT(lancerLaPreparationCafe()));
-
-    gererSelectionCafes();
 }
 
 void IHMPikawa::initialiserPreferences()
@@ -558,27 +541,39 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
 
     if((cafetiere->getNiveauEau() - cafetiere->getNiveauEauNecessaire()) <= 0)
     {
-        message.append("Eau insuffisante ");
+        message.append("Remplir le réservoir d'eau");
     }
 
     if(!bacPasPlein)
     {
-        message.append("Bac plein ");
+        if(message.isEmpty())
+            message.append("Vider le bac");
+        else
+            message.append("\nVider le bac");
     }
 
     if(!capsulePresente)
     {
-        message.append("Caspule non présente ");
+        if(message.isEmpty())
+            message.append("Plus de caspules");
+        else
+            message.append("\nPlus de caspules");
     }
 
     if(!tassePresente)
     {
-        message.append("Tasse non présente ");
+        if(message.isEmpty())
+            message.append("Tasse non présente");
+        else
+            message.append("\nTasse non présente");
     }
 
     if(!cafetiere->estCapsuleChoisieDisponible())
     {
-        message.append("Caspule choisie indisponible ");
+        if(message.isEmpty())
+        {
+            message.append("Caspule choisie indisponible");
+        }
         ui->capsuleChoisie->setStyleSheet("font-size:25px; color:red;");
         ui->boutonChangerCafe->setStyleSheet("background-color:#A9A9A9;");
     }
@@ -588,7 +583,8 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         ui->boutonChangerCafe->setStyleSheet("background-color:#FC924B;");
     }
 
-    afficherMessage(message, "red");
+    if(!cafetiere->estCafeEnPreparation())
+        afficherMessage(message, "red");
 }
 
 void IHMPikawa::afficherMessage(QString message, QString couleur)
@@ -598,4 +594,9 @@ void IHMPikawa::afficherMessage(QString message, QString couleur)
     ui->labelAvertisseur->setAlignment(Qt::AlignCenter | Qt::AlignBottom);
     ui->labelAvertisseur->setStyleSheet("font-size:25px; color:" + couleur +
                                         ";");
+}
+
+void IHMPikawa::initialiserCafetiere()
+{
+    cafetiere = new Cafetiere(this);
 }

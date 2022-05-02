@@ -5,9 +5,8 @@
  * @file ihm.h
  *
  * @brief Déclaration de la classe IHMPikawa
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 #include <QtWidgets>
@@ -33,12 +32,10 @@ class Cafetiere;
  */
 #define PLEIN_ECRAN
 
-// QT_BEGIN_NAMESPACE
 namespace Ui
 {
 class IHMPikawa;
 }
-// QT_END_NAMESPACE
 
 class BaseDeDonnees;
 
@@ -82,28 +79,27 @@ class IHMPikawa : public QMainWindow
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
-
-    QIcon* iconeBoutonConnecte;
-    QIcon* iconeBoutonDetectee;
-    QIcon* iconeBoutonDeconnecte;
-
-    QIcon* iconeCapsuleColombia;
-    QIcon* iconeCapsuleIndonesia;
-    QIcon* iconeCapsuleEthiopia;
-    QIcon* iconeCapsuleVolluto;
-    QIcon* iconeCapsuleCapriccio;
-    QIcon* iconeCapsuleCosi;
-    QIcon* iconeCapsuleScuro;
-    QIcon* iconeCapsuleVanilla;
-
-    QPixmap* iconeBacPlein;
-    QPixmap* iconeBacVide;
-
+    // GUI
+    QIcon*                iconeBoutonConnecte;
+    QIcon*                iconeBoutonDetectee;
+    QIcon*                iconeBoutonDeconnecte;
+    QIcon*                iconeCapsuleColombia;
+    QIcon*                iconeCapsuleIndonesia;
+    QIcon*                iconeCapsuleEthiopia;
+    QIcon*                iconeCapsuleVolluto;
+    QIcon*                iconeCapsuleCapriccio;
+    QIcon*                iconeCapsuleCosi;
+    QIcon*                iconeCapsuleScuro;
+    QIcon*                iconeCapsuleVanilla;
+    QPixmap*              iconeBacPlein;
+    QPixmap*              iconeBacPasPlein;
     QVector<QPushButton*> boutonsCafes;
 
     void initialiserIcones();
     void initialiserIHM();
     void gererEvenements();
+    void gererEvenementsBoutons();
+    void gererEvenementsCafetiere();
     void initialiserPreferences();
     int  convertirPourcentageEau(int reservoirEau);
     void chargerBoutonsCafe();
@@ -113,6 +109,7 @@ class IHMPikawa : public QMainWindow
                                bool tassePresente,
                                bool capsulePresente);
     void afficherMessage(QString message, QString couleur);
+    void initialiserCafetiere();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
@@ -132,6 +129,7 @@ class IHMPikawa : public QMainWindow
     void terminerDecouverte(bool detecte);
     void gererLongueurPreparation(int longueurPreparation);
     void gererSelectionCafes();
+    void afficherCapsuleChoisie(int idCapsule);
     void selectionnerColombia();
     void selectionnerIndonesia();
     void selectionnerEthiopia();
@@ -144,7 +142,7 @@ class IHMPikawa : public QMainWindow
     void afficherCafeEnCours();
     void afficherErreurPreparation();
     void mettreAJourEtatCafetiere(int  reservoirEau,
-                                  bool bacCapsules,
+                                  bool bacPasPlein,
                                   bool etatCapsule,
                                   bool etatTasse);
     void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
