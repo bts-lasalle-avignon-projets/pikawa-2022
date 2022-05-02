@@ -29,7 +29,7 @@ Ce document présente rapidement le fonctionnement du simulateur PIKAWA ainsi qu
 
 Ce programme est destiné à un ESP32 équipé d'un écran OLED. Par défaut, la configuration de l'écran OLED est la suivante (fichier `lib/pikawa/pikawa.h`) :
 
-```c
+```cpp
 #define ADRESSE_I2C_OLED 0x3c
 #define I2C_SDA_OLED     5
 #define I2C_SCL_OLED     4
@@ -39,44 +39,41 @@ Autres réglages possibles :
 
 - Nombre de colonnes du magasin  :
 
-```c
+```cpp
 #define NB_COLONNES       8
 ```
 
 - Nombre de capsules par colonne :
 
-```c
+```cpp
 #define TAILLE_COLONNE    4
 ```
 
 - Capacité du réservoir d'eau (ne tient pas compte des cafés court ou long) :
 
-```c
+```cpp
 #define CAPACITE_EAU      20 // capsules en café court
 ```
 
 - Capacité du bac de récupération de capsules :
 
-```c
+```cpp
 #define CAPACITE_BAC      5 // capsules
 ```
 
 - Les durées pour préparer un café court (le double pour un long) :
 
-```c
+```cpp
 #define TEMPO_CMD_CAFE    6000 // 6 s pour un café court et donc le double pour un long
 ```
 
 - Périodicité de la simulation (toutes les **3 secondes**) :
 
-```c
+```cpp
 #define TEMPO_SIMULATION        3000 // en ms
-#define SIMULATION_TASSE        (TEMPO_SIMULATION) // en ms
-#define SIMULATION_VIDAGE       (TEMPO_SIMULATION*2) // en ms
-#define SIMULATION_REMPLISSAGE  (TEMPO_SIMULATION*2) // en ms
 ```
 
-Le remplissage d'eau et le vidage du bac à capsules se fera au plus tard après **6 secondes**. L'absence de tasse est aléatoire et ne dure que **3 secondes**.
+Toutes les `TEMPO_SIMULATION`, une simulation d'état est possible entre : l'absence de tasse, le remplissage du réservoir d'eau ou du magasin et le vidage du bac à capsules.
 
 ## Limites actuelles
 

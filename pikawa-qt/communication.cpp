@@ -1,13 +1,13 @@
 ﻿#include "communication.h"
+#include "protocole.h"
 #include <QDebug>
 
 /**
  * @file communication.cpp
  *
  * @brief Définition de la classe Communication
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 Communication::Communication(QObject* parent) :
@@ -48,14 +48,15 @@ void Communication::activerBluetooth()
 bool Communication::estTrameValide(QString trame)
 {
     qDebug() << Q_FUNC_INFO << trame
-             << (trame.startsWith("$PIKAWA") && trame.endsWith("\r\n"));
-    return trame.startsWith("$PIKAWA") && trame.endsWith("\r\n");
+             << (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
+    return (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
 }
 
 TypeTrame Communication::extraireTypeTrame(QString trame)
 {
-    QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
-    QString     type   = champs[CHAMP_TYPE_TRAME];
+    QStringList champs =
+      trame.split(QLatin1Char(DELIMITEUR), QString::SkipEmptyParts);
+    QString type = champs[CHAMP_TYPE_TRAME];
     qDebug() << Q_FUNC_INFO << type;
 
     if(type == ETAT_CAFETIERE)
@@ -76,10 +77,11 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
 {
     if(typeTrame == TypeTrame::Inconnue)
         return false;
-    QStringList champs = trame.split(QLatin1Char(';'), QString::SkipEmptyParts);
+    QStringList champs =
+      trame.split(QLatin1Char(DELIMITEUR), QString::SkipEmptyParts);
     qDebug() << Q_FUNC_INFO << typeTrame << champs;
     int     niveauEau;
-    bool    caspulePresente, tassePresente, bacVide;
+    bool    caspulePresente, tassePresente, bacPasPlein;
     QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
       capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
     int preparationCafe, codeErreur;
@@ -88,17 +90,20 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
 
     switch(typeTrame)
     {
+        case TypeTrame::Inconnue:
+            qDebug() << Q_FUNC_INFO << "type de trame inconnue !";
+            break;
         case TypeTrame::EtatCafetiere:
-            niveauEau = champs[ChampEtatCafetiere::NiveauEau].toInt();
-            bacVide  = (champs[ChampEtatCafetiere::NiveauBac] == '1');
+            niveauEau   = champs[ChampEtatCafetiere::NiveauEau].toInt();
+            bacPasPlein = (champs[ChampEtatCafetiere::NiveauBac] == '1');
             caspulePresente =
               (champs[ChampEtatCafetiere::CaspulePresente] == '1');
             tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
             qDebug() << Q_FUNC_INFO << " niveauEau " << niveauEau
-                     << " bacVide " << bacVide << " caspulePresente "
+                     << " bacPasPlein " << bacPasPlein << " caspulePresente "
                      << caspulePresente << " tassePresente " << tassePresente;
             emit etatCafetiere(niveauEau,
-                               bacVide,
+                               bacPasPlein,
                                caspulePresente,
                                tassePresente);
             return true;
@@ -157,8 +162,8 @@ void Communication::envoyerTrame(QString trame)
     {
         return;
     }
-    if(!trame.endsWith("\r\n"))
-        trame += "\r\n";
+    if(!trame.endsWith(FIN_TRAME))
+        trame += QString(FIN_TRAME);
     socketBluetoothPikawa->write(trame.toLatin1());
 }
 
@@ -251,11 +256,11 @@ void Communication::connecter()
                 connect(socketBluetoothPikawa,
                         SIGNAL(connected()),
                         this,
-                        SLOT(socketConnectee()));
+                        SLOT(recupererEtatConnexion()));
                 connect(socketBluetoothPikawa,
                         SIGNAL(disconnected()),
                         this,
-                        SLOT(socketDeconnectee()));
+                        SLOT(recupererEtatDeconnexion()));
                 connect(socketBluetoothPikawa,
                         SIGNAL(readyRead()),
                         this,
@@ -295,7 +300,7 @@ void Communication::deconnecter()
     }
 }
 
-void Communication::socketConnectee()
+void Communication::recupererEtatConnexion()
 {
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->peerName()
              << socketBluetoothPikawa->peerAddress().toString();
@@ -304,7 +309,7 @@ void Communication::socketConnectee()
                             socketBluetoothPikawa->peerAddress().toString());
 }
 
-void Communication::socketDeconnectee()
+void Communication::recupererEtatDeconnexion()
 {
     qDebug() << Q_FUNC_INFO;
     connecte = false;
@@ -348,6 +353,7 @@ void Communication::lireEtatSocket()
 void Communication::envoyerTramePreparation(int nomCafe, int longueur)
 {
     qDebug() << Q_FUNC_INFO << nomCafe << longueur;
-    envoyerTrame("$PIKAWA;P;" + QString::number(nomCafe) + ";" +
-                 QString::number(longueur + 1) + ";\r\n");
+    envoyerTrame(QString(DEBUT_TRAME_PREPARATION) + QString::number(nomCafe) +
+                 QString(DELIMITEUR) + QString::number(longueur + 1) +
+                 QString(DELIMITEUR) + QString(FIN_TRAME));
 }

@@ -5,33 +5,19 @@
  * @file communication.h
  *
  * @brief Déclaration de la classe Communication
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 #include <QObject>
 #include <QtBluetooth>
+#include "protocole.h"
 
 /**
  * @def PREFIXE_NOM_CAFETIERE
- * @brief Le nom de l'appareil Bluetooth d'une cafetière doit contenir ce
- * préfixe
+ * @brief L'appareil Bluetooth d'une cafetière doit contenir ce préfixe de nom
  */
 #define PREFIXE_NOM_CAFETIERE "PIKAWA"
-#define DELIMITEUR            ';'
-#define ETAT_CAFETIERE        "C"
-#define ETAT_MAGASIN          "M"
-#define ETAT_PREPARATION      "P"
-#define TRAME_ERREUR          "ERREUR"
-#define CHAMP_TYPE_TRAME      1
-
-// Code erreur
-#define ERREUR_PROTOCOLE      1
-#define ERREUR_NB_PARAMETRES  2
-#define ERREUR_TRAME_INCONNUE 3
-#define ERREUR_TYPE_CAFE      4
-#define ERREUR_LONGUEUR_CAFE  5
 
 /**
  * @def TEST_TRAMES
@@ -40,25 +26,9 @@
 //#define TEST_TRAMES
 
 /**
- * @enum TypeTrame
- * @brief Les différents types de trame
- */
-enum TypeTrame
-{
-    Inconnue = -1,
-    EtatCafetiere,
-    EtatMagasin,
-    EtatPreparation,
-    ErreurPreparation,
-    NbTrames
-};
-
-/**
  * @class Communication
- * @brief
- * @details
+ * @brief Permet de gérer les échanges Bluetooth
  */
-
 class Communication : public QObject
 {
     Q_OBJECT
@@ -134,8 +104,8 @@ class Communication : public QObject
     void terminerRecherche();
     void connecter();
     void deconnecter();
-    void socketConnectee();
-    void socketDeconnectee();
+    void recupererEtatConnexion();
+    void recupererEtatDeconnexion();
     void recevoir();
     void lireEtatSocket();
 
@@ -145,7 +115,7 @@ class Communication : public QObject
     void cafetiereDeconnectee();
     void rechercheTerminee(bool detecte);
     void etatCafetiere(int  reservoirEau,
-                       bool bacPlein,
+                       bool bacPasPlein,
                        bool etatCapsule,
                        bool etatTasse);
     void etatMagasin(QStringList caspulesDisponibles);

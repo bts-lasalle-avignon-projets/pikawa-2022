@@ -18,7 +18,8 @@ HEADERS += \
     cafetiere.h \
     communication.h \
     ihm.h \
-    preparation.h
+    preparation.h \
+    protocole.h
 
 FORMS += \
     ihm.ui

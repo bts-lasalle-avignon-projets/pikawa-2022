@@ -172,6 +172,19 @@ enum LongueurCafe
   Long = 3
 };
 
+/**
+ * @enum Simulation
+ * @brief Les differents états de simulation
+ */
+enum Simulation
+{
+  Tasse = 0,
+  Bac = 1,
+  Eau = 2,
+  Magasin,
+  NbEtatsSimulation
+};
+
 #define CAFE_COURT "1"
 #define CAFE_MOYEN "2"
 #define CAFE_LONG  "3"
@@ -253,3 +266,4 @@ void forcerEtatsSimules();
 void getRSSI(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param);
 void getEtatBluetooth(esp_spp_cb_event_t event, esp_spp_cb_param_t *param);
 void lireNiveauBluetooth();
+bool estEcheance(unsigned long intervalle);

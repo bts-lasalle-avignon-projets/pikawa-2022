@@ -7,19 +7,17 @@
  * @file preparation.cpp
  *
  * @brief Définition de la classe Preparation
- * @author
+ * @author Anthony BRYCKAERT
  * @version 0.2
- *
  */
 
 Preparation::Preparation(Cafetiere* cafetiere) :
     QObject(cafetiere), cafetiere(cafetiere), baseDeDonneesPikawa(nullptr),
-    nomCapsules(0), nomLongueurs(0), capsulePresente(false), bacVide(false),
+    nomCapsules(0), nomLongueurs(0), capsulePresente(false), bacPasPlein(false),
     tassePresente(false), niveauEauNecessaire(0)
 {
     qDebug() << Q_FUNC_INFO;
-    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
-    baseDeDonneesPikawa->ouvrir(NOM_BDD);
+    ouvrirBaseDeDonnees();
     chargerNomCapsules();
     chargerLongeurBoissons();
 }
@@ -53,9 +51,9 @@ bool Preparation::getCapsulePresente() const
     return capsulePresente;
 }
 
-bool Preparation::getbacVide() const
+bool Preparation::getBacPasPlein() const
 {
-    return bacVide;
+    return bacPasPlein;
 }
 
 bool Preparation::getTassePresente() const
@@ -79,6 +77,7 @@ int Preparation::getNiveauEauNecessaire(const int& longueurChoisie) const
         case 2:
             return TAILLE_LUNGO;
     }
+    return TAILLE_INCONNUE;
 }
 
 void Preparation::setCapsulePresente(bool caspulePresente)
@@ -86,14 +85,41 @@ void Preparation::setCapsulePresente(bool caspulePresente)
     this->capsulePresente = caspulePresente;
 }
 
-void Preparation::setbacVide(bool bacVide)
+void Preparation::setBacPasPlein(bool bacPasPlein)
 {
-    this->bacVide = bacVide;
+    this->bacPasPlein = bacPasPlein;
 }
 
 void Preparation::setTassePresente(bool tassePresente)
 {
     this->tassePresente = tassePresente;
+}
+
+bool Preparation::estPreparationPrete() const
+{
+    qDebug() << Q_FUNC_INFO << "niveauEau" << cafetiere->getNiveauEau();
+    qDebug() << Q_FUNC_INFO << "niveauEauNecessaire" << niveauEauNecessaire;
+    qDebug() << Q_FUNC_INFO << "bacPasPlein" << bacPasPlein;
+    qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
+    qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
+
+    if((cafetiere->getNiveauEau() - niveauEauNecessaire) < 0 || !bacPasPlein ||
+       !tassePresente || !capsulePresente)
+    {
+        qDebug() << Q_FUNC_INFO << "Pas prête";
+        return false;
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "Prête";
+        return true;
+    }
+}
+
+void Preparation::setNiveauEauNecessaire(const int& longueurChoisie)
+{
+    this->niveauEauNecessaire = getNiveauEauNecessaire(longueurChoisie);
+    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
 }
 
 void Preparation::chargerNomCapsules()
@@ -110,28 +136,8 @@ void Preparation::chargerLongeurBoissons()
                                    nomLongueurs);
 }
 
-bool Preparation::estPreparationPrete() const
+void Preparation::ouvrirBaseDeDonnees()
 {
-    qDebug() << Q_FUNC_INFO << "niveauEau" << cafetiere->getNiveauEau();
-    qDebug() << Q_FUNC_INFO << "niveauEauNecessaire" << niveauEauNecessaire;
-    qDebug() << Q_FUNC_INFO << "bacVide" << bacVide;
-    qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
-    qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
-
-    if((cafetiere->getNiveauEau() - niveauEauNecessaire) < 0 || bacVide || !tassePresente || !capsulePresente)
-    {
-        qDebug() << Q_FUNC_INFO << "Pas prête";
-        return false;
-    }
-    else
-    {
-        qDebug() << Q_FUNC_INFO << "Prête";
-        return true;
-    }
-}
-
-void Preparation::setNiveauEauNecessaire(const int& longueurChoisie)
-{
-    this->niveauEauNecessaire = getNiveauEauNecessaire(longueurChoisie);
-    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
+    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
+    baseDeDonneesPikawa->ouvrir(NOM_BDD);
 }
