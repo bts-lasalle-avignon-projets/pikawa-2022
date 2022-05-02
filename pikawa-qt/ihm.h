@@ -100,6 +100,7 @@ class IHMPikawa : public QMainWindow
     QPixmap* iconeBacVide;
 
     QVector<QPushButton*> boutonsCafes;
+    QVector<QLabel*> labelsCafe;
 
     void initialiserIcones();
     void initialiserIHM();
@@ -107,6 +108,7 @@ class IHMPikawa : public QMainWindow
     void initialiserPreferences();
     int  convertirPourcentageEau(int reservoirEau);
     void chargerBoutonsCafe();
+    void chargerLabelsCafe();
     void ouvrirBaseDeDonnees();
     void afficherAvertissement(int  niveau,
                                bool bacPasPlein,
@@ -147,7 +149,8 @@ class IHMPikawa : public QMainWindow
                                   bool bacCapsules,
                                   bool etatCapsule,
                                   bool etatTasse);
-    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
+    void mettreAJourMagasinIBoutonIHM(QStringList caspulesDisponibles);
+    void mettreAJourInformationsMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
 

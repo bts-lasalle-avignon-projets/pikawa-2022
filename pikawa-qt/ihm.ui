@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -1738,6 +1738,89 @@ background: rgb(114, 159, 207);
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout">
+              <item row="6" column="2">
+               <spacer name="verticalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="labelIndonesia">
+                <property name="styleSheet">
+                 <string notr="true">font-size: 20px;</string>
+                </property>
+                <property name="text">
+                 <string>Indonesia</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="labelVolluto">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Volluto</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="labelScuro">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Scuro</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="labelCapriccio">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Capriccio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="labelColombia">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Colombia</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="labelVanilla">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Vanilla</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="labelCosi">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Cosi</string>
+                </property>
+               </widget>
+              </item>
               <item row="6" column="1">
                <spacer name="verticalSpacer_10">
                 <property name="orientation">
@@ -1759,88 +1842,8 @@ background: rgb(114, 159, 207);
                 <property name="text">
                  <string>Ethiopia</string>
                 </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLabel" name="labelCapriccio">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Capriccio</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLabel" name="labelScuro">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Scuro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="labelVolluto">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Volluto</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QLabel" name="LabelVanilla">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Vanilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QLabel" name="labelCosi">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Cosi</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="2">
-               <spacer name="verticalSpacer_11">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="labelColombia">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Colombia</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="labelIndonesia">
-                <property name="styleSheet">
-                 <string notr="true">font-size: 20px;</string>
-                </property>
-                <property name="text">
-                 <string>Indonesia</string>
+                <property name="wordWrap">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>

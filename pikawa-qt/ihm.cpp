@@ -72,6 +72,7 @@ void IHMPikawa::afficherPageAcceuil()
 void IHMPikawa::afficherPageInformations()
 {
     afficherPage(IHMPikawa::Page::Information);
+    ui->boutonInformationsInformation->setEnabled(false);
 }
 
 void IHMPikawa::afficherPageEntretien()
@@ -306,7 +307,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     afficherAvertissement(reservoirEau, bacCapsules, etatCapsule, etatTasse);
 }
 
-void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
+void IHMPikawa::mettreAJourMagasinIBoutonIHM(QStringList caspulesDisponibles)
 {
 
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
@@ -321,6 +322,22 @@ void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
         }
     }
 }
+
+void IHMPikawa::mettreAJourInformationsMagasinIHM(QStringList caspulesDisponibles)
+{
+    for(int i = 0; i < caspulesDisponibles.size(); ++i)
+    {
+        if(caspulesDisponibles.at(i) == "1")
+        {
+            labelsCafe.at(i)->setStyleSheet("color: green;");
+        }
+        else
+        {
+            labelsCafe.at(i)->setStyleSheet("color: red;");
+        }
+    }
+}
+
 
 void IHMPikawa::afficherCafetierePrete()
 {
@@ -453,7 +470,12 @@ void IHMPikawa::gererEvenements()
     connect(cafetiere,
             SIGNAL(etatMagasinIHM(QStringList)),
             this,
-            SLOT(mettreAJourMagasinIHM(QStringList)));
+            SLOT(mettreAJourMagasinIBoutonIHM(QStringList)));
+
+    connect(cafetiere,
+            SIGNAL(etatMagasinIHM(QStringList)),
+            this,
+            SLOT(mettreAJourInformationsMagasinIHM(QStringList)));
 
     connect(cafetiere,
             SIGNAL(cafetierePrete()),
@@ -541,6 +563,17 @@ void IHMPikawa::chargerBoutonsCafe()
     boutonsCafes.push_back(ui->boutonCosi);
     boutonsCafes.push_back(ui->boutonScuro);
     boutonsCafes.push_back(ui->boutonVanilla);
+}
+
+void IHMPikawa::chargerLabelsCafe()
+{
+    labelsCafe.push_back(ui->labelColombia);
+    labelsCafe.push_back(ui->labelIndonesia);
+    labelsCafe.push_back(ui->labelEthiopia);
+    labelsCafe.push_back(ui->labelVolluto);
+    labelsCafe.push_back(ui->labelCosi);
+    labelsCafe.push_back(ui->labelScuro);
+    labelsCafe.push_back(ui->labelVanilla);
 }
 
 void IHMPikawa::ouvrirBaseDeDonnees()
