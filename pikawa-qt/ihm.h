@@ -94,7 +94,7 @@ class IHMPikawa : public QMainWindow
     QPixmap*              iconeBacPlein;
     QPixmap*              iconeBacPasPlein;
     QVector<QPushButton*> boutonsCafes;
-    QVector<QLabel*> labelsCafe;
+    QVector<QLabel*>      labelsCafe;
 
     void initialiserIcones();
     void initialiserIHM();
@@ -147,8 +147,7 @@ class IHMPikawa : public QMainWindow
                                   bool bacPasPlein,
                                   bool etatCapsule,
                                   bool etatTasse);
-    void mettreAJourMagasinIBoutonIHM(QStringList caspulesDisponibles);
-    void mettreAJourInformationsMagasinIHM(QStringList caspulesDisponibles);
+    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
 

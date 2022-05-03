@@ -305,36 +305,22 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     afficherAvertissement(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
 
-void IHMPikawa::mettreAJourMagasinIBoutonIHM(QStringList caspulesDisponibles)
+void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
         {
             boutonsCafes.at(i)->setEnabled(true);
-        }
-        else
-        {
-            boutonsCafes.at(i)->setEnabled(false);
-        }
-    }
-}
-
-void IHMPikawa::mettreAJourInformationsMagasinIHM(QStringList caspulesDisponibles)
-{
-    for(int i = 0; i < caspulesDisponibles.size(); ++i)
-    {
-        if(caspulesDisponibles.at(i) == "1")
-        {
             labelsCafe.at(i)->setStyleSheet("color: green;");
         }
         else
         {
+            boutonsCafes.at(i)->setEnabled(false);
             labelsCafe.at(i)->setStyleSheet("color: red;");
         }
     }
 }
-
 
 void IHMPikawa::afficherCafetierePrete()
 {
@@ -368,6 +354,7 @@ void IHMPikawa::initialiserIHM()
     ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
                                QString::fromUtf8(VERSION));
     chargerBoutonsCafe();
+    chargerLabelsCafe();
     initialiserIcones();
     activerBoutonConnexionEtatDeconnecte();
     initialiserPreferences();
@@ -462,13 +449,7 @@ void IHMPikawa::gererEvenementsCafetiere()
     connect(cafetiere,
             SIGNAL(etatMagasinIHM(QStringList)),
             this,
-            SLOT(mettreAJourMagasinIBoutonIHM(QStringList)));
-
-    connect(cafetiere,
-            SIGNAL(etatMagasinIHM(QStringList)),
-            this,
-            SLOT(mettreAJourInformationsMagasinIHM(QStringList)));
-
+            SLOT(mettreAJourMagasinIHM(QStringList)));
     connect(cafetiere,
             SIGNAL(cafetierePrete()),
             this,
@@ -555,6 +536,7 @@ void IHMPikawa::chargerLabelsCafe()
     labelsCafe.push_back(ui->labelIndonesia);
     labelsCafe.push_back(ui->labelEthiopia);
     labelsCafe.push_back(ui->labelVolluto);
+    labelsCafe.push_back(ui->labelCapriccio);
     labelsCafe.push_back(ui->labelCosi);
     labelsCafe.push_back(ui->labelScuro);
     labelsCafe.push_back(ui->labelVanilla);

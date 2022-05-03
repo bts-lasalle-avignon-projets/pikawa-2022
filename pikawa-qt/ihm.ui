@@ -1737,14 +1737,49 @@ background: rgb(114, 159, 207);
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="nombreCafeTotal">
-              <property name="styleSheet">
-               <string notr="true">font-size:20px;</string>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <property name="bottomMargin">
+               <number>50</number>
               </property>
-              <property name="text">
-               <string>Nombre de café total : 0</string>
-              </property>
-             </widget>
+              <item>
+               <widget class="QLabel" name="labelNombreTotalCafes">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Nombre total de cafés : </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="nombreTotalCafes">
+                <property name="font">
+                 <font>
+                  <pointsize>-1</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
             <item>
              <spacer name="verticalSpacer_12">
@@ -1765,10 +1800,13 @@ background: rgb(114, 159, 207);
             <item>
              <widget class="QLabel" name="disponibiliteCaspule">
               <property name="styleSheet">
-               <string notr="true">font-size:20px;</string>
+               <string notr="true">font-size:24px;</string>
               </property>
               <property name="text">
-               <string>Disponibilité des caspules :</string>
+               <string>Disponibilité des caspules</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -1783,14 +1821,23 @@ background: rgb(114, 159, 207);
               <property name="sizeHint" stdset="0">
                <size>
                 <width>15</width>
-                <height>40</height>
+                <height>20</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout">
-              <item row="6" column="2">
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <item row="8" column="2">
                <spacer name="verticalSpacer_11">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -1803,17 +1850,7 @@ background: rgb(114, 159, 207);
                 </property>
                </spacer>
               </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="labelIndonesia">
-                <property name="styleSheet">
-                 <string notr="true">font-size: 20px;</string>
-                </property>
-                <property name="text">
-                 <string>Indonesia</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
+              <item row="3" column="2">
                <widget class="QLabel" name="labelVolluto">
                 <property name="styleSheet">
                  <string notr="true">font-size:20px;</string>
@@ -1823,17 +1860,20 @@ background: rgb(114, 159, 207);
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QLabel" name="labelScuro">
+              <item row="3" column="1">
+               <widget class="QLabel" name="labelEthiopia">
                 <property name="styleSheet">
                  <string notr="true">font-size:20px;</string>
                 </property>
                 <property name="text">
-                 <string>Scuro</string>
+                 <string>Ethiopia</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
+              <item row="5" column="1">
                <widget class="QLabel" name="labelCapriccio">
                 <property name="styleSheet">
                  <string notr="true">font-size:20px;</string>
@@ -1843,27 +1883,7 @@ background: rgb(114, 159, 207);
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="labelColombia">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Colombia</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QLabel" name="labelVanilla">
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="text">
-                 <string>Vanilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
+              <item row="5" column="2">
                <widget class="QLabel" name="labelCosi">
                 <property name="styleSheet">
                  <string notr="true">font-size:20px;</string>
@@ -1873,7 +1893,7 @@ background: rgb(114, 159, 207);
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="8" column="1">
                <spacer name="verticalSpacer_10">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -1886,18 +1906,94 @@ background: rgb(114, 159, 207);
                 </property>
                </spacer>
               </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="labelEthiopia">
+              <item row="6" column="1">
+               <widget class="QLabel" name="labelScuro">
                 <property name="styleSheet">
                  <string notr="true">font-size:20px;</string>
                 </property>
                 <property name="text">
-                 <string>Ethiopia</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>false</bool>
+                 <string>Scuro</string>
                 </property>
                </widget>
+              </item>
+              <item row="6" column="2">
+               <widget class="QLabel" name="labelVanilla">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string>Vanilla</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayoutCapsule1">
+                <property name="spacing">
+                 <number>20</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="labelEtatColombia">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>false</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labelColombia">
+                  <property name="styleSheet">
+                   <string notr="true">font-size:20px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Colombia</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="2">
+               <layout class="QHBoxLayout" name="horizontalLayoutCapsule2">
+                <property name="spacing">
+                 <number>20</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="labelIndonesia">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 20px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Indonesia</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labelEtatIndonesia">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
