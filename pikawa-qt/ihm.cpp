@@ -307,6 +307,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
+    qDebug() << Q_FUNC_INFO;
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
@@ -347,9 +348,8 @@ void IHMPikawa::initialiserIcones()
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
     iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
     iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
-    capsulePresente       = new QPixmap (":/RondRouge.png");
-    capsuleAbsente        = new QPixmap (":/RondVert.png");
-
+    capsulePresente       = new QPixmap(":/RondVert.png");
+    capsuleAbsente        = new QPixmap(":/RondRouge.png");
 }
 
 void IHMPikawa::initialiserIHM()
