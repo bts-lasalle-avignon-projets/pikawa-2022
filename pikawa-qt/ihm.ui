@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -297,7 +297,7 @@
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>10</width>
-                  <height>80</height>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
@@ -1739,12 +1739,25 @@ background: rgb(114, 159, 207);
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout">
               <property name="bottomMargin">
-               <number>50</number>
+               <number>0</number>
               </property>
+              <item>
+               <spacer name="horizontalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
               <item>
                <widget class="QLabel" name="labelNombreTotalCafes">
                 <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
+                 <string notr="true">font-size:24px;</string>
                 </property>
                 <property name="text">
                  <string>Nombre total de cafés : </string>
@@ -1759,7 +1772,7 @@ background: rgb(114, 159, 207);
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
+                 <string notr="true">font-size:24px;</string>
                 </property>
                 <property name="text">
                  <string>0</string>
@@ -1843,7 +1856,7 @@ background: rgb(114, 159, 207);
               <item row="1" column="1">
                <layout class="QHBoxLayout" name="horizontalLayoutCapsule1">
                 <property name="spacing">
-                 <number>20</number>
+                 <number>12</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -1874,12 +1887,25 @@ background: rgb(114, 159, 207);
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </item>
               <item row="1" column="2">
                <layout class="QHBoxLayout" name="horizontalLayoutCapsule2">
                 <property name="spacing">
-                 <number>20</number>
+                 <number>12</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -1907,6 +1933,19 @@ background: rgb(114, 159, 207);
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <spacer name="horizontalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </item>
               <item row="2" column="2">
@@ -1930,6 +1969,19 @@ background: rgb(114, 159, 207);
                    <string>Volluto</string>
                   </property>
                  </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_11">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </item>
@@ -1984,6 +2036,19 @@ background: rgb(114, 159, 207);
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </item>
               <item row="3" column="1">
@@ -2007,6 +2072,19 @@ background: rgb(114, 159, 207);
                    <string>Capriccio</string>
                   </property>
                  </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_12">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </item>
@@ -2032,6 +2110,19 @@ background: rgb(114, 159, 207);
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <spacer name="horizontalSpacer_13">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </item>
               <item row="3" column="2">
@@ -2056,6 +2147,19 @@ background: rgb(114, 159, 207);
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <spacer name="horizontalSpacer_14">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                </layout>
               </item>
               <item row="4" column="2">
@@ -2079,6 +2183,19 @@ background: rgb(114, 159, 207);
                    <string>Vanilla</string>
                   </property>
                  </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_15">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </item>
