@@ -62,6 +62,7 @@ void IHMPikawa::afficherPageAcceuil()
 void IHMPikawa::afficherPageInformations()
 {
     afficherPage(IHMPikawa::Page::Information);
+    ui->boutonInformationsInformation->setEnabled(false);
 }
 
 void IHMPikawa::afficherPageEntretien()
@@ -306,15 +307,18 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
 
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
+    qDebug() << Q_FUNC_INFO;
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
         {
             boutonsCafes.at(i)->setEnabled(true);
+            labelsEtatCafe.at(i)->setPixmap(*capsulePresente);
         }
         else
         {
             boutonsCafes.at(i)->setEnabled(false);
+            labelsEtatCafe.at(i)->setPixmap(*capsuleAbsente);
         }
     }
 }
@@ -344,6 +348,8 @@ void IHMPikawa::initialiserIcones()
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
     iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
     iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
+    capsulePresente       = new QPixmap(":/RondVert.png");
+    capsuleAbsente        = new QPixmap(":/RondRouge.png");
 }
 
 void IHMPikawa::initialiserIHM()
@@ -351,6 +357,7 @@ void IHMPikawa::initialiserIHM()
     ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
                                QString::fromUtf8(VERSION));
     chargerBoutonsCafe();
+    chargerLabelsEtatCafe();
     initialiserIcones();
     activerBoutonConnexionEtatDeconnecte();
     initialiserPreferences();
@@ -524,6 +531,18 @@ void IHMPikawa::chargerBoutonsCafe()
     boutonsCafes.push_back(ui->boutonCosi);
     boutonsCafes.push_back(ui->boutonScuro);
     boutonsCafes.push_back(ui->boutonVanilla);
+}
+
+void IHMPikawa::chargerLabelsEtatCafe()
+{
+    labelsEtatCafe.push_back(ui->labelEtatColombia);
+    labelsEtatCafe.push_back(ui->labelEtatIndonesia);
+    labelsEtatCafe.push_back(ui->labelEtatEthiopia);
+    labelsEtatCafe.push_back(ui->labelEtatVolluto);
+    labelsEtatCafe.push_back(ui->labelEtatCapriccio);
+    labelsEtatCafe.push_back(ui->labelEtatCosi);
+    labelsEtatCafe.push_back(ui->labelEtatScuro);
+    labelsEtatCafe.push_back(ui->labelEtatVanilla);
 }
 
 void IHMPikawa::ouvrirBaseDeDonnees()
