@@ -1713,7 +1713,7 @@ background: rgb(114, 159, 207);
                <string notr="true">font-size:25px;</string>
               </property>
               <property name="text">
-               <string>Acceuil</string>
+               <string>Accueil</string>
               </property>
              </widget>
             </item>
@@ -2205,8 +2205,8 @@ background: rgb(114, 159, 207);
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>1021</width>
-          <height>1120</height>
+          <width>1171</width>
+          <height>1080</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="layoutPrincipaleEntretien">
@@ -2389,7 +2389,7 @@ background: rgb(114, 159, 207);
                 <string notr="true">font-size:25px;</string>
                </property>
                <property name="text">
-                <string>Acceuil</string>
+                <string>Accueil</string>
                </property>
               </widget>
              </item>
@@ -2407,19 +2407,6 @@ background: rgb(114, 159, 207);
               </spacer>
              </item>
             </layout>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_54">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item>
             <layout class="QVBoxLayout" name="layoutCentreEntretien">
@@ -2477,14 +2464,14 @@ background: rgb(114, 159, 207);
                 <widget class="QLabel" name="imageCafetiere">
                  <property name="minimumSize">
                   <size>
-                   <width>300</width>
-                   <height>350</height>
+                   <width>250</width>
+                   <height>300</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>290</width>
-                   <height>330</height>
+                   <width>250</width>
+                   <height>300</height>
                   </size>
                  </property>
                  <property name="text">
@@ -2503,9 +2490,12 @@ background: rgb(114, 159, 207);
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>20</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -2513,46 +2503,8 @@ background: rgb(114, 159, 207);
                </item>
                <item>
                 <layout class="QVBoxLayout" name="layoutNomLabelEntretien">
-                 <item alignment="Qt::AlignLeft">
-                  <widget class="QLabel" name="label">
-                   <property name="styleSheet">
-                    <string notr="true">font-size:20px</string>
-                   </property>
-                   <property name="text">
-                    <string>Niveau de Tartre</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item alignment="Qt::AlignLeft">
-                  <widget class="QProgressBar" name="etatTartre">
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>100</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QProgressBar::chunk{background-color:red}</string>
-                   </property>
-                   <property name="value">
-                    <number>24</number>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignHCenter|Qt::AlignTop</set>
-                   </property>
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                  </widget>
-                 </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <layout class="QHBoxLayout" name="layoutCafeTotal">
                    <property name="spacing">
                     <number>6</number>
                    </property>
@@ -2560,15 +2512,15 @@ background: rgb(114, 159, 207);
                     <widget class="QLabel" name="labelNombreCafeTotal">
                      <property name="maximumSize">
                       <size>
-                       <width>200</width>
+                       <width>500</width>
                        <height>100</height>
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">font-size:20px;</string>
+                      <string notr="true">font-size:25px;</string>
                      </property>
                      <property name="text">
-                      <string>Nombre café total : </string>
+                      <string>Nombre cafés depuis mise en service : </string>
                      </property>
                     </widget>
                    </item>
@@ -2591,38 +2543,156 @@ background: rgb(114, 159, 207);
                   </layout>
                  </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <spacer name="verticalSpacer_23">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label">
+                   <property name="styleSheet">
+                    <string notr="true">font-size:20px</string>
+                   </property>
+                   <property name="text">
+                    <string>Niveau d'entartrage</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
                    <item>
-                    <widget class="QLabel" name="labelNombreCafeAvantDetartrage">
-                     <property name="maximumSize">
+                    <widget class="QProgressBar" name="etatTartre">
+                     <property name="minimumSize">
                       <size>
-                       <width>16777215</width>
+                       <width>75</width>
                        <height>100</height>
                       </size>
                      </property>
-                     <property name="styleSheet">
-                      <string notr="true">font-size:20px;</string>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>200</height>
+                      </size>
                      </property>
-                     <property name="text">
-                      <string>Nombre café avant détartrage : </string>
+                     <property name="styleSheet">
+                      <string notr="true">QProgressBar::chunk{background-color:red}</string>
+                     </property>
+                     <property name="value">
+                      <number>24</number>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignHCenter|Qt::AlignTop</set>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="NombreCafeAvantDetartrage">
-                     <property name="maximumSize">
+                    <spacer name="horizontalSpacer_19">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
                       <size>
-                       <width>16777215</width>
-                       <height>100</height>
+                       <width>10</width>
+                       <height>20</height>
                       </size>
                      </property>
-                     <property name="styleSheet">
-                      <string notr="true">font-size:20px;</string>
-                     </property>
-                     <property name="text">
-                      <string>0</string>
-                     </property>
-                    </widget>
+                    </spacer>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_5">
+                     <item>
+                      <spacer name="verticalSpacer_24">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>50</width>
+                         <height>100</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_4">
+                       <item>
+                        <widget class="QLabel" name="labelNombreCafeAvantDetartrage">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>100</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font-size:20px;</string>
+                         </property>
+                         <property name="text">
+                          <string>Nombre cafés restants avant détartrage : </string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="NombreCafeAvantDetartrage">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>100</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font-size:20px;</string>
+                         </property>
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="layoutDernierDetartrage">
+                       <item>
+                        <widget class="QLabel" name="labelDernierDetartrage">
+                         <property name="styleSheet">
+                          <string notr="true">font-size:20px;</string>
+                         </property>
+                         <property name="text">
+                          <string>Nombre de cafés depuis dernier détartrage : </string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="NombreCafeDepuisDernierDetartrage">
+                         <property name="styleSheet">
+                          <string notr="true">font-size:20px;</string>
+                         </property>
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
                    </item>
                   </layout>
                  </item>
@@ -2649,6 +2719,9 @@ background: rgb(114, 159, 207);
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>40</width>
@@ -2666,7 +2739,7 @@ background: rgb(114, 159, 207);
               <widget class="QPushButton" name="boutonNettoyer">
                <property name="minimumSize">
                 <size>
-                 <width>150</width>
+                 <width>250</width>
                  <height>100</height>
                 </size>
                </property>
@@ -2680,7 +2753,7 @@ background: rgb(114, 159, 207);
                 <string notr="true">font-size : 25px;</string>
                </property>
                <property name="text">
-                <string>Nettoyée</string>
+                <string>Détartage effectué</string>
                </property>
               </widget>
              </item>
@@ -2701,6 +2774,19 @@ background: rgb(114, 159, 207);
               </spacer>
              </item>
             </layout>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_54">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <spacer name="horizontalSpacer_65">

@@ -116,6 +116,7 @@ class IHMPikawa : public QMainWindow
     void afficherMessage(QString message, QString couleur);
     void initialiserCafetiere();
     void initialiserPageEntretien();
+    void mettreAJourNombreCafeDepuisDetartrage();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);

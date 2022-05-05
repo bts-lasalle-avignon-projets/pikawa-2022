@@ -666,6 +666,7 @@ void IHMPikawa::reinitialiserDetartrage()
     ui->NombreCafeAvantDetartrage->setText(
       QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE));
     emit detartrageReinitialise();
+    ui->NombreCafeDepuisDernierDetartrage->setText("0");
 }
 
 void IHMPikawa::initialiserPageEntretien()
@@ -677,6 +678,7 @@ void IHMPikawa::initialiserPageEntretien()
       (NOMBRE_CAFE_AVANT_DETARTRAGE -
        cafetiere->getNombreCafeAvantDetartrage().toInt()) *
       100 / NOMBRE_CAFE_AVANT_DETARTRAGE);
+    mettreAJourNombreCafeDepuisDetartrage();
 }
 
 void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
@@ -686,4 +688,11 @@ void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
     ui->etatTartre->setValue(
       (NOMBRE_CAFE_AVANT_DETARTRAGE - nombreCafeDecremente.toInt()) * 100 /
       NOMBRE_CAFE_AVANT_DETARTRAGE);
+    mettreAJourNombreCafeDepuisDetartrage();
 }
+
+void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
+{
+    ui->NombreCafeDepuisDernierDetartrage->setText(QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE - cafetiere->getNombreCafeAvantDetartrage().toInt()));
+}
+

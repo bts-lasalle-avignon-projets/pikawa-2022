@@ -439,10 +439,10 @@ void Cafetiere::decrementerNombreCafeAvantDetartrage()
     QString requete = "SELECT nombreCafeAvantDetartrage FROM Statistiques";
     QString nombreCafeAvantDetartrage = "";
     baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
+    qDebug() << Q_FUNC_INFO << "nombreCafeAvantDetartrage " << nombreCafeAvantDetartrage;
     QString nombreCafeJourDecremente =
       QString::number(nombreCafeAvantDetartrage.toInt() - 1);
-    requete = "UPDATE Statistiques SET nombreCafeAvantDetartrage = " +
-              nombreCafeJourDecremente.toInt();
+    requete = "UPDATE Statistiques SET nombreCafeAvantDetartrage = " + nombreCafeJourDecremente;
     qDebug() << Q_FUNC_INFO << "requete de decrementation" << requete;
     baseDeDonneesPikawa->executer(requete);
     emit NombreCafeAvantDetartrage(nombreCafeJourDecremente);
