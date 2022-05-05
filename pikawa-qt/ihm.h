@@ -18,13 +18,14 @@ class Cafetiere;
  * @def NOM
  * @brief Le nom de l'application
  */
-#define NOM "Pikawa"
+#define NOM                          "Pikawa"
+#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 
 /**
  * @def VERSION
  * @brief La version de l'application
  */
-#define VERSION "0.1"
+#define VERSION "0.2"
 
 /**
  * @def PLEIN_ECRAN
@@ -114,6 +115,7 @@ class IHMPikawa : public QMainWindow
                                bool capsulePresente);
     void afficherMessage(QString message, QString couleur);
     void initialiserCafetiere();
+    void initialiserPageEntretien();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
@@ -152,8 +154,12 @@ class IHMPikawa : public QMainWindow
     void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
+    void mettreAJourNombreCafeTotal(QString nombreCafeIncremente);
+    void reinitialiserDetartrage();
+    void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
 
   signals:
+    void detartrageReinitialise();
 };
 
 #endif // IHM_H

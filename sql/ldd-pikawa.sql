@@ -68,12 +68,13 @@ CREATE TABLE IF NOT EXISTS StockMagasin(
 
 CREATE TABLE IF NOT EXISTS Statistiques(
   idUtilisateur INTEGER PRIMARY KEY NOT NULL,
-  nombreCafeDuJour INTEGER DEFAULT 0,
+  nombreCafeDuJour INTEGER NOT NULL,
   nombreCafeTotal INTEGER DEFAULT 0,
   nombreBacVide INTEGER DEFAULT 0,
   nombreEauRemplie INTEGER DEFAULT 0,
   dureteeEau INTEGER DEFAULT 0,
   qualiteEau INTEGER DEFAULT 0,
+  nombreCafeAvantEntretien INTEGER NOT NULL,
   CONSTRAINT Statistiques_fk_1 FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE
 );
 

@@ -17,6 +17,7 @@
         <file alias="volluto.png">images/capsule-volluto.png</file>
         <file>images/bacPlein.png</file>
         <file>images/bacVide.png</file>
+        <file>images/machinePikawa.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>cafetiere.qss</file>
