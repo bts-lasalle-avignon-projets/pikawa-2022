@@ -496,6 +496,11 @@ void IHMPikawa::gererEvenementsCafetiere()
             SIGNAL(NombreCafeAvantDetartrage(QString)),
             this,
             SLOT(mettreAJourNombreCafeAvantDetartrage(QString)));
+
+    connect(cafetiere,
+            SIGNAL(ErreurAccesBaseDeDonnees()),
+            this,
+            SLOT(afficherErreurAccesBaseDeDonnees()));
 }
 
 void IHMPikawa::initialiserPreferences()
@@ -693,6 +698,15 @@ void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
 
 void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
 {
-    ui->NombreCafeDepuisDernierDetartrage->setText(QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE - cafetiere->getNombreCafeAvantDetartrage().toInt()));
+    ui->NombreCafeDepuisDernierDetartrage->setText(
+      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE -
+                      cafetiere->getNombreCafeAvantDetartrage().toInt()));
 }
 
+void IHMPikawa::afficherErreurAccesBaseDeDonnees()
+{
+    qDebug() << Q_FUNC_INFO;
+    QMessageBox::critical(this,
+                          "Erreur",
+                          "Accès impossible à la base de données");
+}

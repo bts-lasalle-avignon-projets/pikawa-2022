@@ -158,6 +158,7 @@ class IHMPikawa : public QMainWindow
     void mettreAJourNombreCafeTotal(QString nombreCafeIncremente);
     void reinitialiserDetartrage();
     void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
+    void afficherErreurAccesBaseDeDonnees();
 
   signals:
     void detartrageReinitialise();

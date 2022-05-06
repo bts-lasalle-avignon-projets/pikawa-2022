@@ -330,6 +330,9 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
     {
         this->cafeEnPreparation = true;
         emit cafeEnCours();
+        incrementerNombreCafeJour();
+        recupererEtatMagasin();
+        decrementerNombreCafeAvantDetartrage();
     }
     else
     {
@@ -343,8 +346,6 @@ void Cafetiere::lancerLaPreparationCafe()
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
     // recupererEtatCafetiere();
     recupererEtatMagasin();
-    incrementerNombreCafeJour();
-    decrementerNombreCafeAvantDetartrage();
 }
 
 void Cafetiere::initialiserNomCapsules()
@@ -422,35 +423,52 @@ void Cafetiere::ouvrirBaseDeDonnees()
 
 void Cafetiere::incrementerNombreCafeJour()
 {
-    QString requete        = "SELECT nombreCafeTotal FROM Statistiques";
+    QString requete        = "SELECT nombreCafeTotal FROM Entretien";
     QString nombreCafeJour = "";
-    baseDeDonneesPikawa->recuperer(requete, nombreCafeJour);
-    QString nombreCafeJourIncremente =
-      QString::number(nombreCafeJour.toInt() + 1);
-    requete =
-      "UPDATE Statistiques SET nombreCafeTotal = " + nombreCafeJourIncremente;
-    qDebug() << Q_FUNC_INFO << requete;
-    baseDeDonneesPikawa->executer(requete);
-    emit NombreCafeTotal(nombreCafeJourIncremente);
+    bool    retour = baseDeDonneesPikawa->recuperer(requete, nombreCafeJour);
+    if(!retour)
+    {
+        emit ErreurAccesBaseDeDonnees();
+    }
+    else
+    {
+        QString nombreCafeJourIncremente =
+          QString::number(nombreCafeJour.toInt() + 1);
+        requete =
+          "UPDATE Entretien SET nombreCafeTotal = " + nombreCafeJourIncremente;
+        qDebug() << Q_FUNC_INFO << requete;
+        baseDeDonneesPikawa->executer(requete);
+        emit NombreCafeTotal(nombreCafeJourIncremente);
+    }
 }
 
 void Cafetiere::decrementerNombreCafeAvantDetartrage()
 {
-    QString requete = "SELECT nombreCafeAvantDetartrage FROM Statistiques";
+    QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
     QString nombreCafeAvantDetartrage = "";
-    baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
-    qDebug() << Q_FUNC_INFO << "nombreCafeAvantDetartrage " << nombreCafeAvantDetartrage;
-    QString nombreCafeJourDecremente =
-      QString::number(nombreCafeAvantDetartrage.toInt() - 1);
-    requete = "UPDATE Statistiques SET nombreCafeAvantDetartrage = " + nombreCafeJourDecremente;
-    qDebug() << Q_FUNC_INFO << "requete de decrementation" << requete;
-    baseDeDonneesPikawa->executer(requete);
-    emit NombreCafeAvantDetartrage(nombreCafeJourDecremente);
+    bool    retour =
+      baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
+    if(!retour)
+    {
+        emit ErreurAccesBaseDeDonnees();
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "nombreCafeAvantDetartrage "
+                 << nombreCafeAvantDetartrage;
+        QString nombreCafeJourDecremente =
+          QString::number(nombreCafeAvantDetartrage.toInt() - 1);
+        requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
+                  nombreCafeJourDecremente;
+        qDebug() << Q_FUNC_INFO << "requete de decrementation" << requete;
+        baseDeDonneesPikawa->executer(requete);
+        emit NombreCafeAvantDetartrage(nombreCafeJourDecremente);
+    }
 }
 
 QString Cafetiere::getNombreCafeJour() const
 {
-    QString requete        = "SELECT nombreCafeTotal FROM Statistiques";
+    QString requete        = "SELECT nombreCafeTotal FROM Entretien";
     QString nombreCafeJour = "";
     baseDeDonneesPikawa->recuperer(requete, nombreCafeJour);
     return nombreCafeJour;
@@ -458,7 +476,7 @@ QString Cafetiere::getNombreCafeJour() const
 
 QString Cafetiere::getNombreCafeAvantDetartrage() const
 {
-    QString requete = "SELECT nombreCafeAvantDetartrage FROM Statistiques";
+    QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
     QString nombreCafeAvantDetartrage = "";
     baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
     return nombreCafeAvantDetartrage;
@@ -466,7 +484,7 @@ QString Cafetiere::getNombreCafeAvantDetartrage() const
 
 void Cafetiere::reinitialiserDetartrageBaseDeDonnees()
 {
-    QString requete = "UPDATE Statistiques SET nombreCafeAvantDetartrage = " +
+    QString requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
                       QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE);
     baseDeDonneesPikawa->executer(requete);
 }

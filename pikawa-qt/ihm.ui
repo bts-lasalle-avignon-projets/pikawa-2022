@@ -2206,7 +2206,7 @@ background: rgb(114, 159, 207);
           <x>0</x>
           <y>0</y>
           <width>1171</width>
-          <height>1080</height>
+          <height>1100</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="layoutPrincipaleEntretien">
@@ -2421,7 +2421,7 @@ background: rgb(114, 159, 207);
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>10</height>
+                 <height>30</height>
                 </size>
                </property>
               </spacer>
@@ -2460,6 +2460,22 @@ background: rgb(114, 159, 207);
              </item>
              <item>
               <layout class="QHBoxLayout" name="layoutImageEtLabel">
+               <item>
+                <spacer name="horizontalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item>
                 <widget class="QLabel" name="imageCafetiere">
                  <property name="minimumSize">

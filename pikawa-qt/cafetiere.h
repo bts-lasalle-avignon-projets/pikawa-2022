@@ -157,6 +157,7 @@ class Cafetiere : public QObject
     void etatMagasinIHM(QStringList caspulesDisponibles);
     void NombreCafeTotal(QString nombreCafeJourIncremente);
     void NombreCafeAvantDetartrage(QString nombreCafeJourDecremente);
+    void ErreurAccesBaseDeDonnees();
 };
 
 #endif // CAFETIERE_H
