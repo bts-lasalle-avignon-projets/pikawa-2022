@@ -13,14 +13,19 @@ class IHMPikawa
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
     iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
     iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
+    capsulePresente       = new QPixmap(":/RondVert.png");
+    capsuleAbsente        = new QPixmap(":/RondRouge.png");
 !!!139671.cpp!!!	initialiserIHM() : void
     ui->statusbar->showMessage(QString::fromUtf8(NOM) + " " +
                                QString::fromUtf8(VERSION));
     chargerBoutonsCafe();
+    chargerLabelsEtatCafe();
     initialiserIcones();
     activerBoutonConnexionEtatDeconnecte();
     initialiserPreferences();
     afficherPageAcceuil();
+    initialiserPageEntretien();
+
 #ifdef PLEIN_ECRAN
     showFullScreen();
 // showMaximized();
@@ -78,6 +83,25 @@ class IHMPikawa
             SIGNAL(clicked()),
             cafetiere,
             SLOT(lancerLaPreparationCafe()));
+
+    connect(ui->boutonInformationsEntretien,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageInformations()));
+
+    connect(ui->boutonParametresEntretien,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageParametres()));
+
+    connect(ui->boutonAcceuilEntretien,
+            SIGNAL(clicked()),
+            this,
+            SLOT(afficherPageAcceuil()));
+
+    connect(ui->boutonNettoyer,
+            SIGNAL(clicked()),
+            SLOT(reinitialiserDetartrage()));
 !!!153879.cpp!!!	gererEvenementsCafetiere() : void
     connect(cafetiere,
             SIGNAL(cafetiereDetectee(QString, QString)),
@@ -111,6 +135,18 @@ class IHMPikawa
             SIGNAL(cafetierePasPrete()),
             this,
             SLOT(afficherCafetierePasPrete()));
+    connect(cafetiere,
+            SIGNAL(nombreCafesTotal(QString)),
+            this,
+            SLOT(mettreAJourNombreCafeTotal(QString)));
+    connect(cafetiere,
+            SIGNAL(nombreCafesAvantDetartrage(QString)),
+            this,
+            SLOT(mettreAJourNombreCafeAvantDetartrage(QString)));
+    connect(cafetiere,
+            SIGNAL(erreurAccesBaseDeDonnees()),
+            this,
+            SLOT(afficherErreurAccesBaseDeDonnees()));
 !!!139927.cpp!!!	initialiserPreferences() : void
     QStringList preferences = cafetiere->getPreferences();
 
@@ -172,11 +208,21 @@ class IHMPikawa
     boutonsCafes.push_back(ui->boutonCosi);
     boutonsCafes.push_back(ui->boutonScuro);
     boutonsCafes.push_back(ui->boutonVanilla);
+!!!162071.cpp!!!	chargerLabelsEtatCafe() : void
+    labelsEtatCafe.push_back(ui->labelEtatColombia);
+    labelsEtatCafe.push_back(ui->labelEtatIndonesia);
+    labelsEtatCafe.push_back(ui->labelEtatEthiopia);
+    labelsEtatCafe.push_back(ui->labelEtatVolluto);
+    labelsEtatCafe.push_back(ui->labelEtatCapriccio);
+    labelsEtatCafe.push_back(ui->labelEtatCosi);
+    labelsEtatCafe.push_back(ui->labelEtatScuro);
+    labelsEtatCafe.push_back(ui->labelEtatVanilla);
 !!!140311.cpp!!!	ouvrirBaseDeDonnees() : void
-    baseDeDonnees = BaseDeDonnees::getInstance();
-    baseDeDonnees->ouvrir(NOM_BDD);
+    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
+    baseDeDonneesPikawa->ouvrir(NOM_BDD);
 !!!140439.cpp!!!	afficherAvertissement(in niveauEau : int, in bacPasPlein : bool, in capsulePresente : bool, in tassePresente : bool) : void
-    QString message = "";
+    Q_UNUSED(niveauEau)
+    QString message;
 
     if((cafetiere->getNiveauEau() - cafetiere->getNiveauEauNecessaire()) <= 0)
     {
@@ -232,6 +278,19 @@ class IHMPikawa
                                         ";");
 !!!154007.cpp!!!	initialiserCafetiere() : void
     cafetiere = new Cafetiere(this);
+!!!162199.cpp!!!	initialiserPageEntretien() : void
+    ui->NombreCafeTotal->setText(cafetiere->getNombreCafeJour());
+    ui->NombreCafeAvantDetartrage->setText(
+      cafetiere->getNombreCafeAvantDetartrage());
+    ui->etatTartre->setValue(
+      (NOMBRE_CAFE_AVANT_DETARTRAGE -
+       cafetiere->getNombreCafeAvantDetartrage().toInt()) *
+      100 / NOMBRE_CAFE_AVANT_DETARTRAGE);
+    mettreAJourNombreCafeDepuisDetartrage();
+!!!162327.cpp!!!	mettreAJourNombreCafeDepuisDetartrage() : void
+    ui->NombreCafeDepuisDernierDetartrage->setText(
+      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE -
+                      cafetiere->getNombreCafeAvantDetartrage().toInt()));
 !!!140695.cpp!!!	IHMPikawa(inout parent : QWidget = nullptr)
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -253,8 +312,10 @@ class IHMPikawa
     afficherPage(IHMPikawa::Page::Accueil);
 !!!141207.cpp!!!	afficherPageInformations() : void
     afficherPage(IHMPikawa::Page::Information);
+    ui->boutonInformationsInformation->setEnabled(false);
 !!!141335.cpp!!!	afficherPageEntretien() : void
     afficherPage(IHMPikawa::Page::Entretien);
+    ui->boutonEntretienEntretien->setEnabled(false);
 !!!141463.cpp!!!	afficherPageParametres() : void
     afficherPage(IHMPikawa::Page::Parametres);
 !!!141591.cpp!!!	afficherPageSelectionCafe() : void
@@ -406,7 +467,7 @@ class IHMPikawa
     }
     else
     {
-        ui->labelBac->setStyleSheet("font-size: 25px; color: black;");
+        ui->labelEau->setStyleSheet("font-size: 25px; color: black;");
     }
 
     if(!bacPasPlein)
@@ -422,18 +483,43 @@ class IHMPikawa
 
     afficherAvertissement(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 !!!144151.cpp!!!	mettreAJourMagasinIHM(in caspulesDisponibles : QStringList) : void
+    qDebug() << Q_FUNC_INFO;
     for(int i = 0; i < caspulesDisponibles.size(); ++i)
     {
         if(caspulesDisponibles.at(i) == "1")
         {
             boutonsCafes.at(i)->setEnabled(true);
+            labelsEtatCafe.at(i)->setPixmap(*capsulePresente);
         }
         else
         {
             boutonsCafes.at(i)->setEnabled(false);
+            labelsEtatCafe.at(i)->setPixmap(*capsuleAbsente);
         }
     }
 !!!144279.cpp!!!	afficherCafetierePrete() : void
     ui->boutonLancerPreparation->setEnabled(true);
 !!!144407.cpp!!!	afficherCafetierePasPrete() : void
     ui->boutonLancerPreparation->setEnabled(false);
+!!!162455.cpp!!!	mettreAJourNombreCafeTotal(in nombreCafeIncremente : QString) : void
+    ui->NombreCafeTotal->setText(nombreCafeIncremente);
+!!!162583.cpp!!!	reinitialiserDetartrage() : void
+    ui->etatTartre->setValue(0);
+    ui->NombreCafeAvantDetartrage->setText(
+      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE));
+    emit detartrageReinitialise();
+    ui->NombreCafeDepuisDernierDetartrage->setText("0");
+!!!162711.cpp!!!	mettreAJourNombreCafeAvantDetartrage(in nombreCafeDecremente : QString) : void
+    ui->NombreCafeAvantDetartrage->setText(nombreCafeDecremente);
+    ui->etatTartre->setValue(
+      (NOMBRE_CAFE_AVANT_DETARTRAGE - nombreCafeDecremente.toInt()) * 100 /
+      NOMBRE_CAFE_AVANT_DETARTRAGE);
+    mettreAJourNombreCafeDepuisDetartrage();
+!!!162839.cpp!!!	afficherErreurAccesBaseDeDonnees() : void
+    qDebug() << Q_FUNC_INFO;
+    /**
+     * @todo Afficher dans l'IHM si nécessaire
+     */
+    /*QMessageBox::critical(this,
+                          "Erreur",
+                          "Accès impossible à la base de données");*/
