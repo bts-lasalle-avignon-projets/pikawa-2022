@@ -13,8 +13,8 @@
 #include <QStringList>
 
 // Pour les tests
-#define IDENTIFIANT_UTILISATEUR    "tvaira"
-#define IDENTIFIANT_UTILISATEUR_ID "1"
+#define IDENTIFIANT_UTILISATEUR    "abryckaert"
+#define IDENTIFIANT_UTILISATEUR_ID "3"
 
 #define TAILLE_RESERVOIR 800
 
@@ -155,9 +155,9 @@ class Cafetiere : public QObject
     void cafetierePrete();
     void cafetierePasPrete();
     void etatMagasinIHM(QStringList caspulesDisponibles);
-    void NombreCafeTotal(QString nombreCafeJourIncremente);
-    void NombreCafeAvantDetartrage(QString nombreCafeJourDecremente);
-    void ErreurAccesBaseDeDonnees();
+    void nombreCafesTotal(QString nombreCafeJourIncremente);
+    void nombreCafesAvantDetartrage(QString nombreCafeJourDecremente);
+    void erreurAccesBaseDeDonnees();
 };
 
 #endif // CAFETIERE_H

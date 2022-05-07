@@ -876,11 +876,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Eau insuffisante
-Bac plein
-Caspule non présente
-Tasse non présente
-</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -1260,314 +1256,342 @@ background: rgb(114, 159, 207);
        <property name="styleSheet">
         <string notr="true">background:rgb(233, 185, 110);</string>
        </property>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>50</y>
-          <width>1001</width>
-          <height>531</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <layout class="QHBoxLayout" name="LayoutMenu">
-         <item>
-          <widget class="QPushButton" name="boutonAcceuilSelectionCafe">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>80</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>200</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font-size:25px;</string>
-           </property>
-           <property name="text">
-            <string>Acceuil</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <layout class="QGridLayout" name="LayoutSelectionCafe">
-           <item row="8" column="2">
-            <widget class="QPushButton" name="boutonScuro">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Scuro</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/scuro.png</normaloff>:/scuro.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="4">
-            <widget class="QPushButton" name="boutonVolluto">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>15077215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Volluto</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/volluto.png</normaloff>:/volluto.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0">
-            <widget class="QPushButton" name="boutonCosi">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Cosi</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/cosi.png</normaloff>:/cosi.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="3">
-            <widget class="QPushButton" name="boutonVanilla">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Vanilla</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/vanilla-eclair.png</normaloff>:/vanilla-eclair.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="3">
-            <widget class="QPushButton" name="boutonEthiopia">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Ethiopia</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/ethiopia.png</normaloff>:/ethiopia.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="4">
-            <widget class="QPushButton" name="boutonCapriccio">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Capriccio</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/capriccio.png</normaloff>:/capriccio.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="2">
-            <widget class="QPushButton" name="boutonIndonesia">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Indonesia</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/indonesia.png</normaloff>:/indonesia.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QPushButton" name="boutonColombia">
-             <property name="minimumSize">
-              <size>
-               <width>190</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>150</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Colombia</string>
-             </property>
-             <property name="icon">
-              <iconset resource="ressources.qrc">
-               <normaloff>:/colombia.png</normaloff>:/colombia.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <spacer name="verticalSpacer_14">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>5</width>
-             <height>5</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </widget>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="LayoutMenu">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="boutonAcceuilSelectionCafe">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-size: 30px;
+background-color: rgb(237, 212, 0);</string>
+            </property>
+            <property name="text">
+             <string>Acceuil</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Minimum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="LayoutSelectionCafe">
+            <item row="8" column="3">
+             <widget class="QPushButton" name="boutonVanilla">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Vanilla</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/vanilla-eclair.png</normaloff>:/vanilla-eclair.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QPushButton" name="boutonCosi">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Cosi</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/cosi.png</normaloff>:/cosi.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QPushButton" name="boutonIndonesia">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Indonesia</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/indonesia.png</normaloff>:/indonesia.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QPushButton" name="boutonVolluto">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>15077215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Volluto</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/volluto.png</normaloff>:/volluto.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="boutonColombia">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Colombia</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/colombia.png</normaloff>:/colombia.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QPushButton" name="boutonEthiopia">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Ethiopia</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/ethiopia.png</normaloff>:/ethiopia.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="4">
+             <widget class="QPushButton" name="boutonCapriccio">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Capriccio</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/capriccio.png</normaloff>:/capriccio.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="2">
+             <widget class="QPushButton" name="boutonScuro">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Scuro</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/scuro.png</normaloff>:/scuro.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>5</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="information">
        <property name="styleSheet">
         <string notr="true">background:rgb(233, 185, 110);</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item>
          <layout class="QHBoxLayout" name="layoutPrincipal">
           <property name="spacing">
@@ -1695,7 +1719,7 @@ background: rgb(114, 159, 207);
               </property>
              </spacer>
             </item>
-            <item alignment="Qt::AlignHCenter">
+            <item>
              <widget class="QPushButton" name="boutonAcceuilInformation">
               <property name="minimumSize">
                <size>
@@ -1710,7 +1734,8 @@ background: rgb(114, 159, 207);
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">font-size:25px;</string>
+               <string notr="true">font-size: 30px;
+background-color: rgb(237, 212, 0);</string>
               </property>
               <property name="text">
                <string>Accueil</string>
@@ -1758,7 +1783,7 @@ background: rgb(114, 159, 207);
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>100</height>
+                <height>50</height>
                </size>
               </property>
              </spacer>
@@ -1769,6 +1794,19 @@ background: rgb(114, 159, 207);
                <number>0</number>
               </property>
              </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="styleSheet">
+               <string notr="true">font-size: 40px;</string>
+              </property>
+              <property name="text">
+               <string>Informations</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer name="verticalSpacer_12">
@@ -2206,7 +2244,7 @@ background: rgb(114, 159, 207);
           <x>0</x>
           <y>0</y>
           <width>1171</width>
-          <height>1100</height>
+          <height>1167</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="layoutPrincipaleEntretien">
@@ -2371,7 +2409,7 @@ background: rgb(114, 159, 207);
                </property>
               </spacer>
              </item>
-             <item alignment="Qt::AlignHCenter">
+             <item>
               <widget class="QPushButton" name="boutonAcceuilEntretien">
                <property name="minimumSize">
                 <size>
@@ -2386,7 +2424,8 @@ background: rgb(114, 159, 207);
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">font-size:25px;</string>
+                <string notr="true">font-size: 30px;
+background-color: rgb(237, 212, 0);</string>
                </property>
                <property name="text">
                 <string>Accueil</string>
@@ -2438,7 +2477,7 @@ background: rgb(114, 159, 207);
                 <string notr="true">font-size:40px;</string>
                </property>
                <property name="text">
-                <string>Ma machine :</string>
+                <string>Entretien</string>
                </property>
               </widget>
              </item>
@@ -2549,7 +2588,7 @@ background: rgb(114, 159, 207);
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">font-size:20px;</string>
+                      <string notr="true">font-size:25px;</string>
                      </property>
                      <property name="text">
                       <string>0</string>
@@ -2756,13 +2795,13 @@ background: rgb(114, 159, 207);
                <property name="minimumSize">
                 <size>
                  <width>250</width>
-                 <height>100</height>
+                 <height>80</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
                  <width>150</width>
-                 <height>100</height>
+                 <height>80</height>
                 </size>
                </property>
                <property name="styleSheet">

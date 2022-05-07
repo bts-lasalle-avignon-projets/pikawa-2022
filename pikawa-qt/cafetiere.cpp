@@ -91,9 +91,6 @@ bool Cafetiere::estCafeEnPreparation() const
 
 int Cafetiere::getIdCapsule(QString nomCapsule) const
 {
-    /**
-      @bug idCapsule Vanilla = -1
-      */
     if(nomCapsules.isEmpty() || nomCapsule.isEmpty())
         return -1;
     return nomCapsules.indexOf(nomCapsule);
@@ -428,7 +425,7 @@ void Cafetiere::incrementerNombreCafeJour()
     bool    retour = baseDeDonneesPikawa->recuperer(requete, nombreCafeJour);
     if(!retour)
     {
-        emit ErreurAccesBaseDeDonnees();
+        emit erreurAccesBaseDeDonnees();
     }
     else
     {
@@ -438,7 +435,7 @@ void Cafetiere::incrementerNombreCafeJour()
           "UPDATE Entretien SET nombreCafeTotal = " + nombreCafeJourIncremente;
         qDebug() << Q_FUNC_INFO << requete;
         baseDeDonneesPikawa->executer(requete);
-        emit NombreCafeTotal(nombreCafeJourIncremente);
+        emit nombreCafesTotal(nombreCafeJourIncremente);
     }
 }
 
@@ -450,7 +447,7 @@ void Cafetiere::decrementerNombreCafeAvantDetartrage()
       baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
     if(!retour)
     {
-        emit ErreurAccesBaseDeDonnees();
+        emit erreurAccesBaseDeDonnees();
     }
     else
     {
@@ -462,7 +459,7 @@ void Cafetiere::decrementerNombreCafeAvantDetartrage()
                   nombreCafeJourDecremente;
         qDebug() << Q_FUNC_INFO << "requete de decrementation" << requete;
         baseDeDonneesPikawa->executer(requete);
-        emit NombreCafeAvantDetartrage(nombreCafeJourDecremente);
+        emit nombreCafesAvantDetartrage(nombreCafeJourDecremente);
     }
 }
 

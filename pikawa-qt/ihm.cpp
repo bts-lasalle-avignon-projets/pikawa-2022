@@ -240,9 +240,6 @@ void IHMPikawa::selectionnerScuro()
 
 void IHMPikawa::selectionnerVanilla()
 {
-    /**
-      @bug idCapsule Vanilla = -1
-      */
     ui->boutonChangerCafe->setIcon(*iconeCapsuleVanilla);
     ui->capsuleChoisie->setText("Vanilla");
     int idCapsule = cafetiere->getIdCapsule("Vanilla");
@@ -486,19 +483,16 @@ void IHMPikawa::gererEvenementsCafetiere()
             SIGNAL(cafetierePasPrete()),
             this,
             SLOT(afficherCafetierePasPrete()));
-
     connect(cafetiere,
-            SIGNAL(NombreCafeTotal(QString)),
+            SIGNAL(nombreCafesTotal(QString)),
             this,
             SLOT(mettreAJourNombreCafeTotal(QString)));
-
     connect(cafetiere,
-            SIGNAL(NombreCafeAvantDetartrage(QString)),
+            SIGNAL(nombreCafesAvantDetartrage(QString)),
             this,
             SLOT(mettreAJourNombreCafeAvantDetartrage(QString)));
-
     connect(cafetiere,
-            SIGNAL(ErreurAccesBaseDeDonnees()),
+            SIGNAL(erreurAccesBaseDeDonnees()),
             this,
             SLOT(afficherErreurAccesBaseDeDonnees()));
 }
@@ -587,8 +581,8 @@ void IHMPikawa::chargerLabelsEtatCafe()
 
 void IHMPikawa::ouvrirBaseDeDonnees()
 {
-    baseDeDonnees = BaseDeDonnees::getInstance();
-    baseDeDonnees->ouvrir(NOM_BDD);
+    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
+    baseDeDonneesPikawa->ouvrir(NOM_BDD);
 }
 
 void IHMPikawa::afficherAvertissement(int  niveauEau,
@@ -596,7 +590,8 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
                                       bool capsulePresente,
                                       bool tassePresente)
 {
-    QString message = "";
+    Q_UNUSED(niveauEau)
+    QString message;
 
     if((cafetiere->getNiveauEau() - cafetiere->getNiveauEauNecessaire()) <= 0)
     {
@@ -706,7 +701,10 @@ void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
 void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 {
     qDebug() << Q_FUNC_INFO;
-    QMessageBox::critical(this,
+    /**
+     * @todo Afficher dans l'IHM si nécessaire
+     */
+    /*QMessageBox::critical(this,
                           "Erreur",
-                          "Accès impossible à la base de données");
+                          "Accès impossible à la base de données");*/
 }
