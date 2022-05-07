@@ -6,6 +6,7 @@
 
 INSERT INTO Utilisateur(nom,prenom,identifiant,email) VALUES('VAIRA','Thierry','tvaira','tvaira@free.fr');
 INSERT INTO Utilisateur(nom,prenom,identifiant,email) VALUES('BEAUMONT','Jérôme','jbeaumont','beaumont@lasalle84.org');
+INSERT INTO Utilisateur(nom,prenom,identifiant,email) VALUES('BRYCKAERT','Anthony','abryckaert','bryckaert@lasalle84.org');
 
 -- Table Capsule
 
@@ -42,10 +43,16 @@ INSERT INTO StockMagasin (idMagasin,idCapsule,quantiteMax,quantite,rangee) VALUE
 
 -- Table Statistiques
 
-INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreCafeTotal,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(1,0,0,0,0,0,0);
-INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreCafeTotal,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(2,0,0,0,0,0,0);
+INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(1,0,0,0,0,0);
+INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(2,0,0,0,0,0);
+INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(3,0,0,0,0,0);
 
 -- Table Preferences
 
 INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(1,1,1,1);
 INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(2,2,4,3);
+INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(3,3,1,1);
+
+-- Table Entretien
+
+INSERT INTO Entretien(nombreCafeTotal,nombreCafeAvantDetartrage) VALUES(0,75);
