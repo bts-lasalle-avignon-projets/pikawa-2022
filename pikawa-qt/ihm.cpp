@@ -701,10 +701,5 @@ void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
 void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 {
     qDebug() << Q_FUNC_INFO;
-    /**
-     * @todo Afficher dans l'IHM si nécessaire
-     */
-    /*QMessageBox::critical(this,
-                          "Erreur",
-                          "Accès impossible à la base de données");*/
+    afficherMessage("Erreur d'accès a la base de données", "red");
 }
