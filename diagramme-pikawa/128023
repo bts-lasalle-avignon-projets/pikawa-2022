@@ -1,7 +1,7 @@
 format 224
 "pikawa-qt" // pikawa-qt
-  revision 4
-  modified_by 23 "tv"
+  revision 5
+  modified_by 2 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -1731,7 +1731,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 128407 "IHMPikawa"

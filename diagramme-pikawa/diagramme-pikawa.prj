@@ -1,7 +1,7 @@
 format 224
 "diagramme-pikawa"
-  revision 9
-  modified_by 23 "tv"
+  revision 11
+  modified_by 2 "btssn2"
   cpp_root_dir "../pikawa-qt/"
 
 
@@ -700,6 +700,16 @@ format 224
 	-_->
 	  on usecase_ref 129026 // S'identifier
       end
+    end
+
+    sequencediagram 141314 "Diagramme séquence lancer preparation café"
+      sequencediagramsettings show_full_operations_definition yes drawing_language uml end
+      overlapping_bars size A0
+    end
+
+    sequencediagram 141442 "ds gérer préparation"
+      sequencediagramsettings show_full_operations_definition yes drawing_language uml end
+      overlapping_bars size A0
     end
   end
 
