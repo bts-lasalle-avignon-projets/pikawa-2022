@@ -18,13 +18,14 @@ class Cafetiere;
  * @def NOM
  * @brief Le nom de l'application
  */
-#define NOM "Pikawa"
+#define NOM                          "Pikawa"
+#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 
 /**
  * @def VERSION
  * @brief La version de l'application
  */
-#define VERSION "0.1"
+#define VERSION "0.2"
 
 /**
  * @def PLEIN_ECRAN
@@ -48,6 +49,9 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
+    /**
+     * @todo Revoir COMPLETEMENT la mise en page de l'IHM
+     */
     /**
      * @enum Page
      * @brief Les différentes pages de l'application
@@ -77,8 +81,8 @@ class IHMPikawa : public QMainWindow
 
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
-    BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
-    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
+    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
+    Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     // GUI
     QIcon*                iconeBoutonConnecte;
     QIcon*                iconeBoutonDetectee;
@@ -114,6 +118,8 @@ class IHMPikawa : public QMainWindow
                                bool capsulePresente);
     void afficherMessage(QString message, QString couleur);
     void initialiserCafetiere();
+    void initialiserPageEntretien();
+    void mettreAJourNombreCafeDepuisDetartrage();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
@@ -152,8 +158,13 @@ class IHMPikawa : public QMainWindow
     void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
     void afficherCafetierePrete();
     void afficherCafetierePasPrete();
+    void mettreAJourNombreCafeTotal(QString nombreCafeIncremente);
+    void reinitialiserDetartrage();
+    void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
+    void afficherErreurAccesBaseDeDonnees();
 
   signals:
+    void detartrageReinitialise();
 };
 
 #endif // IHM_H

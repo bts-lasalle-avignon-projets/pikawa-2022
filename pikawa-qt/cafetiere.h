@@ -13,14 +13,15 @@
 #include <QStringList>
 
 // Pour les tests
-#define IDENTIFIANT_UTILISATEUR    "tvaira"
-#define IDENTIFIANT_UTILISATEUR_ID "1"
+#define IDENTIFIANT_UTILISATEUR    "abryckaert"
+#define IDENTIFIANT_UTILISATEUR_ID "3"
 
 #define TAILLE_RESERVOIR 800
 
-#define CAFE_PRET               0
-#define CAFE_EN_PREPARATION     1
-#define ERREUR_PREPARATION_CAFE 2
+#define CAFE_PRET                    0
+#define CAFE_EN_PREPARATION          1
+#define ERREUR_PREPARATION_CAFE      2
+#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 
 class IHMPikawa;
 class Communication;
@@ -82,6 +83,10 @@ class Cafetiere : public QObject
     QStringList getDisponibiliteCapsules() const;
     bool        estCapsuleChoisieDisponible();
     bool        estCapsuleChoisieDisponible(int capsule);
+    void        incrementerNombreCafeJour();
+    void        decrementerNombreCafeAvantDetartrage();
+    QString     getNombreCafeJour() const;
+    QString     getNombreCafeAvantDetartrage() const;
     /**
      * @enum ChampsTablePreferences
      * @brief Les différentes colonne de la table Preferences
@@ -93,7 +98,8 @@ class Cafetiere : public QObject
         COLONNE_PREFERENCES_NOM_UTILISATEUR,     //!< nom de l'utilisateur
         COLONNE_PREFERENCES_PRENOM_UTILISATEUR,  //!< prénom de l'utilisateur
         COLONNE_PREFERENCES_ID_CAPSULE,          //!< id de la capsule
-        COLONNE_PREFERENCES_DESIGNATION_CAPSULE, //!< désignation de la capsule
+        COLONNE_PREFERENCES_DESIGNATION_CAPSULE, //!< désignation de la
+                                                 //!< capsule
         COLONNE_PREFERENCES_LIBELLE_CAPSULE,     //!< libellé de la capsule
         COLONNE_PREFERENCES_ID_TYPEBOISSON,      //!< id du type de boisson
         COLONNE_PREFERENCES_TYPE_BOISSON,        //!< type de boisson
@@ -132,6 +138,7 @@ class Cafetiere : public QObject
     void mettreAJourMagasin(QStringList caspulesDisponibles);
     void gererEtatPreparationCafe(int preparation);
     void lancerLaPreparationCafe();
+    void reinitialiserDetartrageBaseDeDonnees();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
@@ -148,6 +155,9 @@ class Cafetiere : public QObject
     void cafetierePrete();
     void cafetierePasPrete();
     void etatMagasinIHM(QStringList caspulesDisponibles);
+    void nombreCafesTotal(QString nombreCafeJourIncremente);
+    void nombreCafesAvantDetartrage(QString nombreCafeJourDecremente);
+    void erreurAccesBaseDeDonnees();
 };
 
 #endif // CAFETIERE_H

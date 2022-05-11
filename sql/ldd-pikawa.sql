@@ -2,6 +2,7 @@
 
 --- Supprime les tables
 
+DROP TABLE IF EXISTS Entretien;
 DROP TABLE IF EXISTS Preferences;
 DROP TABLE IF EXISTS Statistiques;
 DROP TABLE IF EXISTS StockMagasin;
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Capsule(
   designation VARCHAR,
   libelle VARCHAR,
   description VARCHAR,
-  intensite INTEGER DEFAULT 0,
+  intensite INTEGER DEFAULT 0
 );
 
 -- Structure de la table TypeBoisson
@@ -69,7 +70,6 @@ CREATE TABLE IF NOT EXISTS StockMagasin(
 CREATE TABLE IF NOT EXISTS Statistiques(
   idUtilisateur INTEGER PRIMARY KEY NOT NULL,
   nombreCafeDuJour INTEGER DEFAULT 0,
-  nombreCafeTotal INTEGER DEFAULT 0,
   nombreBacVide INTEGER DEFAULT 0,
   nombreEauRemplie INTEGER DEFAULT 0,
   dureteeEau INTEGER DEFAULT 0,
@@ -87,4 +87,11 @@ CREATE TABLE IF NOT EXISTS Preferences(
   CONSTRAINT Preferences_fk_1 FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE,
   CONSTRAINT Preferences_fk_2 FOREIGN KEY (capsuleActuelle) REFERENCES Capsule(idCapsule) ON DELETE CASCADE,
   CONSTRAINT Preferences_fk_3 FOREIGN KEY (typeBoissonActuelle) REFERENCES TypeBoisson(idTypeBoisson) ON DELETE CASCADE
+);
+
+-- Structure de la table Entretien
+
+CREATE TABLE IF NOT EXISTS Entretien (
+	nombreCafeTotal INTEGER DEFAULT 0,
+	nombreCafeAvantDetartrage INTEGER DEFAULT 75
 );

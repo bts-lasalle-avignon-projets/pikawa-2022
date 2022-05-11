@@ -17,6 +17,11 @@ class Cafetiere
       identifiantUtilisateur + "';";
     baseDeDonneesPikawa->recuperer(requete, preferences);
     qDebug() << Q_FUNC_INFO << preferences;
+!!!129815.cpp!!!	gererEvenements() : void
+    connect(ihm,
+            SIGNAL(detartrageReinitialise()),
+            this,
+            SLOT(reinitialiserDetartrageBaseDeDonnees()));
 !!!129943.cpp!!!	gererEvenementsCommunication() : void
     connect(communication,
             SIGNAL(cafetiereDetectee(QString, QString)),
@@ -192,6 +197,55 @@ class Cafetiere
     {
         return false;
     }
+!!!161047.cpp!!!	incrementerNombreCafeJour() : void
+    QString requete        = "SELECT nombreCafeTotal FROM Entretien";
+    QString nombreCafeJour = "";
+    bool    retour = baseDeDonneesPikawa->recuperer(requete, nombreCafeJour);
+    if(!retour)
+    {
+        emit erreurAccesBaseDeDonnees();
+    }
+    else
+    {
+        QString nombreCafeJourIncremente =
+          QString::number(nombreCafeJour.toInt() + 1);
+        requete =
+          "UPDATE Entretien SET nombreCafeTotal = " + nombreCafeJourIncremente;
+        qDebug() << Q_FUNC_INFO << requete;
+        baseDeDonneesPikawa->executer(requete);
+        emit nombreCafesTotal(nombreCafeJourIncremente);
+    }
+!!!161175.cpp!!!	decrementerNombreCafeAvantDetartrage() : void
+    QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
+    QString nombreCafeAvantDetartrage = "";
+    bool    retour =
+      baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
+    if(!retour)
+    {
+        emit erreurAccesBaseDeDonnees();
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "nombreCafeAvantDetartrage "
+                 << nombreCafeAvantDetartrage;
+        QString nombreCafeJourDecremente =
+          QString::number(nombreCafeAvantDetartrage.toInt() - 1);
+        requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
+                  nombreCafeJourDecremente;
+        qDebug() << Q_FUNC_INFO << "requete de decrementation" << requete;
+        baseDeDonneesPikawa->executer(requete);
+        emit nombreCafesAvantDetartrage(nombreCafeJourDecremente);
+    }
+!!!161303.cpp!!!	getNombreCafeJour() : QString
+    QString requete        = "SELECT nombreCafeTotal FROM Entretien";
+    QString nombreCafeJour = "";
+    baseDeDonneesPikawa->recuperer(requete, nombreCafeJour);
+    return nombreCafeJour;
+!!!161431.cpp!!!	getNombreCafeAvantDetartrage() : QString
+    QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
+    QString nombreCafeAvantDetartrage = "";
+    baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
+    return nombreCafeAvantDetartrage;
 !!!133015.cpp!!!	demarrerDecouverte() : void
     qDebug() << Q_FUNC_INFO;
     communication->activerLaDecouverte();
@@ -258,6 +312,9 @@ class Cafetiere
     {
         this->cafeEnPreparation = true;
         emit cafeEnCours();
+        incrementerNombreCafeJour();
+        recupererEtatMagasin();
+        decrementerNombreCafeAvantDetartrage();
     }
     else
     {
@@ -268,3 +325,7 @@ class Cafetiere
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
     // recupererEtatCafetiere();
     recupererEtatMagasin();
+!!!161559.cpp!!!	reinitialiserDetartrageBaseDeDonnees() : void
+    QString requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
+                      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE);
+    baseDeDonneesPikawa->executer(requete);
