@@ -359,11 +359,13 @@ void IHMPikawa::initialiserIHM()
                                QString::fromUtf8(VERSION));
     chargerBoutonsCafe();
     chargerLabelsEtatCafe();
+    chargerlabelsDescriptions();
     initialiserIcones();
     activerBoutonConnexionEtatDeconnecte();
     initialiserPreferences();
     afficherPageAcceuil();
     initialiserPageEntretien();
+    chargerDescription();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -579,6 +581,18 @@ void IHMPikawa::chargerLabelsEtatCafe()
     labelsEtatCafe.push_back(ui->labelEtatVanilla);
 }
 
+void IHMPikawa::chargerlabelsDescriptions()
+{
+    labelsDescriptions.push_back(ui->descriptionColombia);
+    labelsDescriptions.push_back(ui->descriptionIndonesia);
+    labelsDescriptions.push_back(ui->descriptionEthiopia);
+    labelsDescriptions.push_back(ui->descriptionVolluto);
+    labelsDescriptions.push_back(ui->descriptionCapriccio);
+    labelsDescriptions.push_back(ui->descriptionCosi);
+    labelsDescriptions.push_back(ui->descriptionScuro);
+    labelsDescriptions.push_back(ui->descriptionVanilla);
+}
+
 void IHMPikawa::ouvrirBaseDeDonnees()
 {
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
@@ -702,4 +716,16 @@ void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 {
     qDebug() << Q_FUNC_INFO;
     afficherMessage("Erreur d'accès a la base de données", "red");
+}
+
+void IHMPikawa::chargerDescription()
+{
+    for(int i = 1 ; i < labelsDescriptions.size() + 1; ++i)
+    {
+        QString description = "";
+        QString requette = "SELECT description FROM Capsule WHERE idCapsule =" + QString::number(i);
+        qDebug() << Q_FUNC_INFO << requette ;
+        baseDeDonneesPikawa->recuperer(requette, description);
+        labelsDescriptions.at(i - 1)->setText(description);
+    }
 }

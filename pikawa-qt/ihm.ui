@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -1762,18 +1762,21 @@ background-color: rgb(237, 212, 0);</string>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>50</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="layoutVerticalCentralEntretien">
+           <layout class="QVBoxLayout" name="verticalLayoutMilieuPrincipale">
             <item>
-             <spacer name="verticalSpacer_9">
+             <spacer name="verticalSpacer_27">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
@@ -1783,452 +1786,654 @@ background-color: rgb(237, 212, 0);</string>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>50</height>
+                <height>40</height>
                </size>
               </property>
              </spacer>
             </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-             </layout>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_2">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label_11">
               <property name="styleSheet">
-               <string notr="true">font-size: 40px;</string>
+               <string notr="true">font-size:35px;</string>
               </property>
               <property name="text">
-               <string>Informations</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>Description et disponibilité des capsules</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="verticalSpacer_12">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>10</width>
-                <height>50</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_5"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="disponibiliteCaspule">
-              <property name="styleSheet">
-               <string notr="true">font-size:24px;</string>
-              </property>
-              <property name="text">
-               <string>Disponibilité des caspules</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>15</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <layout class="QGridLayout" name="gridLayout">
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <property name="spacing">
-               <number>20</number>
-              </property>
-              <item row="1" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule1">
-                <property name="spacing">
-                 <number>12</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
+             <layout class="QHBoxLayout" name="horizontalLayoutSecondaireMilieu">
+              <item>
+               <layout class="QVBoxLayout" name="layoutVerticalGauchelInformations">
                 <item>
-                 <widget class="QLabel" name="labelEtatColombia">
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule1">
+                  <property name="spacing">
+                   <number>12</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="labelEtatColombia">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>false</bool>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapColombiaInformation">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/colombia.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelColombia">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Colombia</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_8">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionColombia">
+                  <property name="styleSheet">
+                   <string notr="true">font-size:17px;</string>
+                  </property>
                   <property name="text">
                    <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
-                  </property>
-                  <property name="scaledContents">
-                   <bool>false</bool>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelColombia">
-                  <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
-                  </property>
-                  <property name="text">
-                   <string>Colombia</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_8">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="1" column="2">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule2">
-                <property name="spacing">
-                 <number>12</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="labelEtatIndonesia">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelIndonesia">
-                  <property name="styleSheet">
-                   <string notr="true">font-size: 20px;</string>
-                  </property>
-                  <property name="text">
-                   <string>Indonesia</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_9">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="2" column="2">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule4">
-                <item>
-                 <widget class="QLabel" name="labelEtatVolluto">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelVolluto">
-                  <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
-                  </property>
-                  <property name="text">
-                   <string>Volluto</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_11">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="11" column="2">
-               <spacer name="verticalSpacer_11">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="11" column="1">
-               <spacer name="verticalSpacer_10">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="2" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule3">
-                <item>
-                 <widget class="QLabel" name="labelEtatEthiopia">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelEthiopia">
-                  <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
-                  </property>
-                  <property name="text">
-                   <string>Ethiopia</string>
                   </property>
                   <property name="wordWrap">
-                   <bool>false</bool>
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_10">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule2">
+                  <property name="spacing">
+                   <number>12</number>
                   </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
+                  <property name="bottomMargin">
+                   <number>0</number>
                   </property>
-                 </spacer>
+                  <item>
+                   <widget class="QLabel" name="labelEtatIndonesia">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapIndonesiaInformation">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/indonesia.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelIndonesia">
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Indonesia</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_9">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
                 </item>
-               </layout>
-              </item>
-              <item row="3" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule5">
                 <item>
-                 <widget class="QLabel" name="labelEtatCapriccio">
+                 <widget class="QLabel" name="descriptionIndonesia">
+                  <property name="styleSheet">
+                   <string notr="true">font-size:17px;</string>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="labelCapriccio">
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule4">
+                  <item>
+                   <widget class="QLabel" name="labelEtatVolluto">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapVollutoInformation">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/volluto.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelVolluto">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Volluto</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_11">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionVolluto">
                   <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
+                   <string notr="true">font-size:17px;</string>
                   </property>
-                  <property name="text">
-                   <string>Capriccio</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_12">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="4" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule7">
-                <item>
-                 <widget class="QLabel" name="labelEtatScuro">
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="labelScuro">
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule3">
+                  <item>
+                   <widget class="QLabel" name="labelEtatEthiopia">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapEthiopiaInformation">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/ethiopia.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelEthiopia">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Ethiopia</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_10">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionEthiopia">
                   <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
+                   <string notr="true">font-size:17px;</string>
                   </property>
-                  <property name="text">
-                   <string>Scuro</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_13">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="3" column="2">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule6">
-                <item>
-                 <widget class="QLabel" name="labelEtatCosi">
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelCosi">
-                  <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
-                  </property>
-                  <property name="text">
-                   <string>Cosi</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_14">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                </layout>
               </item>
-              <item row="4" column="2">
-               <layout class="QHBoxLayout" name="horizontalLayoutCapsule8">
+              <item>
+               <spacer name="horizontalSpacer_21">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>25</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayoutDroiteInformations">
                 <item>
-                 <widget class="QLabel" name="labelEtatVanilla">
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule8">
+                  <item>
+                   <widget class="QLabel" name="labelEtatVanilla">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapVanillaInformation">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/vanilla-eclair.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelVanilla">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Vanilla</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_15">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionVanilla">
+                  <property name="styleSheet">
+                   <string notr="true">font-size:17px;</string>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="pixmap">
-                   <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="labelVanilla">
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule7">
+                  <item>
+                   <widget class="QLabel" name="labelEtatScuro">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapScuroInformation">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/scuro.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelScuro">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Scuro</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_13">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionScuro">
                   <property name="styleSheet">
-                   <string notr="true">font-size:20px;</string>
+                   <string notr="true">font-size:17px;</string>
                   </property>
                   <property name="text">
-                   <string>Vanilla</string>
+                   <string/>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_15">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule5">
+                  <item>
+                   <widget class="QLabel" name="labelEtatCapriccio">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapCapriccioInformation">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/capriccio.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelCapriccio">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Capriccio</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_12">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionCapriccio">
+                  <property name="styleSheet">
+                   <string notr="true">font-size:17px;</string>
                   </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
+                  <property name="text">
+                   <string/>
                   </property>
-                 </spacer>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayoutCapsule6">
+                  <item>
+                   <widget class="QLabel" name="labelEtatCosi">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/RondRouge.png</pixmap>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="pixmapCosiInformation">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="ressources.qrc">:/cosi.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="labelCosi">
+                    <property name="styleSheet">
+                     <string notr="true">font-size:20px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Cosi</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_14">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="descriptionCosi">
+                  <property name="styleSheet">
+                   <string notr="true">font-size:17px;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
              </layout>
             </item>
+            <item>
+             <spacer name="verticalSpacer_28">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
            </layout>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
