@@ -20,7 +20,8 @@ class Cafetiere;
  */
 #define NOM                          "Pikawa"
 #define NOMBRE_CAFE_AVANT_DETARTRAGE 75
-
+#define INTENSITE_MAX                12
+#define GRAIN_INTENSITE_MAX          5
 /**
  * @def VERSION
  * @brief La version de l'application
@@ -84,23 +85,31 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     // GUI
-    QIcon*                iconeBoutonConnecte;
-    QIcon*                iconeBoutonDetectee;
-    QIcon*                iconeBoutonDeconnecte;
-    QIcon*                iconeCapsuleColombia;
-    QIcon*                iconeCapsuleIndonesia;
-    QIcon*                iconeCapsuleEthiopia;
-    QIcon*                iconeCapsuleVolluto;
-    QIcon*                iconeCapsuleCapriccio;
-    QIcon*                iconeCapsuleCosi;
-    QIcon*                iconeCapsuleScuro;
-    QIcon*                iconeCapsuleVanilla;
-    QPixmap*              iconeBacPlein;
-    QPixmap*              iconeBacPasPlein;
-    QPixmap*              capsulePresente;
-    QPixmap*              capsuleAbsente;
+    QIcon*   iconeBoutonConnecte;
+    QIcon*   iconeBoutonDetectee;
+    QIcon*   iconeBoutonDeconnecte;
+    QIcon*   iconeCapsuleColombia;
+    QIcon*   iconeCapsuleIndonesia;
+    QIcon*   iconeCapsuleEthiopia;
+    QIcon*   iconeCapsuleVolluto;
+    QIcon*   iconeCapsuleCapriccio;
+    QIcon*   iconeCapsuleCosi;
+    QIcon*   iconeCapsuleScuro;
+    QIcon*   iconeCapsuleVanilla;
+    QPixmap* iconeBacPlein;
+    QPixmap* iconeBacPasPlein;
+    QPixmap* capsulePresente;
+    QPixmap* capsuleAbsente;
+    QPixmap* intensite1;
+    QPixmap* intensite2;
+    QPixmap* intensite3;
+    QPixmap* intensite4;
+    QPixmap* intensite5;
+
     QVector<QPushButton*> boutonsCafes;
     QVector<QLabel*>      labelsEtatCafe;
+    QVector<QLabel*>      labelsDescriptions;
+    QVector<QLabel*>      labelsintensitesCafes;
 
     void initialiserIcones();
     void initialiserIHM();
@@ -111,6 +120,7 @@ class IHMPikawa : public QMainWindow
     int  convertirPourcentageEau(int reservoirEau);
     void chargerBoutonsCafe();
     void chargerLabelsEtatCafe();
+    void chargerlabelsDescriptions();
     void ouvrirBaseDeDonnees();
     void afficherAvertissement(int  niveau,
                                bool bacPasPlein,
@@ -120,6 +130,21 @@ class IHMPikawa : public QMainWindow
     void initialiserCafetiere();
     void initialiserPageEntretien();
     void mettreAJourNombreCafeDepuisDetartrage();
+    void chargerDescription();
+    void chargerLabelsIntensiteCafe();
+    void chargerIntensite();
+
+    void afficherIntensiteDoux(int i);
+
+    void afficherIntensite1(int i);
+
+    void afficherIntensite2(int i);
+
+    void afficherIntensite3(int i);
+
+    void afficherIntensite4(int i);
+
+    void afficherIntensite5(int i);
 
   public:
     IHMPikawa(QWidget* parent = nullptr);

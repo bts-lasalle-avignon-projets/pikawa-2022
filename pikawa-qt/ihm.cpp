@@ -351,6 +351,11 @@ void IHMPikawa::initialiserIcones()
     iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
     capsulePresente       = new QPixmap(":/RondVert.png");
     capsuleAbsente        = new QPixmap(":/RondRouge.png");
+    intensite1            = new QPixmap(":/images/intensite-cafe-1.png");
+    intensite2            = new QPixmap(":/images/intensite-cafe-2.png");
+    intensite3            = new QPixmap(":/images/intensite-cafe-3.png");
+    intensite4            = new QPixmap(":/images/intensite-cafe-4.png");
+    intensite5            = new QPixmap(":/images/intensite-cafe-5.png");
 }
 
 void IHMPikawa::initialiserIHM()
@@ -359,11 +364,15 @@ void IHMPikawa::initialiserIHM()
                                QString::fromUtf8(VERSION));
     chargerBoutonsCafe();
     chargerLabelsEtatCafe();
+    chargerlabelsDescriptions();
+    chargerLabelsIntensiteCafe();
     initialiserIcones();
     activerBoutonConnexionEtatDeconnecte();
     initialiserPreferences();
     afficherPageAcceuil();
     initialiserPageEntretien();
+    chargerDescription();
+    chargerIntensite();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -579,6 +588,30 @@ void IHMPikawa::chargerLabelsEtatCafe()
     labelsEtatCafe.push_back(ui->labelEtatVanilla);
 }
 
+void IHMPikawa::chargerlabelsDescriptions()
+{
+    labelsDescriptions.push_back(ui->descriptionColombia);
+    labelsDescriptions.push_back(ui->descriptionIndonesia);
+    labelsDescriptions.push_back(ui->descriptionEthiopia);
+    labelsDescriptions.push_back(ui->descriptionVolluto);
+    labelsDescriptions.push_back(ui->descriptionCapriccio);
+    labelsDescriptions.push_back(ui->descriptionCosi);
+    labelsDescriptions.push_back(ui->descriptionScuro);
+    labelsDescriptions.push_back(ui->descriptionVanilla);
+}
+
+void IHMPikawa::chargerLabelsIntensiteCafe()
+{
+    labelsintensitesCafes.push_back(ui->intensiteColombia);
+    labelsintensitesCafes.push_back(ui->intensiteIndonesia);
+    labelsintensitesCafes.push_back(ui->intensiteEthiopia);
+    labelsintensitesCafes.push_back(ui->intensiteVolluto);
+    labelsintensitesCafes.push_back(ui->intensiteCapriccio);
+    labelsintensitesCafes.push_back(ui->intensiteCosi);
+    labelsintensitesCafes.push_back(ui->intensiteScuro);
+    labelsintensitesCafes.push_back(ui->intensiteVanilla);
+}
+
 void IHMPikawa::ouvrirBaseDeDonnees()
 {
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
@@ -702,4 +735,95 @@ void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 {
     qDebug() << Q_FUNC_INFO;
     afficherMessage("Erreur d'accès a la base de données", "red");
+}
+
+void IHMPikawa::chargerDescription()
+{
+    for(int i = 1; i < labelsDescriptions.size() + 1; ++i)
+    {
+        QString description = "";
+        QString requette = "SELECT description FROM Capsule WHERE idCapsule =" +
+                           QString::number(i);
+        qDebug() << Q_FUNC_INFO << requette;
+        baseDeDonneesPikawa->recuperer(requette, description);
+        labelsDescriptions.at(i - 1)->setText(description);
+    }
+}
+
+void IHMPikawa::afficherIntensiteDoux(int i)
+{
+    labelsintensitesCafes.at(i)->setText("doux");
+    labelsintensitesCafes.at(i)->setStyleSheet("font-size:25px;");
+}
+
+void IHMPikawa::afficherIntensite1(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite1);
+    labelsintensitesCafes.at(i)->setFixedHeight(30);
+    labelsintensitesCafes.at(i)->setFixedWidth(30);
+}
+
+void IHMPikawa::afficherIntensite2(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite2);
+    labelsintensitesCafes.at(i)->setFixedHeight(32);
+    labelsintensitesCafes.at(i)->setFixedWidth(60);
+}
+
+void IHMPikawa::afficherIntensite3(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite3);
+    labelsintensitesCafes.at(i)->setFixedHeight(32);
+    labelsintensitesCafes.at(i)->setFixedWidth(80);
+}
+
+void IHMPikawa::afficherIntensite4(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite4);
+    labelsintensitesCafes.at(i)->setFixedHeight(32);
+    labelsintensitesCafes.at(i)->setFixedWidth(100);
+}
+
+void IHMPikawa::afficherIntensite5(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite5);
+    labelsintensitesCafes.at(i)->setFixedHeight(35);
+    labelsintensitesCafes.at(i)->setFixedWidth(120);
+}
+
+void IHMPikawa::chargerIntensite()
+{
+    for(int i = 0; i < labelsintensitesCafes.size(); ++i)
+    {
+        QString reponse;
+        QString requete = "SELECT intensite FROM Capsule WHERE idCapsule =" +
+                          QString::number(i + 1);
+        qDebug() << Q_FUNC_INFO << requete;
+
+        baseDeDonneesPikawa->recuperer(requete, reponse);
+        int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+        qDebug() << Q_FUNC_INFO << "intensite " << intensite;
+
+        switch(intensite)
+        {
+            case 0:
+                afficherIntensiteDoux(i);
+                break;
+            case 1:
+                afficherIntensite1(i);
+                break;
+            case 2:
+                afficherIntensite2(i);
+                break;
+            case 3:
+                afficherIntensite3(i);
+                break;
+            case 4:
+                afficherIntensite4(i);
+                break;
+            case 5:
+                afficherIntensite5(i);
+                break;
+        }
+    }
 }
