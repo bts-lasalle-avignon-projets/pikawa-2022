@@ -191,6 +191,7 @@ void IHMPikawa::selectionnerColombia()
     int idCapsule = cafetiere->getIdCapsule("Colombia");
     qDebug() << Q_FUNC_INFO << "idCapsule Colombia" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerIndonesia()
@@ -200,6 +201,7 @@ void IHMPikawa::selectionnerIndonesia()
     int idCapsule = cafetiere->getIdCapsule("Indonesia");
     qDebug() << Q_FUNC_INFO << "idCapsule Indonesia" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerEthiopia()
@@ -209,6 +211,7 @@ void IHMPikawa::selectionnerEthiopia()
     int idCapsule = cafetiere->getIdCapsule("Ethiopia");
     qDebug() << Q_FUNC_INFO << "idCapsule Ethiopia" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerVolluto()
@@ -218,6 +221,7 @@ void IHMPikawa::selectionnerVolluto()
     int idCapsule = cafetiere->getIdCapsule("Volluto");
     qDebug() << Q_FUNC_INFO << "idCapsule Volluto" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerCosi()
@@ -227,6 +231,7 @@ void IHMPikawa::selectionnerCosi()
     int idCapsule = cafetiere->getIdCapsule("Cosi");
     qDebug() << Q_FUNC_INFO << "idCapsule Cosi" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerScuro()
@@ -236,6 +241,7 @@ void IHMPikawa::selectionnerScuro()
     int idCapsule = cafetiere->getIdCapsule("Scuro");
     qDebug() << Q_FUNC_INFO << "idCapsule Scuro" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerVanilla()
@@ -245,6 +251,7 @@ void IHMPikawa::selectionnerVanilla()
     int idCapsule = cafetiere->getIdCapsule("Vanilla");
     qDebug() << Q_FUNC_INFO << "idCapsule Vanilla" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::selectionnerCapriccio()
@@ -825,5 +832,52 @@ void IHMPikawa::chargerIntensite()
                 afficherIntensite5(i);
                 break;
         }
+    }
+}
+
+void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
+{
+    QString reponse;
+    QString requete = "SELECT intensite FROM Capsule WHERE idCapsule =" +
+                      QString::number(idCapsule + 1);
+
+    baseDeDonneesPikawa->recuperer(requete, reponse);
+    int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+
+    switch(intensite)
+    {
+        case 0:
+            ui->intensiteChoisie->clear();
+            ui->intensiteChoisie->setFixedHeight(30);
+            ui->intensiteChoisie->setFixedWidth(100);
+            ui->intensiteChoisie->setFixedHeight(30);
+            ui->intensiteChoisie->setAlignment(Qt::AlignCenter);
+            ui->intensiteChoisie->setText("doux");
+            break;
+        case 1:
+            ui->intensiteChoisie->setPixmap(*intensite1);
+            ui->intensiteChoisie->setFixedHeight(30);
+            ui->intensiteChoisie->setFixedWidth(30);
+            break;
+        case 2:
+            ui->intensiteChoisie->setPixmap(*intensite2);
+            ui->intensiteChoisie->setFixedHeight(32);
+            ui->intensiteChoisie->setFixedWidth(60);
+            break;
+        case 3:
+            ui->intensiteChoisie->setPixmap(*intensite3);
+            ui->intensiteChoisie->setFixedHeight(32);
+            ui->intensiteChoisie->setFixedWidth(80);
+            break;
+        case 4:
+            ui->intensiteChoisie->setPixmap(*intensite4);
+            ui->intensiteChoisie->setFixedHeight(32);
+            ui->intensiteChoisie->setFixedWidth(100);
+            break;
+        case 5:
+            ui->intensiteChoisie->setPixmap(*intensite5);
+            ui->intensiteChoisie->setFixedHeight(35);
+            ui->intensiteChoisie->setFixedWidth(120);
+            break;
     }
 }

@@ -145,6 +145,7 @@ class IHMPikawa : public QMainWindow
     void afficherIntensite4(int i);
 
     void afficherIntensite5(int i);
+    void afficherIntensiteAccueil(int idCapsule);
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
