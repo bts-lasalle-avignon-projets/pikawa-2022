@@ -21,6 +21,7 @@ class Cafetiere;
 #define NOM                          "Pikawa"
 #define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 #define INTENSITE_MAX                12
+#define GRAIN_INTENSITE_MAX          5
 /**
  * @def VERSION
  * @brief La version de l'application
@@ -132,6 +133,18 @@ class IHMPikawa : public QMainWindow
     void chargerDescription();
     void chargerLabelsIntensiteCafe();
     void chargerIntensite();
+
+    void afficherIntensiteDoux(int i);
+
+    void afficherIntensite1(int i);
+
+    void afficherIntensite2(int i);
+
+    void afficherIntensite3(int i);
+
+    void afficherIntensite4(int i);
+
+    void afficherIntensite5(int i);
 
   public:
     IHMPikawa(QWidget* parent = nullptr);

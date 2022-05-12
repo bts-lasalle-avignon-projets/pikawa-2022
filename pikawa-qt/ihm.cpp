@@ -750,55 +750,79 @@ void IHMPikawa::chargerDescription()
     }
 }
 
+void IHMPikawa::afficherIntensiteDoux(int i)
+{
+    labelsintensitesCafes.at(i)->setText("doux");
+    labelsintensitesCafes.at(i)->setStyleSheet("font-size:25px;");
+}
+
+void IHMPikawa::afficherIntensite1(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite1);
+    labelsintensitesCafes.at(i)->setFixedHeight(30);
+    labelsintensitesCafes.at(i)->setFixedWidth(30);
+}
+
+void IHMPikawa::afficherIntensite2(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite2);
+    labelsintensitesCafes.at(i)->setFixedHeight(32);
+    labelsintensitesCafes.at(i)->setFixedWidth(60);
+}
+
+void IHMPikawa::afficherIntensite3(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite3);
+    labelsintensitesCafes.at(i)->setFixedHeight(32);
+    labelsintensitesCafes.at(i)->setFixedWidth(80);
+}
+
+void IHMPikawa::afficherIntensite4(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite4);
+    labelsintensitesCafes.at(i)->setFixedHeight(32);
+    labelsintensitesCafes.at(i)->setFixedWidth(100);
+}
+
+void IHMPikawa::afficherIntensite5(int i)
+{
+    labelsintensitesCafes.at(i)->setPixmap(*intensite5);
+    labelsintensitesCafes.at(i)->setFixedHeight(35);
+    labelsintensitesCafes.at(i)->setFixedWidth(120);
+}
+
 void IHMPikawa::chargerIntensite()
 {
-    for(int i = 1; i < labelsintensitesCafes.size() + 1; ++i)
+    for(int i = 0; i < labelsintensitesCafes.size(); ++i)
     {
-        QString reponse  = "";
-        QString requette = "SELECT intensite FROM Capsule WHERE idCapsule =" +
-                           QString::number(i);
-        qDebug() << Q_FUNC_INFO << requette;
+        QString reponse;
+        QString requete = "SELECT intensite FROM Capsule WHERE idCapsule =" +
+                          QString::number(i + 1);
+        qDebug() << Q_FUNC_INFO << requete;
 
-        baseDeDonneesPikawa->recuperer(requette, reponse);
-        int intensite = (reponse.toInt() * 5) / INTENSITE_MAX;
+        baseDeDonneesPikawa->recuperer(requete, reponse);
+        int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
         qDebug() << Q_FUNC_INFO << "intensite " << intensite;
 
         switch(intensite)
         {
             case 0:
-                labelsintensitesCafes.at(i - 1)->setText("doux");
-                labelsintensitesCafes.at(i - 1)->setStyleSheet(
-                  "font-size:25px;");
+                afficherIntensiteDoux(i);
                 break;
-
             case 1:
-                labelsintensitesCafes.at(i - 1)->setPixmap(*intensite1);
-                labelsintensitesCafes.at(i - 1)->setFixedHeight(40);
-                labelsintensitesCafes.at(i - 1)->setFixedWidth(40);
+                afficherIntensite1(i);
                 break;
-
             case 2:
-                labelsintensitesCafes.at(i - 1)->setPixmap(*intensite2);
-                labelsintensitesCafes.at(i - 1)->setFixedHeight(42);
-                labelsintensitesCafes.at(i - 1)->setFixedWidth(70);
+                afficherIntensite2(i);
                 break;
-
             case 3:
-                labelsintensitesCafes.at(i - 1)->setPixmap(*intensite3);
-                labelsintensitesCafes.at(i - 1)->setFixedHeight(42);
-                labelsintensitesCafes.at(i - 1)->setFixedWidth(90);
+                afficherIntensite3(i);
                 break;
-
             case 4:
-                labelsintensitesCafes.at(i - 1)->setPixmap(*intensite4);
-                labelsintensitesCafes.at(i - 1)->setFixedHeight(42);
-                labelsintensitesCafes.at(i - 1)->setFixedWidth(110);
+                afficherIntensite4(i);
                 break;
-
             case 5:
-                labelsintensitesCafes.at(i - 1)->setPixmap(*intensite5);
-                labelsintensitesCafes.at(i - 1)->setFixedHeight(45);
-                labelsintensitesCafes.at(i - 1)->setFixedWidth(130);
+                afficherIntensite5(i);
                 break;
         }
     }
