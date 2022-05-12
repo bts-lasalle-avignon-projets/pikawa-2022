@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -211,7 +211,7 @@
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>5</width>
+                <width>20</width>
                 <height>5</height>
                </size>
               </property>
@@ -224,9 +224,12 @@
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>40</width>
+                  <width>50</width>
                   <height>20</height>
                  </size>
                 </property>
@@ -234,6 +237,21 @@
               </item>
               <item>
                <widget class="QLabel" name="labelLongueurPreparation">
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
                 <property name="lineWidth">
                  <number>3</number>
                 </property>
@@ -241,7 +259,7 @@
                  <number>3</number>
                 </property>
                 <property name="text">
-                 <string>court</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -249,15 +267,50 @@
                <widget class="QSlider" name="selectionLongueurPreparation">
                 <property name="minimumSize">
                  <size>
-                  <width>50</width>
+                  <width>100</width>
                   <height>200</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>40</width>
-                  <height>150</height>
+                  <width>30</width>
+                  <height>200</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QSlider
+{
+	min-width:100px;
+	min-height:200px;
+	max-height:200px;
+}
+
+QSlider::groove:vertical {
+    border: 0px solid transparent;
+    width: 7px;
+height:200px;
+    background: #eeeeee;
+    margin: 2px 0;
+}
+
+/* La poignée */
+QSlider::handle:vertical {
+    background-color: rgb(193, 125, 17);
+    height: 35px;
+    width: 90px;
+    border: 5px solid transparent;
+    margin: 0 -15px;
+    border-radius: 10px;
+}
+
+QSlider::handle:vertical:pressed {
+    background-color: rgb(193, 125, 17);
+    height: 32px;
+    width: 70px;
+    border: 0px solid transparent;
+    margin: 0 -15px;
+    border-radius: 10px;
+}</string>
                 </property>
                 <property name="maximum">
                  <number>2</number>
@@ -840,6 +893,25 @@
                 </property>
                </widget>
               </item>
+              <item alignment="Qt::AlignHCenter">
+               <widget class="QLabel" name="intensiteChoisie">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
               <item>
                <spacer name="verticalSpacer_16">
                 <property name="orientation">
@@ -866,8 +938,14 @@
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>350</width>
+                  <width>300</width>
                   <height>100</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="font">
@@ -1010,6 +1088,16 @@
               </property>
               <property name="flat">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="labelEtatConnection">
+              <property name="styleSheet">
+               <string notr="true">font-size:18px;</string>
+              </property>
+              <property name="text">
+               <string/>
               </property>
              </widget>
             </item>
@@ -2661,7 +2749,7 @@ background-color: rgb(237, 212, 0);</string>
           <x>0</x>
           <y>0</y>
           <width>1171</width>
-          <height>1167</height>
+          <height>1190</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="layoutPrincipaleEntretien">
@@ -3025,7 +3113,7 @@ background-color: rgb(237, 212, 0);</string>
                    <property name="sizeHint" stdset="0">
                     <size>
                      <width>20</width>
-                     <height>50</height>
+                     <height>40</height>
                     </size>
                    </property>
                   </spacer>
@@ -3179,7 +3267,7 @@ background-color: rgb(237, 212, 0);</string>
                    <property name="sizeHint" stdset="0">
                     <size>
                      <width>20</width>
-                     <height>20</height>
+                     <height>62</height>
                     </size>
                    </property>
                   </spacer>
@@ -3240,7 +3328,7 @@ background-color: rgb(237, 212, 0);</string>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>600</height>
+                 <height>620</height>
                 </size>
                </property>
               </spacer>

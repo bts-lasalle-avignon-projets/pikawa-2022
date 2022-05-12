@@ -361,11 +361,12 @@ void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
     QString requete =
       "SELECT Preferences.idPreferences, Utilisateur.idUtilisateur, "
       "Utilisateur.nom, Utilisateur.prenom, Capsule.idCapsule, "
-      "Capsule.designation, Capsule.libelle, TypeBoisson.idTypeBoisson, "
-      "TypeBoisson.type FROM Preferences INNER JOIN Utilisateur ON "
-      "Utilisateur.idUtilisateur=Preferences.idUtilisateur INNER JOIN Capsule "
-      "ON Capsule.idCapsule=Preferences.capsuleActuelle INNER JOIN TypeBoisson "
-      "ON TypeBoisson.idTypeBoisson=Preferences.typeBoissonActuelle WHERE "
+      "Capsule.designation, Capsule.description, "
+      "TypeBoisson.idTypeBoisson,typeBoisson.type FROM Preferences INNER JOIN "
+      "Utilisateur ON Utilisateur.idUtilisateur=Preferences.idUtilisateur "
+      "INNER JOIN Capsule ON Capsule.idCapsule=Preferences.capsuleActuelle "
+      "INNER JOIN TypeBoisson ON "
+      "TypeBoisson.idTypeBoisson=Preferences.typeBoissonActuelle WHERE "
       "Utilisateur.identifiant='" +
       identifiantUtilisateur + "';";
     baseDeDonneesPikawa->recuperer(requete, preferences);

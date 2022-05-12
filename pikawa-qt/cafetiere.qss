@@ -1,25 +1,25 @@
 /* La barre verticale */
-QSlider::groove:vertical {
-    border: 0px solid transparent;
-    width: 8px;
+.QSlider::groove:vertical {
+    border: 40px solid transparent;
+    width: 30px;
     background: #eeeeee;
-    margin: 2px 0;
+    margin: 20px 0;
 }
 
 /* La poignée */
-QSlider::handle:vertical {
+.QSlider::handle:vertical {
     background-color: rgb(193, 125, 17);
-    height: 42px;
-    width: 50px;
-    border: 0px solid transparent;
+    height: 172px;
+    width: 180px;
+    border: 80px solid transparent;
     margin: 0 -15px;
     border-radius: 10px;
 }
 
-QSlider::handle:vertical:pressed {
+.QSlider::handle:vertical:pressed {
     background-color: rgb(193, 125, 17);
     height: 32px;
-    width: 6px;
+    width: 60px;
     border: 0px solid transparent;
     margin: 0 -15px;
     border-radius: 10px;
