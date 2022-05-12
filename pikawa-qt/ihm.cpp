@@ -754,36 +754,48 @@ void IHMPikawa::chargerIntensite()
 {
     for(int i = 1; i < labelsintensitesCafes.size() + 1; ++i)
     {
-        QString intensite = "";
-        QString requette  = "SELECT intensite FROM Capsule WHERE idCapsule =" +
+        QString reponse  = "";
+        QString requette = "SELECT intensite FROM Capsule WHERE idCapsule =" +
                            QString::number(i);
         qDebug() << Q_FUNC_INFO << requette;
 
-        baseDeDonneesPikawa->recuperer(requette, intensite);
+        baseDeDonneesPikawa->recuperer(requette, reponse);
+        int intensite = (reponse.toInt() * 5) / INTENSITE_MAX;
+        qDebug() << Q_FUNC_INFO << "intensite " << intensite;
 
-        switch(intensite.toInt())
+        switch(intensite)
         {
             case 0:
+                labelsintensitesCafes.at(i - 1)->setText("doux");
+                labelsintensitesCafes.at(i - 1)->setStyleSheet(
+                  "font-size:25px;");
+                break;
+
+            case 1:
                 labelsintensitesCafes.at(i - 1)->setPixmap(*intensite1);
                 labelsintensitesCafes.at(i - 1)->setFixedHeight(40);
                 labelsintensitesCafes.at(i - 1)->setFixedWidth(40);
                 break;
-            case 4:
+
+            case 2:
                 labelsintensitesCafes.at(i - 1)->setPixmap(*intensite2);
                 labelsintensitesCafes.at(i - 1)->setFixedHeight(42);
                 labelsintensitesCafes.at(i - 1)->setFixedWidth(70);
                 break;
-            case 5:
+
+            case 3:
                 labelsintensitesCafes.at(i - 1)->setPixmap(*intensite3);
                 labelsintensitesCafes.at(i - 1)->setFixedHeight(42);
                 labelsintensitesCafes.at(i - 1)->setFixedWidth(90);
                 break;
-            case 6:
+
+            case 4:
                 labelsintensitesCafes.at(i - 1)->setPixmap(*intensite4);
                 labelsintensitesCafes.at(i - 1)->setFixedHeight(42);
                 labelsintensitesCafes.at(i - 1)->setFixedWidth(110);
                 break;
-            case 8:
+
+            case 5:
                 labelsintensitesCafes.at(i - 1)->setPixmap(*intensite5);
                 labelsintensitesCafes.at(i - 1)->setFixedHeight(45);
                 labelsintensitesCafes.at(i - 1)->setFixedWidth(130);

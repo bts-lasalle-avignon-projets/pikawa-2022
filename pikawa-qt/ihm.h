@@ -20,7 +20,7 @@ class Cafetiere;
  */
 #define NOM                          "Pikawa"
 #define NOMBRE_CAFE_AVANT_DETARTRAGE 75
-
+#define INTENSITE_MAX                12
 /**
  * @def VERSION
  * @brief La version de l'application
