@@ -87,7 +87,7 @@ void IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString adresse)
     // si une cafetère pikawa a été détectée
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonDetectee);
-    // ui->labelEtatConnexion->setText("Cafetière détectée");
+    ui->labelEtatConnection->setText("Cafetière détectée");
 }
 
 void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
@@ -96,7 +96,7 @@ void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
     // si une cafetère pikawa a été connectée
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonConnecte);
-    // ui->labelEtatConnexion->setText("Cafetière connectée");
+    ui->labelEtatConnection->setText("Cafetière connectée");
     ui->boutonRafraichir->setEnabled(false);
 }
 
@@ -106,7 +106,7 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
     // si une cafetère pikawa a été déconnectée
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonDeconnecte);
-    // ui->labelEtatConnexion->setText("Cafetière déconnectée");
+    ui->labelEtatConnection->setText("Cafetière déconnectée");
     ui->boutonRafraichir->setEnabled(true);
 }
 
