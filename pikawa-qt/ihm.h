@@ -84,24 +84,31 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     // GUI
-    QIcon*                iconeBoutonConnecte;
-    QIcon*                iconeBoutonDetectee;
-    QIcon*                iconeBoutonDeconnecte;
-    QIcon*                iconeCapsuleColombia;
-    QIcon*                iconeCapsuleIndonesia;
-    QIcon*                iconeCapsuleEthiopia;
-    QIcon*                iconeCapsuleVolluto;
-    QIcon*                iconeCapsuleCapriccio;
-    QIcon*                iconeCapsuleCosi;
-    QIcon*                iconeCapsuleScuro;
-    QIcon*                iconeCapsuleVanilla;
-    QPixmap*              iconeBacPlein;
-    QPixmap*              iconeBacPasPlein;
-    QPixmap*              capsulePresente;
-    QPixmap*              capsuleAbsente;
+    QIcon*   iconeBoutonConnecte;
+    QIcon*   iconeBoutonDetectee;
+    QIcon*   iconeBoutonDeconnecte;
+    QIcon*   iconeCapsuleColombia;
+    QIcon*   iconeCapsuleIndonesia;
+    QIcon*   iconeCapsuleEthiopia;
+    QIcon*   iconeCapsuleVolluto;
+    QIcon*   iconeCapsuleCapriccio;
+    QIcon*   iconeCapsuleCosi;
+    QIcon*   iconeCapsuleScuro;
+    QIcon*   iconeCapsuleVanilla;
+    QPixmap* iconeBacPlein;
+    QPixmap* iconeBacPasPlein;
+    QPixmap* capsulePresente;
+    QPixmap* capsuleAbsente;
+    QPixmap* intensite1;
+    QPixmap* intensite2;
+    QPixmap* intensite3;
+    QPixmap* intensite4;
+    QPixmap* intensite5;
+
     QVector<QPushButton*> boutonsCafes;
     QVector<QLabel*>      labelsEtatCafe;
     QVector<QLabel*>      labelsDescriptions;
+    QVector<QLabel*>      labelsintensitesCafes;
 
     void initialiserIcones();
     void initialiserIHM();
@@ -123,6 +130,8 @@ class IHMPikawa : public QMainWindow
     void initialiserPageEntretien();
     void mettreAJourNombreCafeDepuisDetartrage();
     void chargerDescription();
+    void chargerLabelsIntensiteCafe();
+    void chargerIntensite();
 
   public:
     IHMPikawa(QWidget* parent = nullptr);

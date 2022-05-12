@@ -1296,7 +1296,7 @@ background: rgb(114, 159, 207);
 background-color: rgb(237, 212, 0);</string>
             </property>
             <property name="text">
-             <string>Acceuil</string>
+             <string>Accueil</string>
             </property>
            </widget>
           </item>
@@ -1317,9 +1317,41 @@ background-color: rgb(237, 212, 0);</string>
            </spacer>
           </item>
           <item>
+           <spacer name="verticalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>5</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <layout class="QGridLayout" name="LayoutSelectionCafe">
-            <item row="8" column="3">
-             <widget class="QPushButton" name="boutonVanilla">
+            <item row="5" column="3" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteEthiopia">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="4">
+             <widget class="QPushButton" name="boutonCapriccio">
               <property name="minimumSize">
                <size>
                 <width>190</width>
@@ -1333,11 +1365,11 @@ background-color: rgb(237, 212, 0);</string>
                </size>
               </property>
               <property name="text">
-               <string>Vanilla</string>
+               <string>Capriccio</string>
               </property>
               <property name="icon">
                <iconset resource="ressources.qrc">
-                <normaloff>:/vanilla-eclair.png</normaloff>:/vanilla-eclair.png</iconset>
+                <normaloff>:/capriccio.png</normaloff>:/capriccio.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1347,8 +1379,8 @@ background-color: rgb(237, 212, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="0">
-             <widget class="QPushButton" name="boutonCosi">
+            <item row="9" column="2">
+             <widget class="QPushButton" name="boutonScuro">
               <property name="minimumSize">
                <size>
                 <width>190</width>
@@ -1362,98 +1394,11 @@ background-color: rgb(237, 212, 0);</string>
                </size>
               </property>
               <property name="text">
-               <string>Cosi</string>
+               <string>Scuro</string>
               </property>
               <property name="icon">
                <iconset resource="ressources.qrc">
-                <normaloff>:/cosi.png</normaloff>:/cosi.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="2">
-             <widget class="QPushButton" name="boutonIndonesia">
-              <property name="minimumSize">
-               <size>
-                <width>190</width>
-                <height>150</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>150</width>
-                <height>150</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Indonesia</string>
-              </property>
-              <property name="icon">
-               <iconset resource="ressources.qrc">
-                <normaloff>:/indonesia.png</normaloff>:/indonesia.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QPushButton" name="boutonVolluto">
-              <property name="minimumSize">
-               <size>
-                <width>190</width>
-                <height>150</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>150</width>
-                <height>15077215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Volluto</string>
-              </property>
-              <property name="icon">
-               <iconset resource="ressources.qrc">
-                <normaloff>:/volluto.png</normaloff>:/volluto.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QPushButton" name="boutonColombia">
-              <property name="minimumSize">
-               <size>
-                <width>190</width>
-                <height>150</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>150</width>
-                <height>150</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Colombia</string>
-              </property>
-              <property name="icon">
-               <iconset resource="ressources.qrc">
-                <normaloff>:/colombia.png</normaloff>:/colombia.png</iconset>
+                <normaloff>:/scuro.png</normaloff>:/scuro.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1492,8 +1437,8 @@ background-color: rgb(237, 212, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="4">
-             <widget class="QPushButton" name="boutonCapriccio">
+            <item row="9" column="3">
+             <widget class="QPushButton" name="boutonVanilla">
               <property name="minimumSize">
                <size>
                 <width>190</width>
@@ -1507,11 +1452,11 @@ background-color: rgb(237, 212, 0);</string>
                </size>
               </property>
               <property name="text">
-               <string>Capriccio</string>
+               <string>Vanilla</string>
               </property>
               <property name="icon">
                <iconset resource="ressources.qrc">
-                <normaloff>:/capriccio.png</normaloff>:/capriccio.png</iconset>
+                <normaloff>:/vanilla-eclair.png</normaloff>:/vanilla-eclair.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1521,8 +1466,30 @@ background-color: rgb(237, 212, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="2">
-             <widget class="QPushButton" name="boutonScuro">
+            <item row="5" column="2" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteIndonesia">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QPushButton" name="boutonCosi">
               <property name="minimumSize">
                <size>
                 <width>190</width>
@@ -1536,37 +1503,210 @@ background-color: rgb(237, 212, 0);</string>
                </size>
               </property>
               <property name="text">
-               <string>Scuro</string>
+               <string>Cosi</string>
               </property>
               <property name="icon">
                <iconset resource="ressources.qrc">
-                <normaloff>:/scuro.png</normaloff>:/scuro.png</iconset>
+                <normaloff>:/cosi.png</normaloff>:/cosi.png</iconset>
               </property>
               <property name="iconSize">
                <size>
                 <width>50</width>
                 <height>50</height>
                </size>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QPushButton" name="boutonVolluto">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>15077215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Volluto</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/volluto.png</normaloff>:/volluto.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteColombia">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="boutonColombia">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Colombia</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/colombia.png</normaloff>:/colombia.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QPushButton" name="boutonIndonesia">
+              <property name="minimumSize">
+               <size>
+                <width>190</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Indonesia</string>
+              </property>
+              <property name="icon">
+               <iconset resource="ressources.qrc">
+                <normaloff>:/indonesia.png</normaloff>:/indonesia.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="4" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteVolluto">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="0" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteCosi">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="2" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteScuro">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="3" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteVanilla">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="4" alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="intensiteCapriccio">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>55</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
            </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_14">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>5</width>
-              <height>5</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -1792,7 +1932,7 @@ background-color: rgb(237, 212, 0);</string>
              </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="label_11">
+             <widget class="QLabel" name="labelDescriptionInformation">
               <property name="styleSheet">
                <string notr="true">font-size:35px;</string>
               </property>
@@ -1808,7 +1948,7 @@ background-color: rgb(237, 212, 0);</string>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayoutCapsule1">
                   <property name="spacing">
-                   <number>12</number>
+                   <number>6</number>
                   </property>
                   <property name="bottomMargin">
                    <number>0</number>
@@ -1889,7 +2029,7 @@ background-color: rgb(237, 212, 0);</string>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayoutCapsule2">
                   <property name="spacing">
-                   <number>12</number>
+                   <number>6</number>
                   </property>
                   <property name="bottomMargin">
                    <number>0</number>
@@ -2428,7 +2568,7 @@ background-color: rgb(237, 212, 0);</string>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>40</height>
+                <height>20</height>
                </size>
               </property>
              </spacer>
