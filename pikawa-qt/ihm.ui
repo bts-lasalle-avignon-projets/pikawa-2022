@@ -363,7 +363,7 @@ QSlider::handle:vertical:pressed {
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>10</width>
-                  <height>50</height>
+                  <height>40</height>
                  </size>
                 </property>
                </spacer>
@@ -877,6 +877,22 @@ QSlider::handle:vertical:pressed {
                 </property>
                </spacer>
               </item>
+              <item>
+               <spacer name="verticalSpacer_26">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>60</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
               <item alignment="Qt::AlignHCenter">
                <widget class="QLabel" name="capsuleChoisie">
                 <property name="maximumSize">
@@ -953,6 +969,22 @@ QSlider::handle:vertical:pressed {
                   <pointsize>10</pointsize>
                  </font>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="textFormat">
+                 <enum>Qt::AutoText</enum>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="etatCafe">
                 <property name="text">
                  <string/>
                 </property>
@@ -1019,7 +1051,7 @@ QSlider::handle:vertical:pressed {
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>5</height>
+                  <height>1</height>
                  </size>
                 </property>
                </spacer>
@@ -1100,6 +1132,22 @@ QSlider::handle:vertical:pressed {
                <string/>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_27">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>10</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QPushButton" name="boutonRafraichir">

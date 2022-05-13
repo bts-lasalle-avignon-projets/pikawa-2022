@@ -127,6 +127,7 @@ class IHMPikawa : public QMainWindow
                                bool tassePresente,
                                bool capsulePresente);
     void afficherMessage(QString message, QString couleur);
+    void afficherMessageEtatCafe(QString message, QString couleur);
     void initialiserCafetiere();
     void initialiserPageEntretien();
     void mettreAJourNombreCafeDepuisDetartrage();

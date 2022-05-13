@@ -130,6 +130,10 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
     ui->labelLongueurPreparation->setText(
       labelsLongueurPreparation.at(longueurPreparation));
     cafetiere->setLongueurChoisie(longueurPreparation);
+    if(cafetiere->estConnectee())
+    {
+        cafetiere->estPrete();
+    }
 }
 
 void IHMPikawa::gererSelectionCafes()
@@ -180,7 +184,10 @@ void IHMPikawa::afficherCapsuleChoisie(int idCapsule)
     ui->boutonChangerCafe->setStyleSheet("background-color:#FC924B;");
     cafetiere->setCapsuleChoisie(idCapsule);
     afficherMessage(" ", "red");
-    cafetiere->estPrete();
+    if(cafetiere->estConnectee())
+    {
+        cafetiere->estPrete();
+    }
     afficherPageAcceuil();
 }
 
@@ -261,25 +268,27 @@ void IHMPikawa::selectionnerCapriccio()
     int idCapsule = cafetiere->getIdCapsule("Capriccio");
     qDebug() << Q_FUNC_INFO << "idCapsule Capriccio" << idCapsule;
     afficherCapsuleChoisie(idCapsule);
+    afficherIntensiteAccueil(idCapsule);
 }
 
 void IHMPikawa::afficherCafePret()
 {
     qDebug() << Q_FUNC_INFO;
-    afficherMessage("Café prêt", "green");
+    afficherMessageEtatCafe("Café prêt", "green");
     cafetiere->estPrete();
 }
 
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
-    afficherMessage("Café en cours", "red");
+    afficherMessageEtatCafe("Café en cours", "red");
 }
 
 void IHMPikawa::afficherErreurPreparation()
 {
     qDebug() << Q_FUNC_INFO;
-    afficherMessage("Préparation impossible !", "red");
+    afficherMessageEtatCafe("Préparation impossible !", "red");
+    cafetiere->estPrete();
 }
 
 void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
@@ -303,6 +312,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     {
         ui->etatBac->setPixmap(*iconeBacPlein);
         ui->labelBac->setStyleSheet("font-size: 25px; color: red;");
+        ui->labelAvertisseur->setText("Vider le bac");
     }
     else
     {
@@ -633,7 +643,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
     Q_UNUSED(niveauEau)
     QString message;
 
-    if((cafetiere->getNiveauEau() - cafetiere->getNiveauEauNecessaire()) <= 0)
+    if((niveauEau - cafetiere->getNiveauEauNecessaire()) <= 0)
     {
         message.append("Remplir le réservoir d'eau");
     }
@@ -643,7 +653,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Vider le bac");
         else
-            message.append("\nVider le bac");
+            message.append("/nVider le bac");
     }
 
     if(!capsulePresente)
@@ -651,7 +661,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Plus de caspules");
         else
-            message.append("\nPlus de caspules");
+            message.append("/nPlus de caspules");
     }
 
     if(!tassePresente)
@@ -659,7 +669,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Tasse non présente");
         else
-            message.append("\nTasse non présente");
+            message.append("/nTasse non présente");
     }
 
     if(!cafetiere->estCapsuleChoisieDisponible())
@@ -667,6 +677,10 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
         {
             message.append("Caspule choisie indisponible");
+        }
+        else
+        {
+            message.append("/nCaspule choisie indisponible");
         }
         ui->capsuleChoisie->setStyleSheet("font-size:25px; color:red;");
         ui->boutonChangerCafe->setStyleSheet("background-color:#A9A9A9;");
@@ -679,9 +693,21 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
 
     if(!cafetiere->estCafeEnPreparation())
         afficherMessage(message, "red");
+    qDebug() << Q_FUNC_INFO << "niveau eau " << niveauEau << "bacPasPlein "
+             << bacPasPlein << "capsulePresente " << capsulePresente
+             << "tassePresente " << tassePresente;
 }
 
 void IHMPikawa::afficherMessage(QString message, QString couleur)
+{
+    qDebug() << Q_FUNC_INFO << "message" << message;
+    ui->labelAvertisseur->setText(message);
+    ui->labelAvertisseur->setAlignment(Qt::AlignCenter | Qt::AlignBottom);
+    ui->labelAvertisseur->setStyleSheet("font-size:25px; color:" + couleur +
+                                        ";");
+}
+
+void IHMPikawa::afficherMessageEtatCafe(QString message, QString couleur)
 {
     qDebug() << Q_FUNC_INFO << "message" << message;
     ui->labelAvertisseur->setText(message);
@@ -840,9 +866,12 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
     QString reponse;
     QString requete = "SELECT intensite FROM Capsule WHERE idCapsule =" +
                       QString::number(idCapsule + 1);
+    qDebug() << Q_FUNC_INFO << "idCapsule bdd"
+             << QString::number(idCapsule + 1);
 
     baseDeDonneesPikawa->recuperer(requete, reponse);
     int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+    qDebug() << Q_FUNC_INFO << "intensité " << intensite;
 
     switch(intensite)
     {
