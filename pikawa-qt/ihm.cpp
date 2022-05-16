@@ -277,6 +277,7 @@ void IHMPikawa::afficherCafePret()
 {
     qDebug() << Q_FUNC_INFO;
     ui->avancementPreparation->setValue(100);
+    timerPreparation->stop();
     afficherMessageEtatCafe("Café prêt", "green");
     cafetiere->estPrete();
 }
