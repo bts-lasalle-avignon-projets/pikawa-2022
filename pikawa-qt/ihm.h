@@ -40,6 +40,7 @@ class IHMPikawa;
 }
 
 class BaseDeDonnees;
+class threadAvancementCafe;
 
 /**
  * @class IHMPikawa
@@ -84,6 +85,7 @@ class IHMPikawa : public QMainWindow
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
+    threadAvancementCafe* threadAvancement;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
@@ -148,7 +150,8 @@ class IHMPikawa : public QMainWindow
     void afficherIntensite5(int i);
     void afficherIntensiteAccueil(int idCapsule);
 
-  public:
+
+public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
 

@@ -2,6 +2,7 @@
 #include "ui_ihm.h"
 #include "basededonnees.h"
 #include "cafetiere.h"
+#include "threadavancementcafe.h"
 #include <QDebug>
 #include <QIcon>
 
@@ -22,7 +23,7 @@
  */
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa), iconeBoutonConnecte(nullptr),
-    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
+    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr), threadAvancement(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -31,6 +32,8 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     gererEvenements();
     initialiserIHM();
     cafetiere->gererConnexion(); // connexion automatique
+    ui->boutonLancerPreparation->setEnabled(true);
+
 }
 
 /**
@@ -390,6 +393,9 @@ void IHMPikawa::initialiserIHM()
     initialiserPageEntretien();
     chargerDescription();
     chargerIntensite();
+    threadAvancement = new threadAvancementCafe(this);
+    this->moveToThread(threadAvancement);
+    threadAvancement->run();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -454,6 +460,11 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(clicked()),
             cafetiere,
             SLOT(lancerLaPreparationCafe()));
+
+    connect(threadAvancement,
+            SIGNAL(boutonChangerCafe->clicked()),
+            SLOT(run()));
+
 
     connect(ui->boutonInformationsEntretien,
             SIGNAL(clicked()),
@@ -910,3 +921,4 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
             break;
     }
 }
+
