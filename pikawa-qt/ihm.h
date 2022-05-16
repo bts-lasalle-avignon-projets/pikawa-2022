@@ -85,7 +85,7 @@ class IHMPikawa : public QMainWindow
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
-    threadAvancementCafe* threadAvancement;
+    QTimer*        timerPreparation;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
@@ -136,22 +136,15 @@ class IHMPikawa : public QMainWindow
     void chargerDescription();
     void chargerLabelsIntensiteCafe();
     void chargerIntensite();
-
     void afficherIntensiteDoux(int i);
-
     void afficherIntensite1(int i);
-
     void afficherIntensite2(int i);
-
     void afficherIntensite3(int i);
-
     void afficherIntensite4(int i);
-
     void afficherIntensite5(int i);
     void afficherIntensiteAccueil(int idCapsule);
 
-
-public:
+  public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
 
@@ -192,6 +185,7 @@ public:
     void reinitialiserDetartrage();
     void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
     void afficherErreurAccesBaseDeDonnees();
+    void afficherProgressionPrepration();
 
   signals:
     void detartrageReinitialise();

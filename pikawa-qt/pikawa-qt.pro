@@ -11,8 +11,7 @@ SOURCES += \
     communication.cpp \
     main.cpp \
     ihm.cpp \
-    preparation.cpp \
-    threadavancementcafe.cpp
+    preparation.cpp
 
 HEADERS += \
     basededonnees.h \
@@ -20,8 +19,7 @@ HEADERS += \
     communication.h \
     ihm.h \
     preparation.h \
-    protocole.h \
-    threadavancementcafe.h
+    protocole.h
 
 FORMS += \
     ihm.ui

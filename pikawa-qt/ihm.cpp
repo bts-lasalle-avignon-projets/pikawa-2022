@@ -2,7 +2,6 @@
 #include "ui_ihm.h"
 #include "basededonnees.h"
 #include "cafetiere.h"
-#include "threadavancementcafe.h"
 #include <QDebug>
 #include <QIcon>
 
@@ -22,8 +21,9 @@
  * fenêtre principale de l'application
  */
 IHMPikawa::IHMPikawa(QWidget* parent) :
-    QMainWindow(parent), ui(new Ui::IHMPikawa), iconeBoutonConnecte(nullptr),
-    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr), threadAvancement(nullptr)
+    QMainWindow(parent), ui(new Ui::IHMPikawa), baseDeDonneesPikawa(nullptr),
+    cafetiere(nullptr), timerPreparation(nullptr), iconeBoutonConnecte(nullptr),
+    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -33,7 +33,6 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     initialiserIHM();
     cafetiere->gererConnexion(); // connexion automatique
     ui->boutonLancerPreparation->setEnabled(true);
-
 }
 
 /**
@@ -277,6 +276,7 @@ void IHMPikawa::selectionnerCapriccio()
 void IHMPikawa::afficherCafePret()
 {
     qDebug() << Q_FUNC_INFO;
+    ui->avancementPreparation->setValue(100);
     afficherMessageEtatCafe("Café prêt", "green");
     cafetiere->estPrete();
 }
@@ -284,6 +284,8 @@ void IHMPikawa::afficherCafePret()
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
+    timerPreparation->start(500);
+    ui->avancementPreparation->setValue(0);
     afficherMessageEtatCafe("Café en cours", "red");
 }
 
@@ -393,9 +395,6 @@ void IHMPikawa::initialiserIHM()
     initialiserPageEntretien();
     chargerDescription();
     chargerIntensite();
-    threadAvancement = new threadAvancementCafe(this);
-    this->moveToThread(threadAvancement);
-    threadAvancement->run();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -460,27 +459,22 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(clicked()),
             cafetiere,
             SLOT(lancerLaPreparationCafe()));
-
-    connect(threadAvancement,
-            SIGNAL(boutonChangerCafe->clicked()),
-            SLOT(run()));
-
-
+    connect(timerPreparation,
+            SIGNAL(timeout()),
+            this,
+            SLOT(afficherProgressionPrepration()));
     connect(ui->boutonInformationsEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
-
     connect(ui->boutonParametresEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageParametres()));
-
     connect(ui->boutonAcceuilEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageAcceuil()));
-
     connect(ui->boutonNettoyer,
             SIGNAL(clicked()),
             SLOT(reinitialiserDetartrage()));
@@ -729,7 +723,8 @@ void IHMPikawa::afficherMessageEtatCafe(QString message, QString couleur)
 
 void IHMPikawa::initialiserCafetiere()
 {
-    cafetiere = new Cafetiere(this);
+    cafetiere        = new Cafetiere(this);
+    timerPreparation = new QTimer(this);
 }
 
 void IHMPikawa::mettreAJourNombreCafeTotal(QString nombreCafeIncremente)
@@ -779,6 +774,14 @@ void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 {
     qDebug() << Q_FUNC_INFO;
     afficherMessage("Erreur d'accès a la base de données", "red");
+}
+
+void IHMPikawa::afficherProgressionPrepration()
+{
+    qDebug() << Q_FUNC_INFO;
+    /**
+     * @todo Gérer l'avancée de la barre de progression
+     */
 }
 
 void IHMPikawa::chargerDescription()
@@ -877,8 +880,7 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
     QString reponse;
     QString requete = "SELECT intensite FROM Capsule WHERE idCapsule =" +
                       QString::number(idCapsule + 1);
-    qDebug() << Q_FUNC_INFO << "idCapsule "
-             << QString::number(idCapsule + 1);
+    qDebug() << Q_FUNC_INFO << "idCapsule " << QString::number(idCapsule + 1);
 
     baseDeDonneesPikawa->recuperer(requete, reponse);
     int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
@@ -921,4 +923,3 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
             break;
     }
 }
-
