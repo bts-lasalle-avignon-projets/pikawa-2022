@@ -209,7 +209,7 @@ bool Cafetiere::estCapsuleChoisieDisponible()
     baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
     qDebug() << Q_FUNC_INFO << "capsuleChoisie" << capsuleChoisie
              << "reponseQuantite " << reponseQuantite;
-    if(reponseQuantite.toInt() == 1)
+    if(reponseQuantite.toInt() >= 1)
     {
         return true;
     }
@@ -228,7 +228,7 @@ bool Cafetiere::estCapsuleChoisieDisponible(int capsule)
     baseDeDonneesPikawa->recuperer(requete, reponseQuantite);
     qDebug() << Q_FUNC_INFO << "capsule" << capsule << "reponseQuantite "
              << reponseQuantite;
-    if(reponseQuantite.toInt() == 1)
+    if(reponseQuantite.toInt() >= 1)
     {
         return true;
     }

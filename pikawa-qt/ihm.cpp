@@ -653,7 +653,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Vider le bac");
         else
-            message.append("/nVider le bac");
+            message.append("\nVider le bac");
     }
 
     if(!capsulePresente)
@@ -661,7 +661,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Plus de caspules");
         else
-            message.append("/nPlus de caspules");
+            message.append("\nPlus de caspules");
     }
 
     if(!tassePresente)
@@ -669,7 +669,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Tasse non présente");
         else
-            message.append("/nTasse non présente");
+            message.append("\nTasse non présente");
     }
 
     if(!cafetiere->estCapsuleChoisieDisponible())
@@ -680,7 +680,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         }
         else
         {
-            message.append("/nCaspule choisie indisponible");
+            message.append("\nCaspule choisie indisponible");
         }
         ui->capsuleChoisie->setStyleSheet("font-size:25px; color:red;");
         ui->boutonChangerCafe->setStyleSheet("background-color:#A9A9A9;");
@@ -866,7 +866,7 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
     QString reponse;
     QString requete = "SELECT intensite FROM Capsule WHERE idCapsule =" +
                       QString::number(idCapsule + 1);
-    qDebug() << Q_FUNC_INFO << "idCapsule bdd"
+    qDebug() << Q_FUNC_INFO << "idCapsule "
              << QString::number(idCapsule + 1);
 
     baseDeDonneesPikawa->recuperer(requete, reponse);
