@@ -348,6 +348,9 @@ QSlider::handle:vertical:pressed {
                   <height>50</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk:vertical {\nbackground: green;\n}</string>
+                </property>
                 <property name="value">
                  <number>0</number>
                 </property>

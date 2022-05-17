@@ -32,7 +32,6 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     gererEvenements();
     initialiserIHM();
     cafetiere->gererConnexion(); // connexion automatique
-    ui->boutonLancerPreparation->setEnabled(true);
 }
 
 /**
@@ -780,9 +779,29 @@ void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 void IHMPikawa::afficherProgressionPrepration()
 {
     qDebug() << Q_FUNC_INFO;
-    /**
-     * @todo Gérer l'avancée de la barre de progression
-     */
+    switch (cafetiere->getLongueurChoisie()) {
+    case RISTRETTO:
+        for(int i = 0; i <= 99; ++i)
+            {
+                IHMPikawa::ui->avancementPreparation->setValue(i+1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(TEMPS_RISTRETTO));
+            }
+        break;
+    case ESPRESSO:
+        for(int i = 0; i <= 99; ++i)
+            {
+                IHMPikawa::ui->avancementPreparation->setValue(i+1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(TEMPS_ESPRESSO));
+            }
+        break;
+    case LUNGO:
+        for(int i = 0; i <= 99; ++i)
+            {
+                IHMPikawa::ui->avancementPreparation->setValue(i+1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(TEMPS_LUNGO));
+            }
+
+    }
 }
 
 void IHMPikawa::chargerDescription()
