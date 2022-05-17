@@ -834,7 +834,7 @@ void IHMPikawa::chargerIntensite()
         qDebug() << Q_FUNC_INFO << requete;
 
         baseDeDonneesPikawa->recuperer(requete, reponse);
-        int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+        int intensite = (reponse.toInt() * (double)GRAIN_INTENSITE_MAX) / (double)INTENSITE_MAX;
         qDebug() << Q_FUNC_INFO << "intensite " << intensite;
 
         switch(intensite)
@@ -870,7 +870,7 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
              << QString::number(idCapsule + 1);
 
     baseDeDonneesPikawa->recuperer(requete, reponse);
-    int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+    int intensite = (reponse.toInt() * (double)GRAIN_INTENSITE_MAX) / (double)INTENSITE_MAX;
     qDebug() << Q_FUNC_INFO << "intensité " << intensite;
 
     switch(intensite)
