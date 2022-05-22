@@ -778,29 +778,20 @@ void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 
 void IHMPikawa::afficherProgressionPrepration()
 {
+    int pasAvancementPreparation = 0;
     qDebug() << Q_FUNC_INFO;
     switch (cafetiere->getLongueurChoisie()) {
     case RISTRETTO:
-        for(int i = 0; i <= 99; ++i)
-            {
-                IHMPikawa::ui->avancementPreparation->setValue(i+1);
-                std::this_thread::sleep_for(std::chrono::milliseconds(TEMPS_RISTRETTO));
-            }
+        pasAvancementPreparation = ui->avancementPreparation->value() + PAS_RISTRETTO;
+    IHMPikawa::ui->avancementPreparation->setValue(pasAvancementPreparation);
         break;
     case ESPRESSO:
-        for(int i = 0; i <= 99; ++i)
-            {
-                IHMPikawa::ui->avancementPreparation->setValue(i+1);
-                std::this_thread::sleep_for(std::chrono::milliseconds(TEMPS_ESPRESSO));
-            }
+    pasAvancementPreparation = ui->avancementPreparation->value() + PAS_ESPRESSO;
+    IHMPikawa::ui->avancementPreparation->setValue(pasAvancementPreparation);
         break;
     case LUNGO:
-        for(int i = 0; i <= 99; ++i)
-            {
-                IHMPikawa::ui->avancementPreparation->setValue(i+1);
-                std::this_thread::sleep_for(std::chrono::milliseconds(TEMPS_LUNGO));
-            }
-
+        pasAvancementPreparation = ui->avancementPreparation->value() + PAS_LUNGO;
+    IHMPikawa::ui->avancementPreparation->setValue(pasAvancementPreparation);
     }
 }
 

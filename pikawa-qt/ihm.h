@@ -23,11 +23,11 @@ class Cafetiere;
 #define INTENSITE_MAX                12
 #define GRAIN_INTENSITE_MAX          5
 #define RISTRETTO 0
-#define TEMPS_RISTRETTO 50
+#define PAS_RISTRETTO 7
 #define ESPRESSO 1
-#define TEMPS_ESPRESSO 70
+#define PAS_ESPRESSO 4
 #define LUNGO 2
-#define TEMPS_LUNGO 100
+#define PAS_LUNGO 2
 /**
  * @def VERSION
  * @brief La version de l'application
