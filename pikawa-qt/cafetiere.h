@@ -139,6 +139,7 @@ class Cafetiere : public QObject
     void gererEtatPreparationCafe(int preparation);
     void lancerLaPreparationCafe();
     void reinitialiserDetartrageBaseDeDonnees();
+    void setDeconnectee();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);

@@ -122,6 +122,7 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
             preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
             qDebug() << Q_FUNC_INFO << " preparationCafe " << preparationCafe;
             emit cafeEnPreparation(preparationCafe);
+
             return true;
         case TypeTrame::ErreurPreparation:
             codeErreur = champs[ChampEtatPreparation::Cafe].toInt();

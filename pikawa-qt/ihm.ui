@@ -218,67 +218,69 @@
              </spacer>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="layoutTypeBoisson">
+             <layout class="QVBoxLayout" name="layoutTypeboisson">
               <item>
-               <spacer name="horizontalSpacer_17">
+               <spacer name="verticalSpacer_29">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeType">
                  <enum>QSizePolicy::Fixed</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>50</width>
-                  <height>20</height>
+                  <width>20</width>
+                  <height>80</height>
                  </size>
                 </property>
                </spacer>
               </item>
               <item>
-               <widget class="QLabel" name="labelLongueurPreparation">
-                <property name="minimumSize">
-                 <size>
-                  <width>80</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>80</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font-size:20px;</string>
-                </property>
-                <property name="lineWidth">
-                 <number>3</number>
-                </property>
-                <property name="midLineWidth">
-                 <number>3</number>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="selectionLongueurPreparation">
-                <property name="minimumSize">
-                 <size>
-                  <width>100</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>30</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">QSlider
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QLabel" name="labelLongueurPreparation">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">font-size:20px;</string>
+                  </property>
+                  <property name="lineWidth">
+                   <number>3</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>3</number>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="selectionLongueurPreparation">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>200</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>30</width>
+                    <height>200</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QSlider
 {
 	min-width:100px;
 	min-height:200px;
@@ -311,17 +313,86 @@ QSlider::handle:vertical:pressed {
     margin: 0 -15px;
     border-radius: 10px;
 }</string>
-                </property>
-                <property name="maximum">
-                 <number>2</number>
-                </property>
-                <property name="sliderPosition">
-                 <number>0</number>
-                </property>
+                  </property>
+                  <property name="maximum">
+                   <number>2</number>
+                  </property>
+                  <property name="sliderPosition">
+                   <number>0</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_30">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>120</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="styleSheet">
+                 <string notr="true">font-size: 20px;</string>
+                </property>
+                <property name="text">
+                 <string>Preparation en cours :</string>
+                </property>
                </widget>
+              </item>
+              <item>
+               <widget class="QProgressBar" name="avancementPreparation">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk {
+     background-color:  #15BE4C;
+ }
+</string>
+                </property>
+                <property name="value">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_28">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>70</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -363,7 +434,7 @@ QSlider::handle:vertical:pressed {
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>10</width>
-                  <height>50</height>
+                  <height>40</height>
                  </size>
                 </property>
                </spacer>
@@ -877,6 +948,22 @@ QSlider::handle:vertical:pressed {
                 </property>
                </spacer>
               </item>
+              <item>
+               <spacer name="verticalSpacer_26">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>80</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
               <item alignment="Qt::AlignHCenter">
                <widget class="QLabel" name="capsuleChoisie">
                 <property name="maximumSize">
@@ -953,6 +1040,22 @@ QSlider::handle:vertical:pressed {
                   <pointsize>10</pointsize>
                  </font>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="textFormat">
+                 <enum>Qt::AutoText</enum>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="etatCafe">
                 <property name="text">
                  <string/>
                 </property>
@@ -1019,7 +1122,7 @@ QSlider::handle:vertical:pressed {
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>5</height>
+                  <height>1</height>
                  </size>
                 </property>
                </spacer>
@@ -1100,6 +1203,22 @@ QSlider::handle:vertical:pressed {
                <string/>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_27">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>10</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QPushButton" name="boutonRafraichir">

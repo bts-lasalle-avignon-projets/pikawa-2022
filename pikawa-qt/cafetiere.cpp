@@ -174,11 +174,19 @@ bool Cafetiere::estPrete()
     {
         emit cafetierePrete();
         qDebug() << Q_FUNC_INFO << "Prête";
+        emit etatCafetiere(niveauEau,
+                           preparation->getBacPasPlein(),
+                           preparation->getCapsulePresente(),
+                           preparation->getTassePresente());
         return true;
     }
     else
     {
         emit cafetierePasPrete();
+        emit etatCafetiere(niveauEau,
+                           preparation->getBacPasPlein(),
+                           preparation->getCapsulePresente(),
+                           preparation->getTassePresente());
         qDebug() << Q_FUNC_INFO << "Pas prête";
         return false;
     }
@@ -260,6 +268,7 @@ void Cafetiere::gererConnexion()
 
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 {
+    this->connectee = true;
     emit cafetiereConnectee(nom, adresse);
     recupererEtatCafetiere();
     recupererEtatMagasin();
@@ -342,7 +351,7 @@ void Cafetiere::lancerLaPreparationCafe()
 {
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
     // recupererEtatCafetiere();
-    recupererEtatMagasin();
+    // recupererEtatMagasin();
 }
 
 void Cafetiere::initialiserNomCapsules()
@@ -395,10 +404,16 @@ void Cafetiere::gererEvenementsCommunication()
             SIGNAL(cafetiereDeconnectee()),
             this,
             SIGNAL(cafetiereDeconnectee()));
+
     connect(communication,
-            SIGNAL(rechercheTerminee(bool)),
+            SIGNAL(cafetiereDeconnectee()),
             this,
-            SIGNAL(rechercheTerminee(bool)));
+            SLOT(setDeconnectee())),
+
+      connect(communication,
+              SIGNAL(rechercheTerminee(bool)),
+              this,
+              SIGNAL(rechercheTerminee(bool)));
     connect(communication,
             SIGNAL(etatCafetiere(int, bool, bool, bool)),
             this,
@@ -485,4 +500,9 @@ void Cafetiere::reinitialiserDetartrageBaseDeDonnees()
     QString requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
                       QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE);
     baseDeDonneesPikawa->executer(requete);
+}
+
+void Cafetiere::setDeconnectee()
+{
+    this->connectee = false;
 }
