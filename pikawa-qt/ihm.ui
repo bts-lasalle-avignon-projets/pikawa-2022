@@ -45,7 +45,7 @@
     <item>
      <widget class="QStackedWidget" name="ecrans">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="accueil">
        <property name="styleSheet">
@@ -154,28 +154,6 @@
                 </property>
                 <property name="text">
                  <string>Entretien</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="boutonParametres">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>80</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font-size: 30px</string>
-                </property>
-                <property name="text">
-                 <string>Paramètres</string>
                 </property>
                </widget>
               </item>
@@ -2120,28 +2098,6 @@ background-color: rgb(237, 212, 0);</string>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="boutonParametresInformation">
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>80</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>200</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font-size: 30px</string>
-              </property>
-              <property name="text">
-               <string>Paramètres</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <spacer name="verticalSpacer_19">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -2992,28 +2948,6 @@ background-color: rgb(237, 212, 0);</string>
                </property>
                <property name="flat">
                 <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="boutonParametresEntretien">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>80</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>200</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">font-size: 30px</string>
-               </property>
-               <property name="text">
-                <string>Paramètres</string>
                </property>
               </widget>
              </item>

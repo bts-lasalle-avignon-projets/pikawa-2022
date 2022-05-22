@@ -34,6 +34,12 @@ class Communication : public QObject
     Q_OBJECT
   private:
     QBluetoothLocalDevice interfaceLocale; //!< l'interface Bluetooth locale
+
+    /*
+     * @todo
+     * Remplacer le QBluetoothDeviceDiscoveryAgent par le QBluetoothServiceInfo
+     */
+
     QBluetoothDeviceDiscoveryAgent*
       agentDecouvreur; //!< pour découvrir des interfaces Bluetooth
     QBluetoothDeviceInfo

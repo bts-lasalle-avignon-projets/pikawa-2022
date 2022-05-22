@@ -423,10 +423,7 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
-    connect(ui->boutonParametres,
-            SIGNAL(clicked()),
-            this,
-            SLOT(afficherPageParametres()));
+
     connect(ui->boutonAcceuilInformation,
             SIGNAL(clicked()),
             this,
@@ -435,10 +432,7 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageEntretien()));
-    connect(ui->boutonParametresInformation,
-            SIGNAL(clicked()),
-            this,
-            SLOT(afficherPageParametres()));
+
     connect(ui->boutonConnexion,
             SIGNAL(clicked()),
             cafetiere,
@@ -467,10 +461,7 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
-    connect(ui->boutonParametresEntretien,
-            SIGNAL(clicked()),
-            this,
-            SLOT(afficherPageParametres()));
+
     connect(ui->boutonAcceuilEntretien,
             SIGNAL(clicked()),
             this,
@@ -859,7 +850,8 @@ void IHMPikawa::chargerIntensite()
         qDebug() << Q_FUNC_INFO << requete;
 
         baseDeDonneesPikawa->recuperer(requete, reponse);
-        int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+        int intensite = (reponse.toInt() * (double)GRAIN_INTENSITE_MAX) /
+                        (double)INTENSITE_MAX;
         qDebug() << Q_FUNC_INFO << "intensite " << intensite;
 
         switch(intensite)
@@ -894,7 +886,8 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
     qDebug() << Q_FUNC_INFO << "idCapsule " << QString::number(idCapsule + 1);
 
     baseDeDonneesPikawa->recuperer(requete, reponse);
-    int intensite = (reponse.toInt() * GRAIN_INTENSITE_MAX) / INTENSITE_MAX;
+    int intensite =
+      (reponse.toInt() * (double)GRAIN_INTENSITE_MAX) / (double)INTENSITE_MAX;
     qDebug() << Q_FUNC_INFO << "intensité " << intensite;
 
     switch(intensite)
