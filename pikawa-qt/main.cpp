@@ -26,7 +26,6 @@ int main(int argc, char* argv[])
     }
 
     IHMPikawa fenetrePikawa;
-    fenetrePikawa.show();
 
     return a.exec();
 }

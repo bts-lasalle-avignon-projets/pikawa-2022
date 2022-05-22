@@ -22,6 +22,12 @@ class Cafetiere;
 #define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 #define INTENSITE_MAX                12
 #define GRAIN_INTENSITE_MAX          5
+#define RISTRETTO 0
+#define PAS_RISTRETTO 7
+#define ESPRESSO 1
+#define PAS_ESPRESSO 4
+#define LUNGO 2
+#define PAS_LUNGO 2
 /**
  * @def VERSION
  * @brief La version de l'application
@@ -40,6 +46,7 @@ class IHMPikawa;
 }
 
 class BaseDeDonnees;
+class threadAvancementCafe;
 
 /**
  * @class IHMPikawa
@@ -84,6 +91,7 @@ class IHMPikawa : public QMainWindow
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
+    QTimer*        timerPreparation;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
@@ -134,17 +142,11 @@ class IHMPikawa : public QMainWindow
     void chargerDescription();
     void chargerLabelsIntensiteCafe();
     void chargerIntensite();
-
     void afficherIntensiteDoux(int i);
-
     void afficherIntensite1(int i);
-
     void afficherIntensite2(int i);
-
     void afficherIntensite3(int i);
-
     void afficherIntensite4(int i);
-
     void afficherIntensite5(int i);
     void afficherIntensiteAccueil(int idCapsule);
 
@@ -189,6 +191,7 @@ class IHMPikawa : public QMainWindow
     void reinitialiserDetartrage();
     void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
     void afficherErreurAccesBaseDeDonnees();
+    void afficherProgressionPrepration();
 
   signals:
     void detartrageReinitialise();
