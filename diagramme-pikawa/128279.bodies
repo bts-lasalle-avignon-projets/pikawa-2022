@@ -8,11 +8,12 @@ class Cafetiere
     QString requete =
       "SELECT Preferences.idPreferences, Utilisateur.idUtilisateur, "
       "Utilisateur.nom, Utilisateur.prenom, Capsule.idCapsule, "
-      "Capsule.designation, Capsule.libelle, TypeBoisson.idTypeBoisson, "
-      "TypeBoisson.type FROM Preferences INNER JOIN Utilisateur ON "
-      "Utilisateur.idUtilisateur=Preferences.idUtilisateur INNER JOIN Capsule "
-      "ON Capsule.idCapsule=Preferences.capsuleActuelle INNER JOIN TypeBoisson "
-      "ON TypeBoisson.idTypeBoisson=Preferences.typeBoissonActuelle WHERE "
+      "Capsule.designation, Capsule.description, "
+      "TypeBoisson.idTypeBoisson,typeBoisson.type FROM Preferences INNER JOIN "
+      "Utilisateur ON Utilisateur.idUtilisateur=Preferences.idUtilisateur "
+      "INNER JOIN Capsule ON Capsule.idCapsule=Preferences.capsuleActuelle "
+      "INNER JOIN TypeBoisson ON "
+      "TypeBoisson.idTypeBoisson=Preferences.typeBoissonActuelle WHERE "
       "Utilisateur.identifiant='" +
       identifiantUtilisateur + "';";
     baseDeDonneesPikawa->recuperer(requete, preferences);
@@ -35,10 +36,16 @@ class Cafetiere
             SIGNAL(cafetiereDeconnectee()),
             this,
             SIGNAL(cafetiereDeconnectee()));
+
     connect(communication,
-            SIGNAL(rechercheTerminee(bool)),
+            SIGNAL(cafetiereDeconnectee()),
             this,
-            SIGNAL(rechercheTerminee(bool)));
+            SLOT(setDeconnectee())),
+
+      connect(communication,
+              SIGNAL(rechercheTerminee(bool)),
+              this,
+              SIGNAL(rechercheTerminee(bool)));
     connect(communication,
             SIGNAL(etatCafetiere(int, bool, bool, bool)),
             this,
@@ -142,7 +149,7 @@ class Cafetiere
     }
 !!!132503.cpp!!!	setNiveauEau(in niveauEau : int) : void
     this->niveauEau = niveauEau;
-!!!132631.cpp!!!	estPrete() : bool
+!!!128002.cpp!!!	preparerCafetiere() : bool
     qDebug() << Q_FUNC_INFO << "estPreparationPrete"
              << preparation->estPreparationPrete() << "estCafeEnPreparation"
              << cafeEnPreparation << "estCapsuleChoisieDisponible"
@@ -152,11 +159,19 @@ class Cafetiere
     {
         emit cafetierePrete();
         qDebug() << Q_FUNC_INFO << "Prête";
+        emit etatCafetiere(niveauEau,
+                           preparation->getBacPasPlein(),
+                           preparation->getCapsulePresente(),
+                           preparation->getTassePresente());
         return true;
     }
     else
     {
         emit cafetierePasPrete();
+        emit etatCafetiere(niveauEau,
+                           preparation->getBacPasPlein(),
+                           preparation->getCapsulePresente(),
+                           preparation->getTassePresente());
         qDebug() << Q_FUNC_INFO << "Pas prête";
         return false;
     }
@@ -263,6 +278,7 @@ class Cafetiere
     else
         communication->connecter();
 !!!133527.cpp!!!	mettreAJourConnexion(in nom : QString, in adresse : QString) : void
+    this->connectee = true;
     emit cafetiereConnectee(nom, adresse);
     recupererEtatCafetiere();
     recupererEtatMagasin();
@@ -279,7 +295,7 @@ class Cafetiere
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);
 
-    qDebug() << Q_FUNC_INFO << estPrete();
+    preparerCafetiere();
 
     emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 !!!134039.cpp!!!	mettreAJourMagasin(in caspulesDisponibles : QStringList) : void
@@ -293,7 +309,8 @@ class Cafetiere
         baseDeDonneesPikawa->executer(requete);
     }
     emit etatMagasinIHM(caspulesDisponibles);
-    estPrete();
+    bool pret = preparerCafetiere();
+    qDebug() << Q_FUNC_INFO << pret;
 !!!134167.cpp!!!	gererEtatPreparationCafe(in preparationCafe : int) : void
     qDebug() << Q_FUNC_INFO << preparationCafe;
     /**
@@ -324,8 +341,10 @@ class Cafetiere
 !!!134295.cpp!!!	lancerLaPreparationCafe() : void
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
     // recupererEtatCafetiere();
-    recupererEtatMagasin();
+    // recupererEtatMagasin();
 !!!161559.cpp!!!	reinitialiserDetartrageBaseDeDonnees() : void
     QString requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
                       QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE);
     baseDeDonneesPikawa->executer(requete);
+!!!128130.cpp!!!	setDeconnectee() : void
+    this->connectee = false;
