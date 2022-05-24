@@ -297,7 +297,7 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);
 
-    qDebug() << Q_FUNC_INFO << estPrete();
+    estPrete();
 
     emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
