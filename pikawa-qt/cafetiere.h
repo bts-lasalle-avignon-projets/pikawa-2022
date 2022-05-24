@@ -79,7 +79,7 @@ class Cafetiere : public QObject
     void        setCapsuleChoisie(const int& capsuleChoisie);
     void        setLongueurChoisie(const int& boissonChoisie);
     void        setNiveauEau(const int& niveauEau);
-    bool        estPrete();
+    bool        preparerCafetiere();
     QStringList getDisponibiliteCapsules() const;
     bool        estCapsuleChoisieDisponible();
     bool        estCapsuleChoisieDisponible(int capsule);

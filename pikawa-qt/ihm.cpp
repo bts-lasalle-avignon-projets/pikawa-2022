@@ -133,7 +133,7 @@ void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
     cafetiere->setLongueurChoisie(longueurPreparation);
     if(cafetiere->estConnectee())
     {
-        cafetiere->estPrete();
+        cafetiere->preparerCafetiere();
     }
 }
 
@@ -187,7 +187,7 @@ void IHMPikawa::afficherCapsuleChoisie(int idCapsule)
     afficherMessage(" ", "red");
     if(cafetiere->estConnectee())
     {
-        cafetiere->estPrete();
+        cafetiere->preparerCafetiere();
     }
     afficherPageAcceuil();
 }
@@ -278,7 +278,7 @@ void IHMPikawa::afficherCafePret()
     ui->avancementPreparation->setValue(100);
     timerPreparation->stop();
     afficherMessageEtatCafe("Café prêt", "green");
-    cafetiere->estPrete();
+    cafetiere->preparerCafetiere();
 }
 
 void IHMPikawa::afficherCafeEnCours()
@@ -293,7 +293,7 @@ void IHMPikawa::afficherErreurPreparation()
 {
     qDebug() << Q_FUNC_INFO;
     afficherMessageEtatCafe("Préparation impossible !", "red");
-    cafetiere->estPrete();
+    cafetiere->preparerCafetiere();
 }
 
 void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
@@ -771,18 +771,25 @@ void IHMPikawa::afficherProgressionPrepration()
 {
     int pasAvancementPreparation = 0;
     qDebug() << Q_FUNC_INFO;
-    switch (cafetiere->getLongueurChoisie()) {
-    case RISTRETTO:
-        pasAvancementPreparation = ui->avancementPreparation->value() + PAS_RISTRETTO;
-    IHMPikawa::ui->avancementPreparation->setValue(pasAvancementPreparation);
-        break;
-    case ESPRESSO:
-    pasAvancementPreparation = ui->avancementPreparation->value() + PAS_ESPRESSO;
-    IHMPikawa::ui->avancementPreparation->setValue(pasAvancementPreparation);
-        break;
-    case LUNGO:
-        pasAvancementPreparation = ui->avancementPreparation->value() + PAS_LUNGO;
-    IHMPikawa::ui->avancementPreparation->setValue(pasAvancementPreparation);
+    switch(cafetiere->getLongueurChoisie())
+    {
+        case RISTRETTO:
+            pasAvancementPreparation =
+              ui->avancementPreparation->value() + PAS_RISTRETTO;
+            IHMPikawa::ui->avancementPreparation->setValue(
+              pasAvancementPreparation);
+            break;
+        case ESPRESSO:
+            pasAvancementPreparation =
+              ui->avancementPreparation->value() + PAS_ESPRESSO;
+            IHMPikawa::ui->avancementPreparation->setValue(
+              pasAvancementPreparation);
+            break;
+        case LUNGO:
+            pasAvancementPreparation =
+              ui->avancementPreparation->value() + PAS_LUNGO;
+            IHMPikawa::ui->avancementPreparation->setValue(
+              pasAvancementPreparation);
     }
 }
 
