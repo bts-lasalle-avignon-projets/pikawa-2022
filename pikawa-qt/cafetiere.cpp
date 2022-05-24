@@ -163,7 +163,7 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
     this->niveauEau = niveauEau;
 }
 
-bool Cafetiere::estPrete()
+bool Cafetiere::preparerCafetiere()
 {
     qDebug() << Q_FUNC_INFO << "estPreparationPrete"
              << preparation->estPreparationPrete() << "estCafeEnPreparation"
@@ -297,7 +297,7 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
     preparation->setCapsulePresente(etatCapsule);
     preparation->setTassePresente(etatTasse);
 
-    estPrete();
+    preparerCafetiere();
 
     emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
@@ -314,7 +314,8 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
         baseDeDonneesPikawa->executer(requete);
     }
     emit etatMagasinIHM(caspulesDisponibles);
-    estPrete();
+    bool pret = preparerCafetiere();
+    qDebug() << Q_FUNC_INFO << pret;
 }
 
 void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
