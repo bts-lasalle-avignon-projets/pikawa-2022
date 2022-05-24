@@ -1,7 +1,7 @@
 format 224
 "diagramme-pikawa"
-  revision 12
-  modified_by 3 "najiro64"
+  revision 14
+  modified_by 2 "btssn2"
   cpp_root_dir "../pikawa-qt/"
 
 

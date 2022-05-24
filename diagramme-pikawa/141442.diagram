@@ -13,12 +13,12 @@ fragment 131331 "alt"
   separator 5027
 end
 textcanvas 131459 "else"
-  xyzwh 251.4 1079.2 2030 659 20
+  xyzwh 251 1079 2030 659 20
 fragment 134146 "alt"
   xyzwh 831 99.5 2000 487 137
 end
 textcanvas 134274 "[trame valide]"
-  xyzwh 883.5 104.5 2000 89 15
+  xyzwh 883 104 2000 89 15
 classinstance 137090 class_ref 128023 // BaseDeDonnees
   name ""   xyz 1260.5 4.5 2000 life_line_z 2000
 note 137730 "Préparation en cours :
@@ -33,67 +33,67 @@ fragment 137986 "alt"
   separator 7537
 end
 textcanvas 139394 "PreparationPrete et Connectée et cafePasEnCoursPreparation et CapsuleChoisieDisponible"
-  xyzwh 252.4 874.9 2030 659 20
+  xyzwh 252 874 2030 659 20
 textcanvas 142850 "[preparation en cours]"
-  xyzwh 196.2 287.8 2030 143 15
+  xyzwh 196 287 2030 143 15
 textcanvas 142978 "[café pret]"
-  xyzwh 157.1 636.3 2030 143 15
+  xyzwh 157 636 2030 143 15
 textcanvas 143106 "[erreur préparation]"
-  xyzwh 168.2 1305.2 2030 143 15
+  xyzwh 168 1305 2030 143 15
 durationcanvas 128259 classinstance_ref 129026 // :IHMPikawa
-  xyzwh 241 651.8 2010 11 200
+  xyzwh 241 651 2010 11 200
   overlappingdurationcanvas 128515
-    xyzwh 247 713.6 2020 11 116
+    xyzwh 247 713 2020 11 116
     overlappingdurationcanvas 128771
-      xyzwh 253 759.6 2030 11 25
+      xyzwh 253 759 2030 11 25
     end
   end
 end
 durationcanvas 129283 classinstance_ref 129026 // :IHMPikawa
-  xyzwh 241 918.6 2010 11 147
+  xyzwh 241 918 2010 11 147
   overlappingdurationcanvas 129539
-    xyzwh 247 976.2 2020 11 53
+    xyzwh 247 976 2020 11 53
   end
 end
 durationcanvas 129795 classinstance_ref 129026 // :IHMPikawa
-  xyzwh 241 1108.8 2010 11 118
+  xyzwh 241 1108 2010 11 118
   overlappingdurationcanvas 130051
-    xyzwh 247 1165.2 2020 11 25
+    xyzwh 247 1165 2020 11 25
   end
 end
 durationcanvas 130307 classinstance_ref 129026 // :IHMPikawa
-  xyzwh 241 1347.2 2010 11 152
+  xyzwh 241 1347 2010 11 152
   overlappingdurationcanvas 130819
     xyzwh 247 1417 2020 11 67
     overlappingdurationcanvas 131075
-      xyzwh 253 1452.4 2030 11 25
+      xyzwh 253 1452 2030 11 25
     end
   end
 end
 durationcanvas 133762 classinstance_ref 130690 // :Communication
-  xyzwh 866 78.5 2010 11 150
+  xyzwh 866 78 2010 11 150
   overlappingdurationcanvas 134402
-    xyzwh 872 183.6 2020 11 32
+    xyzwh 872 183 2020 11 32
   end
   overlappingdurationcanvas 134658
     xyzwh 872 135 2020 11 25
   end
 end
 durationcanvas 134914 classinstance_ref 129794 // :Cafetiere
-  xyzwh 495 199.3 2010 11 1344
+  xyzwh 495 199 2010 11 1344
   overlappingdurationcanvas 135170
-    xyzwh 501 267.7 2015 11 1266
+    xyzwh 501 267 2015 11 1266
     overlappingdurationcanvas 136322
-      xyzwh 507 453.6 2030 11 28
+      xyzwh 507 453 2030 11 28
     end
     overlappingdurationcanvas 136578
-      xyzwh 507 507.5 2030 11 37
+      xyzwh 507 507 2030 11 37
     end
     overlappingdurationcanvas 136834
       xyzwh 507 564 2030 11 67
     end
     overlappingdurationcanvas 129027
-      xyzwh 507 811.2 2020 11 456
+      xyzwh 507 811 2020 11 456
     end
   end
 end
@@ -107,15 +107,15 @@ durationcanvas 135554 classinstance_ref 129026 // :IHMPikawa
   end
 end
 durationcanvas 137218 classinstance_ref 137090 // :BaseDeDonnees
-  xyzwh 1318 438.6 2010 11 43
+  xyzwh 1318 438 2010 11 43
 end
 durationcanvas 137474 classinstance_ref 137090 // :BaseDeDonnees
-  xyzwh 1318 522.5 2010 11 109
+  xyzwh 1318 522 2010 11 109
 end
 msg 128387 synchronous
   from durationcanvas_ref 135170
   to durationcanvas_ref 128259
-  yz 653 2025 explicitmsg "estPret()"
+  yz 653 2025 explicitmsg "cafePret()"
   stereotype "<<signal>>" xyz 340 667 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 348 636
@@ -133,7 +133,7 @@ reflexivemsg 128899 synchronous
 msg 129155 synchronous
   from durationcanvas_ref 128259
   to durationcanvas_ref 129027
-  yz 813 2035 msg operation_ref 132631 // "estPrete() : bool"
+  yz 813 2035 explicitmsg "preparerCafetiere : bool"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 326 796
 msg 129411 synchronous

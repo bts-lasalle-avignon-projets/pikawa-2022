@@ -1,11 +1,13 @@
 window_sizes 1864 1016 436 1422 843 120
 cleanlooks_style
 diagrams
-  active  sequencediagram_ref 141442 // ds gérer préparation
-    1422 843 100 A0 492 0
+  sequencediagram_ref 141442 // ds gérer préparation
+    1422 843 100 A0 1056 0
+  active  sequencediagram_ref 134658 // Diagramme séquence système
+    1422 843 100 A4 0 0
 end
 show_stereotypes
-selected sequencediagram_ref 141442 // ds gérer préparation
+selected sequencediagram_ref 134658 // Diagramme séquence système
 open
   usecase_ref 129154 // Visualiser son utilisation
   
