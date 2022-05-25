@@ -52,3 +52,6 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 [pikawa-2022](https://github.com/btssn-lasalle-84/pikawa-2022/projects/1)
 
+## Documentation du code
+
+https://btssn-lasalle-84.github.io/pikawa-2022/
