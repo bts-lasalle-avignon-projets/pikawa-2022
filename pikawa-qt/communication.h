@@ -5,55 +5,128 @@
  * @file communication.h
  *
  * @brief Déclaration de la classe Communication
- * @author
- * @version 1.0
- *
+ * @author Anthony BRYCKAERT
+ * @version 0.2
  */
 
 #include <QObject>
 #include <QtBluetooth>
+#include "protocole.h"
 
 /**
  * @def PREFIXE_NOM_CAFETIERE
- * @brief Le nom de l'appareil Bluetooth d'une cafetière doit contenir ce
- * préfixe
+ * @brief L'appareil Bluetooth d'une cafetière doit contenir ce préfixe de nom
  */
 #define PREFIXE_NOM_CAFETIERE "PIKAWA"
 
 /**
+ * @def TEST_TRAMES
+ * @brief Pour les tests de trames
+ */
+//#define TEST_TRAMES
+
+/**
  * @class Communication
- * @brief
- * @details
+ * @brief Permet de gérer les échanges Bluetooth
  */
 class Communication : public QObject
 {
     Q_OBJECT
   private:
     QBluetoothLocalDevice interfaceLocale; //!< l'interface Bluetooth locale
+
+    /*
+     * @todo
+     * Remplacer le QBluetoothDeviceDiscoveryAgent par le QBluetoothServiceInfo
+     */
+
     QBluetoothDeviceDiscoveryAgent*
       agentDecouvreur; //!< pour découvrir des interfaces Bluetooth
     QBluetoothDeviceInfo
-         pikawa;        //!< l'interface Bluetooth de la cafetière pikawa
+         pikawa;        //!< l'int erface Bluetooth de la cafetière pikawa
+    bool connecte;      //!< l'état de connexion de la socket Bluetooth
     bool pikawaDetecte; //!< état de détection de l'interface pikawa
     QBluetoothSocket*
-      socketBluetoothPikawa; //!< La socket cliente de communication Bluetooth
+            socketBluetoothPikawa; //!< socket cliente de communication Bluetooth
+    QString trameRecue;            //!< la trame reçue
 
-    bool estBluetoothDisponible() const;
-    void activerBluetooth();
+    bool      estBluetoothDisponible() const;
+    void      activerBluetooth();
+    bool      estTrameValide(QString trame);
+    TypeTrame extraireTypeTrame(QString trame);
+    bool      traiterTrame(TypeTrame typeTrame, QString trame);
 
   public:
     Communication(QObject* parent = nullptr);
     ~Communication();
 
     bool estConnecte() const;
+    bool estCafetiereDetectee() const;
+    void envoyerTrame(QString trame);
+    void envoyerTramePreparation(int nomCafe, int longueur);
+
+    /**
+     * @enum ChampEtatCafetiere
+     * @brief Les différents champs de la trame EtatCafetiere
+     */
+    enum ChampEtatCafetiere
+    {
+        NiveauEau = 2,
+        NiveauBac,
+        CaspulePresente,
+        TassePresente,
+        NbChampsEtatCafetiere
+    };
+    /**
+     * @enum ChampEtatMagasin
+     * @brief Les différents champs de la trame EtatMagasin
+     */
+    enum ChampEtatMagasin
+    {
+        Colombia = 2,
+        Indonesia,
+        Ethiopia,
+        Volluto,
+        Capriccio,
+        Cosi,
+        Scuro,
+        Vanilla,
+        NbChampsEtatMagasin
+    };
+    /**
+     * @enum ChampEtatPreparation
+     * @brief Les différents champs de la trame EtatPreparation
+     */
+    enum ChampEtatPreparation
+    {
+        Cafe = 2,
+        NbChampsEtatPreparation
+    };
 
   public slots:
     void activerLaDecouverte();
+    void desactiverLaDecouverte();
     void decouvrirCafetiere(const QBluetoothDeviceInfo& appareilBluetooth);
+    void terminerRecherche();
+    void connecter();
     void deconnecter();
+    void recupererEtatConnexion();
+    void recupererEtatDeconnexion();
+    void recevoir();
+    void lireEtatSocket();
 
   signals:
     void cafetiereDetectee(QString nom, QString adresse);
+    void cafetiereConnectee(QString nom, QString adresse);
+    void cafetiereDeconnectee();
+    void rechercheTerminee(bool detecte);
+    void etatCafetiere(int  reservoirEau,
+                       bool bacPasPlein,
+                       bool etatCapsule,
+                       bool etatTasse);
+    void etatMagasin(QStringList caspulesDisponibles);
+    void cafeEnPreparation(int preparationCafe);
+    void erreurPreparationCafe(int codeErreur);
 };
 
 #endif // COMMUNICATION_H

@@ -1,0 +1,78 @@
+class Preparation
+!!!144535.cpp!!!	chargerNomCapsules() : void
+    qDebug() << Q_FUNC_INFO;
+    baseDeDonneesPikawa->recuperer("SELECT designation FROM Capsule;",
+                                   nomCapsules);
+!!!144663.cpp!!!	chargerLongeurBoissons() : void
+    qDebug() << Q_FUNC_INFO;
+    baseDeDonneesPikawa->recuperer("SELECT type FROM TypeBoisson;",
+                                   nomLongueurs);
+!!!154263.cpp!!!	ouvrirBaseDeDonnees() : void
+    baseDeDonneesPikawa = BaseDeDonnees::getInstance();
+    baseDeDonneesPikawa->ouvrir(NOM_BDD);
+!!!144791.cpp!!!	Preparation(inout cafetiere : Cafetiere = nullptr)
+    qDebug() << Q_FUNC_INFO;
+    ouvrirBaseDeDonnees();
+    chargerNomCapsules();
+    chargerLongeurBoissons();
+!!!144919.cpp!!!	~Preparation()
+    BaseDeDonnees::detruireInstance();
+    qDebug() << Q_FUNC_INFO;
+!!!145047.cpp!!!	getNomCapsules() : QStringList
+    QStringList listeNomCapsules;
+    for(int i = 0; i < nomCapsules.size(); ++i)
+        listeNomCapsules << nomCapsules.at(i);
+    qDebug() << Q_FUNC_INFO << listeNomCapsules;
+    return listeNomCapsules;
+!!!145175.cpp!!!	getNomLongueurs() : QStringList
+    QStringList listeNomLongueurs;
+    for(int i = 0; i < nomLongueurs.size(); ++i)
+        listeNomLongueurs << nomLongueurs.at(i);
+    qDebug() << Q_FUNC_INFO << listeNomLongueurs;
+    return listeNomLongueurs;
+!!!145303.cpp!!!	getCapsulePresente() : bool
+    return capsulePresente;
+!!!154391.cpp!!!	getBacPasPlein() : bool
+    return bacPasPlein;
+!!!145559.cpp!!!	getTassePresente() : bool
+    return tassePresente;
+!!!145687.cpp!!!	getNiveauEauNecessaire() : int
+    return niveauEauNecessaire;
+!!!145815.cpp!!!	getNiveauEauNecessaire(in longueurChoisie : int) : int
+    switch(longueurChoisie)
+    {
+        case 0:
+            return TAILLE_RISTRETTO;
+        case 1:
+            return TAILLE_ESPRESSO;
+        case 2:
+            return TAILLE_LUNGO;
+    }
+    return TAILLE_INCONNUE;
+!!!145943.cpp!!!	setCapsulePresente(in caspulePresente : bool) : void
+    this->capsulePresente = caspulePresente;
+!!!154519.cpp!!!	setBacPasPlein(in bacPasPlein : bool) : void
+    this->bacPasPlein = bacPasPlein;
+!!!146199.cpp!!!	setTassePresente(in tassePresente : bool) : void
+    this->tassePresente = tassePresente;
+!!!146327.cpp!!!	estPreparationPrete() : bool
+    qDebug() << Q_FUNC_INFO << "niveauEau" << cafetiere->getNiveauEau();
+    qDebug() << Q_FUNC_INFO << "niveauEauNecessaire" << niveauEauNecessaire;
+    qDebug() << Q_FUNC_INFO << "bacPasPlein" << bacPasPlein;
+    qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
+    qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
+
+    if((cafetiere->getNiveauEau() - niveauEauNecessaire) <= 0 || !bacPasPlein ||
+       !tassePresente || !capsulePresente)
+    {
+        qDebug() << Q_FUNC_INFO << "Pas prête";
+        return false;
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "Prête";
+        return true;
+    }
+!!!146455.cpp!!!	setNiveauEauNecessaire(in longueurChoisie : int) : void
+    this->niveauEauNecessaire = getNiveauEauNecessaire(longueurChoisie);
+    qDebug() << Q_FUNC_INFO << niveauEauNecessaire;

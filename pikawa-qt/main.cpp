@@ -6,7 +6,7 @@
  * @brief Programme principal
  * @details Crée et affiche la fenêtre principale de l'application Pikawa
  * @author
- * @version 0.1
+ * @version 0.2
  *
  * @param argc
  * @param argv[]
@@ -25,8 +25,7 @@ int main(int argc, char* argv[])
         a.setStyleSheet(styleSheet);
     }
 
-    IHMPikawa w;
-    w.show();
+    IHMPikawa fenetrePikawa;
 
     return a.exec();
 }

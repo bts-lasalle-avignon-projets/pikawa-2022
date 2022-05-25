@@ -5,12 +5,12 @@
  * @file ihm.h
  *
  * @brief Déclaration de la classe IHMPikawa
- * @author
- * @version 1.0
- *
+ * @author Anthony BRYCKAERT
+ * @version 0.2
  */
 
 #include <QtWidgets>
+#include <QIcon>
 
 class Cafetiere;
 
@@ -18,19 +18,21 @@ class Cafetiere;
  * @def NOM
  * @brief Le nom de l'application
  */
-#define NOM "Pikawa"
-
+#define NOM                          "Pikawa"
+#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
+#define INTENSITE_MAX                12
+#define GRAIN_INTENSITE_MAX          5
+#define RISTRETTO 0
+#define PAS_RISTRETTO 7
+#define ESPRESSO 1
+#define PAS_ESPRESSO 4
+#define LUNGO 2
+#define PAS_LUNGO 2
 /**
  * @def VERSION
  * @brief La version de l'application
  */
-#define VERSION "0.1"
-
-/**
- * @def NOM_BDD
- * @brief Le nom de la base de données SQLite
- */
-#define NOM_BDD "pikawa.sqlite"
+#define VERSION "0.2"
 
 /**
  * @def PLEIN_ECRAN
@@ -38,25 +40,13 @@ class Cafetiere;
  */
 #define PLEIN_ECRAN
 
-QT_BEGIN_NAMESPACE
 namespace Ui
 {
 class IHMPikawa;
 }
-QT_END_NAMESPACE
 
 class BaseDeDonnees;
-
-/**
- * @enum LongueurPreparation
- * @brief Long, Moyen ou Court
- */
-enum LongueurCafe
-{
-    Court = 0,
-    Moyen = 1,
-    Long  = 2
-};
+class threadAvancementCafe;
 
 /**
  * @class IHMPikawa
@@ -67,34 +57,144 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
+    /**
+     * @todo Revoir COMPLETEMENT la mise en page de l'IHM
+     */
+    /**
+     * @enum Page
+     * @brief Les différentes pages de l'application
+     */
     enum Page
     {
-        Accueil     = 0,
-        Information = 1,
-        Entretien   = 2,
-        Parametre   = 3,
+        Accueil,
+        SelectionCafe,
+        Information,
+        Entretien,
+        Parametres,
         NbEcrans
+    };
+
+    enum BoutonCafe
+    {
+        boutonColombia = 0,
+        boutonIndonesia,
+        boutonEthiopia,
+        boutonVolluto,
+        boutonCapriccio,
+        boutonCosi,
+        boutonScuro,
+        boutonVanilla,
+        nbCafe
     };
 
   private:
     Ui::IHMPikawa* ui; //!< la fenêtre graphique associée à cette classe
-    BaseDeDonnees* baseDeDonnees; //!< instance d'un objet BaseDeDonnees
-    Cafetiere*     cafetiere;     //!< instance d'un objet Cafetiere
+    BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
+    Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
+    QTimer*        timerPreparation;
+    // GUI
+    QIcon*   iconeBoutonConnecte;
+    QIcon*   iconeBoutonDetectee;
+    QIcon*   iconeBoutonDeconnecte;
+    QIcon*   iconeCapsuleColombia;
+    QIcon*   iconeCapsuleIndonesia;
+    QIcon*   iconeCapsuleEthiopia;
+    QIcon*   iconeCapsuleVolluto;
+    QIcon*   iconeCapsuleCapriccio;
+    QIcon*   iconeCapsuleCosi;
+    QIcon*   iconeCapsuleScuro;
+    QIcon*   iconeCapsuleVanilla;
+    QPixmap* iconeBacPlein;
+    QPixmap* iconeBacPasPlein;
+    QPixmap* capsulePresente;
+    QPixmap* capsuleAbsente;
+    QPixmap* intensite1;
+    QPixmap* intensite2;
+    QPixmap* intensite3;
+    QPixmap* intensite4;
+    QPixmap* intensite5;
 
+    QVector<QPushButton*> boutonsCafes;
+    QVector<QLabel*>      labelsEtatCafe;
+    QVector<QLabel*>      labelsDescriptions;
+    QVector<QLabel*>      labelsintensitesCafes;
+
+    void initialiserIcones();
     void initialiserIHM();
     void gererEvenements();
+    void gererEvenementsBoutons();
+    void gererEvenementsCafetiere();
+    void initialiserPreferences();
+    int  convertirPourcentageEau(int reservoirEau);
+    void chargerBoutonsCafe();
+    void chargerLabelsEtatCafe();
+    void chargerlabelsDescriptions();
+    void ouvrirBaseDeDonnees();
+    void afficherAvertissement(int  niveau,
+                               bool bacPasPlein,
+                               bool tassePresente,
+                               bool capsulePresente);
+    void afficherMessage(QString message, QString couleur);
+    void afficherMessageEtatCafe(QString message, QString couleur);
+    void initialiserCafetiere();
+    void initialiserPageEntretien();
+    void mettreAJourNombreCafeDepuisDetartrage();
+    void chargerDescription();
+    void chargerLabelsIntensiteCafe();
+    void chargerIntensite();
+    void afficherIntensiteDoux(int i);
+    void afficherIntensite1(int i);
+    void afficherIntensite2(int i);
+    void afficherIntensite3(int i);
+    void afficherIntensite4(int i);
+    void afficherIntensite5(int i);
+    void afficherIntensiteAccueil(int idCapsule);
 
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
 
   public slots:
-    void afficherLongueurPreparation(int longueurPreparation);
     void afficherPage(IHMPikawa::Page page);
     void afficherPageAcceuil();
     void afficherPageInformations();
     void afficherPageEntretien();
     void afficherPageParametres();
+    void afficherPageSelectionCafe();
+    void activerBoutonConnexionEtatDetecte(QString nom, QString adresse);
+    void activerBoutonConnexionEtatConnecte(QString nom, QString adresse);
+    void activerBoutonConnexionEtatDeconnecte();
+    void rafraichirDecouverte();
+    void terminerDecouverte(bool detecte);
+    void gererLongueurPreparation(int longueurPreparation);
+    void gererSelectionCafes();
+    void afficherCapsuleChoisie(int idCapsule);
+    void selectionnerColombia();
+    void selectionnerIndonesia();
+    void selectionnerEthiopia();
+    void selectionnerVolluto();
+    void selectionnerCosi();
+    void selectionnerScuro();
+    void selectionnerVanilla();
+    void selectionnerCapriccio();
+    void afficherCafePret();
+    void afficherCafeEnCours();
+    void afficherErreurPreparation();
+    void mettreAJourEtatCafetiere(int  reservoirEau,
+                                  bool bacPasPlein,
+                                  bool etatCapsule,
+                                  bool etatTasse);
+    void mettreAJourMagasinIHM(QStringList caspulesDisponibles);
+    void afficherCafetierePrete();
+    void afficherCafetierePasPrete();
+    void mettreAJourNombreCafeTotal(QString nombreCafeIncremente);
+    void reinitialiserDetartrage();
+    void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
+    void afficherErreurAccesBaseDeDonnees();
+    void afficherProgressionPrepration();
+
+  signals:
+    void detartrageReinitialise();
 };
 
 #endif // IHM_H

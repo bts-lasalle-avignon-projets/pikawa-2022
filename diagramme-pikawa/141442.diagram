@@ -1,0 +1,259 @@
+format 224
+
+classinstance 128130 class_ref 135042 // Client
+  name ""   xyz 2 4.5 2000 life_line_z 2000
+classinstance 129026 class_ref 128407 // IHMPikawa
+  name ""   xyz 202 4.5 2000 life_line_z 2000
+classinstance 129794 class_ref 128279 // Cafetiere
+  name ""   xyz 463.5 4.5 2000 life_line_z 2000
+classinstance 130690 class_ref 128535 // Communication
+  name ""   xyz 813 5.5 2000 life_line_z 2000
+fragment 131331 "alt"
+  xyzwh 194.8 872.2 2000 672 402
+  separator 5027
+end
+textcanvas 131459 "else"
+  xyzwh 251 1079 2030 659 20
+fragment 134146 "alt"
+  xyzwh 831 99.5 2000 487 137
+end
+textcanvas 134274 "[trame valide]"
+  xyzwh 883 104 2000 89 15
+classinstance 137090 class_ref 128023 // BaseDeDonnees
+  name ""   xyz 1260.5 4.5 2000 life_line_z 2000
+note 137730 "Préparation en cours :
+$PIKAWA;P;1;\\r\\n
+
+Préparation terminée :
+$PIKAWA;P;0;\\r\\n"
+  xyzwh 587.5 5 2000 191 105
+fragment 137986 "alt"
+  xyzwh 153.1 285.4 1995 1187 1337
+  separator 2616
+  separator 7537
+end
+textcanvas 139394 "PreparationPrete et Connectée et cafePasEnCoursPreparation et CapsuleChoisieDisponible"
+  xyzwh 252 874 2030 659 20
+textcanvas 142850 "[preparation en cours]"
+  xyzwh 196 287 2030 143 15
+textcanvas 142978 "[café pret]"
+  xyzwh 157 636 2030 143 15
+textcanvas 143106 "[erreur préparation]"
+  xyzwh 168 1305 2030 143 15
+durationcanvas 128259 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 241 651 2010 11 200
+  overlappingdurationcanvas 128515
+    xyzwh 247 713 2020 11 116
+    overlappingdurationcanvas 128771
+      xyzwh 253 759 2030 11 25
+    end
+  end
+end
+durationcanvas 129283 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 241 918 2010 11 147
+  overlappingdurationcanvas 129539
+    xyzwh 247 976 2020 11 53
+  end
+end
+durationcanvas 129795 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 241 1108 2010 11 118
+  overlappingdurationcanvas 130051
+    xyzwh 247 1165 2020 11 25
+  end
+end
+durationcanvas 130307 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 241 1347 2010 11 152
+  overlappingdurationcanvas 130819
+    xyzwh 247 1417 2020 11 67
+    overlappingdurationcanvas 131075
+      xyzwh 253 1452 2030 11 25
+    end
+  end
+end
+durationcanvas 133762 classinstance_ref 130690 // :Communication
+  xyzwh 866 78 2010 11 150
+  overlappingdurationcanvas 134402
+    xyzwh 872 183 2020 11 32
+  end
+  overlappingdurationcanvas 134658
+    xyzwh 872 135 2020 11 25
+  end
+end
+durationcanvas 134914 classinstance_ref 129794 // :Cafetiere
+  xyzwh 495 199 2010 11 1344
+  overlappingdurationcanvas 135170
+    xyzwh 501 267 2015 11 1266
+    overlappingdurationcanvas 136322
+      xyzwh 507 453 2030 11 28
+    end
+    overlappingdurationcanvas 136578
+      xyzwh 507 507 2030 11 37
+    end
+    overlappingdurationcanvas 136834
+      xyzwh 507 564 2030 11 67
+    end
+    overlappingdurationcanvas 129027
+      xyzwh 507 811 2020 11 456
+    end
+  end
+end
+durationcanvas 135554 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 241 315 2010 11 151
+  overlappingdurationcanvas 135810
+    xyzwh 247 382 2020 11 69
+    overlappingdurationcanvas 136066
+      xyzwh 253 420 2030 11 25
+    end
+  end
+end
+durationcanvas 137218 classinstance_ref 137090 // :BaseDeDonnees
+  xyzwh 1318 438 2010 11 43
+end
+durationcanvas 137474 classinstance_ref 137090 // :BaseDeDonnees
+  xyzwh 1318 522 2010 11 109
+end
+msg 128387 synchronous
+  from durationcanvas_ref 135170
+  to durationcanvas_ref 128259
+  yz 653 2025 explicitmsg "cafePret()"
+  stereotype "<<signal>>" xyz 340 667 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 348 636
+reflexivemsg 128643 synchronous
+  to durationcanvas_ref 128515
+  yz 713 2025 explicitmsg "afficherCafePret()"
+  stereotype "<<slot>>" xyz 284 711 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 255 699
+reflexivemsg 128899 synchronous
+  to durationcanvas_ref 128771
+  yz 759 2035 explicitmsg "afficherMessage(in message : QString, in couleur : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 259 744
+msg 129155 synchronous
+  from durationcanvas_ref 128259
+  to durationcanvas_ref 129027
+  yz 813 2035 explicitmsg "preparerCafetiere : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 326 796
+msg 129411 synchronous
+  from durationcanvas_ref 129027
+  to durationcanvas_ref 129283
+  yz 921 2035 explicitmsg "cafetierePrete()"
+  stereotype "<<signal>>" xyz 342 935 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 328 904
+reflexivemsg 129667 synchronous
+  to durationcanvas_ref 129539
+  yz 976 2025 explicitmsg "afficherCafetierePrete()"
+  stereotype "<<slot>>" xyz 290 980 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 256 962
+msg 129923 synchronous
+  from durationcanvas_ref 129027
+  to durationcanvas_ref 129795
+  yz 1108 2035 explicitmsg "cafetierePasPrete()"
+  stereotype "<<signal>>" xyz 342 1123 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 316 1092
+reflexivemsg 130179 synchronous
+  to durationcanvas_ref 130051
+  yz 1165 2025 explicitmsg "afficherCafetierePasPrete()"
+  stereotype "<<slot>>" xyz 313 1165 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 254 1151
+msg 130435 synchronous
+  from durationcanvas_ref 135170
+  to durationcanvas_ref 130307
+  yz 1347 2025 explicitmsg "erreurPreparation()"
+  stereotype "<<signal>>" xyz 340 1362 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 314 1331
+reflexivemsg 130947 synchronous
+  to durationcanvas_ref 130819
+  yz 1417 2025 explicitmsg "afficherErreurPreparation()"
+  stereotype "<<slot>>" xyz 310 1415 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 256 1396
+reflexivemsg 131203 synchronous
+  to durationcanvas_ref 131075
+  yz 1452 2035 explicitmsg "afficherMessage(in message : QString, in couleur : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 260 1439
+reflexivemsg 133890 asynchronous
+  to durationcanvas_ref 133762
+  yz 80 2015 msg operation_ref 138263 // "recevoir() : void"
+  stereotype "<<slot>>" xyz 903 80 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 877 65
+reflexivemsg 134530 synchronous
+  to durationcanvas_ref 134402
+  yz 183 2025 msg operation_ref 136343 // "traiterTrame(in typeTrame : TypeTrame, in trame : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 883 166
+reflexivemsg 134786 synchronous
+  to durationcanvas_ref 134658
+  yz 135 2025 msg operation_ref 136215 // "extraireTypeTrame(in trame : QString) : TypeTrame"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 883 121
+msg 135042 synchronous
+  from durationcanvas_ref 134402
+  to durationcanvas_ref 134914
+  yz 199 2030 explicitmsg "cafeEnPreparation(in preparationCafe : int)"
+  stereotype "<<signal>>" xyz 623 211 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 594 185
+reflexivemsg 135298 synchronous
+  to durationcanvas_ref 135170
+  yz 267 2025 explicitmsg "gererEtatPreparationCafe(in preparationCafe : int)"
+  stereotype "<<slot>>" xyz 624 267 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 514 253
+msg 135682 synchronous
+  from durationcanvas_ref 135170
+  to durationcanvas_ref 135554
+  yz 329 2025 explicitmsg "cafeEnCours()"
+  stereotype "<<signal>>" xyz 322 345 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 311 315
+reflexivemsg 135938 synchronous
+  to durationcanvas_ref 135810
+  yz 382 2030 explicitmsg "afficherCafeEnCours()"
+  stereotype "<<slot>>" xyz 285 384 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 260 369
+reflexivemsg 136194 synchronous
+  to durationcanvas_ref 136066
+  yz 420 2035 explicitmsg "afficherMessage(in message : QString, in couleur : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 257 408
+reflexivemsg 136450 synchronous
+  to durationcanvas_ref 136322
+  yz 453 2035 msg operation_ref 161047 // "incrementerNombreCafeJour() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 515 440
+reflexivemsg 136706 synchronous
+  to durationcanvas_ref 136578
+  yz 507 2035 msg operation_ref 133783 // "recupererEtatMagasin() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 514 495
+reflexivemsg 136962 synchronous
+  to durationcanvas_ref 136834
+  yz 564 2035 msg operation_ref 161175 // "decrementerNombreCafeAvantDetartrage() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 516 550
+msg 137346 synchronous
+  from durationcanvas_ref 136322
+  to durationcanvas_ref 137218
+  yz 469 3005 explicitmsg "executer(in requete : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 770 454
+msg 137602 synchronous
+  from durationcanvas_ref 136834
+  to durationcanvas_ref 137474
+  yz 581 2040 explicitmsg "executer(in requete : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 770 566
+line 137858 -_-_
+  from ref 137730 z 2016 to ref 133890
+end

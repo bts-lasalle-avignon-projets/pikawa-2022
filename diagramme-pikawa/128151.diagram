@@ -1,0 +1,57 @@
+format 224
+
+artifactcanvas 128023 artifact_ref 128663 // main
+  xyz 551 13 2000
+end
+artifactcanvas 128151 artifact_ref 128407 // ihm
+  xyz 551 274 2000
+end
+artifactcanvas 128279 artifact_ref 128151 // cafetiere
+  xyz 551 558 2000
+end
+artifactcanvas 128407 artifact_ref 128023 // basededonnees
+  xyz 1074 558 2000
+end
+artifactcanvas 128535 artifact_ref 128279 // communication
+  xyz 343 772 2000
+end
+artifactcanvas 128663 artifact_ref 128535 // preparation
+  xyz 771 772 2005
+end
+artifactcanvas 129943 artifact_ref 135191 // protocole
+  xyz 85 558 2006
+end
+simplerelationcanvas 128791 simplerelation_ref 128023
+  from ref 128023 z 2001 to ref 128151
+end
+simplerelationcanvas 128919 simplerelation_ref 128151
+  from ref 128151 z 2001 to ref 128407
+end
+simplerelationcanvas 129047 simplerelation_ref 128279
+  from ref 128151 z 2001 to ref 128279
+end
+simplerelationcanvas 129175 simplerelation_ref 128407
+  from ref 128279 z 2006 to ref 128663
+end
+simplerelationcanvas 129303 simplerelation_ref 128535
+  from ref 128279 z 2001 to ref 128407
+end
+simplerelationcanvas 129431 simplerelation_ref 128663
+  from ref 128279 z 2001 to ref 128535
+end
+simplerelationcanvas 129559 simplerelation_ref 128791
+  from ref 128663 z 2006 to ref 128407
+end
+simplerelationcanvas 129687 simplerelation_ref 128919
+  from ref 128279 z 2001 to ref 128151
+end
+simplerelationcanvas 129815 simplerelation_ref 129047
+  from ref 128663 z 2006 to ref 128279
+end
+simplerelationcanvas 130071 simplerelation_ref 135575
+  from ref 128279 z 2007 to ref 129943
+end
+simplerelationcanvas 130199 simplerelation_ref 135703
+  from ref 128535 z 2007 to ref 129943
+end
+end

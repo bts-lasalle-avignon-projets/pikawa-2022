@@ -1,11 +1,28 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="cafetiere-off.png">images/cafetiere-rouge.png</file>
-        <file alias="cafetiere-on.png">images/cafetiere-verte.png</file>
+        <file>images/cafetiere-noire.png</file>
+        <file>images/cafetiere-rouge.png</file>
+        <file>images/cafetiere-verte.png</file>
         <file alias="cafe.png">images/cafe.png</file>
         <file alias="RondVert.png">images/RondVert.png</file>
         <file alias="RondRouge.png">images/RondRouge.png</file>
-
+        <file>images/rafraichir.png</file>
+        <file alias="capriccio.png">images/capsule-capriccio.png</file>
+        <file alias="cosi.png">images/capsule-cosi.png</file>
+        <file alias="indonesia.png">images/capsule-indonesia.png</file>
+        <file alias="vanilla-eclair.png">images/capsule-vanilla-eclair.png</file>
+        <file alias="colombia.png">images/capsule-colombia.png</file>
+        <file alias="ethiopia.png">images/capsule-ethiopia.png</file>
+        <file alias="scuro.png">images/capsule-scuro.png</file>
+        <file alias="volluto.png">images/capsule-volluto.png</file>
+        <file>images/bacPlein.png</file>
+        <file>images/bacVide.png</file>
+        <file>images/machinePikawa.png</file>
+        <file>images/intensite-cafe-1.png</file>
+        <file>images/intensite-cafe-2.png</file>
+        <file>images/intensite-cafe-3.png</file>
+        <file>images/intensite-cafe-4.png</file>
+        <file>images/intensite-cafe-5.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>cafetiere.qss</file>

@@ -1,7 +1,8 @@
 format 224
-"projet pikawa"
-  revision 6
+"diagramme-pikawa"
+  revision 14
   modified_by 2 "btssn2"
+  cpp_root_dir "../pikawa-qt/"
 
 
   
@@ -182,7 +183,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130178 "connectÈ"
+      attribute 130178 "connect√©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -193,7 +194,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130306 "activÈ"
+      attribute 130306 "activ√©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -324,7 +325,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 128898 "connectÈ"
+      attribute 128898 "connect√©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -335,7 +336,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 129026 "activÈ"
+      attribute 129026 "activ√©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -388,7 +389,7 @@ format 224
     
     activitydiagramsettings
      end
-    sequencediagram 134658 "Diagramme sÈquence systËme"
+    sequencediagram 134658 "Diagramme s√©quence syst√®me"
       sequencediagramsettings end
       overlapping_bars size A4
     end
@@ -434,7 +435,7 @@ format 224
       
     end
 
-    usecase 128002 "Lancer la prÈparation d'un cafÈ"
+    usecase 128002 "Lancer la pr√©paration d'un caf√©"
       
       usecasediagramsettings end
       
@@ -466,7 +467,7 @@ format 224
       end
     end
 
-    usecase 128130 "Programmer la prÈparation d'un cafÈ"
+    usecase 128130 "Programmer la pr√©paration d'un caf√©"
       
       usecasediagramsettings end
       
@@ -493,7 +494,7 @@ format 224
       end
     end
 
-    usecase 128258 "ParamÈtrer ses prÈfÈrences"
+    usecase 128258 "Param√©trer ses pr√©f√©rences"
       
       usecasediagramsettings end
       
@@ -547,7 +548,7 @@ format 224
       end
     end
 
-    usecase 128514 "Suivre l'Ètat de vie de la machine"
+    usecase 128514 "Suivre l'√©tat de vie de la machine"
       
       usecasediagramsettings end
       
@@ -597,7 +598,7 @@ format 224
        end
       simplerelation 129026
 	-_->
-	  on usecase_ref 128002 // Lancer la prÈparation d'un cafÈ
+	  on usecase_ref 128002 // Lancer la pr√©paration d'un caf√©
       end
     end
 
@@ -624,7 +625,7 @@ format 224
        end
       simplerelation 128898
 	-_->
-	  on usecase_ref 128002 // Lancer la prÈparation d'un cafÈ
+	  on usecase_ref 128002 // Lancer la pr√©paration d'un caf√©
       end
     end
 
@@ -700,5 +701,17 @@ format 224
 	  on usecase_ref 129026 // S'identifier
       end
     end
+
+    sequencediagram 141314 "Diagramme s√©quence lancer preparation caf√©"
+      sequencediagramsettings show_full_operations_definition yes drawing_language uml end
+      overlapping_bars size A0
+    end
+
+    sequencediagram 141442 "ds g√©rer pr√©paration"
+      sequencediagramsettings show_full_operations_definition yes drawing_language uml end
+      overlapping_bars size A0
+    end
   end
+
+  package_ref 128023 // pikawa-qt
 end

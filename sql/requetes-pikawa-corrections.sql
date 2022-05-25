@@ -43,3 +43,10 @@ INNER JOIN Capsule ON Capsule.idCapsule=StockMagasin.idCapsule;
 |8|7|Scuro|0|0|4|
 |8|8|Vanilla Eclair|0|0|4|
 
+SELECT Preferences.idPreferences, Utilisateur.idUtilisateur, Utilisateur.nom, Utilisateur.prenom, Capsule.idCapsule, Capsule.designation, Capsule.libelle, TypeBoisson.idTypeBoisson, TypeBoisson.type FROM Preferences
+INNER JOIN Utilisateur ON Utilisateur.idUtilisateur=Preferences.idUtilisateur
+INNER JOIN Capsule ON Capsule.idCapsule=Preferences.capsuleActuelle
+INNER JOIN TypeBoisson ON TypeBoisson.idTypeBoisson=Preferences.typeBoissonActuelle
+WHERE Utilisateur.identifiant='tvaira';
+
+UPDATE Preferences SET capsuleActuelle='1' WHERE Preferences.idUtilisateur='1';

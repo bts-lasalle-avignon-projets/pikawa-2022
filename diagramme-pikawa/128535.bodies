@@ -1,0 +1,269 @@
+class Communication
+!!!135831.cpp!!!	estBluetoothDisponible() : bool
+    return interfaceLocale.isValid();
+!!!135959.cpp!!!	activerBluetooth() : void
+    if(estBluetoothDisponible())
+    {
+        qDebug() << Q_FUNC_INFO << interfaceLocale.name();
+        interfaceLocale.powerOn();
+    }
+    else
+        qDebug() << Q_FUNC_INFO << "Pas de bluetooh !";
+!!!136087.cpp!!!	estTrameValide(in trame : QString) : bool
+    qDebug() << Q_FUNC_INFO << trame
+             << (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
+    return (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
+!!!136215.cpp!!!	extraireTypeTrame(in trame : QString) : TypeTrame
+    QStringList champs =
+      trame.split(QLatin1Char(DELIMITEUR), QString::SkipEmptyParts);
+    QString type = champs[CHAMP_TYPE_TRAME];
+    qDebug() << Q_FUNC_INFO << type;
+
+    if(type == ETAT_CAFETIERE)
+        return TypeTrame::EtatCafetiere;
+    else if(type == ETAT_MAGASIN)
+        return TypeTrame::EtatMagasin;
+    else if(type == ETAT_PREPARATION)
+        return TypeTrame::EtatPreparation;
+    else if(type == TRAME_ERREUR)
+        return TypeTrame::ErreurPreparation;
+    else
+        return TypeTrame::Inconnue;
+
+    return TypeTrame::Inconnue;
+!!!136343.cpp!!!	traiterTrame(in typeTrame : TypeTrame, in trame : QString) : bool
+    if(typeTrame == TypeTrame::Inconnue)
+        return false;
+    QStringList champs =
+      trame.split(QLatin1Char(DELIMITEUR), QString::SkipEmptyParts);
+    qDebug() << Q_FUNC_INFO << typeTrame << champs;
+    int     niveauEau;
+    bool    caspulePresente, tassePresente, bacPasPlein;
+    QString colombiaPresent, indonesiaPresent, ethiopiaPresent, vollutoPresent,
+      capriccioPresent, cosiPresent, scuroPresent, vanillaPresent;
+    int preparationCafe, codeErreur;
+
+    QStringList caspulesDisponibles;
+
+    switch(typeTrame)
+    {
+        case TypeTrame::Inconnue:
+            qDebug() << Q_FUNC_INFO << "type de trame inconnue !";
+            break;
+        case TypeTrame::EtatCafetiere:
+            niveauEau   = champs[ChampEtatCafetiere::NiveauEau].toInt();
+            bacPasPlein = (champs[ChampEtatCafetiere::NiveauBac] == '1');
+            caspulePresente =
+              (champs[ChampEtatCafetiere::CaspulePresente] == '1');
+            tassePresente = (champs[ChampEtatCafetiere::TassePresente] == '1');
+            qDebug() << Q_FUNC_INFO << " niveauEau " << niveauEau
+                     << " bacPasPlein " << bacPasPlein << " caspulePresente "
+                     << caspulePresente << " tassePresente " << tassePresente;
+            emit etatCafetiere(niveauEau,
+                               bacPasPlein,
+                               caspulePresente,
+                               tassePresente);
+            return true;
+        case TypeTrame::EtatMagasin:
+            for(int i = ChampEtatMagasin::Colombia;
+                i < ChampEtatMagasin::NbChampsEtatMagasin;
+                ++i)
+            {
+                caspulesDisponibles << champs.at(i);
+            }
+            qDebug() << Q_FUNC_INFO << " capulesDisponibles "
+                     << caspulesDisponibles;
+            emit etatMagasin(caspulesDisponibles);
+            return true;
+        case TypeTrame::EtatPreparation:
+            preparationCafe = champs[ChampEtatPreparation::Cafe].toInt();
+            qDebug() << Q_FUNC_INFO << " preparationCafe " << preparationCafe;
+            emit cafeEnPreparation(preparationCafe);
+
+            return true;
+        case TypeTrame::ErreurPreparation:
+            codeErreur = champs[ChampEtatPreparation::Cafe].toInt();
+            qDebug() << Q_FUNC_INFO << " codeErreur " << codeErreur;
+            emit erreurPreparationCafe(codeErreur);
+            return true;
+    }
+    return false;
+!!!136471.cpp!!!	Communication(inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO << "Bluetooth" << interfaceLocale.isValid();
+    activerBluetooth();
+    activerLaDecouverte();
+
+#ifdef TEST_TRAMES
+    recevoir();
+#endif
+!!!136599.cpp!!!	~Communication()
+    deconnecter();
+    qDebug() << Q_FUNC_INFO;
+!!!136727.cpp!!!	estConnecte() : bool
+    if(!estBluetoothDisponible())
+        return false;
+    if(socketBluetoothPikawa == nullptr)
+        return false;
+    qDebug() << Q_FUNC_INFO << "isOpen" << socketBluetoothPikawa->isOpen()
+             << "connecte" << connecte;
+    if(!socketBluetoothPikawa->isOpen())
+        return false;
+    return connecte;
+!!!136855.cpp!!!	estCafetiereDetectee() : bool
+    return pikawaDetecte;
+!!!136983.cpp!!!	envoyerTrame(in trame : QString) : void
+    qDebug() << Q_FUNC_INFO << trame;
+    if(!estConnecte())
+    {
+        return;
+    }
+    if(!trame.endsWith(FIN_TRAME))
+        trame += QString(FIN_TRAME);
+    socketBluetoothPikawa->write(trame.toLatin1());
+!!!137111.cpp!!!	envoyerTramePreparation(in nomCafe : int, in longueur : int) : void
+    qDebug() << Q_FUNC_INFO << nomCafe << longueur;
+    envoyerTrame(QString(DEBUT_TRAME_PREPARATION) + QString::number(nomCafe) +
+                 QString(DELIMITEUR) + QString::number(longueur + 1) +
+                 QString(DELIMITEUR) + QString(FIN_TRAME));
+!!!137239.cpp!!!	activerLaDecouverte() : void
+    if(estBluetoothDisponible())
+    {
+        qDebug() << Q_FUNC_INFO;
+        agentDecouvreur = new QBluetoothDeviceDiscoveryAgent(this);
+        if(agentDecouvreur != nullptr)
+        {
+            connect(agentDecouvreur,
+                    SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
+                    this,
+                    SLOT(decouvrirCafetiere(QBluetoothDeviceInfo)));
+            connect(agentDecouvreur,
+                    SIGNAL(finished()),
+                    this,
+                    SLOT(terminerRecherche()));
+            pikawaDetecte = false;
+            agentDecouvreur->start();
+        }
+    }
+!!!137367.cpp!!!	desactiverLaDecouverte() : void
+    qDebug() << Q_FUNC_INFO;
+    if(agentDecouvreur != nullptr)
+    {
+        agentDecouvreur->start();
+    }
+!!!137495.cpp!!!	decouvrirCafetiere(in appareilBluetooth : QBluetoothDeviceInfo) : void
+    qDebug() << Q_FUNC_INFO << "appareil Bluetooth" << appareilBluetooth.name()
+             << '[' << appareilBluetooth.address().toString() << ']' << "rssi"
+             << appareilBluetooth.rssi();
+
+    if(appareilBluetooth.name().contains(PREFIXE_NOM_CAFETIERE) /*&&
+       appareilBluetooth.rssi() != 0*/)
+    {
+        /**
+         * @see systemctl restart bluetooth
+         */
+        qDebug() << Q_FUNC_INFO << "machine à café pikawa détectée"
+                 << appareilBluetooth.name() << '['
+                 << appareilBluetooth.address().toString() << ']';
+        agentDecouvreur->stop();
+        pikawa        = appareilBluetooth;
+        pikawaDetecte = true;
+        emit rechercheTerminee(pikawaDetecte);
+        emit cafetiereDetectee(appareilBluetooth.name(),
+                               appareilBluetooth.address().toString());
+    }
+!!!137623.cpp!!!	terminerRecherche() : void
+    qDebug() << Q_FUNC_INFO << "pikawaDetecte" << pikawaDetecte;
+    emit rechercheTerminee(pikawaDetecte);
+!!!137751.cpp!!!	connecter() : void
+    qDebug() << Q_FUNC_INFO;
+
+    if(!estConnecte())
+    {
+        if(pikawaDetecte)
+        {
+            qDebug() << Q_FUNC_INFO << "connexion" << pikawa.name() << '['
+                     << pikawa.address().toString() << ']';
+            socketBluetoothPikawa =
+              new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
+
+            if(socketBluetoothPikawa != nullptr)
+            {
+                connect(socketBluetoothPikawa,
+                        SIGNAL(stateChanged(QBluetoothSocket::SocketState)),
+                        this,
+                        SLOT(lireEtatSocket()));
+                connect(socketBluetoothPikawa,
+                        SIGNAL(connected()),
+                        this,
+                        SLOT(recupererEtatConnexion()));
+                connect(socketBluetoothPikawa,
+                        SIGNAL(disconnected()),
+                        this,
+                        SLOT(recupererEtatDeconnexion()));
+                connect(socketBluetoothPikawa,
+                        SIGNAL(readyRead()),
+                        this,
+                        SLOT(recevoir()));
+
+                QBluetoothAddress adresse = QBluetoothAddress(pikawa.address());
+                QBluetoothUuid    uuid =
+                  QBluetoothUuid(QBluetoothUuid::SerialPort);
+
+                socketBluetoothPikawa->connectToService(adresse, uuid);
+                socketBluetoothPikawa->open(QIODevice::ReadWrite);
+            }
+            else
+                qDebug() << Q_FUNC_INFO << "erreur création socket";
+        }
+        else
+            qDebug() << Q_FUNC_INFO << "erreur pikawa non détecté";
+    }
+    qDebug() << Q_FUNC_INFO << estConnecte();
+!!!137879.cpp!!!	deconnecter() : void
+    if(!estBluetoothDisponible())
+        return;
+    if(socketBluetoothPikawa == nullptr)
+        return;
+    if(socketBluetoothPikawa->isOpen())
+    {
+        qDebug() << Q_FUNC_INFO;
+        socketBluetoothPikawa->close();
+    }
+!!!153495.cpp!!!	recupererEtatConnexion() : void
+    qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->peerName()
+             << socketBluetoothPikawa->peerAddress().toString();
+    connecte = true;
+    emit cafetiereConnectee(socketBluetoothPikawa->peerName(),
+                            socketBluetoothPikawa->peerAddress().toString());
+!!!153623.cpp!!!	recupererEtatDeconnexion() : void
+    qDebug() << Q_FUNC_INFO;
+    connecte = false;
+    emit cafetiereDeconnectee();
+!!!138263.cpp!!!	recevoir() : void
+#ifndef TEST_TRAMES
+    QByteArray donnees;
+    donnees = socketBluetoothPikawa->readAll();
+    qDebug() << Q_FUNC_INFO << "donnees" << donnees;
+    trameRecue += QString(donnees.data());
+#else
+    // on peut simuler des trames reçues
+    // trameRecue = "$PIKAWA;C;50;60;1;1;\r\n";
+    trameRecue = "$PIKAWA;M;0;1;1;0;1;0;1;0;\r\n";
+    // trameRecue = "$PIKAWA;P;1;\r\n";
+    // trameRecue = "$PIKAWA;W;50;60;1;1;\r\n"; // trame invalide
+#endif
+    qDebug() << Q_FUNC_INFO << "trameRecue" << trameRecue;
+    if(estTrameValide(trameRecue))
+    {
+        TypeTrame typeTrame = extraireTypeTrame(trameRecue);
+        if(traiterTrame(typeTrame, trameRecue))
+        {
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO << "erreur traitement";
+        }
+        trameRecue.clear();
+    }
+!!!138391.cpp!!!	lireEtatSocket() : void
+    qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->state();

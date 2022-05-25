@@ -18,7 +18,8 @@ HEADERS += \
     cafetiere.h \
     communication.h \
     ihm.h \
-    preparation.h
+    preparation.h \
+    protocole.h
 
 FORMS += \
     ihm.ui
@@ -27,7 +28,7 @@ RESOURCES += \
     ressources.qrc
 
 COPIES += bd
-bd.files = pikawa.sqlite
+bd.files = pikawa.db
 bd.path = $$OUT_PWD/
 bd.base = $$PWD/
 

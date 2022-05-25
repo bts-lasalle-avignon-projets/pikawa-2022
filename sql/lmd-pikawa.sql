@@ -6,17 +6,18 @@
 
 INSERT INTO Utilisateur(nom,prenom,identifiant,email) VALUES('VAIRA','Thierry','tvaira','tvaira@free.fr');
 INSERT INTO Utilisateur(nom,prenom,identifiant,email) VALUES('BEAUMONT','Jérôme','jbeaumont','beaumont@lasalle84.org');
+INSERT INTO Utilisateur(nom,prenom,identifiant,email) VALUES('BRYCKAERT','Anthony','abryckaert','bryckaert@lasalle84.org');
 
 -- Table Capsule
 
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Colombia','Arabica cueilli en récolte tardive, unique comme la cordillère des Andes',6);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Indonesia','Arabica, né des pluies de Sumatra, labellisé Fairtrade et certifié biologique',8);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Ethiopia','Arabica dépulpé par voie sèche sous le soleil bienfaiteur',4);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Volluto','Doux et léger',4);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Capriccio','Riche et exclusif',5);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Cosi','Équilibré et délicatement torréfié',4);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Scuro','Idéal pour les amateurs de recettes intenses et équilibrées à base de lait',0);
-INSERT INTO Capsule (marque,designation,description,intensite) VALUES('Nespresso','Vanilla Eclair','Saveur éclair à la vanille',0);
+INSERT INTO Capsule VALUES (1,'Nespresso','Colombia','colombia','Arabica cueilli en récolte tardive, unique comme la cordillère des Andes',6);
+INSERT INTO Capsule VALUES (2,'Nespresso','Indonesia','indonesia','Arabica, né des pluies de Sumatra, labellisé Fairtrade et certifié biologique',8);
+INSERT INTO Capsule VALUES (3,'Nespresso','Ethiopia','ethiopia','Arabica dépulpé par voie sèche sous le soleil bienfaiteur',4);
+INSERT INTO Capsule VALUES (4,'Nespresso','Volluto','volluto','Doux et léger',4);
+INSERT INTO Capsule VALUES (5,'Nespresso','Capriccio','capriccio','Riche et exclusif',5);
+INSERT INTO Capsule VALUES (6,'Nespresso','Cosi','cosi','Équilibré et délicatement torréfié',4);
+INSERT INTO Capsule VALUES (7,'Nespresso','Scuro','scuro','Idéal pour les amateurs de recettes intenses et équilibrées à base de lait',0);
+INSERT INTO Capsule VALUES (8,'Nespresso','Vanilla','vanilla-eclair','Saveur éclair à la vanille',0);
 
 -- Table TypeBoisson
 
@@ -42,10 +43,16 @@ INSERT INTO StockMagasin (idMagasin,idCapsule,quantiteMax,quantite,rangee) VALUE
 
 -- Table Statistiques
 
-INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreCafeTotal,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(1,0,0,0,0,0,0);
-INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreCafeTotal,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(2,0,0,0,0,0,0);
+INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(1,0,0,0,0,0);
+INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(2,0,0,0,0,0);
+INSERT INTO Statistiques(idUtilisateur,nombreCafeDuJour,nombreBacVide,nombreEauRemplie,dureteeEau,qualiteEau) VALUES(3,0,0,0,0,0);
 
 -- Table Preferences
 
-INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(1,2,1,1);
+INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(1,1,1,1);
 INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(2,2,4,3);
+INSERT INTO Preferences(idPreferences,idUtilisateur,capsuleActuelle,typeBoissonActuelle) VALUES(3,3,1,1);
+
+-- Table Entretien
+
+INSERT INTO Entretien(nombreCafeTotal,nombreCafeAvantDetartrage) VALUES(0,75);
