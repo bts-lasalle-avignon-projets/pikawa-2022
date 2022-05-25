@@ -5,7 +5,7 @@ classcanvas 128002 class_ref 135298 // Utilisateur
   xyz 23 243 2000
 end
 usecasecanvas 128130 usecase_ref 128002 // Lancer la préparation d'un café
-  xyzwh 334 102 3005 64 32 label_xy 264 86
+  xyzwh 334 103 3005 64 32 label_xy 264 87
 end
 usecasecanvas 128258 usecase_ref 128130 // Programmer la préparation d'un café
   xyzwh 351 207 3005 64 32 label_xy 273 190
@@ -37,21 +37,21 @@ end
 textcanvas 138626 "<<include>>"
   xyzwh 682 450 3013 81 15
 textcanvas 138754 "<<include>>"
-  xyzwh 523.5 423.5 3013 81 15
+  xyzwh 523 423 3013 81 15
 textcanvas 138882 "<<include>>"
-  xyzwh 538.5 192.5 3013 81 15
+  xyzwh 538 192 3013 81 15
 textcanvas 139010 "<<include>>"
-  xyzwh 471.5 319.5 3013 81 15
+  xyzwh 471 319 3013 81 15
 textcanvas 139138 "<<include>>"
-  xyzwh 474.5 245.5 3013 81 15
+  xyzwh 474 245 3013 81 15
 textcanvas 139266 "<<include>>"
-  xyzwh 694.5 220.5 3013 81 15
+  xyzwh 694 220 3013 81 15
 textcanvas 139394 "<<include>>"
-  xyzwh 470.5 374.5 3013 81 15
+  xyzwh 470 374 3013 81 15
 textcanvas 139906 "<<extend>>"
   xyzwh 478 52 3011 79 15
 textcanvas 140034 "<<extend>>"
-  xyzwh 492.5 103.5 3011 79 15
+  xyzwh 492 103 3011 79 15
 line 128770 ----
   from ref 128002 z 3006 to point 197 159
   line 134402 z 3006 to ref 128130
