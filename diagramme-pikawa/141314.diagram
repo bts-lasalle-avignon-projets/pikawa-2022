@@ -1,0 +1,215 @@
+format 224
+
+classinstance 128130 class_ref 135042 // Client
+  name ""   xyz 10 4 2000 life_line_z 2000
+classinstance 129026 class_ref 128407 // IHMPikawa
+  name ""   xyz 210 4 2000 life_line_z 2000
+classinstance 129794 class_ref 128279 // Cafetiere
+  name ""   xyz 475 4 2000 life_line_z 2000
+note 129922 "Clic sur le bouton GO"
+  xyzwh 86 169 2000 99 57
+classinstance 130690 class_ref 128535 // Communication
+  name ""   xyz 824 4 2000 life_line_z 2000
+note 131330 "$PIKAWA;P;0;1;\\r\\n"
+  xyzwh 922 264 2000 173 37
+fragment 132354 "alt"
+  xyzwh 834 196 2000 266 116
+end
+textcanvas 132482 "[socket connecté]"
+  xyzwh 892 200 2000 134 17
+note 133506 "$PIKAWA;ETAT;M;\\r\\n"
+  xyzwh 642 400 2000 171 37
+note 134018 "$PIKAWA;P;1;\\r\\n"
+  xyzwh 976 405 2000 179 35
+fragment 134146 "alt"
+  xyzwh 839 493 2000 487 137
+end
+textcanvas 134274 "[trame valide]"
+  xyzwh 891 498 2000 89 15
+classinstance 137090 class_ref 128023 // BaseDeDonnees
+  name ""   xyz 1268 4 2000 life_line_z 2000
+durationcanvas 129154 classinstance_ref 128130 // :Client
+  xyzwh 27 81 2010 11 40
+end
+durationcanvas 129282 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 249 81 2010 11 46
+end
+durationcanvas 130178 classinstance_ref 129794 // :Cafetiere
+  xyzwh 507 106 2010 11 306
+  overlappingdurationcanvas 130434
+    xyzwh 513 121 2020 11 71
+  end
+  overlappingdurationcanvas 132610
+    xyzwh 513 327 2020 11 73
+  end
+end
+durationcanvas 130818 classinstance_ref 130690 // :Communication
+  xyzwh 877 164 2010 11 137
+  overlappingdurationcanvas 131074
+    xyzwh 883 251 2020 11 31
+  end
+end
+durationcanvas 133122 classinstance_ref 130690 // :Communication
+  xyzwh 877 369 2010 11 25
+end
+durationcanvas 133762 classinstance_ref 130690 // :Communication
+  xyzwh 877 473 2010 11 150
+  overlappingdurationcanvas 134402
+    xyzwh 883 577 2020 11 29
+  end
+  overlappingdurationcanvas 134658
+    xyzwh 883 528 2020 11 25
+  end
+end
+durationcanvas 134914 classinstance_ref 129794 // :Cafetiere
+  xyzwh 507 595 2010 11 401
+  overlappingdurationcanvas 135170
+    xyzwh 513 650 2020 11 311
+    overlappingdurationcanvas 136322
+      xyzwh 519 817 2030 11 26
+    end
+    overlappingdurationcanvas 136578
+      xyzwh 519 874 2030 11 25
+    end
+    overlappingdurationcanvas 136834
+      xyzwh 519 924 2030 11 30
+    end
+  end
+end
+durationcanvas 135554 classinstance_ref 129026 // :IHMPikawa
+  xyzwh 249 670 2010 11 126
+  overlappingdurationcanvas 135810
+    xyzwh 255 721 2020 11 69
+    overlappingdurationcanvas 136066
+      xyzwh 261 759 2030 11 25
+    end
+  end
+end
+durationcanvas 137218 classinstance_ref 137090 // :BaseDeDonnees
+  xyzwh 1326 832 2010 11 25
+end
+durationcanvas 137474 classinstance_ref 137090 // :BaseDeDonnees
+  xyzwh 1326 917 2010 11 35
+end
+msg 129410 asynchronous
+  from durationcanvas_ref 129154
+  to durationcanvas_ref 129282
+  yz 81 2015 explicitmsg "clic sur boutonLancerPreparation"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 35 66
+msg 130306 synchronous
+  from durationcanvas_ref 129282
+  to durationcanvas_ref 130178
+  yz 106 2015 explicitmsg "clicked"
+  stereotype "<<signal>>" xyz 327 121 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 341 91
+reflexivemsg 130562 synchronous
+  to durationcanvas_ref 130434
+  yz 121 2025 msg operation_ref 134295 // "lancerLaPreparationCafe() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 522 106
+msg 130946 synchronous
+  from durationcanvas_ref 130434
+  to durationcanvas_ref 130818
+  yz 164 2025 explicitmsg "envoyerTramePreparation(capsuleChoisie, longueurChoisie)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 581 149
+reflexivemsg 131202 synchronous
+  to durationcanvas_ref 131074
+  yz 251 2025 msg operation_ref 136983 // "envoyerTrame(in trame : QString) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 894 238
+reflexivemsg 132738 synchronous
+  to durationcanvas_ref 132610
+  yz 327 2025 msg operation_ref 133783 // "recupererEtatMagasin() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 524 313
+msg 133250 synchronous
+  from durationcanvas_ref 132610
+  to durationcanvas_ref 133122
+  yz 369 2025 msg operation_ref 136983 // "envoyerTrame(in trame : QString) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 542 354
+reflexivemsg 133890 asynchronous
+  to durationcanvas_ref 133762
+  yz 474 2015 msg operation_ref 138263 // "recevoir() : void"
+  stereotype "<<slot>>" xyz 914 474 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 888 459
+reflexivemsg 134530 synchronous
+  to durationcanvas_ref 134402
+  yz 577 2025 msg operation_ref 136343 // "traiterTrame(in typeTrame : TypeTrame, in trame : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 895 560
+reflexivemsg 134786 synchronous
+  to durationcanvas_ref 134658
+  yz 528 2025 msg operation_ref 136215 // "extraireTypeTrame(in trame : QString) : TypeTrame"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 894 515
+msg 135042 synchronous
+  from durationcanvas_ref 134402
+  to durationcanvas_ref 134914
+  yz 595 2030 explicitmsg "cafeEnPreparation()"
+  stereotype "<<signal>>" xyz 634 606 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 605 580
+reflexivemsg 135298 synchronous
+  to durationcanvas_ref 135170
+  yz 650 2025 explicitmsg "gererEtatPreparationCafe(in preparationCafe : int)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 525 635
+msg 135682 synchronous
+  from durationcanvas_ref 135170
+  to durationcanvas_ref 135554
+  yz 673 2025 explicitmsg "cafeEnCours()"
+  stereotype "<<signal>>" xyz 330 688 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 319 658
+reflexivemsg 135938 synchronous
+  to durationcanvas_ref 135810
+  yz 721 2030 explicitmsg "afficherCafeEnCours()"
+  stereotype "<<slot>>" xyz 293 723 3000
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 268 708
+reflexivemsg 136194 synchronous
+  to durationcanvas_ref 136066
+  yz 759 2035 explicitmsg "afficherMessage(in message : QString, in couleur : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 67 744
+reflexivemsg 136450 synchronous
+  to durationcanvas_ref 136322
+  yz 817 2035 msg operation_ref 161047 // "incrementerNombreCafeJour() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 420 802
+reflexivemsg 136706 synchronous
+  to durationcanvas_ref 136578
+  yz 874 2035 msg operation_ref 133783 // "recupererEtatMagasin() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 442 859
+reflexivemsg 136962 synchronous
+  to durationcanvas_ref 136834
+  yz 924 2035 msg operation_ref 161175 // "decrementerNombreCafeAvantDetartrage() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 378 909
+msg 137346 synchronous
+  from durationcanvas_ref 136322
+  to durationcanvas_ref 137218
+  yz 832 3005 explicitmsg "executer(in requete : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 781 817
+msg 137602 synchronous
+  from durationcanvas_ref 136834
+  to durationcanvas_ref 137474
+  yz 941 2040 explicitmsg "executer(in requete : QString)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 781 926
+line 130050 -_-_
+  from ref 129922 z 2016 to ref 129410
+line 131458 -_-_
+  from ref 131330 z 2026 to ref 131202
+line 133634 -_-_
+  from ref 133506 z 2026 to ref 133250
+line 137730 -_-_
+  from ref 134018 z 2016 to ref 133890
+end
