@@ -2,7 +2,7 @@
 
 ## Présentation
 
-Pikawa est une machine à café connectée, pilotable grâce à un écran tactile et un logiciel embarqué sur Raspberry.
+Pikawa est une machine à café connectée, pilotable grâce à un écran tactile et un logiciel embarqué sur Raspberry Pis.
 
 La cafetière Ekawa est équipée d’un magasin rotatif et motorisé de capsules.
 
@@ -23,10 +23,26 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ## Historique des versions
 
+- Version 0.2 : 25/05/2022
+  - lancement de la préparation d'un café personnalisé (type de capsule et longueur)
+  - suivi de l'entretien de la machine
+  - affichage des alertes (niveau d'eau, bac à capsule, présence tasse et capsule)
+  - affichage de la description des capsules
+
 - Version 0.1 : 03/04/2022
   - affichage de l'écran d'accueil et d'informations
   - mise en oeuvre de la recherche d'interfaces Bluetooth
   - squelettes des classes Cafetiere et Preparation
+
+## Captures d'écran
+
+![](captures/page-Accueil-IHM.png)
+
+![](captures/page-Information-IHM.png)
+
+![](captures/page-Selection-IHM.png)
+
+![](captures/page-Entretien-IHM.png)
 
 ## Auteur
 
