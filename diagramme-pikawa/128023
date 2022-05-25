@@ -996,13 +996,13 @@ ${body}}
 	
       end
 
-      operation 132631 "estPrete"
+      operation 128002 "preparerCafetiere"
 	preserve_cpp_body_indent public explicit_return_type "bool"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
+  ${body}}
 "
 	
 	
@@ -1535,6 +1535,20 @@ ${body}}
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128130 "setDeconnectee"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
 "
 	
 	
@@ -2440,7 +2454,8 @@ ${body}}
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QMainWindow(parent), ui(new Ui::IHMPikawa), iconeBoutonConnecte(nullptr),
+    QMainWindow(parent), ui(new Ui::IHMPikawa), baseDeDonneesPikawa(nullptr),
+    cafetiere(nullptr), timerPreparation(nullptr), iconeBoutonConnecte(nullptr),
     iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
 ${throw}{
 ${body}}
@@ -3076,7 +3091,10 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< pour découvrir des interfaces Bluetooth"
+	comment "@todo
+Remplacer le QBluetoothDeviceDiscoveryAgent par le QBluetoothServiceInfo
+
+!< pour découvrir des interfaces Bluetooth"
       end
 
       attribute 133399 "pikawa"
@@ -4544,7 +4562,6 @@ int main(int argc, char* argv[])
     }
 
     IHMPikawa fenetrePikawa;
-    fenetrePikawa.show();
 
     return a.exec();
 }

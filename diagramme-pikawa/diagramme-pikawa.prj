@@ -183,7 +183,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130178 "connecté"
+      attribute 130178 "connectÃ©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -194,7 +194,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 130306 "activé"
+      attribute 130306 "activÃ©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -325,7 +325,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 128898 "connecté"
+      attribute 128898 "connectÃ©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -336,7 +336,7 @@ format 224
 	MysqlColumn
       end
 
-      attribute 129026 "activé"
+      attribute 129026 "activÃ©"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -389,7 +389,7 @@ format 224
     
     activitydiagramsettings
      end
-    sequencediagram 134658 "Diagramme séquence système"
+    sequencediagram 134658 "Diagramme sÃ©quence systÃ¨me"
       sequencediagramsettings end
       overlapping_bars size A4
     end
@@ -435,7 +435,7 @@ format 224
       
     end
 
-    usecase 128002 "Lancer la préparation d'un café"
+    usecase 128002 "Lancer la prÃ©paration d'un cafÃ©"
       
       usecasediagramsettings end
       
@@ -467,7 +467,7 @@ format 224
       end
     end
 
-    usecase 128130 "Programmer la préparation d'un café"
+    usecase 128130 "Programmer la prÃ©paration d'un cafÃ©"
       
       usecasediagramsettings end
       
@@ -494,7 +494,7 @@ format 224
       end
     end
 
-    usecase 128258 "Paramétrer ses préférences"
+    usecase 128258 "ParamÃ©trer ses prÃ©fÃ©rences"
       
       usecasediagramsettings end
       
@@ -548,7 +548,7 @@ format 224
       end
     end
 
-    usecase 128514 "Suivre l'état de vie de la machine"
+    usecase 128514 "Suivre l'Ã©tat de vie de la machine"
       
       usecasediagramsettings end
       
@@ -598,7 +598,7 @@ format 224
        end
       simplerelation 129026
 	-_->
-	  on usecase_ref 128002 // Lancer la préparation d'un café
+	  on usecase_ref 128002 // Lancer la prÃ©paration d'un cafÃ©
       end
     end
 
@@ -625,7 +625,7 @@ format 224
        end
       simplerelation 128898
 	-_->
-	  on usecase_ref 128002 // Lancer la préparation d'un café
+	  on usecase_ref 128002 // Lancer la prÃ©paration d'un cafÃ©
       end
     end
 
@@ -702,12 +702,12 @@ format 224
       end
     end
 
-    sequencediagram 141314 "Diagramme séquence lancer preparation café"
+    sequencediagram 141314 "Diagramme sÃ©quence lancer preparation cafÃ©"
       sequencediagramsettings show_full_operations_definition yes drawing_language uml end
       overlapping_bars size A0
     end
 
-    sequencediagram 141442 "ds gérer préparation"
+    sequencediagram 141442 "ds gÃ©rer prÃ©paration"
       sequencediagramsettings show_full_operations_definition yes drawing_language uml end
       overlapping_bars size A0
     end

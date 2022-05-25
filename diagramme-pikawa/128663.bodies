@@ -62,7 +62,7 @@ class Preparation
     qDebug() << Q_FUNC_INFO << "tassePresente" << tassePresente;
     qDebug() << Q_FUNC_INFO << "capsulePresente" << capsulePresente;
 
-    if((cafetiere->getNiveauEau() - niveauEauNecessaire) < 0 || !bacPasPlein ||
+    if((cafetiere->getNiveauEau() - niveauEauNecessaire) <= 0 || !bacPasPlein ||
        !tassePresente || !capsulePresente)
     {
         qDebug() << Q_FUNC_INFO << "Pas prête";
