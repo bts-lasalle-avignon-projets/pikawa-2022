@@ -21,7 +21,7 @@
 
 # pikawa
 
-“Entraînement ludique au tir de basket-ball“
+Machine à café connectée, pilotable grâce à un écran tactile et un logiciel embarqué sur Raspberry Pi.
 
 Fonctionnalités :
 
