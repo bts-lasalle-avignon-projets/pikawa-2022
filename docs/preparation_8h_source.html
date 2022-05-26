@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>pikawa:  Fichier source de preparation.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pikawa.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">pikawa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2022</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('preparation_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">preparation.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="preparation_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PREPARATION_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PREPARATION_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QVector&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="preparation_8h.html#a39b0c1aa8c560f343a25881ed98210c8">   26</a></span>&#160;<span class="preprocessor">#define TAILLE_INCONNUE  -1</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="preparation_8h.html#a7f92420285f2b592435fb20e5fccef60">   27</a></span>&#160;<span class="preprocessor">#define TAILLE_RISTRETTO 30</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="preparation_8h.html#a309ffaebe8ba10a2ec92ea8da0e64b55">   28</a></span>&#160;<span class="preprocessor">#define TAILLE_ESPRESSO  60</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="preparation_8h.html#ac9a92da27cb2ce157ff462c68b603840">   29</a></span>&#160;<span class="preprocessor">#define TAILLE_LUNGO     110</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span><a class="code" href="class_base_de_donnees.html">BaseDeDonnees</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="preparation_8h.html#acfacfb1c591ea85504553b673ced3877">   33</a></span>&#160;<span class="preprocessor">#define NIVEAU_EAU_MAX      800</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="preparation_8h.html#a684698204843474839fa13a256674f12">   34</a></span>&#160;<span class="preprocessor">#define NIVEAU_EAU_MIN_CAFE 30</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span><a class="code" href="class_cafetiere.html">Cafetiere</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_preparation.html">   42</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_preparation.html">Preparation</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">   46</a></span>&#160;    <a class="code" href="class_cafetiere.html">Cafetiere</a>*       <a class="code" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a>;           </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">   47</a></span>&#160;    <a class="code" href="class_base_de_donnees.html">BaseDeDonnees</a>*   <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">   48</a></span>&#160;    QVector&lt;QString&gt; <a class="code" href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">nomCapsules</a>;         </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">   49</a></span>&#160;    QVector&lt;QString&gt; <a class="code" href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">nomLongueurs</a>; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">   50</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">   51</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>;     </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">   52</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>;   </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">   53</a></span>&#160;    <span class="keywordtype">int</span>  <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_preparation.html#afdac4af81f9e77f63c892d0755ac9a7a">chargerNomCapsules</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">chargerLongeurBoissons</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_preparation.html#a0fd26abc0f78a3eaede223e2731ce0d9">ouvrirBaseDeDonnees</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="class_preparation.html#aae06ca33fb85b77864a4729a45274302">Preparation</a>(<a class="code" href="class_cafetiere.html">Cafetiere</a>* <a class="code" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a> = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_preparation.html#ac2c7d4696efd03e5aef5bcf301bfdbe5">~Preparation</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    QStringList <a class="code" href="class_preparation.html#a7740da5dab8cd92023d50d91f1ef3913">getNomCapsules</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    QStringList <a class="code" href="class_preparation.html#a0e3ba0cf39fb939ad7df6f1e6c0daafc">getNomLongueurs</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span>        <a class="code" href="class_preparation.html#a32bcafe4fa3bcc11573b1bbf54ae0b83">getCapsulePresente</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">bool</span>        <a class="code" href="class_preparation.html#aa468742fc359d0dc2900c0ddfcbb1dc3">getBacPasPlein</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">bool</span>        <a class="code" href="class_preparation.html#a5e634747bdf2243dbeaffffd24722a21">getTassePresente</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">int</span>         <a class="code" href="class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c">getNiveauEauNecessaire</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span>         <a class="code" href="class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c">getNiveauEauNecessaire</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; longueurChoisie) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span>        <a class="code" href="class_preparation.html#aacc99752dde314fa6705dfc303e1e1a2">setCapsulePresente</a>(<span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span>        <a class="code" href="class_preparation.html#a8f685cb053f26b33566e53e9dfa806d8">setBacPasPlein</a>(<span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span>        <a class="code" href="class_preparation.html#abc42205625e1a21e70b72c67b8a69faa">setTassePresente</a>(<span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span>        <a class="code" href="class_preparation.html#ae422029f2a3f47eddad18ca80efeb447">estPreparationPrete</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span>        <a class="code" href="class_preparation.html#a741a1e7f7cd7b74f1368d5ea40a88329">setNiveauEauNecessaire</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; longueurChoisie);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  signals:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_preparation.html#aa070af07ac266643b4afc534e1fd17c0">preparationPasPrete</a>(<span class="keywordtype">int</span>  niveauEau,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                             <span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                             <span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                             <span class="keywordtype">bool</span> <a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif // PREPARATION_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclass_preparation_html_a32bcafe4fa3bcc11573b1bbf54ae0b83"><div class="ttname"><a href="class_preparation.html#a32bcafe4fa3bcc11573b1bbf54ae0b83">Preparation::getCapsulePresente</a></div><div class="ttdeci">bool getCapsulePresente() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00049">preparation.cpp:49</a></div></div>
+<div class="ttc" id="aclass_preparation_html_ac752c6c69f1d8237a6cd115300a4656a"><div class="ttname"><a href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">Preparation::baseDeDonneesPikawa</a></div><div class="ttdeci">BaseDeDonnees * baseDeDonneesPikawa</div><div class="ttdoc">instance d'un objet BaseDeDonnees</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00047">preparation.h:47</a></div></div>
+<div class="ttc" id="aclass_preparation_html_adba25bf106902c7acca5a2645ade1fe5"><div class="ttname"><a href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">Preparation::chargerLongeurBoissons</a></div><div class="ttdeci">void chargerLongeurBoissons()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00132">preparation.cpp:132</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a102ae7821b5228a7b190b797b53f37ef"><div class="ttname"><a href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">Preparation::nomCapsules</a></div><div class="ttdeci">QVector&lt; QString &gt; nomCapsules</div><div class="ttdoc">liste des noms de capsules</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00048">preparation.h:48</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a0fd26abc0f78a3eaede223e2731ce0d9"><div class="ttname"><a href="class_preparation.html#a0fd26abc0f78a3eaede223e2731ce0d9">Preparation::ouvrirBaseDeDonnees</a></div><div class="ttdeci">void ouvrirBaseDeDonnees()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00139">preparation.cpp:139</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a7740da5dab8cd92023d50d91f1ef3913"><div class="ttname"><a href="class_preparation.html#a7740da5dab8cd92023d50d91f1ef3913">Preparation::getNomCapsules</a></div><div class="ttdeci">QStringList getNomCapsules() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00031">preparation.cpp:31</a></div></div>
+<div class="ttc" id="aclass_preparation_html_aae06ca33fb85b77864a4729a45274302"><div class="ttname"><a href="class_preparation.html#aae06ca33fb85b77864a4729a45274302">Preparation::Preparation</a></div><div class="ttdeci">Preparation(Cafetiere *cafetiere=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00014">preparation.cpp:14</a></div></div>
+<div class="ttc" id="aclass_preparation_html"><div class="ttname"><a href="class_preparation.html">Preparation</a></div><div class="ttdoc">Gére la préparation d'un café</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00042">preparation.h:42</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a9c21d3e9fff81b36f87bfb1d82824287"><div class="ttname"><a href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">Preparation::nomLongueurs</a></div><div class="ttdeci">QVector&lt; QString &gt; nomLongueurs</div><div class="ttdoc">liste des longueurs de préparation</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00049">preparation.h:49</a></div></div>
+<div class="ttc" id="aclass_preparation_html_ac2c7d4696efd03e5aef5bcf301bfdbe5"><div class="ttname"><a href="class_preparation.html#ac2c7d4696efd03e5aef5bcf301bfdbe5">Preparation::~Preparation</a></div><div class="ttdeci">~Preparation()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00025">preparation.cpp:25</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a579826e835afc6e82d23dddb37b77b8e"><div class="ttname"><a href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">Preparation::niveauEauNecessaire</a></div><div class="ttdeci">int niveauEauNecessaire</div><div class="ttdoc">niveau d'eau minimum pour préparer un café</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00053">preparation.h:53</a></div></div>
+<div class="ttc" id="aclass_preparation_html_abb68c1c2a199e4123f9daf9dc2e9d8e6"><div class="ttname"><a href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">Preparation::cafetiere</a></div><div class="ttdeci">Cafetiere * cafetiere</div><div class="ttdoc">instance d'un objet Cafetiere</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00046">preparation.h:46</a></div></div>
+<div class="ttc" id="aclass_preparation_html_abc42205625e1a21e70b72c67b8a69faa"><div class="ttname"><a href="class_preparation.html#abc42205625e1a21e70b72c67b8a69faa">Preparation::setTassePresente</a></div><div class="ttdeci">void setTassePresente(bool tassePresente)</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00093">preparation.cpp:93</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a371647b15cd25993fa33ad46b42bbd6c"><div class="ttname"><a href="class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c">Preparation::getNiveauEauNecessaire</a></div><div class="ttdeci">int getNiveauEauNecessaire() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00064">preparation.cpp:64</a></div></div>
+<div class="ttc" id="aclass_preparation_html_aacf050d6cad49be1056d2a31213652ed"><div class="ttname"><a href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">Preparation::bacPasPlein</a></div><div class="ttdeci">bool bacPasPlein</div><div class="ttdoc">le bac n'est pas complètement plein</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00051">preparation.h:51</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a1b02355328501772ed270fb0f0b548c8"><div class="ttname"><a href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">Preparation::capsulePresente</a></div><div class="ttdeci">bool capsulePresente</div><div class="ttdoc">au moins une capsule est présente dans le magasin</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00050">preparation.h:50</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a5e634747bdf2243dbeaffffd24722a21"><div class="ttname"><a href="class_preparation.html#a5e634747bdf2243dbeaffffd24722a21">Preparation::getTassePresente</a></div><div class="ttdeci">bool getTassePresente() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00059">preparation.cpp:59</a></div></div>
+<div class="ttc" id="aclass_preparation_html_aacc99752dde314fa6705dfc303e1e1a2"><div class="ttname"><a href="class_preparation.html#aacc99752dde314fa6705dfc303e1e1a2">Preparation::setCapsulePresente</a></div><div class="ttdeci">void setCapsulePresente(bool capsulePresente)</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00083">preparation.cpp:83</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a69c9cf09d1fcb939541a38fe58fdfc8c"><div class="ttname"><a href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">Preparation::tassePresente</a></div><div class="ttdeci">bool tassePresente</div><div class="ttdoc">une tasse est détectée</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00052">preparation.h:52</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a741a1e7f7cd7b74f1368d5ea40a88329"><div class="ttname"><a href="class_preparation.html#a741a1e7f7cd7b74f1368d5ea40a88329">Preparation::setNiveauEauNecessaire</a></div><div class="ttdeci">void setNiveauEauNecessaire(const int &amp;longueurChoisie)</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00119">preparation.cpp:119</a></div></div>
+<div class="ttc" id="aclass_preparation_html_ae422029f2a3f47eddad18ca80efeb447"><div class="ttname"><a href="class_preparation.html#ae422029f2a3f47eddad18ca80efeb447">Preparation::estPreparationPrete</a></div><div class="ttdeci">bool estPreparationPrete() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00098">preparation.cpp:98</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a0e3ba0cf39fb939ad7df6f1e6c0daafc"><div class="ttname"><a href="class_preparation.html#a0e3ba0cf39fb939ad7df6f1e6c0daafc">Preparation::getNomLongueurs</a></div><div class="ttdeci">QStringList getNomLongueurs() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00040">preparation.cpp:40</a></div></div>
+<div class="ttc" id="aclass_preparation_html_aa070af07ac266643b4afc534e1fd17c0"><div class="ttname"><a href="class_preparation.html#aa070af07ac266643b4afc534e1fd17c0">Preparation::preparationPasPrete</a></div><div class="ttdeci">void preparationPasPrete(int niveauEau, bool bacPasPlein, bool tassePresente, bool capsulePresente)</div></div>
+<div class="ttc" id="aclass_preparation_html_a8f685cb053f26b33566e53e9dfa806d8"><div class="ttname"><a href="class_preparation.html#a8f685cb053f26b33566e53e9dfa806d8">Preparation::setBacPasPlein</a></div><div class="ttdeci">void setBacPasPlein(bool bacPasPlein)</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00088">preparation.cpp:88</a></div></div>
+<div class="ttc" id="aclass_base_de_donnees_html"><div class="ttname"><a href="class_base_de_donnees.html">BaseDeDonnees</a></div><div class="ttdoc">Class permettant de s'interfacer avec la base de données.</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8h_source.html#l00027">basededonnees.h:27</a></div></div>
+<div class="ttc" id="aclass_cafetiere_html"><div class="ttname"><a href="class_cafetiere.html">Cafetiere</a></div><div class="ttdoc">Parmet de gérer la machine à café PIKAWA.</div><div class="ttdef"><b>Definition:</b> <a href="cafetiere_8h_source.html#l00035">cafetiere.h:35</a></div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="aclass_preparation_html_afdac4af81f9e77f63c892d0755ac9a7a"><div class="ttname"><a href="class_preparation.html#afdac4af81f9e77f63c892d0755ac9a7a">Preparation::chargerNomCapsules</a></div><div class="ttdeci">void chargerNomCapsules()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00125">preparation.cpp:125</a></div></div>
+<div class="ttc" id="aclass_preparation_html_aa468742fc359d0dc2900c0ddfcbb1dc3"><div class="ttname"><a href="class_preparation.html#aa468742fc359d0dc2900c0ddfcbb1dc3">Preparation::getBacPasPlein</a></div><div class="ttdeci">bool getBacPasPlein() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00054">preparation.cpp:54</a></div></div>
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a46bf0de6af686900e6da73bcfd144fe.html">pikawa-qt</a></li><li class="navelem"><a class="el" href="preparation_8h.html">preparation.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 25 Mai 2022 15:54:31 pour pikawa par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.8.17&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
