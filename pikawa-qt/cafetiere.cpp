@@ -128,8 +128,10 @@ QString Cafetiere::getLongueurPreferee() const
 }
 
 /**
+ * @fn Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
  * @brief Met à jour dans la base de données la caspule préférée de
  * l'utilisateur
+ * @details Table concernée Preferences
  */
 void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
 {
@@ -147,8 +149,11 @@ void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
     }
 }
 /**
+
+ * @fn Cafetiere::setLongueurChoisie(const int& longueurChoisie)
  * @brief Met à jour dans la base de données la longueur préférée de
  * l'utilisateur
+ * @details Table concernée Preferences
  */
 void Cafetiere::setLongueurChoisie(const int& longueurChoisie)
 {
@@ -171,8 +176,8 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
 }
 
 /**
- * @brief preparerCafetiere:
- * Verifie si il est possible de lancer un café et prepare la cafetiere.
+ * @fn Cafetiere::preparerCafetiere()
+ * @brief Verifie si il est possible de lancer un café et prepare la cafetiere.
  */
 bool Cafetiere::preparerCafetiere()
 {
@@ -184,7 +189,8 @@ bool Cafetiere::preparerCafetiere()
        !cafeEnPreparation && estCapsuleChoisieDisponible())
     {
         /**
-         * @brief Cafetiere prête :
+         * @brief
+         * Cafetiere prête :
          * envoie d'un signal pour activer le bouton GO
          */
         emit cafetierePrete();
@@ -198,7 +204,8 @@ bool Cafetiere::preparerCafetiere()
     else
     {
         /**
-         * @brief Cafetiere pas prête :
+         * @brief
+         * Cafetiere pas prête :
          * envoie d'un signal pour désactiver le bouton GO
          */
         emit cafetierePasPrete();
@@ -212,6 +219,7 @@ bool Cafetiere::preparerCafetiere()
 }
 
 /**
+ * @fn Cafetiere::getDisponibiliteCapsules() const
  * @brief Récupère dans la base de données la présence des capsules
  */
 QStringList Cafetiere::getDisponibiliteCapsules() const
@@ -223,6 +231,7 @@ QStringList Cafetiere::getDisponibiliteCapsules() const
 }
 
 /**
+ * @fn Cafetiere::estCapsuleChoisieDisponible()
  * @brief Récupère dans la base de données la présence de la capsules choisie
  */
 bool Cafetiere::estCapsuleChoisieDisponible()
@@ -245,8 +254,9 @@ bool Cafetiere::estCapsuleChoisieDisponible()
 }
 
 /**
- * @brief Récupère dans la base de données la présence de la capsules passée en
- * paramètre
+ * @fn Cafetiere::estCapsuleChoisieDisponible(int capsule)
+ * @brief Récupère dans la base de données la présence de la capsules passée
+ * en paramètre
  */
 bool Cafetiere::estCapsuleChoisieDisponible(int capsule)
 {
@@ -296,8 +306,9 @@ void Cafetiere::gererConnexion()
 }
 
 /**
- * @brief Mise à jour de la connexion:
- * Si la cafetiere est connectée envoie des trames d'états
+ * @fn Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
+ * @brief Mise à jour de la connexion: Si la cafetiere est connectée envoie
+ * des trames d'états
  */
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 {
@@ -308,7 +319,9 @@ void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 }
 
 /**
- * @brief envoie d'une trame d'état cafetiere : $PIKAWA;ETAT;C;\r\n
+ * @fn Cafetiere::recupererEtatCafetiere()
+ * @brief Envoie d'une trame d'état cafetiere
+ * @details $PIKAWA;ETAT;C;\r\n
  */
 void Cafetiere::recupererEtatCafetiere()
 {
@@ -316,7 +329,9 @@ void Cafetiere::recupererEtatCafetiere()
 }
 
 /**
- * @brief envoie d'une trame d'état magasin : $PIKAWA;ETAT;M;\r\n
+ * @fn Cafetiere::recupererEtatMagasin()
+ * @brief Envoie d'une trame d'état magasin
+ * @details $PIKAWA;ETAT;M;\r\n
  */
 void Cafetiere::recupererEtatMagasin()
 {
@@ -324,8 +339,12 @@ void Cafetiere::recupererEtatMagasin()
 }
 
 /**
+ * @fn Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
+                                         bool bacPasPlein,
+                                         bool etatCapsule,
+                                         bool etatTasse)
  * @brief Slot qui met à jour les états de la cafetiere
- * Le signal passe les états de la cafetiere sous forme de parametres
+ * @details Le signal passe les états de la cafetiere sous forme de parametres
  */
 void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
                                          bool bacPasPlein,
@@ -349,8 +368,10 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
 }
 
 /**
+ * @fn Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
  * @brief Slot qui met à jour les champs de la table magasin dans la base de
  * données
+ * @details Requête UPDATE
  */
 void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
 {
@@ -403,7 +424,9 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
 }
 
 /**
- * @brief envoie une trame de préparation
+ * @fn Cafetiere::lancerLaPreparationCafe()
+ * @brief Envoie une trame de préparation
+ * @details Exemple PIKAWA;7;2;\r\n
  */
 void Cafetiere::lancerLaPreparationCafe()
 {
@@ -423,8 +446,10 @@ void Cafetiere::initiatiserNomLongueurs()
 }
 
 /**
+ * @fn Cafetiere::chargerPreferences(QString identifiantUtilisateur)
  * @brief Récupère dans la base de données la dernière capsule choisie et
  * longueur de l'utilisateur
+ * @details Selectionne des champs de plusieurs tables grâce à INNER JOIN
  */
 void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 {
@@ -497,8 +522,10 @@ void Cafetiere::ouvrirBaseDeDonnees()
 }
 
 /**
+ * @fn Cafetiere::incrementerNombreCafeJour()
  * @brief Effectue une requête dans la base de données pour incrémenter le
  * nombre de café
+ * @details Table concernée Entretien
  */
 void Cafetiere::incrementerNombreCafeJour()
 {
@@ -522,8 +549,10 @@ void Cafetiere::incrementerNombreCafeJour()
 }
 
 /**
+ * @fn Cafetiere::decrementerNombreCafeAvantDetartrage()
  * @brief Effectue une requête dans la base de données pour décrémenter le
  * nombre de café
+ * @details Table concernée Entretien
  */
 void Cafetiere::decrementerNombreCafeAvantDetartrage()
 {
@@ -550,8 +579,10 @@ void Cafetiere::decrementerNombreCafeAvantDetartrage()
 }
 
 /**
+ * @fn Cafetiere::getNombreCafeJour() const
  * @brief Effectue une requête dans la base de données pour recuperer le nombre
  * de café effectué
+ * @details Table concernée Entretien
  */
 QString Cafetiere::getNombreCafeJour() const
 {
@@ -562,8 +593,10 @@ QString Cafetiere::getNombreCafeJour() const
 }
 
 /**
+ * @fn Cafetiere::getNombreCafeAvantDetartrage() const
  * @brief Effectue une requête dans la base de données pour recuperer le nombre
  * de café avant le prochain détartrage
+ * @details Table concernée Entretien
  */
 QString Cafetiere::getNombreCafeAvantDetartrage() const
 {
