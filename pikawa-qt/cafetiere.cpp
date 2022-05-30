@@ -1,4 +1,4 @@
-#include "cafetiere.h"
+﻿#include "cafetiere.h"
 #include "ihm.h"
 #include "protocole.h"
 #include "communication.h"
@@ -11,7 +11,7 @@
  *
  * @brief Définitionde la classe Cafetiere
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.0
  */
 
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
@@ -127,6 +127,10 @@ QString Cafetiere::getLongueurPreferee() const
     return QString();
 }
 
+/**
+ * @brief Met à jour dans la base de données la caspule préférée de
+ * l'utilisateur
+ */
 void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
 {
     if(this->capsuleChoisie != capsuleChoisie)
@@ -142,7 +146,10 @@ void Cafetiere::setCapsuleChoisie(const int& capsuleChoisie)
         }
     }
 }
-
+/**
+ * @brief Met à jour dans la base de données la longueur préférée de
+ * l'utilisateur
+ */
 void Cafetiere::setLongueurChoisie(const int& longueurChoisie)
 {
     preparation->setNiveauEauNecessaire(longueurChoisie);
@@ -163,6 +170,10 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
     this->niveauEau = niveauEau;
 }
 
+/**
+ * @brief preparerCafetiere:
+ * Verifie si il est possible de lancer un café et prepare la cafetiere.
+ */
 bool Cafetiere::preparerCafetiere()
 {
     qDebug() << Q_FUNC_INFO << "estPreparationPrete"
@@ -172,6 +183,10 @@ bool Cafetiere::preparerCafetiere()
     if(preparation->estPreparationPrete() && communication->estConnecte() &&
        !cafeEnPreparation && estCapsuleChoisieDisponible())
     {
+        /**
+         * @brief Cafetiere prête :
+         * envoie d'un signal pour activer le bouton GO
+         */
         emit cafetierePrete();
         qDebug() << Q_FUNC_INFO << "Prête";
         emit etatCafetiere(niveauEau,
@@ -182,6 +197,10 @@ bool Cafetiere::preparerCafetiere()
     }
     else
     {
+        /**
+         * @brief Cafetiere pas prête :
+         * envoie d'un signal pour désactiver le bouton GO
+         */
         emit cafetierePasPrete();
         emit etatCafetiere(niveauEau,
                            preparation->getBacPasPlein(),
@@ -192,6 +211,9 @@ bool Cafetiere::preparerCafetiere()
     }
 }
 
+/**
+ * @brief Récupère dans la base de données la présence des capsules
+ */
 QStringList Cafetiere::getDisponibiliteCapsules() const
 {
     QString     requete = "SELECT quantite FROM StockMagasin";
@@ -200,6 +222,9 @@ QStringList Cafetiere::getDisponibiliteCapsules() const
     return caspuleDisponibles;
 }
 
+/**
+ * @brief Récupère dans la base de données la présence de la capsules choisie
+ */
 bool Cafetiere::estCapsuleChoisieDisponible()
 {
     QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
@@ -219,6 +244,10 @@ bool Cafetiere::estCapsuleChoisieDisponible()
     }
 }
 
+/**
+ * @brief Récupère dans la base de données la présence de la capsules passée en
+ * paramètre
+ */
 bool Cafetiere::estCapsuleChoisieDisponible(int capsule)
 {
     QString requete = "SELECT quantite FROM StockMagasin WHERE rangee = " +
@@ -266,6 +295,10 @@ void Cafetiere::gererConnexion()
         communication->connecter();
 }
 
+/**
+ * @brief Mise à jour de la connexion:
+ * Si la cafetiere est connectée envoie des trames d'états
+ */
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 {
     this->connectee = true;
@@ -274,16 +307,26 @@ void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
     recupererEtatMagasin();
 }
 
+/**
+ * @brief envoie d'une trame d'état cafetiere : $PIKAWA;ETAT;C;\r\n
+ */
 void Cafetiere::recupererEtatCafetiere()
 {
     communication->envoyerTrame(TRAME_DEMANDE_ETAT_CAFETIERE);
 }
 
+/**
+ * @brief envoie d'une trame d'état magasin : $PIKAWA;ETAT;M;\r\n
+ */
 void Cafetiere::recupererEtatMagasin()
 {
     communication->envoyerTrame(TRAME_DEMANDE_ETAT_MAGASIN);
 }
 
+/**
+ * @brief Slot qui met à jour les états de la cafetiere
+ * Le signal passe les états de la cafetiere sous forme de parametres
+ */
 void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
                                          bool bacPasPlein,
                                          bool etatCapsule,
@@ -299,9 +342,16 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
 
     preparerCafetiere();
 
+    /**
+     * @brief Signal envoyé à l'IHM pour afficher les états
+     */
     emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
 
+/**
+ * @brief Slot qui met à jour les champs de la table magasin dans la base de
+ * données
+ */
 void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
 {
     qDebug() << Q_FUNC_INFO << caspulesDisponibles;
@@ -313,6 +363,10 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
           " WHERE rangee=" + QString::number((i + 1));
         baseDeDonneesPikawa->executer(requete);
     }
+
+    /**
+     * @brief Envoie des disponibilités des capsules à l'IHM
+     */
     emit etatMagasinIHM(caspulesDisponibles);
     bool pret = preparerCafetiere();
     qDebug() << Q_FUNC_INFO << pret;
@@ -348,6 +402,9 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
     }
 }
 
+/**
+ * @brief envoie une trame de préparation
+ */
 void Cafetiere::lancerLaPreparationCafe()
 {
     communication->envoyerTramePreparation(capsuleChoisie, longueurChoisie);
@@ -365,6 +422,10 @@ void Cafetiere::initiatiserNomLongueurs()
     this->nomLongueurs = preparation->getNomLongueurs();
 }
 
+/**
+ * @brief Récupère dans la base de données la dernière capsule choisie et
+ * longueur de l'utilisateur
+ */
 void Cafetiere::chargerPreferences(QString identifiantUtilisateur)
 {
     qDebug() << Q_FUNC_INFO << identifiantUtilisateur;
@@ -435,6 +496,10 @@ void Cafetiere::ouvrirBaseDeDonnees()
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
 }
 
+/**
+ * @brief Effectue une requête dans la base de données pour incrémenter le
+ * nombre de café
+ */
 void Cafetiere::incrementerNombreCafeJour()
 {
     QString requete        = "SELECT nombreCafeTotal FROM Entretien";
@@ -456,6 +521,10 @@ void Cafetiere::incrementerNombreCafeJour()
     }
 }
 
+/**
+ * @brief Effectue une requête dans la base de données pour décrémenter le
+ * nombre de café
+ */
 void Cafetiere::decrementerNombreCafeAvantDetartrage()
 {
     QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
@@ -480,6 +549,10 @@ void Cafetiere::decrementerNombreCafeAvantDetartrage()
     }
 }
 
+/**
+ * @brief Effectue une requête dans la base de données pour recuperer le nombre
+ * de café effectué
+ */
 QString Cafetiere::getNombreCafeJour() const
 {
     QString requete        = "SELECT nombreCafeTotal FROM Entretien";
@@ -488,6 +561,10 @@ QString Cafetiere::getNombreCafeJour() const
     return nombreCafeJour;
 }
 
+/**
+ * @brief Effectue une requête dans la base de données pour recuperer le nombre
+ * de café avant le prochain détartrage
+ */
 QString Cafetiere::getNombreCafeAvantDetartrage() const
 {
     QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
