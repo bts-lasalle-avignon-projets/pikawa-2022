@@ -298,6 +298,7 @@ void Communication::deconnecter()
     {
         qDebug() << Q_FUNC_INFO;
         socketBluetoothPikawa->close();
+        connecte = false;
     }
 }
 

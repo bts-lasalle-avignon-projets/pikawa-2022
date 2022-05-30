@@ -261,9 +261,14 @@ void Cafetiere::gererConnexion()
 {
     qDebug() << Q_FUNC_INFO;
     if(communication->estConnecte())
+    {
         communication->deconnecter();
+        preparerCafetiere();
+    }
     else
+    {
         communication->connecter();
+    }
 }
 
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
