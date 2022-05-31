@@ -48,7 +48,7 @@ void Communication::activerBluetooth()
 /**
  * @fn Communication::estTrameValide(QString trame)
  * @brief Vérifie si la trame est valide
- * @details La trame est valise elle commence avec "$" et fini avec "/r/n"
+ * @details La trame est valide si elle commence avec "$" et fini avec "/r/n"
  */
 bool Communication::estTrameValide(QString trame)
 {
@@ -59,8 +59,7 @@ bool Communication::estTrameValide(QString trame)
 
 /**
  * @fn Communication::extraireTypeTrame(QString trame)
- * @brief Extrait le type de trame cafetiere, magasin, preparation ou erreur
- * @details Le type de trame est à la position 1 de la trame
+ * @brief Extrait le type de trame (champ à la position 1 dans la trame)
  */
 TypeTrame Communication::extraireTypeTrame(QString trame)
 {
@@ -174,7 +173,7 @@ bool Communication::estCafetiereDetectee() const
 
 /**
  * @fn Communication::envoyerTrame(QString trame)
- * @brief Envoie une trame passé en paramètre
+ * @brief Envoie la trame passée en paramètre
  * @details Ecrit sur la socket la trame
  */
 void Communication::envoyerTrame(QString trame)
@@ -264,8 +263,8 @@ void Communication::terminerRecherche()
 
 /**
  * @fn Communication::connecter()
- * @brief Slot de connection
- * @details Connection des signals de l'objet socketBluetoothPikawa au slots
+ * @brief Slot de connexion
+ * @details connexion des signals de l'objet socketBluetoothPikawa au slots
  */
 
 void Communication::connecter()
@@ -318,7 +317,7 @@ void Communication::connecter()
 
 /**
  * @fn Communication::deconnecter()
- * @brief Slot de déconnection
+ * @brief Slot de déconnexion
  * @details Ferme la socket
  */
 

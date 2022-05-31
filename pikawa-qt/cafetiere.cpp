@@ -305,7 +305,7 @@ void Cafetiere::gererConnexion()
 
 /**
  * @fn Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
- * @brief Mise à jour de la connexion: Si la cafetiere est connectée envoie
+ * @brief Met à jour l'état de connexion
  * des trames d'états
  */
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
@@ -358,10 +358,6 @@ void Cafetiere::mettreAJourEtatCafetiere(int  reservoirEau,
     preparation->setTassePresente(etatTasse);
 
     preparerCafetiere();
-
-    /**
-     * @brief Signal envoyé à l'IHM pour afficher les états
-     */
     emit etatCafetiere(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
 
@@ -384,7 +380,7 @@ void Cafetiere::mettreAJourMagasin(QStringList caspulesDisponibles)
     }
 
     /**
-     * @brief Envoie des disponibilités des capsules à l'IHM
+     * Envoie des disponibilités des capsules à l'IHM
      */
     emit etatMagasinIHM(caspulesDisponibles);
     bool pret = preparerCafetiere();
