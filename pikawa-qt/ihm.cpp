@@ -288,6 +288,7 @@ void IHMPikawa::afficherNiveauBac()
     {
         case BAC_VIDE:
             ui->etatBac->setPixmap(*iconeBacPasPlein);
+            ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
             break;
         case BAC_NIVEAU_1:
             ui->etatBac->setPixmap(*iconeBacNiveau1);
