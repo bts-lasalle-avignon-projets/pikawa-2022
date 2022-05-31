@@ -44,17 +44,17 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ![](captures/page-Entretien-IHM.png)
 
-## Configuration du Rapsberry
+## Configuration du Rapsberry PI 3B+ 
 
 Désactivation de l'écran de veille
 
-Pour désactiver l'écran de veille sur le Rapsberry, il faut aller dans le menu principal en haut à gauche puis dans préférence et dans configuration du Rapsberry.
+`sudo raspi-config`
 
-![](captures/configuration-Raspberry-1.png)
+Vous pouvez naviguer jusqu'à cette option en utilisant les touches FLÉCHÉES, puis sélectionnez `Display Option` en appuyant sur la touche ENTRÉE.
 
-Dans dans l'onglet "Display" désactivez "Screen Blanking"
+Maintenant que nous sommes dans le menu des options d'affichage, vous devez trouver et sélectionner l'option "Screen Blanking".
 
-![](captures/configuration-Raspberry-2.png)
+Lorsqu'on vous demande si vous souhaitez activer le Screen Blanking, assurez-vous de sélectionner l'option `<Non>`.
 
 ## Compilation
 
