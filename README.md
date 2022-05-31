@@ -52,7 +52,7 @@ Pour désactiver l'écran de veille sur le Rapsberry, il faut aller dans le menu
 
 ![](captures/configuration-Raspberry-1.png)
 
-Aller dans l'onglet "Display" et désactiver "Screen Blanking"
+Dans dans l'onglet "Display" désactivez "Screen Blanking"
 
 ![](captures/configuration-Raspberry-2.png)
 
