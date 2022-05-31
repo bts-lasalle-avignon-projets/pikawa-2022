@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pikawa: Référence du fichier basededonnees.h</title>
+<title>pikawa: Le projet pikawa-2022</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('basededonnees_8h.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md__home_btssn2_pikawa-2022__r_e_a_d_m_e.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -83,67 +83,68 @@ $(document).ready(function(){initNavTree('basededonnees_8h.html',''); initResiza
 </iframe>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Référence du fichier basededonnees.h</div>  </div>
+<div class="title">Le projet pikawa-2022 </div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Fichier qui contient la déclaration de la classe <a class="el" href="class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données.">BaseDeDonnees</a>.  
-<a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;QObject&gt;</code><br />
-<code>#include &lt;QtSql/QtSql&gt;</code><br />
-<code>#include &lt;QSqlDatabase&gt;</code><br />
-<code>#include &lt;QMutex&gt;</code><br />
-<code>#include &lt;QString&gt;</code><br />
+<div class="textblock"><h1>Présentation</h1>
+<p>Pikawa est une machine à café connectée, pilotable grâce à un écran tactile et un logiciel embarqué sur Raspberry Pi.</p>
+<p>La cafetière Ekawa est équipée d’un magasin rotatif et motorisé de capsules.</p>
+<p>Le logiciel embarqué Pikawa permettra :</p>
+<ul>
+<li>lancer un café personnalisé</li>
+<li>visualiser les alertes (eau, bac à capsule)</li>
+<li>suivre l’entretien</li>
+</ul>
+<h1>Analyse de l’existant</h1>
+<p>L’année 2016 aura marqué l’arrivée de la machine à café automatique connectée, pilotable directement depuis un smartphone et/ou une tablette. Pour l'instant, la machine à café connectée reste limitée aux modèles “haut de gamme” à grains.</p>
+<p>Exemples : la Delonghi, PrimaDonna Elite, la Saeco Granbaristo Avanti et les Jura Z6, E6 et E8.</p>
+<p>Actuellement, il n’existe pas de solutions équivalentes pour des machines à capsules.</p>
+<h1>Historique des versions</h1>
+<ul>
+<li>Version 0.2 : 25/05/2022<ul>
+<li>lancement de la préparation d'un café personnalisé (type de capsule et longueur)</li>
+<li>suivi de l'entretien de la machine</li>
+<li>affichage des alertes (niveau d'eau, bac à capsule, présence tasse et capsule)</li>
+<li>affichage de la description des capsules</li>
+</ul>
+</li>
+<li>Version 0.1 : 03/04/2022<ul>
+<li>affichage de l'écran d'accueil et d'informations</li>
+<li>mise en oeuvre de la recherche d'interfaces Bluetooth</li>
+<li>squelettes des classes <a class="el" href="class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA.">Cafetiere</a> et <a class="el" href="class_preparation.html" title="Gére la préparation d&#39;un café">Preparation</a></li>
+</ul>
+</li>
+</ul>
+<h1>Captures d'écran</h1>
+<div class="image">
+<img src="page-Accueil-IHM.png" alt=""/>
 </div>
-<p><a href="basededonnees_8h_source.html">Aller au code source de ce fichier.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_de_donnees.html">BaseDeDonnees</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class permettant de s'interfacer avec la base de données.  <a href="class_base_de_donnees.html#details">Plus de détails...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a633c24dd10861ba1bee8ca6a33e939fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="basededonnees_8h.html#a633c24dd10861ba1bee8ca6a33e939fb">NOM_BDD</a>&#160;&#160;&#160;&quot;pikawa.db&quot;</td></tr>
-<tr class="memdesc:a633c24dd10861ba1bee8ca6a33e939fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Le nom de la base de données SQLite.  <a href="basededonnees_8h.html#a633c24dd10861ba1bee8ca6a33e939fb">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a633c24dd10861ba1bee8ca6a33e939fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Fichier qui contient la déclaration de la classe <a class="el" href="class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données.">BaseDeDonnees</a>. </p>
-
-<p class="definition">Définition dans le fichier <a class="el" href="basededonnees_8h_source.html">basededonnees.h</a>.</p>
-</div><h2 class="groupheader">Documentation des macros</h2>
-<a id="a633c24dd10861ba1bee8ca6a33e939fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a633c24dd10861ba1bee8ca6a33e939fb">&#9670;&nbsp;</a></span>NOM_BDD</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NOM_BDD&#160;&#160;&#160;&quot;pikawa.db&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Le nom de la base de données SQLite. </p>
-
-<p class="definition">Définition à la ligne <a class="el" href="basededonnees_8h_source.html#l00020">20</a> du fichier <a class="el" href="basededonnees_8h_source.html">basededonnees.h</a>.</p>
-
+   <div class="image">
+<img src="page-Information-IHM.png" alt=""/>
 </div>
+   <div class="image">
+<img src="page-Selection-IHM.png" alt=""/>
 </div>
-</div><!-- contents -->
+   <div class="image">
+<img src="page-Entretien-IHM.png" alt=""/>
+</div>
+   <h1>Auteur</h1>
+<ul>
+<li>Anthony Bryckaert &lt;<a href="#" onclick="location.href='mai'+'lto:'+'bry'+'ck'+'aer'+'t.'+'ant'+'ho'+'ny@'+'gm'+'ail'+'.c'+'om'; return false;">bryck<span style="display: none;">.nosp@m.</span>aert<span style="display: none;">.nosp@m.</span>.anth<span style="display: none;">.nosp@m.</span>ony@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a>&gt;</li>
+</ul>
+<h1>Kanban</h1>
+<p><a href="https://github.com/btssn-lasalle-84/pikawa-2022/projects/1">pikawa-2022</a></p>
+<h1>Documentation du code</h1>
+<p><a href="https://btssn-lasalle-84.github.io/pikawa-2022/">https://btssn-lasalle-84.github.io/pikawa-2022/</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a46bf0de6af686900e6da73bcfd144fe.html">pikawa-qt</a></li><li class="navelem"><a class="el" href="basededonnees_8h.html">basededonnees.h</a></li>
     <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mardi 31 Mai 2022 12:26:59 pour pikawa par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.8.17&nbsp;</li>
   </ul>
 </div>

@@ -30,7 +30,7 @@ var NAVTREE =
     [ "README", "page__r_e_a_d_m_e.html", null ],
     [ "A propos", "page_about.html", null ],
     [ "Licence GPL", "page_licence.html", null ],
-    [ "Le projet pikawa-2022", "md__home_tvaira__documents_git_projets_pikawa-2022__r_e_a_d_m_e.html", null ],
+    [ "Le projet pikawa-2022", "md__home_btssn2_pikawa-2022__r_e_a_d_m_e.html", null ],
     [ "Liste des choses à faire", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Liste des classes", "annotated.html", "annotated_dup" ],
