@@ -44,6 +44,36 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ![](captures/page-Entretien-IHM.png)
 
+## Configuration du Rapsberry
+
+Désactivation de l'écran de veille
+
+Pour désactiver l'écran de veille sur le Rapsberry, il faut aller dans le menu principal en haut à gauche puis dans préférence et dans configuration du Rapsberry.
+
+![](captures/configuration-Raspberry-1.png)
+
+Aller dans l'onglet "Display" et désactiver "Screen Blanking"
+
+![](captures/configuration-Raspberry-2.png)
+
+## Compilation
+
+Allez dans le dossier du projet :
+
+`cd pikawa/pikawa-qt/`
+
+Fabriquez le Makefile avec qmake :
+
+`qmake`
+
+Lancez le Makefile (cette opération peut prendre plusieurs minutes) :
+
+`make`
+
+Puis executez le programme :
+
+`./pikawa-qt`
+
 ## Auteur
 
 - Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
