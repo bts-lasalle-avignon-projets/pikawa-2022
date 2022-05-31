@@ -44,7 +44,7 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ![](captures/page-Entretien-IHM.png)
 
-## Configuration du Rapsberry PI 3B+ 
+## Configuration du Rapsberry PI 3B+ sur Bullseye (Debian 11)
 
 Désactivation de l'écran de veille
 
