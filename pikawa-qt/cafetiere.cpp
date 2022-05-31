@@ -11,7 +11,7 @@
  *
  * @brief Définitionde la classe Cafetiere
  * @author Anthony BRYCKAERT
- * @version 1.0
+ * @version 1.1
  */
 
 Cafetiere::Cafetiere(IHMPikawa* ihm) :
@@ -189,7 +189,6 @@ bool Cafetiere::preparerCafetiere()
        !cafeEnPreparation && estCapsuleChoisieDisponible())
     {
         /**
-         * @brief
          * Cafetiere prête :
          * envoie d'un signal pour activer le bouton GO
          */
@@ -204,7 +203,6 @@ bool Cafetiere::preparerCafetiere()
     else
     {
         /**
-         * @brief
          * Cafetiere pas prête :
          * envoie d'un signal pour désactiver le bouton GO
          */
@@ -232,7 +230,7 @@ QStringList Cafetiere::getDisponibiliteCapsules() const
 
 /**
  * @fn Cafetiere::estCapsuleChoisieDisponible()
- * @brief Récupère dans la base de données la présence de la capsules choisie
+ * @brief Récupère dans la base de données la présence de la capsule choisie
  */
 bool Cafetiere::estCapsuleChoisieDisponible()
 {
@@ -255,8 +253,8 @@ bool Cafetiere::estCapsuleChoisieDisponible()
 
 /**
  * @fn Cafetiere::estCapsuleChoisieDisponible(int capsule)
- * @brief Récupère dans la base de données la présence de la capsules passée
- * en paramètre
+ * @brief Récupère dans la base de données la présence de la capsule passée en
+ * argument en paramètre
  */
 bool Cafetiere::estCapsuleChoisieDisponible(int capsule)
 {

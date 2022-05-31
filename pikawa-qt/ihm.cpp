@@ -132,7 +132,7 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
 
 /**
  * @fn IHMPikawa::rafraichirDecouverte()
- * @brief Slot connecté bouton rafraichir
+ * @brief Slot déclenché lors du clique du bouton rafraichir
  * @details Relance une découverte
  */
 void IHMPikawa::rafraichirDecouverte()
@@ -150,7 +150,8 @@ void IHMPikawa::terminerDecouverte(bool detecte)
 
 /**
  * @fn IHMPikawa::gererLongueurPreparation(int longueurPreparation)
- * @brief Slot connecté à la bar de séléction des longueurs
+ * @brief Slot déclenché lors d'un changement d'état de la bar de séléction des
+ * longueurs
  * @details Change la valeur de la longeur du café
  */
 void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
@@ -210,7 +211,7 @@ void IHMPikawa::gererSelectionCafes()
 
 /**
  * @fn IHMPikawa::afficherCapsuleChoisie(int idCapsule)
- * @brief Affiche sur le bouton changer de capsule, la capsule chosie
+ * @brief Affiche la capsule sélectionnée dans le bouton
  */
 void IHMPikawa::afficherCapsuleChoisie(int idCapsule)
 {
@@ -736,7 +737,7 @@ void IHMPikawa::chargerLabelsIntensiteCafe()
 
 /**
  * @fn IHMPikawa::ouvrirBaseDeDonnees()
- * @brief Instensie un objet base de données
+ * @brief Instancie un objet base de données
  */
 void IHMPikawa::ouvrirBaseDeDonnees()
 {
@@ -818,7 +819,7 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
 
 /**
  * @fn IHMPikawa::afficherMessage(QString message, QString couleur)
- * @brief Affiche un message sur l'IHM passé en paramètre
+ * @brief Affiche un message passé en paramètre dans l'IHM
  */
 
 void IHMPikawa::afficherMessage(QString message, QString couleur)
