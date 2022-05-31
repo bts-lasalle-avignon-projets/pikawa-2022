@@ -7,7 +7,7 @@
  *
  * @brief Définition de la classe Communication
  * @author Anthony BRYCKAERT
- * @version 1.0
+ * @version 1.1
  */
 
 Communication::Communication(QObject* parent) :

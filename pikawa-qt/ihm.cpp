@@ -10,7 +10,7 @@
  *
  * @brief Définition de la classe IHMPikawa
  * @author Anthony BRYCKAERT
- * @version 1.0
+ * @version 1.1
  */
 
 /**
