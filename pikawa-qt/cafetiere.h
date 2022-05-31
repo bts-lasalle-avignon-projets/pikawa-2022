@@ -76,6 +76,7 @@ class Cafetiere : public QObject
     QStringList getPreferences() const;
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
+    QString     getNiveauBac() const;
     void        setCapsuleChoisie(const int& capsuleChoisie);
     void        setLongueurChoisie(const int& boissonChoisie);
     void        setNiveauEau(const int& niveauEau);
@@ -87,6 +88,9 @@ class Cafetiere : public QObject
     void        decrementerNombreCafeAvantDetartrage();
     QString     getNombreCafeJour() const;
     QString     getNombreCafeAvantDetartrage() const;
+    void        incrementerNiveauBac();
+    void        reinitialiserNiveauBac();
+
     /**
      * @enum ChampsTablePreferences
      * @brief Les différentes colonne de la table Preferences
