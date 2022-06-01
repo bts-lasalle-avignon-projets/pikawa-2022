@@ -280,8 +280,13 @@ void IHMPikawa::afficherCafePret()
     timerPreparation->stop();
     timeOutPreparation->stop();
     afficherMessageEtatCafe("Café prêt", "green");
-    cafetiere->setCafeEnPreparation(false);
     cafetiere->preparerCafetiere();
+}
+
+void IHMPikawa::timeOutAfficherPret()
+{
+    cafetiere->setCafeEnPreparation(false);
+    afficherCafePret();
 }
 
 void IHMPikawa::afficherCafeEnCours()
@@ -465,7 +470,7 @@ void IHMPikawa::gererEvenementsBoutons()
     connect(timeOutPreparation,
             SIGNAL(timeout()),
             this,
-            SLOT(afficherCafePret()));
+            SLOT(timeOutAfficherPret()));
 
     connect(ui->boutonInformationsEntretien,
             SIGNAL(clicked()),

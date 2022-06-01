@@ -195,6 +195,7 @@ class IHMPikawa : public QMainWindow
     void afficherProgressionPrepration();
     void mettreAJourNombreCafeDepuisDetartrage(
       QString nombreCafeDepuisDernierDetartrage);
+    void timeOutAfficherPret();
   signals:
     void detartrageReinitialise();
 };
