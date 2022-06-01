@@ -33,6 +33,7 @@ class Cafetiere;
 #define BAC_NIVEAU_2                 2
 #define BAC_NIVEAU_3                 3
 #define BAC_NIVEAU_4                 4
+
 /**
  * @def VERSION
  * @brief La version de l'application
@@ -147,7 +148,6 @@ class IHMPikawa : public QMainWindow
     void afficherMessageEtatCafe(QString message, QString couleur);
     void initialiserCafetiere();
     void initialiserPageEntretien();
-    void mettreAJourNombreCafeDepuisDetartrage();
     void chargerDescription();
     void chargerLabelsIntensiteCafe();
     void chargerIntensite();
@@ -203,7 +203,8 @@ class IHMPikawa : public QMainWindow
     void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
     void afficherErreurAccesBaseDeDonnees();
     void afficherProgressionPrepration();
-
+    void mettreAJourNombreCafeDepuisDetartrage(
+      QString nombreCafeDepuisDernierDetartrage);
   signals:
     void detartrageReinitialise();
 };

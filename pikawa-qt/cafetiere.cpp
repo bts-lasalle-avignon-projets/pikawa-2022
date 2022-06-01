@@ -344,6 +344,7 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
         emit cafeEnCours();
         incrementerNombreCafeJour();
         incrementerNiveauBac();
+        incrementerNombreCafeDepuisDetartrage();
         recupererEtatMagasin();
         decrementerNombreCafeAvantDetartrage();
     }
@@ -465,14 +466,14 @@ void Cafetiere::incrementerNombreCafeJour()
 void Cafetiere::decrementerNombreCafeAvantDetartrage()
 {
     QString requete = "SELECT nombreCafeAvantDetartrage FROM Entretien";
-    QString nombreCafeAvantDetartrage = "";
+    QString nombreCafeAvantDetartrage;
     bool    retour =
       baseDeDonneesPikawa->recuperer(requete, nombreCafeAvantDetartrage);
     if(!retour)
     {
         emit erreurAccesBaseDeDonnees();
     }
-    else
+    else if(nombreCafeAvantDetartrage.toInt() > 0)
     {
         qDebug() << Q_FUNC_INFO << "nombreCafeAvantDetartrage "
                  << nombreCafeAvantDetartrage;
@@ -507,6 +508,9 @@ void Cafetiere::reinitialiserDetartrageBaseDeDonnees()
     QString requete = "UPDATE Entretien SET nombreCafeAvantDetartrage = " +
                       QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE);
     baseDeDonneesPikawa->executer(requete);
+    requete = "UPDATE Entretien SET nombreCafeDepuisDetartrage = " +
+              QString::number(NOMBRE_CAFE_DEPUIS_DETARTRAGE_REINITIALISE);
+    baseDeDonneesPikawa->executer(requete);
 }
 
 void Cafetiere::setDeconnectee()
@@ -535,4 +539,24 @@ void Cafetiere::reinitialiserNiveauBac()
 {
     QString requete = "UPDATE Entretien SET niveauBac = 0";
     baseDeDonneesPikawa->executer(requete);
+}
+
+void Cafetiere::incrementerNombreCafeDepuisDetartrage()
+{
+    QString requete = "SELECT nombreCafeDepuisDetartrage FROM Entretien";
+    QString nombreCafeDepuisDetartrage;
+    baseDeDonneesPikawa->recuperer(requete, nombreCafeDepuisDetartrage);
+    requete = "UPDATE Entretien SET nombreCafeDepuisDetartrage = " +
+              QString::number(nombreCafeDepuisDetartrage.toInt() + 1);
+    baseDeDonneesPikawa->executer(requete);
+    emit nombreDeCafeDepuisDetartrage(
+      QString::number(nombreCafeDepuisDetartrage.toInt() + 1));
+}
+
+QString Cafetiere::getNombreCafeDepuisDetartrage() const
+{
+    QString requete = "SELECT nombreCafeDepuisDetartrage FROM Entretien";
+    QString nombreCafeDepuisDetartrage;
+    baseDeDonneesPikawa->recuperer(requete, nombreCafeDepuisDetartrage);
+    return nombreCafeDepuisDetartrage;
 }
