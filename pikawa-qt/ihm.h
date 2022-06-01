@@ -29,6 +29,8 @@ class Cafetiere;
 #define PAS_ESPRESSO                               4
 #define LUNGO                                      2
 #define PAS_LUNGO                                  2
+#define TEMPS_ACTUALISATION_BAR_PROGRESSION        500
+#define TIME_OUT_PREPARATION                       20000
 /**
  * @def VERSION
  * @brief La version de l'application

@@ -292,8 +292,8 @@ void IHMPikawa::timeOutAfficherPret()
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
-    timerPreparation->start(500);
-    timeOutPreparation->start(20000);
+    timerPreparation->start(TEMPS_ACTUALISATION_BAR_PROGRESSION);
+    timeOutPreparation->start(TIME_OUT_PREPARATION);
     ui->avancementPreparation->setValue(0);
     afficherMessageEtatCafe("Café en cours", "red");
 }
