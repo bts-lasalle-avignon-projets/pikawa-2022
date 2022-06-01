@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMPikawa
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 #include <QtWidgets>
@@ -31,11 +31,17 @@ class Cafetiere;
 #define PAS_LUNGO                                  2
 #define TEMPS_ACTUALISATION_BAR_PROGRESSION        500
 #define TIME_OUT_PREPARATION                       20000
+#define BAC_VIDE                     0
+#define BAC_NIVEAU_1                 1
+#define BAC_NIVEAU_2                 2
+#define BAC_NIVEAU_3                 3
+#define BAC_NIVEAU_4                 4
+
 /**
  * @def VERSION
  * @brief La version de l'application
  */
-#define VERSION "0.2"
+#define VERSION "1.1"
 
 /**
  * @def PLEIN_ECRAN
@@ -109,6 +115,10 @@ class IHMPikawa : public QMainWindow
     QIcon*   iconeCapsuleScuro;
     QIcon*   iconeCapsuleVanilla;
     QPixmap* iconeBacPlein;
+    QPixmap* iconeBacNiveau4;
+    QPixmap* iconeBacNiveau3;
+    QPixmap* iconeBacNiveau2;
+    QPixmap* iconeBacNiveau1;
     QPixmap* iconeBacPasPlein;
     QPixmap* capsulePresente;
     QPixmap* capsuleAbsente;
@@ -156,6 +166,8 @@ class IHMPikawa : public QMainWindow
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
+
+    void afficherNiveauBac();
 
   public slots:
     void afficherPage(IHMPikawa::Page page);
