@@ -536,3 +536,8 @@ QString Cafetiere::getNombreCafeDepuisDetartrage() const
     baseDeDonneesPikawa->recuperer(requete, nombreCafeDepuisDetartrage);
     return nombreCafeDepuisDetartrage;
 }
+
+void Cafetiere::setCafeEnPreparation(const bool cafeEnPreparation)
+{
+    this->cafeEnPreparation = cafeEnPreparation;
+}

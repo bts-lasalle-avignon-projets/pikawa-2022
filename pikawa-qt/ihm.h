@@ -93,6 +93,7 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     QTimer*        timerPreparation;
+    QTimer*        timeOutPreparation;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
