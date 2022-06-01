@@ -44,7 +44,10 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ![](captures/page-Entretien-IHM.png)
 
-## Configuration du Rapsberry PI 3B+ sur Bullseye (Debian 11)
+## Configuration du mode kiosque
+
+Modèle : Rapsberry Pi 3B+ sur Bullseye (Debian 11)
+
 
 Désactivation de l'écran de veille
 
@@ -62,6 +65,9 @@ Screen Saver:
 Colors:
 [...]
 ```
+Désactivation du curseur :
+
+`$ sudo apt-get install unclutter`
 
 ## Fabrication
 
@@ -73,13 +79,10 @@ Allez dans le dossier du projet :
 
 `$ cd pikawa-2022/pikawa-qt/`
 
-Fabriquez le Makefile avec qmake :
+Fabriquez le programme (cette opération peut prendre plusieurs minutes) :
 
-`$ qmake`
+`$ qmake && make`
 
-Lancez le Makefile (cette opération peut prendre plusieurs minutes) :
-
-`$ make`
 
 Puis executez le programme :
 
