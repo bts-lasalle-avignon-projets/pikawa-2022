@@ -286,10 +286,6 @@ void IHMPikawa::afficherNiveauBac()
     qDebug() << Q_FUNC_INFO << cafetiere->getNiveauBac();
     switch(cafetiere->getNiveauBac().toInt())
     {
-        case BAC_VIDE:
-            ui->etatBac->setPixmap(*iconeBacPasPlein);
-            ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
-            break;
         case BAC_NIVEAU_1:
             ui->etatBac->setPixmap(*iconeBacNiveau1);
             break;
@@ -346,7 +342,15 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     }
     else
     {
-        afficherNiveauBac();
+        if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
+        {
+            ui->etatBac->setPixmap(*iconeBacPasPlein);
+            ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
+        }
+        else
+        {
+            afficherNiveauBac();
+        }
     }
 
     afficherAvertissement(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
