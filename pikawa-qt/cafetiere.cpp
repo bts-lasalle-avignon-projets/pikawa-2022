@@ -343,6 +343,7 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
         this->cafeEnPreparation = true;
         emit cafeEnCours();
         incrementerNombreCafeJour();
+        incrementerNiveauBac();
         incrementerNombreCafeDepuisDetartrage();
         recupererEtatMagasin();
         decrementerNombreCafeAvantDetartrage();
@@ -515,6 +516,29 @@ void Cafetiere::reinitialiserDetartrageBaseDeDonnees()
 void Cafetiere::setDeconnectee()
 {
     this->connectee = false;
+}
+
+QString Cafetiere::getNiveauBac() const
+{
+    QString requete = "SELECT niveauBac FROM Entretien";
+    QString niveauBac;
+    baseDeDonneesPikawa->recuperer(requete, niveauBac);
+    qDebug() << Q_FUNC_INFO << "niveauBac = " << niveauBac;
+    return niveauBac;
+}
+
+void Cafetiere::incrementerNiveauBac()
+{
+    QString niveauBac = getNiveauBac();
+    QString requete   = "UPDATE Entretien SET niveauBac =" +
+                      QString::number(niveauBac.toInt() + 1);
+    baseDeDonneesPikawa->executer(requete);
+}
+
+void Cafetiere::reinitialiserNiveauBac()
+{
+    QString requete = "UPDATE Entretien SET niveauBac = 0";
+    baseDeDonneesPikawa->executer(requete);
 }
 
 void Cafetiere::incrementerNombreCafeDepuisDetartrage()

@@ -18,17 +18,22 @@ class Cafetiere;
  * @def NOM
  * @brief Le nom de l'application
  */
-#define NOM                                        "Pikawa"
-#define NOMBRE_CAFE_AVANT_DETARTRAGE               75
-#define NOMBRE_CAFE_DEPUIS_DETARTRAGE_REINITIALISE 0
-#define INTENSITE_MAX                              12
-#define GRAIN_INTENSITE_MAX                        5
-#define RISTRETTO                                  0
-#define PAS_RISTRETTO                              7
-#define ESPRESSO                                   1
-#define PAS_ESPRESSO                               4
-#define LUNGO                                      2
-#define PAS_LUNGO                                  2
+#define NOM                          "Pikawa"
+#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
+#define INTENSITE_MAX                12
+#define GRAIN_INTENSITE_MAX          5
+#define RISTRETTO                    0
+#define PAS_RISTRETTO                7
+#define ESPRESSO                     1
+#define PAS_ESPRESSO                 4
+#define LUNGO                        2
+#define PAS_LUNGO                    2
+#define BAC_VIDE                     0
+#define BAC_NIVEAU_1                 1
+#define BAC_NIVEAU_2                 2
+#define BAC_NIVEAU_3                 3
+#define BAC_NIVEAU_4                 4
+
 /**
  * @def VERSION
  * @brief La version de l'application
@@ -106,6 +111,10 @@ class IHMPikawa : public QMainWindow
     QIcon*   iconeCapsuleScuro;
     QIcon*   iconeCapsuleVanilla;
     QPixmap* iconeBacPlein;
+    QPixmap* iconeBacNiveau4;
+    QPixmap* iconeBacNiveau3;
+    QPixmap* iconeBacNiveau2;
+    QPixmap* iconeBacNiveau1;
     QPixmap* iconeBacPasPlein;
     QPixmap* capsulePresente;
     QPixmap* capsuleAbsente;
@@ -153,6 +162,8 @@ class IHMPikawa : public QMainWindow
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
+
+    void afficherNiveauBac();
 
   public slots:
     void afficherPage(IHMPikawa::Page page);

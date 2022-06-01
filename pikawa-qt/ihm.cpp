@@ -281,6 +281,26 @@ void IHMPikawa::afficherCafePret()
     cafetiere->preparerCafetiere();
 }
 
+void IHMPikawa::afficherNiveauBac()
+{
+    qDebug() << Q_FUNC_INFO << cafetiere->getNiveauBac();
+    switch(cafetiere->getNiveauBac().toInt())
+    {
+        case BAC_NIVEAU_1:
+            ui->etatBac->setPixmap(*iconeBacNiveau1);
+            break;
+        case BAC_NIVEAU_2:
+            ui->etatBac->setPixmap(*iconeBacNiveau2);
+            break;
+        case BAC_NIVEAU_3:
+            ui->etatBac->setPixmap(*iconeBacNiveau3);
+            break;
+        case BAC_NIVEAU_4:
+            ui->etatBac->setPixmap(*iconeBacNiveau4);
+            break;
+    }
+}
+
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
@@ -318,11 +338,19 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
         ui->etatBac->setPixmap(*iconeBacPlein);
         ui->labelBac->setStyleSheet("font-size: 25px; color: red;");
         ui->labelAvertisseur->setText("Vider le bac");
+        cafetiere->reinitialiserNiveauBac();
     }
     else
     {
-        ui->etatBac->setPixmap(*iconeBacPasPlein);
-        ui->labelBac->setStyleSheet("font-size: 25px; color: black;");
+        if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
+        {
+            ui->etatBac->setPixmap(*iconeBacPasPlein);
+            ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
+        }
+        else
+        {
+            afficherNiveauBac();
+        }
     }
 
     afficherAvertissement(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
@@ -370,6 +398,10 @@ void IHMPikawa::initialiserIcones()
     iconeCapsuleScuro     = new QIcon(":scuro.png");
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
     iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
+    iconeBacNiveau4       = new QPixmap(":/images/bac-4.png");
+    iconeBacNiveau3       = new QPixmap(":/images/bac-3.png");
+    iconeBacNiveau2       = new QPixmap(":/images/bac-2.png");
+    iconeBacNiveau1       = new QPixmap(":/images/bac-1.png");
     iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
     capsulePresente       = new QPixmap(":/RondVert.png");
     capsuleAbsente        = new QPixmap(":/RondRouge.png");
@@ -395,6 +427,7 @@ void IHMPikawa::initialiserIHM()
     initialiserPageEntretien();
     chargerDescription();
     chargerIntensite();
+    afficherNiveauBac();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();

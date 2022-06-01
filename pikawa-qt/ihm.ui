@@ -1404,9 +1404,15 @@ background: rgb(114, 159, 207);
                 </item>
                 <item>
                  <widget class="QLabel" name="etatBac">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="minimumSize">
                    <size>
-                    <width>150</width>
+                    <width>1</width>
                     <height>150</height>
                    </size>
                   </property>
