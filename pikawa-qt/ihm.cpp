@@ -132,7 +132,7 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
 
 /**
  * @fn IHMPikawa::rafraichirDecouverte()
- * @brief Slot déclenché lors du clique du bouton rafraichir
+ * @brief Slot déclenché lors du clic du bouton rafraichir
  * @details Relance une découverte
  */
 void IHMPikawa::rafraichirDecouverte()
@@ -150,9 +150,9 @@ void IHMPikawa::terminerDecouverte(bool detecte)
 
 /**
  * @fn IHMPikawa::gererLongueurPreparation(int longueurPreparation)
- * @brief Slot déclenché lors d'un changement d'état de la bar de séléction des
- * longueurs
- * @details Change la valeur de la longeur du café
+ * @brief Slot déclenché lors d'un changement d'état de la barre de séléction
+ * des longueurs
+ * @details Change la valeur de la longueur du café
  */
 void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
 {
@@ -566,7 +566,6 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
-
     connect(ui->boutonAcceuilEntretien,
             SIGNAL(clicked()),
             this,
@@ -622,7 +621,6 @@ void IHMPikawa::gererEvenementsCafetiere()
             SIGNAL(erreurAccesBaseDeDonnees()),
             this,
             SLOT(afficherErreurAccesBaseDeDonnees()));
-
     connect(cafetiere,
             SIGNAL(nombreDeCafeDepuisDetartrage(QString)),
             SLOT(mettreAJourNombreCafeDepuisDetartrage(QString)));
@@ -861,7 +859,7 @@ void IHMPikawa::mettreAJourNombreCafeTotal(QString nombreCafeIncremente)
 
 /**
  * @fn IHMPikawa::reinitialiserDetartrage()
- * @brief Remet à 0 le nombre de café avant le détartrage
+ * @brief Remet à 0 le nombre de cafés avant le détartrage
  */
 void IHMPikawa::reinitialiserDetartrage()
 {
@@ -888,7 +886,7 @@ void IHMPikawa::initialiserPageEntretien()
 /**
 * @fn IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
   QString nombreCafeDecremente)
-* @brief Incremente le nombre de cafe avant le detartrage
+* @brief Incremente le nombre de cafés avant le detartrage
 */
 void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
   QString nombreCafeDecremente)
@@ -901,7 +899,7 @@ void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
 
 /**
  * @fn IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
- * @brief Affiche le nombre de café depuis le dernier détartrage
+ * @brief Affiche le nombre de cafés depuis le dernier détartrage
  */
 void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
 {
@@ -922,8 +920,8 @@ void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 
 /**
  * @fn IHMPikawa::afficherProgressionPrepration()
- * @brief Slot connecté au QTimer
- * @details Méthode appelé dès que le QTimer emet le signal timeout()
+ * @brief Slot connecté au timerPreparation
+ * @details Méthode appelée dès que le timerPreparation emet le signal timeout()
  */
 void IHMPikawa::afficherProgressionPrepration()
 {
@@ -953,7 +951,7 @@ void IHMPikawa::afficherProgressionPrepration()
 
 /**
  * @fn IHMPikawa::chargerDescription()
- * @brief Charge de la base de données les description des capsules
+ * @brief Charge de la base de données les descriptions des capsules
  * @details Table concernée Caspule
  */
 void IHMPikawa::chargerDescription()
@@ -1083,7 +1081,7 @@ void IHMPikawa::chargerIntensite()
 
 /**
  * @fn IHMPikawa::afficherIntensiteAccueil(int idCapsule)
- * @brief Affiche l'intensité de la caspule choisie sur l'écran d'acceuil
+ * @brief Affiche l'intensité de la caspule choisie sur l'écran d'accueil
  */
 void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
 {

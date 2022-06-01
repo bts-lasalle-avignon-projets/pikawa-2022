@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe Cafetiere
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 #include <QObject>
@@ -45,7 +45,7 @@ class Cafetiere : public QObject
     QStringList    preferences;    //!< liste des préférences de l'utilisateur
     int            capsuleChoisie; //!< id de la capsule sélectionnée
     int  longueurChoisie; //!< la longueur de préparation sélectionnée
-    int  niveauEau;       //!< le nive d'eau dans la cafetière
+    int  niveauEau;       //!< le niveau d'eau dans la cafetière
     bool connectee;       //!< état de connexion de la cafetière
     bool capsulePresente; //!< au moins une capsule est présente dans le magasin
     bool tassePresente;   //!< une tasse est détectée

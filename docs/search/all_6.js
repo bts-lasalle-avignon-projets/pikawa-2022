@@ -20,10 +20,11 @@ var searchData=
   ['getniveaueau_162',['getNiveauEau',['../class_cafetiere.html#ad96ee75cc8ecf7d9871b772f9926857c',1,'Cafetiere']]],
   ['getniveaueaunecessaire_163',['getNiveauEauNecessaire',['../class_cafetiere.html#abb72380cbb69ea3c3d5db640f6481905',1,'Cafetiere::getNiveauEauNecessaire()'],['../class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c',1,'Preparation::getNiveauEauNecessaire() const'],['../class_preparation.html#a8ce81eaddf593b6a1e8ff6a9981814d2',1,'Preparation::getNiveauEauNecessaire(const int &amp;longueurChoisie) const']]],
   ['getnombrecafeavantdetartrage_164',['getNombreCafeAvantDetartrage',['../class_cafetiere.html#ac2d18357cd8f32f45dc28779db38e09a',1,'Cafetiere']]],
-  ['getnombrecafejour_165',['getNombreCafeJour',['../class_cafetiere.html#aff82dae186757ff13e915e5f091d41a9',1,'Cafetiere']]],
-  ['getnomcapsules_166',['getNomCapsules',['../class_preparation.html#a7740da5dab8cd92023d50d91f1ef3913',1,'Preparation::getNomCapsules()'],['../class_cafetiere.html#a3487d86a94f471e6a5c4e6d089243ad1',1,'Cafetiere::getNomcapsules()']]],
-  ['getnomlongueurs_167',['getNomLongueurs',['../class_cafetiere.html#a105fe62e3e84d5fec198b84e14a49455',1,'Cafetiere::getNomLongueurs()'],['../class_preparation.html#a0e3ba0cf39fb939ad7df6f1e6c0daafc',1,'Preparation::getNomLongueurs()']]],
-  ['getpreferences_168',['getPreferences',['../class_cafetiere.html#a19add6fe82f9182baeb8393f8be5d881',1,'Cafetiere']]],
-  ['gettassepresente_169',['getTassePresente',['../class_cafetiere.html#ad084ea794790b79baf72aa6155346784',1,'Cafetiere::getTassePresente()'],['../class_preparation.html#a5e634747bdf2243dbeaffffd24722a21',1,'Preparation::getTassePresente()']]],
-  ['grain_5fintensite_5fmax_170',['GRAIN_INTENSITE_MAX',['../ihm_8h.html#ab0ef0aef16891632e60ee794a4969353',1,'ihm.h']]]
+  ['getnombrecafedepuisdetartrage_165',['getNombreCafeDepuisDetartrage',['../class_cafetiere.html#a68aca3b00fe02a53fee74ad42517bc17',1,'Cafetiere']]],
+  ['getnombrecafejour_166',['getNombreCafeJour',['../class_cafetiere.html#aff82dae186757ff13e915e5f091d41a9',1,'Cafetiere']]],
+  ['getnomcapsules_167',['getNomCapsules',['../class_preparation.html#a7740da5dab8cd92023d50d91f1ef3913',1,'Preparation::getNomCapsules()'],['../class_cafetiere.html#a3487d86a94f471e6a5c4e6d089243ad1',1,'Cafetiere::getNomcapsules()']]],
+  ['getnomlongueurs_168',['getNomLongueurs',['../class_cafetiere.html#a105fe62e3e84d5fec198b84e14a49455',1,'Cafetiere::getNomLongueurs()'],['../class_preparation.html#a0e3ba0cf39fb939ad7df6f1e6c0daafc',1,'Preparation::getNomLongueurs()']]],
+  ['getpreferences_169',['getPreferences',['../class_cafetiere.html#a19add6fe82f9182baeb8393f8be5d881',1,'Cafetiere']]],
+  ['gettassepresente_170',['getTassePresente',['../class_cafetiere.html#ad084ea794790b79baf72aa6155346784',1,'Cafetiere::getTassePresente()'],['../class_preparation.html#a5e634747bdf2243dbeaffffd24722a21',1,'Preparation::getTassePresente()']]],
+  ['grain_5fintensite_5fmax_171',['GRAIN_INTENSITE_MAX',['../ihm_8h.html#ab0ef0aef16891632e60ee794a4969353',1,'ihm.h']]]
 ];

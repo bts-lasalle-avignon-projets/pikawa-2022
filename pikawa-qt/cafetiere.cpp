@@ -9,7 +9,7 @@
 /**
  * @file cafetiere.cpp
  *
- * @brief Définitionde la classe Cafetiere
+ * @brief Définition de la classe Cafetiere
  * @author Anthony BRYCKAERT
  * @version 1.1
  */
@@ -177,7 +177,7 @@ void Cafetiere::setNiveauEau(const int& niveauEau)
 
 /**
  * @fn Cafetiere::preparerCafetiere()
- * @brief Verifie si il est possible de lancer un café et prepare la cafetiere.
+ * @brief Verifie s'il est possible de lancer un café et prepare la cafetiere
  */
 bool Cafetiere::preparerCafetiere()
 {
@@ -254,7 +254,7 @@ bool Cafetiere::estCapsuleChoisieDisponible()
 /**
  * @fn Cafetiere::estCapsuleChoisieDisponible(int capsule)
  * @brief Récupère dans la base de données la présence de la capsule passée en
- * argument en paramètre
+ * argument
  */
 bool Cafetiere::estCapsuleChoisieDisponible(int capsule)
 {
@@ -311,7 +311,6 @@ void Cafetiere::gererConnexion()
 /**
  * @fn Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
  * @brief Met à jour l'état de connexion
- * des trames d'états
  */
 void Cafetiere::mettreAJourConnexion(QString nom, QString adresse)
 {
@@ -491,12 +490,10 @@ void Cafetiere::gererEvenementsCommunication()
             SIGNAL(cafetiereDeconnectee()),
             this,
             SIGNAL(cafetiereDeconnectee()));
-
     connect(communication,
             SIGNAL(cafetiereDeconnectee()),
             this,
             SLOT(setDeconnectee())),
-
       connect(communication,
               SIGNAL(rechercheTerminee(bool)),
               this,
@@ -524,7 +521,7 @@ void Cafetiere::ouvrirBaseDeDonnees()
 /**
  * @fn Cafetiere::incrementerNombreCafeJour()
  * @brief Effectue une requête dans la base de données pour incrémenter le
- * nombre de café
+ * nombre de cafés
  * @details Table concernée Entretien
  */
 void Cafetiere::incrementerNombreCafeJour()
@@ -551,7 +548,7 @@ void Cafetiere::incrementerNombreCafeJour()
 /**
  * @fn Cafetiere::decrementerNombreCafeAvantDetartrage()
  * @brief Effectue une requête dans la base de données pour décrémenter le
- * nombre de café
+ * nombre de cafés
  * @details Table concernée Entretien
  */
 void Cafetiere::decrementerNombreCafeAvantDetartrage()
@@ -581,7 +578,7 @@ void Cafetiere::decrementerNombreCafeAvantDetartrage()
 /**
  * @fn Cafetiere::getNombreCafeJour() const
  * @brief Effectue une requête dans la base de données pour recuperer le nombre
- * de café effectué
+ * de cafés effectués
  * @details Table concernée Entretien
  */
 QString Cafetiere::getNombreCafeJour() const
@@ -595,7 +592,7 @@ QString Cafetiere::getNombreCafeJour() const
 /**
  * @fn Cafetiere::getNombreCafeAvantDetartrage() const
  * @brief Effectue une requête dans la base de données pour recuperer le nombre
- * de café avant le prochain détartrage
+ * de cafés avant le prochain détartrage
  * @details Table concernée Entretien
  */
 QString Cafetiere::getNombreCafeAvantDetartrage() const

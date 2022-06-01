@@ -1,6 +1,14 @@
 #ifndef PROTOCOLE_H
 #define PROTOCOLE_H
 
+/**
+ * @file protocole.h
+ *
+ * @brief Déclaration du protocole Pikawa
+ * @author Anthony BRYCKAERT
+ * @version 1.1
+ */
+
 #define ENTETE           "$PIKAWA"
 #define FIN_TRAME        "\r\n"
 #define DELIMITEUR       ';'

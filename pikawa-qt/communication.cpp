@@ -150,7 +150,7 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
 /**
  * @fn Communication::estConnecte() const
  * @brief Verifie si la cafetière est connectée
- * @details Verifie si le bluetooth est disponible est si la socket est ouverte
+ * @details Verifie si le bluetooth est disponible et si la socket est ouverte
  */
 
 bool Communication::estConnecte() const
@@ -190,7 +190,7 @@ void Communication::envoyerTrame(QString trame)
 
 /**
  * @fn Communication::activerLaDecouverte()
- * @brief Scan les appareils bluetooth à proximité
+ * @brief Scanne les appareils bluetooth à proximité
  */
 void Communication::activerLaDecouverte()
 {
@@ -264,7 +264,7 @@ void Communication::terminerRecherche()
 /**
  * @fn Communication::connecter()
  * @brief Slot de connexion
- * @details connexion des signals de l'objet socketBluetoothPikawa au slots
+ * @details connexion des "signals" de l'objet socketBluetoothPikawa au "slots"
  */
 
 void Communication::connecter()
@@ -353,7 +353,7 @@ void Communication::recupererEtatDeconnexion()
 
 /**
  * @fn Communication::recevoir()
- * @brief Recoie les trame
+ * @brief Receptionne les trames
  * @details Slot appelé à chaque fois que l'objet socketBluetoothPikawa envoie
  * le signal readyRead()
  */

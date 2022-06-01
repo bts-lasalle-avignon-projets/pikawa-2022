@@ -5,23 +5,14 @@
  * @file preparation.h
  *
  * @brief Déclaration de la classe Preparation
- * @author
- * @version 0.2
- *
+ * @author Anthony BRYCKAERT
+ * @version 1.1
  */
 
 #include <QObject>
 #include <QVector>
 #include <QString>
 #include <QStringList>
-
-/**
- * @file preparation.h
- *
- * @brief Déclaration de la classe IHMPikawa
- * @author Anthony BRYCKAERT
- * @version 0.2
- */
 
 #define TAILLE_INCONNUE  -1
 #define TAILLE_RISTRETTO 30

@@ -69,7 +69,7 @@ var class_i_h_m_pikawa =
     [ "mettreAJourEtatCafetiere", "class_i_h_m_pikawa.html#a2effc158842cfcb03d4ad35684f62a5f", null ],
     [ "mettreAJourMagasinIHM", "class_i_h_m_pikawa.html#a45afc05b3aea63351e1cfc227ad8193b", null ],
     [ "mettreAJourNombreCafeAvantDetartrage", "class_i_h_m_pikawa.html#a108bf8392da4b12d5b8de2e2d164bea6", null ],
-    [ "mettreAJourNombreCafeDepuisDetartrage", "class_i_h_m_pikawa.html#a6a5e1191467eb89dd74ba07811ce86b9", null ],
+    [ "mettreAJourNombreCafeDepuisDetartrage", "class_i_h_m_pikawa.html#a5b517827eb8f669286dbd651348363b3", null ],
     [ "mettreAJourNombreCafeTotal", "class_i_h_m_pikawa.html#a2c88da12454b0e6cc7c8879ef0867465", null ],
     [ "ouvrirBaseDeDonnees", "class_i_h_m_pikawa.html#ab3a34a878c8d46e8ed8f9e7dfb3c010e", null ],
     [ "rafraichirDecouverte", "class_i_h_m_pikawa.html#ab06b724953a81b9bc44af3ca972faab2", null ],

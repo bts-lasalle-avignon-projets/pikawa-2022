@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMPikawa
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 #include <QtWidgets>
@@ -33,7 +33,7 @@ class Cafetiere;
  * @def VERSION
  * @brief La version de l'application
  */
-#define VERSION "0.2"
+#define VERSION "1.1"
 
 /**
  * @def PLEIN_ECRAN
@@ -58,9 +58,6 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
-    /**
-     * @todo Revoir COMPLETEMENT la mise en page de l'IHM
-     */
     /**
      * @enum Page
      * @brief Les différentes pages de l'application

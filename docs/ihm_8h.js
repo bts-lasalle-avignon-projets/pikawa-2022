@@ -7,6 +7,7 @@ var ihm_8h =
     [ "LUNGO", "ihm_8h.html#a1872979cbace01b2d09d856cbb16e60f", null ],
     [ "NOM", "ihm_8h.html#a033ed81c13aab2c1982954148a60e959", null ],
     [ "NOMBRE_CAFE_AVANT_DETARTRAGE", "ihm_8h.html#a326057b0455460114785d41b963471f1", null ],
+    [ "NOMBRE_CAFE_DEPUIS_DETARTRAGE_REINITIALISE", "ihm_8h.html#a36eeeee5939177dc3f4e1c478bd4339b", null ],
     [ "PAS_ESPRESSO", "ihm_8h.html#a927f69022e94b1edf1262cea796796ce", null ],
     [ "PAS_LUNGO", "ihm_8h.html#a52688bd95ac257fa488866cd59490433", null ],
     [ "PAS_RISTRETTO", "ihm_8h.html#a9a0b9b769bac0c3ca44c2ca8ce6db5d2", null ],
