@@ -48,31 +48,42 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 Désactivation de l'écran de veille
 
-`sudo raspi-config`
+`$ xset s noblank`
 
-Vous pouvez naviguer jusqu'à cette option en utilisant les touches FLÉCHÉES, puis sélectionnez `Display Option` en appuyant sur la touche ENTRÉE.
+Verifiez si le paramètre est correctement activé : 
 
-Maintenant que nous sommes dans le menu des options d'affichage, vous devez trouver et sélectionner l'option "Screen Blanking".
+```
+$ xset q
+Keyboard Control:
+[...]
+Screen Saver:
+  prefer blanking:  no    allow exposures:  yes
+  timeout:  0    cycle:  600
+Colors:
+[...]
+```
 
-Lorsqu'on vous demande si vous souhaitez activer le Screen Blanking, assurez-vous de sélectionner l'option `<Non>`.
+## Fabrication
 
-## Compilation
+Clonez le projet :
+
+`$ git clone https://github.com/btssn-lasalle-84/pikawa-2022.git`
 
 Allez dans le dossier du projet :
 
-`cd pikawa/pikawa-qt/`
+`$ cd pikawa-2022/pikawa-qt/`
 
 Fabriquez le Makefile avec qmake :
 
-`qmake`
+`$ qmake`
 
 Lancez le Makefile (cette opération peut prendre plusieurs minutes) :
 
-`make`
+`$ make`
 
 Puis executez le programme :
 
-`./pikawa-qt`
+`$ ./pikawa-qt`
 
 ## Auteur
 
