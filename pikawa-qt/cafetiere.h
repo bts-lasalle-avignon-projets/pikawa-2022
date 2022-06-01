@@ -76,6 +76,7 @@ class Cafetiere : public QObject
     QStringList getPreferences() const;
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
+    QString     getNombreCafeDepuisDetartrage() const;
     void        setCapsuleChoisie(const int& capsuleChoisie);
     void        setLongueurChoisie(const int& boissonChoisie);
     void        setNiveauEau(const int& niveauEau);
@@ -84,6 +85,7 @@ class Cafetiere : public QObject
     bool        estCapsuleChoisieDisponible();
     bool        estCapsuleChoisieDisponible(int capsule);
     void        incrementerNombreCafeJour();
+    void        incrementerNombreCafeDepuisDetartrage();
     void        decrementerNombreCafeAvantDetartrage();
     QString     getNombreCafeJour() const;
     QString     getNombreCafeAvantDetartrage() const;
@@ -159,6 +161,7 @@ class Cafetiere : public QObject
     void nombreCafesTotal(QString nombreCafeJourIncremente);
     void nombreCafesAvantDetartrage(QString nombreCafeJourDecremente);
     void erreurAccesBaseDeDonnees();
+    void nombreDeCafeDepuisDetartrage(QString nombreCafeDepuisDetartrage);
 };
 
 #endif // CAFETIERE_H
