@@ -827,6 +827,14 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
     return false;
   }
 
+  if(etatCapsule == Absente)
+  {
+    #ifdef DEBUG
+    Serial.println(String("<Erreur> Caspule absente !"));
+    #endif
+    return false;
+  }
+
   if(etatCommande == EnCours)
   {
     #ifdef DEBUG
@@ -1046,6 +1054,13 @@ void simuler()
         #endif
       }
       break;
+      case Tasse:
+      //Simulation remise en place de la capsule
+      if(etatCapsule == Absente)
+      {
+        setEtatCapsule(Presente);
+      }
+      break;
     }
   }
 }
@@ -1214,6 +1229,14 @@ void forcerEtatsSimules()
       setLigne1();
       #ifdef DEBUG
       Serial.println(String("<SimulationForce> Vidage du bac !"));
+      #endif
+  }
+
+if(etatCapsule == Absente)
+  {
+      setEtatCapsule(Presente);
+      #ifdef DEBUG
+      Serial.println(String("<SimulationForce> Capsule remise !"));
       #endif
   }
 
