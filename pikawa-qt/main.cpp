@@ -5,8 +5,8 @@
  * @file main.cpp
  * @brief Programme principal
  * @details Crée et affiche la fenêtre principale de l'application Pikawa
- * @author
- * @version 0.2
+ * @author Anthony BRYCKAERT
+ * @version 1.1
  *
  * @param argc
  * @param argv[]
@@ -29,3 +29,13 @@ int main(int argc, char* argv[])
 
     return a.exec();
 }
+
+/**
+ * @class QObject
+ * @brief Classe mère de toutes les classes Qt
+ */
+
+/**
+ * @class QMainWindow
+ * @brief Classe permettant de créer des applications GUI
+ */

@@ -106,11 +106,11 @@ Graphe de collaboration de Preparation:</div>
 <map name="_preparation_coll__map" id="_preparation_coll__map">
 <area shape="rect" title="Gére la préparation d&#39;un café" alt="" coords="371,907,582,1292"/>
 <area shape="rect" href="class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA." alt="" coords="316,1355,575,2019"/>
-<area shape="rect" href="class_q_object.html" title=" " alt="" coords="546,5,620,83"/>
-<area shape="rect" href="class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données." alt="" coords="160,132,318,400"/>
+<area shape="rect" href="class_q_object.html" title="Classe mère de toutes les classes Qt." alt="" coords="546,5,620,83"/>
+<area shape="rect" href="class_base_de_donnees.html" title=" " alt="" coords="160,132,318,400"/>
 <area shape="rect" href="class_communication.html" title="Permet de gérer les échanges Bluetooth." alt="" coords="640,424,860,883"/>
 <area shape="rect" href="class_i_h_m_pikawa.html" title="Déclaration de la classe IHMPikawa." alt="" coords="333,2081,556,2701"/>
-<area shape="rect" href="class_q_main_window.html" title=" " alt="" coords="600,1648,716,1725"/>
+<area shape="rect" href="class_q_main_window.html" title="Classe permettant de créer des applications GUI." alt="" coords="600,1648,716,1725"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -122,6 +122,7 @@ Signaux</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:ae422029f2a3f47eddad18ca80efeb447"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#ae422029f2a3f47eddad18ca80efeb447">estPreparationPrete</a> () const</td></tr>
+<tr class="memdesc:ae422029f2a3f47eddad18ca80efeb447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifie si la préparation est prête.  <a href="class_preparation.html#ae422029f2a3f47eddad18ca80efeb447">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ae422029f2a3f47eddad18ca80efeb447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa468742fc359d0dc2900c0ddfcbb1dc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#aa468742fc359d0dc2900c0ddfcbb1dc3">getBacPasPlein</a> () const</td></tr>
 <tr class="separator:aa468742fc359d0dc2900c0ddfcbb1dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,10 +154,13 @@ Fonctions membres publiques</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Fonctions membres privées</h2></td></tr>
 <tr class="memitem:adba25bf106902c7acca5a2645ade1fe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">chargerLongeurBoissons</a> ()</td></tr>
+<tr class="memdesc:adba25bf106902c7acca5a2645ade1fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge les longueurs des boissons contenus dans la base de données.  <a href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">Plus de détails...</a><br /></td></tr>
 <tr class="separator:adba25bf106902c7acca5a2645ade1fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdac4af81f9e77f63c892d0755ac9a7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#afdac4af81f9e77f63c892d0755ac9a7a">chargerNomCapsules</a> ()</td></tr>
+<tr class="memdesc:afdac4af81f9e77f63c892d0755ac9a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge les noms des capsules contenus dans la base de données.  <a href="class_preparation.html#afdac4af81f9e77f63c892d0755ac9a7a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:afdac4af81f9e77f63c892d0755ac9a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fd26abc0f78a3eaede223e2731ce0d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#a0fd26abc0f78a3eaede223e2731ce0d9">ouvrirBaseDeDonnees</a> ()</td></tr>
+<tr class="memdesc:a0fd26abc0f78a3eaede223e2731ce0d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancie un objet base de données.  <a href="class_preparation.html#a0fd26abc0f78a3eaede223e2731ce0d9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a0fd26abc0f78a3eaede223e2731ce0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -165,7 +169,7 @@ Attributs privés</h2></td></tr>
 <tr class="memdesc:aacf050d6cad49be1056d2a31213652ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">le bac n'est pas complètement plein  <a href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aacf050d6cad49be1056d2a31213652ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac752c6c69f1d8237a6cd115300a4656a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_base_de_donnees.html">BaseDeDonnees</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a></td></tr>
-<tr class="memdesc:ac752c6c69f1d8237a6cd115300a4656a"><td class="mdescLeft">&#160;</td><td class="mdescRight">instance d'un objet <a class="el" href="class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données.">BaseDeDonnees</a>  <a href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:ac752c6c69f1d8237a6cd115300a4656a"><td class="mdescLeft">&#160;</td><td class="mdescRight">instance d'un objet <a class="el" href="class_base_de_donnees.html">BaseDeDonnees</a>  <a href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac752c6c69f1d8237a6cd115300a4656a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb68c1c2a199e4123f9daf9dc2e9d8e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cafetiere.html">Cafetiere</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a></td></tr>
 <tr class="memdesc:abb68c1c2a199e4123f9daf9dc2e9d8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">instance d'un objet <a class="el" href="class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA.">Cafetiere</a>  <a href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">Plus de détails...</a><br /></td></tr>
@@ -189,7 +193,7 @@ Attributs privés</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Gére la préparation d'un café </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00042">42</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00033">33</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 </div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
 <a id="aae06ca33fb85b77864a4729a45274302"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae06ca33fb85b77864a4729a45274302">&#9670;&nbsp;</a></span>Preparation()</h2>
@@ -219,7 +223,7 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">chargerLongeurBoissons</a>();</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8cpp_source.html#l00132">chargerLongeurBoissons()</a>, <a class="el" href="preparation_8cpp_source.html#l00125">chargerNomCapsules()</a>, et <a class="el" href="preparation_8cpp_source.html#l00139">ouvrirBaseDeDonnees()</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8cpp_source.html#l00147">chargerLongeurBoissons()</a>, <a class="el" href="preparation_8cpp_source.html#l00136">chargerNomCapsules()</a>, et <a class="el" href="preparation_8cpp_source.html#l00158">ouvrirBaseDeDonnees()</a>.</p>
 
 </div>
 </div>
@@ -272,14 +276,16 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00132">132</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(<span class="stringliteral">&quot;SELECT type FROM TypeBoisson;&quot;</span>,</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                                   <a class="code" href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">nomLongueurs</a>);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;}</div>
+<p>Charge les longueurs des boissons contenus dans la base de données. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00147">147</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(<span class="stringliteral">&quot;SELECT type FROM TypeBoisson;&quot;</span>,</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                                   <a class="code" href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">nomLongueurs</a>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00047">baseDeDonneesPikawa</a>, <a class="el" href="preparation_8h_source.html#l00049">nomLongueurs</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00137">BaseDeDonnees::recuperer()</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00038">baseDeDonneesPikawa</a>, <a class="el" href="preparation_8h_source.html#l00040">nomLongueurs</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00137">BaseDeDonnees::recuperer()</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00014">Preparation()</a>.</p>
 
@@ -308,14 +314,16 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00125">125</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(<span class="stringliteral">&quot;SELECT designation FROM Capsule;&quot;</span>,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                   <a class="code" href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">nomCapsules</a>);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<p>Charge les noms des capsules contenus dans la base de données. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00136">136</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(<span class="stringliteral">&quot;SELECT designation FROM Capsule;&quot;</span>,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                   <a class="code" href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">nomCapsules</a>);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00047">baseDeDonneesPikawa</a>, <a class="el" href="preparation_8h_source.html#l00048">nomCapsules</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00137">BaseDeDonnees::recuperer()</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00038">baseDeDonneesPikawa</a>, <a class="el" href="preparation_8h_source.html#l00039">nomCapsules</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00137">BaseDeDonnees::recuperer()</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00014">Preparation()</a>.</p>
 
@@ -336,30 +344,33 @@ Attributs privés</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00098">98</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;niveauEau&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a>-&gt;<a class="code" href="class_cafetiere.html#ad96ee75cc8ecf7d9871b772f9926857c">getNiveauEau</a>();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;niveauEauNecessaire&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;bacPasPlein&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;tassePresente&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;capsulePresente&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a>-&gt;<a class="code" href="class_cafetiere.html#ad96ee75cc8ecf7d9871b772f9926857c">getNiveauEau</a>() - <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>) &lt;= 0 || !<a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a> ||</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;       !<a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a> || !<a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Pas prête&quot;</span>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Prête&quot;</span>;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00051">bacPasPlein</a>, <a class="el" href="preparation_8h_source.html#l00046">cafetiere</a>, <a class="el" href="preparation_8h_source.html#l00050">capsulePresente</a>, <a class="el" href="cafetiere_8cpp_source.html#l00062">Cafetiere::getNiveauEau()</a>, <a class="el" href="preparation_8h_source.html#l00053">niveauEauNecessaire</a>, et <a class="el" href="preparation_8h_source.html#l00052">tassePresente</a>.</p>
+<p>Verifie si la préparation est prête. </p>
+<p>Vérifie si le niveau d'eau est suffisant pour la longueur choisie, si le bac n'est pas plein, si la tasse est présente, si la capsule est présente </p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00166">Cafetiere::preparerCafetiere()</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00105">105</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;niveauEau&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a>-&gt;<a class="code" href="class_cafetiere.html#ad96ee75cc8ecf7d9871b772f9926857c">getNiveauEau</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;niveauEauNecessaire&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;bacPasPlein&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;tassePresente&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;capsulePresente&quot;</span> &lt;&lt; <a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">if</span>((<a class="code" href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">cafetiere</a>-&gt;<a class="code" href="class_cafetiere.html#ad96ee75cc8ecf7d9871b772f9926857c">getNiveauEau</a>() - <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>) &lt;= 0 || !<a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a> ||</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;       !<a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a> || !<a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Pas prête&quot;</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Prête&quot;</span>;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00042">bacPasPlein</a>, <a class="el" href="preparation_8h_source.html#l00037">cafetiere</a>, <a class="el" href="preparation_8h_source.html#l00041">capsulePresente</a>, <a class="el" href="cafetiere_8cpp_source.html#l00062">Cafetiere::getNiveauEau()</a>, <a class="el" href="preparation_8h_source.html#l00044">niveauEauNecessaire</a>, et <a class="el" href="preparation_8h_source.html#l00043">tassePresente</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00182">Cafetiere::preparerCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -383,9 +394,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00051">bacPasPlein</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00042">bacPasPlein</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00166">Cafetiere::preparerCafetiere()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00182">Cafetiere::preparerCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -409,9 +420,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a>;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00050">capsulePresente</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00041">capsulePresente</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00166">Cafetiere::preparerCafetiere()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00182">Cafetiere::preparerCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -435,9 +446,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00053">niveauEauNecessaire</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00044">niveauEauNecessaire</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00067">Cafetiere::getNiveauEauNecessaire()</a>, et <a class="el" href="preparation_8cpp_source.html#l00119">setNiveauEauNecessaire()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00067">Cafetiere::getNiveauEauNecessaire()</a>, et <a class="el" href="preparation_8cpp_source.html#l00126">setNiveauEauNecessaire()</a>.</p>
 
 </div>
 </div>
@@ -471,7 +482,7 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="preparation_8h.html#a39b0c1aa8c560f343a25881ed98210c8">TAILLE_INCONNUE</a>;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00028">TAILLE_ESPRESSO</a>, <a class="el" href="preparation_8h_source.html#l00026">TAILLE_INCONNUE</a>, <a class="el" href="preparation_8h_source.html#l00029">TAILLE_LUNGO</a>, et <a class="el" href="preparation_8h_source.html#l00027">TAILLE_RISTRETTO</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00019">TAILLE_ESPRESSO</a>, <a class="el" href="preparation_8h_source.html#l00017">TAILLE_INCONNUE</a>, <a class="el" href="preparation_8h_source.html#l00020">TAILLE_LUNGO</a>, et <a class="el" href="preparation_8h_source.html#l00018">TAILLE_RISTRETTO</a>.</p>
 
 </div>
 </div>
@@ -499,9 +510,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> listeNomCapsules;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00048">nomCapsules</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00039">nomCapsules</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00358">Cafetiere::initialiserNomCapsules()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00437">Cafetiere::initialiserNomCapsules()</a>.</p>
 
 </div>
 </div>
@@ -529,9 +540,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> listeNomLongueurs;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00049">nomLongueurs</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00040">nomLongueurs</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00363">Cafetiere::initiatiserNomLongueurs()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00442">Cafetiere::initiatiserNomLongueurs()</a>.</p>
 
 </div>
 </div>
@@ -555,9 +566,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00052">tassePresente</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00043">tassePresente</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00166">Cafetiere::preparerCafetiere()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00182">Cafetiere::preparerCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -584,13 +595,15 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00139">139</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;{</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a> = <a class="code" href="class_base_de_donnees.html#a58beb2f702f75b257e2e55e25d9f979b">BaseDeDonnees::getInstance</a>();</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>-&gt;<a class="code" href="class_base_de_donnees.html#a7f6a5510b08017b0d99115a84252f186">ouvrir</a>(<a class="code" href="basededonnees_8h.html#a633c24dd10861ba1bee8ca6a33e939fb">NOM_BDD</a>);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
+<p>Instancie un objet base de données. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00158">158</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;{</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a> = <a class="code" href="class_base_de_donnees.html#a58beb2f702f75b257e2e55e25d9f979b">BaseDeDonnees::getInstance</a>();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <a class="code" href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">baseDeDonneesPikawa</a>-&gt;<a class="code" href="class_base_de_donnees.html#a7f6a5510b08017b0d99115a84252f186">ouvrir</a>(<a class="code" href="basededonnees_8h.html#a633c24dd10861ba1bee8ca6a33e939fb">NOM_BDD</a>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00047">baseDeDonneesPikawa</a>, <a class="el" href="basededonnees_8cpp_source.html#l00027">BaseDeDonnees::getInstance()</a>, <a class="el" href="basededonnees_8h_source.html#l00020">NOM_BDD</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00055">BaseDeDonnees::ouvrir()</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00038">baseDeDonneesPikawa</a>, <a class="el" href="basededonnees_8cpp_source.html#l00027">BaseDeDonnees::getInstance()</a>, <a class="el" href="basededonnees_8h_source.html#l00020">NOM_BDD</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00055">BaseDeDonnees::ouvrir()</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00014">Preparation()</a>.</p>
 
@@ -665,9 +678,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    this-&gt;<a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a> = <a class="code" href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">bacPasPlein</a>;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00051">bacPasPlein</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00042">bacPasPlein</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00287">Cafetiere::mettreAJourEtatCafetiere()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00351">Cafetiere::mettreAJourEtatCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -692,9 +705,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    this-&gt;<a class="code" href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">capsulePresente</a> = caspulePresente;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00050">capsulePresente</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00041">capsulePresente</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00287">Cafetiere::mettreAJourEtatCafetiere()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00351">Cafetiere::mettreAJourEtatCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -714,15 +727,15 @@ Attributs privés</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00119">119</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    this-&gt;<a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a> = <a class="code" href="class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c">getNiveauEauNecessaire</a>(longueurChoisie);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8cpp_source.html#l00126">126</a> du fichier <a class="el" href="preparation_8cpp_source.html">preparation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    this-&gt;<a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a> = <a class="code" href="class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c">getNiveauEauNecessaire</a>(longueurChoisie);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <a class="code" href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">niveauEauNecessaire</a>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8cpp_source.html#l00064">getNiveauEauNecessaire()</a>, et <a class="el" href="preparation_8h_source.html#l00053">niveauEauNecessaire</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8cpp_source.html#l00064">getNiveauEauNecessaire()</a>, et <a class="el" href="preparation_8h_source.html#l00044">niveauEauNecessaire</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00146">Cafetiere::setLongueurChoisie()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00158">Cafetiere::setLongueurChoisie()</a>.</p>
 
 </div>
 </div>
@@ -747,9 +760,9 @@ Attributs privés</h2></td></tr>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    this-&gt;<a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a> = <a class="code" href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">tassePresente</a>;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00052">tassePresente</a>.</p>
+<p class="reference">Références <a class="el" href="preparation_8h_source.html#l00043">tassePresente</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00287">Cafetiere::mettreAJourEtatCafetiere()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="cafetiere_8cpp_source.html#l00351">Cafetiere::mettreAJourEtatCafetiere()</a>.</p>
 
 </div>
 </div>
@@ -776,9 +789,9 @@ Attributs privés</h2></td></tr>
 
 <p>le bac n'est pas complètement plein </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00051">51</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00042">42</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00098">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00054">getBacPasPlein()</a>, et <a class="el" href="preparation_8cpp_source.html#l00088">setBacPasPlein()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00105">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00054">getBacPasPlein()</a>, et <a class="el" href="preparation_8cpp_source.html#l00088">setBacPasPlein()</a>.</p>
 
 </div>
 </div>
@@ -802,11 +815,11 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>instance d'un objet <a class="el" href="class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données.">BaseDeDonnees</a> </p>
+<p>instance d'un objet <a class="el" href="class_base_de_donnees.html">BaseDeDonnees</a> </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00047">47</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00038">38</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00132">chargerLongeurBoissons()</a>, <a class="el" href="preparation_8cpp_source.html#l00125">chargerNomCapsules()</a>, et <a class="el" href="preparation_8cpp_source.html#l00139">ouvrirBaseDeDonnees()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00147">chargerLongeurBoissons()</a>, <a class="el" href="preparation_8cpp_source.html#l00136">chargerNomCapsules()</a>, et <a class="el" href="preparation_8cpp_source.html#l00158">ouvrirBaseDeDonnees()</a>.</p>
 
 </div>
 </div>
@@ -832,9 +845,9 @@ Attributs privés</h2></td></tr>
 
 <p>instance d'un objet <a class="el" href="class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA.">Cafetiere</a> </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00046">46</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00037">37</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00098">estPreparationPrete()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00105">estPreparationPrete()</a>.</p>
 
 </div>
 </div>
@@ -860,9 +873,9 @@ Attributs privés</h2></td></tr>
 
 <p>au moins une capsule est présente dans le magasin </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00050">50</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00041">41</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00098">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00049">getCapsulePresente()</a>, et <a class="el" href="preparation_8cpp_source.html#l00083">setCapsulePresente()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00105">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00049">getCapsulePresente()</a>, et <a class="el" href="preparation_8cpp_source.html#l00083">setCapsulePresente()</a>.</p>
 
 </div>
 </div>
@@ -888,9 +901,9 @@ Attributs privés</h2></td></tr>
 
 <p>niveau d'eau minimum pour préparer un café </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00053">53</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00044">44</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00098">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00064">getNiveauEauNecessaire()</a>, et <a class="el" href="preparation_8cpp_source.html#l00119">setNiveauEauNecessaire()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00105">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00064">getNiveauEauNecessaire()</a>, et <a class="el" href="preparation_8cpp_source.html#l00126">setNiveauEauNecessaire()</a>.</p>
 
 </div>
 </div>
@@ -916,9 +929,9 @@ Attributs privés</h2></td></tr>
 
 <p>liste des noms de capsules </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00048">48</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00039">39</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00125">chargerNomCapsules()</a>, et <a class="el" href="preparation_8cpp_source.html#l00031">getNomCapsules()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00136">chargerNomCapsules()</a>, et <a class="el" href="preparation_8cpp_source.html#l00031">getNomCapsules()</a>.</p>
 
 </div>
 </div>
@@ -944,9 +957,9 @@ Attributs privés</h2></td></tr>
 
 <p>liste des longueurs de préparation </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00049">49</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00040">40</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00132">chargerLongeurBoissons()</a>, et <a class="el" href="preparation_8cpp_source.html#l00040">getNomLongueurs()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00147">chargerLongeurBoissons()</a>, et <a class="el" href="preparation_8cpp_source.html#l00040">getNomLongueurs()</a>.</p>
 
 </div>
 </div>
@@ -972,9 +985,9 @@ Attributs privés</h2></td></tr>
 
 <p>une tasse est détectée </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00052">52</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="preparation_8h_source.html#l00043">43</a> du fichier <a class="el" href="preparation_8h_source.html">preparation.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00098">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00059">getTassePresente()</a>, et <a class="el" href="preparation_8cpp_source.html#l00093">setTassePresente()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="preparation_8cpp_source.html#l00105">estPreparationPrete()</a>, <a class="el" href="preparation_8cpp_source.html#l00059">getTassePresente()</a>, et <a class="el" href="preparation_8cpp_source.html#l00093">setTassePresente()</a>.</p>
 
 </div>
 </div>
@@ -984,35 +997,35 @@ Attributs privés</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="apreparation_8h_html_a39b0c1aa8c560f343a25881ed98210c8"><div class="ttname"><a href="preparation_8h.html#a39b0c1aa8c560f343a25881ed98210c8">TAILLE_INCONNUE</a></div><div class="ttdeci">#define TAILLE_INCONNUE</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00026">preparation.h:26</a></div></div>
+<div class="ttc" id="apreparation_8h_html_a39b0c1aa8c560f343a25881ed98210c8"><div class="ttname"><a href="preparation_8h.html#a39b0c1aa8c560f343a25881ed98210c8">TAILLE_INCONNUE</a></div><div class="ttdeci">#define TAILLE_INCONNUE</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00017">preparation.h:17</a></div></div>
 <div class="ttc" id="aclass_base_de_donnees_html_a58beb2f702f75b257e2e55e25d9f979b"><div class="ttname"><a href="class_base_de_donnees.html#a58beb2f702f75b257e2e55e25d9f979b">BaseDeDonnees::getInstance</a></div><div class="ttdeci">static BaseDeDonnees * getInstance(QString type=&quot;QSQLITE&quot;)</div><div class="ttdoc">Permet de créer une instance de BDD ou de récuperer celle deja en cours, cette méthode controle l'ins...</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00027">basededonnees.cpp:27</a></div></div>
-<div class="ttc" id="aclass_preparation_html_ac752c6c69f1d8237a6cd115300a4656a"><div class="ttname"><a href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">Preparation::baseDeDonneesPikawa</a></div><div class="ttdeci">BaseDeDonnees * baseDeDonneesPikawa</div><div class="ttdoc">instance d'un objet BaseDeDonnees</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00047">preparation.h:47</a></div></div>
-<div class="ttc" id="aclass_preparation_html_adba25bf106902c7acca5a2645ade1fe5"><div class="ttname"><a href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">Preparation::chargerLongeurBoissons</a></div><div class="ttdeci">void chargerLongeurBoissons()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00132">preparation.cpp:132</a></div></div>
+<div class="ttc" id="aclass_preparation_html_ac752c6c69f1d8237a6cd115300a4656a"><div class="ttname"><a href="class_preparation.html#ac752c6c69f1d8237a6cd115300a4656a">Preparation::baseDeDonneesPikawa</a></div><div class="ttdeci">BaseDeDonnees * baseDeDonneesPikawa</div><div class="ttdoc">instance d'un objet BaseDeDonnees</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00038">preparation.h:38</a></div></div>
+<div class="ttc" id="aclass_preparation_html_adba25bf106902c7acca5a2645ade1fe5"><div class="ttname"><a href="class_preparation.html#adba25bf106902c7acca5a2645ade1fe5">Preparation::chargerLongeurBoissons</a></div><div class="ttdeci">void chargerLongeurBoissons()</div><div class="ttdoc">Charge les longueurs des boissons contenus dans la base de données.</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00147">preparation.cpp:147</a></div></div>
 <div class="ttc" id="abasededonnees_8h_html_a633c24dd10861ba1bee8ca6a33e939fb"><div class="ttname"><a href="basededonnees_8h.html#a633c24dd10861ba1bee8ca6a33e939fb">NOM_BDD</a></div><div class="ttdeci">#define NOM_BDD</div><div class="ttdoc">Le nom de la base de données SQLite.</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8h_source.html#l00020">basededonnees.h:20</a></div></div>
-<div class="ttc" id="aclass_preparation_html_a102ae7821b5228a7b190b797b53f37ef"><div class="ttname"><a href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">Preparation::nomCapsules</a></div><div class="ttdeci">QVector&lt; QString &gt; nomCapsules</div><div class="ttdoc">liste des noms de capsules</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00048">preparation.h:48</a></div></div>
-<div class="ttc" id="aclass_preparation_html_a0fd26abc0f78a3eaede223e2731ce0d9"><div class="ttname"><a href="class_preparation.html#a0fd26abc0f78a3eaede223e2731ce0d9">Preparation::ouvrirBaseDeDonnees</a></div><div class="ttdeci">void ouvrirBaseDeDonnees()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00139">preparation.cpp:139</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a102ae7821b5228a7b190b797b53f37ef"><div class="ttname"><a href="class_preparation.html#a102ae7821b5228a7b190b797b53f37ef">Preparation::nomCapsules</a></div><div class="ttdeci">QVector&lt; QString &gt; nomCapsules</div><div class="ttdoc">liste des noms de capsules</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00039">preparation.h:39</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a0fd26abc0f78a3eaede223e2731ce0d9"><div class="ttname"><a href="class_preparation.html#a0fd26abc0f78a3eaede223e2731ce0d9">Preparation::ouvrirBaseDeDonnees</a></div><div class="ttdeci">void ouvrirBaseDeDonnees()</div><div class="ttdoc">Instancie un objet base de données.</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00158">preparation.cpp:158</a></div></div>
 <div class="ttc" id="aclass_cafetiere_html_ad96ee75cc8ecf7d9871b772f9926857c"><div class="ttname"><a href="class_cafetiere.html#ad96ee75cc8ecf7d9871b772f9926857c">Cafetiere::getNiveauEau</a></div><div class="ttdeci">int getNiveauEau() const</div><div class="ttdef"><b>Definition:</b> <a href="cafetiere_8cpp_source.html#l00062">cafetiere.cpp:62</a></div></div>
 <div class="ttc" id="aclass_base_de_donnees_html_a7f6a5510b08017b0d99115a84252f186"><div class="ttname"><a href="class_base_de_donnees.html#a7f6a5510b08017b0d99115a84252f186">BaseDeDonnees::ouvrir</a></div><div class="ttdeci">bool ouvrir(QString fichierBase)</div><div class="ttdoc">Permet d'ouvrir le fichier de base de données passé en paramètre.</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00055">basededonnees.cpp:55</a></div></div>
 <div class="ttc" id="aclass_base_de_donnees_html_a457401c0816b888c77ce915997545f4e"><div class="ttname"><a href="class_base_de_donnees.html#a457401c0816b888c77ce915997545f4e">BaseDeDonnees::detruireInstance</a></div><div class="ttdeci">static void detruireInstance()</div><div class="ttdoc">Permet de detruire l'instance en cours, Static elle est accessible depuis n'importe où</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00038">basededonnees.cpp:38</a></div></div>
-<div class="ttc" id="aclass_preparation_html_a9c21d3e9fff81b36f87bfb1d82824287"><div class="ttname"><a href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">Preparation::nomLongueurs</a></div><div class="ttdeci">QVector&lt; QString &gt; nomLongueurs</div><div class="ttdoc">liste des longueurs de préparation</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00049">preparation.h:49</a></div></div>
-<div class="ttc" id="aclass_preparation_html_a579826e835afc6e82d23dddb37b77b8e"><div class="ttname"><a href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">Preparation::niveauEauNecessaire</a></div><div class="ttdeci">int niveauEauNecessaire</div><div class="ttdoc">niveau d'eau minimum pour préparer un café</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00053">preparation.h:53</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a9c21d3e9fff81b36f87bfb1d82824287"><div class="ttname"><a href="class_preparation.html#a9c21d3e9fff81b36f87bfb1d82824287">Preparation::nomLongueurs</a></div><div class="ttdeci">QVector&lt; QString &gt; nomLongueurs</div><div class="ttdoc">liste des longueurs de préparation</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00040">preparation.h:40</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a579826e835afc6e82d23dddb37b77b8e"><div class="ttname"><a href="class_preparation.html#a579826e835afc6e82d23dddb37b77b8e">Preparation::niveauEauNecessaire</a></div><div class="ttdeci">int niveauEauNecessaire</div><div class="ttdoc">niveau d'eau minimum pour préparer un café</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00044">preparation.h:44</a></div></div>
 <div class="ttc" id="aclass_base_de_donnees_html_a77539baad389f5acf754cd2cd452403e"><div class="ttname"><a href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">BaseDeDonnees::recuperer</a></div><div class="ttdeci">bool recuperer(QString requete, QString &amp;donnees)</div><div class="ttdoc">Permet d'executer la requete passé en paramètre au format SQL, et remplit le QString de sa réponse....</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00137">basededonnees.cpp:137</a></div></div>
-<div class="ttc" id="aclass_preparation_html_abb68c1c2a199e4123f9daf9dc2e9d8e6"><div class="ttname"><a href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">Preparation::cafetiere</a></div><div class="ttdeci">Cafetiere * cafetiere</div><div class="ttdoc">instance d'un objet Cafetiere</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00046">preparation.h:46</a></div></div>
+<div class="ttc" id="aclass_preparation_html_abb68c1c2a199e4123f9daf9dc2e9d8e6"><div class="ttname"><a href="class_preparation.html#abb68c1c2a199e4123f9daf9dc2e9d8e6">Preparation::cafetiere</a></div><div class="ttdeci">Cafetiere * cafetiere</div><div class="ttdoc">instance d'un objet Cafetiere</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00037">preparation.h:37</a></div></div>
 <div class="ttc" id="aclass_preparation_html_a371647b15cd25993fa33ad46b42bbd6c"><div class="ttname"><a href="class_preparation.html#a371647b15cd25993fa33ad46b42bbd6c">Preparation::getNiveauEauNecessaire</a></div><div class="ttdeci">int getNiveauEauNecessaire() const</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00064">preparation.cpp:64</a></div></div>
-<div class="ttc" id="aclass_preparation_html_aacf050d6cad49be1056d2a31213652ed"><div class="ttname"><a href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">Preparation::bacPasPlein</a></div><div class="ttdeci">bool bacPasPlein</div><div class="ttdoc">le bac n'est pas complètement plein</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00051">preparation.h:51</a></div></div>
-<div class="ttc" id="aclass_preparation_html_a1b02355328501772ed270fb0f0b548c8"><div class="ttname"><a href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">Preparation::capsulePresente</a></div><div class="ttdeci">bool capsulePresente</div><div class="ttdoc">au moins une capsule est présente dans le magasin</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00050">preparation.h:50</a></div></div>
-<div class="ttc" id="aclass_preparation_html_a69c9cf09d1fcb939541a38fe58fdfc8c"><div class="ttname"><a href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">Preparation::tassePresente</a></div><div class="ttdeci">bool tassePresente</div><div class="ttdoc">une tasse est détectée</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00052">preparation.h:52</a></div></div>
-<div class="ttc" id="apreparation_8h_html_a309ffaebe8ba10a2ec92ea8da0e64b55"><div class="ttname"><a href="preparation_8h.html#a309ffaebe8ba10a2ec92ea8da0e64b55">TAILLE_ESPRESSO</a></div><div class="ttdeci">#define TAILLE_ESPRESSO</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00028">preparation.h:28</a></div></div>
-<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
-<div class="ttc" id="apreparation_8h_html_ac9a92da27cb2ce157ff462c68b603840"><div class="ttname"><a href="preparation_8h.html#ac9a92da27cb2ce157ff462c68b603840">TAILLE_LUNGO</a></div><div class="ttdeci">#define TAILLE_LUNGO</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00029">preparation.h:29</a></div></div>
-<div class="ttc" id="aclass_preparation_html_afdac4af81f9e77f63c892d0755ac9a7a"><div class="ttname"><a href="class_preparation.html#afdac4af81f9e77f63c892d0755ac9a7a">Preparation::chargerNomCapsules</a></div><div class="ttdeci">void chargerNomCapsules()</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00125">preparation.cpp:125</a></div></div>
-<div class="ttc" id="apreparation_8h_html_a7f92420285f2b592435fb20e5fccef60"><div class="ttname"><a href="preparation_8h.html#a7f92420285f2b592435fb20e5fccef60">TAILLE_RISTRETTO</a></div><div class="ttdeci">#define TAILLE_RISTRETTO</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00027">preparation.h:27</a></div></div>
+<div class="ttc" id="aclass_preparation_html_aacf050d6cad49be1056d2a31213652ed"><div class="ttname"><a href="class_preparation.html#aacf050d6cad49be1056d2a31213652ed">Preparation::bacPasPlein</a></div><div class="ttdeci">bool bacPasPlein</div><div class="ttdoc">le bac n'est pas complètement plein</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00042">preparation.h:42</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a1b02355328501772ed270fb0f0b548c8"><div class="ttname"><a href="class_preparation.html#a1b02355328501772ed270fb0f0b548c8">Preparation::capsulePresente</a></div><div class="ttdeci">bool capsulePresente</div><div class="ttdoc">au moins une capsule est présente dans le magasin</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00041">preparation.h:41</a></div></div>
+<div class="ttc" id="aclass_preparation_html_a69c9cf09d1fcb939541a38fe58fdfc8c"><div class="ttname"><a href="class_preparation.html#a69c9cf09d1fcb939541a38fe58fdfc8c">Preparation::tassePresente</a></div><div class="ttdeci">bool tassePresente</div><div class="ttdoc">une tasse est détectée</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00043">preparation.h:43</a></div></div>
+<div class="ttc" id="apreparation_8h_html_a309ffaebe8ba10a2ec92ea8da0e64b55"><div class="ttname"><a href="preparation_8h.html#a309ffaebe8ba10a2ec92ea8da0e64b55">TAILLE_ESPRESSO</a></div><div class="ttdeci">#define TAILLE_ESPRESSO</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00019">preparation.h:19</a></div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div><div class="ttdoc">Classe mère de toutes les classes Qt.</div></div>
+<div class="ttc" id="apreparation_8h_html_ac9a92da27cb2ce157ff462c68b603840"><div class="ttname"><a href="preparation_8h.html#ac9a92da27cb2ce157ff462c68b603840">TAILLE_LUNGO</a></div><div class="ttdeci">#define TAILLE_LUNGO</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00020">preparation.h:20</a></div></div>
+<div class="ttc" id="aclass_preparation_html_afdac4af81f9e77f63c892d0755ac9a7a"><div class="ttname"><a href="class_preparation.html#afdac4af81f9e77f63c892d0755ac9a7a">Preparation::chargerNomCapsules</a></div><div class="ttdeci">void chargerNomCapsules()</div><div class="ttdoc">Charge les noms des capsules contenus dans la base de données.</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8cpp_source.html#l00136">preparation.cpp:136</a></div></div>
+<div class="ttc" id="apreparation_8h_html_a7f92420285f2b592435fb20e5fccef60"><div class="ttname"><a href="preparation_8h.html#a7f92420285f2b592435fb20e5fccef60">TAILLE_RISTRETTO</a></div><div class="ttdeci">#define TAILLE_RISTRETTO</div><div class="ttdef"><b>Definition:</b> <a href="preparation_8h_source.html#l00018">preparation.h:18</a></div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_preparation.html">Preparation</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 25 Mai 2022 15:54:31 pour pikawa par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.8.17&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 1 Juin 2022 15:02:18 pour pikawa par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.8.17&nbsp;</li>
   </ul>
 </div>
 </body>

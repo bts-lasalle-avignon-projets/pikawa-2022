@@ -11,7 +11,7 @@
 
 \author Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
 \date 2022
-\version 1.0
+\version 1.1
 \see https://github.com/btssn-lasalle-84/pikawa-2022
 
 
@@ -32,7 +32,7 @@ Fonctionnalités :
 
 \author Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
 \date 2022
-\version 1.0
+\version 1.1
 \see https://github.com/btssn-lasalle-84/pikawa-2022
 
 
@@ -40,7 +40,7 @@ Fonctionnalités :
 
 \author Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
 \date 2022
-\version 1.0
+\version 1.1
 \see https://github.com/btssn-lasalle-84/pikawa-2022
 
 

@@ -20,8 +20,10 @@
 #define NOM_BDD "pikawa.db"
 
 /**
- * @brief
- * Class permettant de s'interfacer avec la base de données
+ * @file basededonnees.h
+ * @brief * Classe permettant de s'interfacer avec la base de données
+ * @author Anthony BRYCKAERT
+ * @version 1.1
  * @class BaseDeDonnees basededonnees.h "basededonnees.h"
  */
 class BaseDeDonnees : public QObject

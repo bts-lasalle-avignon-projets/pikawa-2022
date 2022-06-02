@@ -7,7 +7,7 @@
  *
  * @brief Définition de la classe Communication
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 Communication::Communication(QObject* parent) :
@@ -45,6 +45,11 @@ void Communication::activerBluetooth()
         qDebug() << Q_FUNC_INFO << "Pas de bluetooh !";
 }
 
+/**
+ * @fn Communication::estTrameValide(QString trame)
+ * @brief Vérifie si la trame est valide
+ * @details La trame est valide si elle commence avec "$" et fini avec "/r/n"
+ */
 bool Communication::estTrameValide(QString trame)
 {
     qDebug() << Q_FUNC_INFO << trame
@@ -52,6 +57,10 @@ bool Communication::estTrameValide(QString trame)
     return (trame.startsWith(ENTETE) && trame.endsWith(FIN_TRAME));
 }
 
+/**
+ * @fn Communication::extraireTypeTrame(QString trame)
+ * @brief Extrait le type de trame (champ à la position 1 dans la trame)
+ */
 TypeTrame Communication::extraireTypeTrame(QString trame)
 {
     QStringList champs =
@@ -73,6 +82,11 @@ TypeTrame Communication::extraireTypeTrame(QString trame)
     return TypeTrame::Inconnue;
 }
 
+/**
+ * @fn Communication::traiterTrame(TypeTrame typeTrame, QString trame)
+ * @brief Envoie un signal suivant le type de trame
+ * @details
+ */
 bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
 {
     if(typeTrame == TypeTrame::Inconnue)
@@ -134,10 +148,11 @@ bool Communication::traiterTrame(TypeTrame typeTrame, QString trame)
 }
 
 /**
- * @brief
- *
- * @fn bool Communication::estConnecte()
+ * @fn Communication::estConnecte() const
+ * @brief Verifie si la cafetière est connectée
+ * @details Verifie si le bluetooth est disponible et si la socket est ouverte
  */
+
 bool Communication::estConnecte() const
 {
     if(!estBluetoothDisponible())
@@ -156,6 +171,11 @@ bool Communication::estCafetiereDetectee() const
     return pikawaDetecte;
 }
 
+/**
+ * @fn Communication::envoyerTrame(QString trame)
+ * @brief Envoie la trame passée en paramètre
+ * @details Ecrit sur la socket la trame
+ */
 void Communication::envoyerTrame(QString trame)
 {
     qDebug() << Q_FUNC_INFO << trame;
@@ -168,6 +188,10 @@ void Communication::envoyerTrame(QString trame)
     socketBluetoothPikawa->write(trame.toLatin1());
 }
 
+/**
+ * @fn Communication::activerLaDecouverte()
+ * @brief Scanne les appareils bluetooth à proximité
+ */
 void Communication::activerLaDecouverte()
 {
     if(estBluetoothDisponible())
@@ -199,6 +223,13 @@ void Communication::desactiverLaDecouverte()
     }
 }
 
+/**
+ * @fn Communication::decouvrirCafetiere(
+  const QBluetoothDeviceInfo& appareilBluetooth)
+ * @brief Stockage des caractéristiques du bluetooth de la cafetiere si elle est
+ découverte
+ * @details Envoie de signal si la recherche est terminée
+ */
 void Communication::decouvrirCafetiere(
   const QBluetoothDeviceInfo& appareilBluetooth)
 {
@@ -231,10 +262,11 @@ void Communication::terminerRecherche()
 }
 
 /**
+ * @fn Communication::connecter()
  * @brief Slot de connexion
- *
- * @fn void Communication::connecter()
+ * @details connexion des "signals" de l'objet socketBluetoothPikawa au "slots"
  */
+
 void Communication::connecter()
 {
     qDebug() << Q_FUNC_INFO;
@@ -284,10 +316,11 @@ void Communication::connecter()
 }
 
 /**
+ * @fn Communication::deconnecter()
  * @brief Slot de déconnexion
- *
- * @fn void Communication::deconnecter()
+ * @details Ferme la socket
  */
+
 void Communication::deconnecter()
 {
     if(!estBluetoothDisponible())
@@ -318,6 +351,12 @@ void Communication::recupererEtatDeconnexion()
     emit cafetiereDeconnectee();
 }
 
+/**
+ * @fn Communication::recevoir()
+ * @brief Receptionne les trames
+ * @details Slot appelé à chaque fois que l'objet socketBluetoothPikawa envoie
+ * le signal readyRead()
+ */
 void Communication::recevoir()
 {
 #ifndef TEST_TRAMES
@@ -352,6 +391,11 @@ void Communication::lireEtatSocket()
     qDebug() << Q_FUNC_INFO << socketBluetoothPikawa->state();
 }
 
+/**
+ * @fn Communication::envoyerTramePreparation(int nomCafe, int longueur)
+ * @brief Envoie d'une trame de préparation
+ * @details Exemple PIKAWA;7;2;\r\n
+ */
 void Communication::envoyerTramePreparation(int nomCafe, int longueur)
 {
     qDebug() << Q_FUNC_INFO << nomCafe << longueur;

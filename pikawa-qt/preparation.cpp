@@ -8,7 +8,7 @@
  *
  * @brief Définition de la classe Preparation
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 Preparation::Preparation(Cafetiere* cafetiere) :
@@ -95,6 +95,13 @@ void Preparation::setTassePresente(bool tassePresente)
     this->tassePresente = tassePresente;
 }
 
+/**
+ * @fn Preparation::estPreparationPrete() const
+ * @brief Verifie si la préparation est prête
+ * @details Vérifie si le niveau d'eau est suffisant pour la longueur choisie,
+ * si le bac n'est pas plein, si la tasse est présente, si la capsule est
+ * présente
+ */
 bool Preparation::estPreparationPrete() const
 {
     qDebug() << Q_FUNC_INFO << "niveauEau" << cafetiere->getNiveauEau();
@@ -122,6 +129,10 @@ void Preparation::setNiveauEauNecessaire(const int& longueurChoisie)
     qDebug() << Q_FUNC_INFO << niveauEauNecessaire;
 }
 
+/**
+ * @fn Preparation::chargerNomCapsules()
+ * @brief Charge les noms des capsules contenus dans la base de données
+ */
 void Preparation::chargerNomCapsules()
 {
     qDebug() << Q_FUNC_INFO;
@@ -129,6 +140,10 @@ void Preparation::chargerNomCapsules()
                                    nomCapsules);
 }
 
+/**
+ * @fn Preparation::chargerLongeurBoissons()
+ * @brief Charge les longueurs des boissons contenus dans la base de données
+ */
 void Preparation::chargerLongeurBoissons()
 {
     qDebug() << Q_FUNC_INFO;
@@ -136,6 +151,10 @@ void Preparation::chargerLongeurBoissons()
                                    nomLongueurs);
 }
 
+/**
+ * @fn Preparation::ouvrirBaseDeDonnees()
+ * @brief Instancie un objet base de données
+ */
 void Preparation::ouvrirBaseDeDonnees()
 {
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();

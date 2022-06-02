@@ -1,9 +1,9 @@
 /**
- * @brief
- * Fichier qui contient la définition de la classe BaseDeDonnees
  * @file basededonnees.cpp
+ * @brief * Fichier qui contient la définition de la classe BaseDeDonnees
+ * @author Anthony BRYCKAERT
+ * @version 1.1
  */
-
 #include "basededonnees.h"
 #include <QDebug>
 #include <QMessageBox>

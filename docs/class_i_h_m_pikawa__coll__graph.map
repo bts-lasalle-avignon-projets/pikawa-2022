@@ -1,9 +1,9 @@
 <map id="IHMPikawa" name="IHMPikawa">
 <area shape="rect" id="node1" title="Déclaration de la classe IHMPikawa." alt="" coords="546,907,768,1527"/>
 <area shape="rect" id="node5" href="$class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA." alt="" coords="462,1589,721,2253"/>
-<area shape="rect" id="node2" href="$class_q_main_window.html" title=" " alt="" coords="780,227,896,305"/>
-<area shape="rect" id="node3" href="$class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données." alt="" coords="419,132,578,400"/>
+<area shape="rect" id="node2" href="$class_q_main_window.html" title="Classe permettant de créer des applications GUI." alt="" coords="780,227,896,305"/>
+<area shape="rect" id="node3" href="$class_base_de_donnees.html" title=" " alt="" coords="419,132,578,400"/>
 <area shape="rect" id="node7" href="$class_preparation.html" title="Gére la préparation d&#39;un café" alt="" coords="644,2316,854,2701"/>
-<area shape="rect" id="node4" href="$class_q_object.html" title=" " alt="" coords="364,5,438,83"/>
+<area shape="rect" id="node4" href="$class_q_object.html" title="Classe mère de toutes les classes Qt." alt="" coords="364,5,438,83"/>
 <area shape="rect" id="node6" href="$class_communication.html" title="Permet de gérer les échanges Bluetooth." alt="" coords="119,424,339,883"/>
 </map>
