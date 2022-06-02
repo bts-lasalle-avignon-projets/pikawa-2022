@@ -31,7 +31,6 @@ class Cafetiere;
 #define PAS_LUNGO                                  2
 #define TEMPS_ACTUALISATION_BAR_PROGRESSION        500
 #define TIME_OUT_PREPARATION                       20000
-#define TIME_OUT_PLUS_CAPSULE                      5000
 #define BAC_VIDE                                   0
 #define BAC_NIVEAU_1                               1
 #define BAC_NIVEAU_2                               2
@@ -100,7 +99,6 @@ class IHMPikawa : public QMainWindow
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     QTimer*        timerPreparation;
     QTimer*        timeOutPreparation;
-    QTimer*        timeOutPlusDeCapsule;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
@@ -209,7 +207,6 @@ class IHMPikawa : public QMainWindow
     void mettreAJourNombreCafeDepuisDetartrage(
       QString nombreCafeDepuisDernierDetartrage);
     void timeOutAfficherPret();
-    void timeOutDemandeEtatCafetiere();
 
   signals:
     void detartrageReinitialise();

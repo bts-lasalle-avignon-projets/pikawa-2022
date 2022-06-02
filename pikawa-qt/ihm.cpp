@@ -23,8 +23,8 @@
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa), baseDeDonneesPikawa(nullptr),
     cafetiere(nullptr), timerPreparation(nullptr), timeOutPreparation(nullptr),
-    timeOutPlusDeCapsule(nullptr), iconeBoutonConnecte(nullptr),
-    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
+    iconeBoutonConnecte(nullptr), iconeBoutonDetectee(nullptr),
+    iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -672,10 +672,6 @@ void IHMPikawa::gererEvenementsCafetiere()
     connect(cafetiere,
             SIGNAL(nombreDeCafeDepuisDetartrage(QString)),
             SLOT(mettreAJourNombreCafeDepuisDetartrage(QString)));
-    connect(timeOutPlusDeCapsule,
-            SIGNAL(timeout()),
-            this,
-            SLOT(timeOutDemandeEtatCafetiere()));
 }
 
 /**
@@ -836,7 +832,6 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         else
         {
             message.append("\nPlus de caspules");
-            timeOutPlusDeCapsule->start(TIME_OUT_PLUS_CAPSULE);
         }
     }
 
@@ -903,10 +898,9 @@ void IHMPikawa::afficherMessageEtatCafe(QString message, QString couleur)
  */
 void IHMPikawa::initialiserCafetiere()
 {
-    cafetiere            = new Cafetiere(this);
-    timerPreparation     = new QTimer(this);
-    timeOutPreparation   = new QTimer(this);
-    timeOutPlusDeCapsule = new QTimer(this);
+    cafetiere          = new Cafetiere(this);
+    timerPreparation   = new QTimer(this);
+    timeOutPreparation = new QTimer(this);
 }
 
 void IHMPikawa::mettreAJourNombreCafeTotal(QString nombreCafeIncremente)
@@ -1188,10 +1182,4 @@ void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage(
 {
     ui->NombreCafeDepuisDernierDetartrage->setText(
       nombreCafeDepuisDernierDetartrage);
-}
-
-void IHMPikawa::timeOutDemandeEtatCafetiere()
-{
-    cafetiere->recupererEtatCafetiere();
-    timeOutPlusDeCapsule->stop();
 }
