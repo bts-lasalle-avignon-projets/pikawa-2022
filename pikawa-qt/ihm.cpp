@@ -22,8 +22,9 @@
  */
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa), baseDeDonneesPikawa(nullptr),
-    cafetiere(nullptr), timerPreparation(nullptr), iconeBoutonConnecte(nullptr),
-    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
+    cafetiere(nullptr), timerPreparation(nullptr), timeOutPreparation(nullptr),
+    iconeBoutonConnecte(nullptr), iconeBoutonDetectee(nullptr),
+    iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -354,8 +355,15 @@ void IHMPikawa::afficherCafePret()
     qDebug() << Q_FUNC_INFO;
     ui->avancementPreparation->setValue(100);
     timerPreparation->stop();
+    timeOutPreparation->stop();
     afficherMessageEtatCafe("Café prêt", "green");
     cafetiere->preparerCafetiere();
+}
+
+void IHMPikawa::timeOutAfficherPret()
+{
+    cafetiere->setCafeEnPreparation(false);
+    afficherCafePret();
 }
 
 void IHMPikawa::afficherNiveauBac()
@@ -385,7 +393,8 @@ void IHMPikawa::afficherNiveauBac()
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
-    timerPreparation->start(500);
+    timerPreparation->start(TEMPS_ACTUALISATION_BAR_PROGRESSION);
+    timeOutPreparation->start(TIME_OUT_PREPARATION);
     ui->avancementPreparation->setValue(0);
     afficherMessageEtatCafe("Café en cours", "red");
 }
@@ -434,7 +443,8 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     }
     else
     {
-        if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
+        if(cafetiere->getNiveauBac().toInt() 
+           BAC_VIDE)
         {
             ui->etatBac->setPixmap(*iconeBacPasPlein);
             ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
@@ -595,6 +605,12 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(timeout()),
             this,
             SLOT(afficherProgressionPrepration()));
+
+    connect(timeOutPreparation,
+            SIGNAL(timeout()),
+            this,
+            SLOT(timeOutAfficherPret()));
+
     connect(ui->boutonInformationsEntretien,
             SIGNAL(clicked()),
             this,
@@ -881,8 +897,9 @@ void IHMPikawa::afficherMessageEtatCafe(QString message, QString couleur)
  */
 void IHMPikawa::initialiserCafetiere()
 {
-    cafetiere        = new Cafetiere(this);
-    timerPreparation = new QTimer(this);
+    cafetiere          = new Cafetiere(this);
+    timerPreparation   = new QTimer(this);
+    timeOutPreparation = new QTimer(this);
 }
 
 void IHMPikawa::mettreAJourNombreCafeTotal(QString nombreCafeIncremente)

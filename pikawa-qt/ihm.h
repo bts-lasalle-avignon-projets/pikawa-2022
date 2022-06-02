@@ -18,16 +18,19 @@ class Cafetiere;
  * @def NOM
  * @brief Le nom de l'application
  */
-#define NOM                          "Pikawa"
-#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
-#define INTENSITE_MAX                12
-#define GRAIN_INTENSITE_MAX          5
-#define RISTRETTO                    0
-#define PAS_RISTRETTO                7
-#define ESPRESSO                     1
-#define PAS_ESPRESSO                 4
-#define LUNGO                        2
-#define PAS_LUNGO                    2
+#define NOM                                        "Pikawa"
+#define NOMBRE_CAFE_AVANT_DETARTRAGE               75
+#define NOMBRE_CAFE_DEPUIS_DETARTRAGE_REINITIALISE 0
+#define INTENSITE_MAX                              12
+#define GRAIN_INTENSITE_MAX                        5
+#define RISTRETTO                                  0
+#define PAS_RISTRETTO                              7
+#define ESPRESSO                                   1
+#define PAS_ESPRESSO                               4
+#define LUNGO                                      2
+#define PAS_LUNGO                                  2
+#define TEMPS_ACTUALISATION_BAR_PROGRESSION        500
+#define TIME_OUT_PREPARATION                       20000
 #define BAC_VIDE                     0
 #define BAC_NIVEAU_1                 1
 #define BAC_NIVEAU_2                 2
@@ -95,6 +98,7 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     QTimer*        timerPreparation;
+    QTimer*        timeOutPreparation;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
@@ -202,6 +206,7 @@ class IHMPikawa : public QMainWindow
     void afficherProgressionPrepration();
     void mettreAJourNombreCafeDepuisDetartrage(
       QString nombreCafeDepuisDernierDetartrage);
+    void timeOutAfficherPret();
   signals:
     void detartrageReinitialise();
 };
