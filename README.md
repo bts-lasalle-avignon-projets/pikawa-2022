@@ -44,6 +44,50 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ![](captures/page-Entretien-IHM.png)
 
+## Configuration du mode kiosque
+
+Modèle : Rapsberry Pi 3B+ sur Bullseye (Debian 11)
+
+
+Désactivation de l'écran de veille
+
+`$ xset s noblank`
+
+Verifiez si le paramètre est correctement activé : 
+
+```
+$ xset q
+Keyboard Control:
+[...]
+Screen Saver:
+  prefer blanking:  no    allow exposures:  yes
+  timeout:  0    cycle:  600
+Colors:
+[...]
+```
+Désactivation du curseur :
+
+`$ sudo apt-get install unclutter`
+
+## Fabrication
+
+Clonez le projet :
+
+`$ git clone https://github.com/btssn-lasalle-84/pikawa-2022.git`
+
+Allez dans le dossier du projet :
+
+`$ cd pikawa-2022/pikawa-qt/`
+
+Fabriquez le programme (cette opération peut prendre plusieurs minutes) :
+
+`$ qmake && make`
+
+
+Puis executez le programme :
+
+`$ ./pikawa-qt`
+
 ## Auteur
 
 - Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
