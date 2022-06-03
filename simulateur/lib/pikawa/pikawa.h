@@ -1,10 +1,10 @@
 /**
-*
-* @file lib/pikawa/pikawa.h
-* @brief Déclaration des ressurces pour le simulateur pikawa
-* @author Thierry Vaira
-* @version 0.1
-*/
+ *
+ * @file lib/pikawa/pikawa.h
+ * @brief Déclaration des ressurces pour le simulateur pikawa
+ * @author Thierry Vaira
+ * @version 0.1
+ */
 
 #include <Arduino.h>
 #include "BluetoothSerial.h"
@@ -22,7 +22,8 @@
 
 /**
  * @def DEBUG
- * @brief A définir si on désire les messages pour le chargement/sauvegarde des préférences
+ * @brief A définir si on désire les messages pour le chargement/sauvegarde des
+ * préférences
  */
 //#define DEBUG_PREFERENCES
 
@@ -31,12 +32,12 @@
  * @brief Définit le nom du périphérique Bluetooth (et son id)
  */
 //#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-1"
-#define PERIPHERIQUE_BLUETOOTH  "PIKAWA-2"
+#define PERIPHERIQUE_BLUETOOTH "PIKAWA-2"
 
 // Machine à café pikawa
-#define TITRE             PERIPHERIQUE_BLUETOOTH
-#define VERSION           "v1"
-#define VERSION_PIKAWA    "0.1"
+#define TITRE          PERIPHERIQUE_BLUETOOTH
+#define VERSION        "v1"
+#define VERSION_PIKAWA "0.1"
 
 // OLED 8 lignes x 16 colonnes
 #define ADRESSE_I2C_OLED 0x3c
@@ -54,36 +55,37 @@
 // Pour la ligne 6
 #define AFFICHAGE_TRAME_RECUE
 #ifdef AFFICHAGE_TRAME_RECUE
-  //#define AFFICHAGE_NB_TRAMES_RECUES
+//#define AFFICHAGE_NB_TRAMES_RECUES
 #endif
 
 // Magasin
-#define NB_COLONNES       8
-#define TAILLE_COLONNE    4
-#define CAPACITE_MAGASIN  (NB_COLONNES*TAILLE_COLONNE)
+#define NB_COLONNES      8
+#define TAILLE_COLONNE   4
+#define CAPACITE_MAGASIN (NB_COLONNES * TAILLE_COLONNE)
 
 // Niveau d'eau
 // SIMULATION_CONSOMMATION
-#define CAPACITE_EAU      20 // capsules en café court
+#define CAPACITE_EAU 20 // capsules en café court
 
 // Bac à capsules
 // SIMULATION_REMPLISSAGE
-#define CAPACITE_BAC      5 // capsules
+#define CAPACITE_BAC 5 // capsules
 
-#define TEMPO_CMD_CAFE          6000 // 6 s pour un café court  et donc le double pour un long
+#define TEMPO_CMD_CAFE                                                         \
+    6000 // 6 s pour un café court  et donc le double pour un long
 
-#define TEMPO_SIMULATION        3000 // en ms
-#define SIMULATION_TASSE        (TEMPO_SIMULATION) // en ms
-#define SIMULATION_VIDAGE       (TEMPO_SIMULATION*2) // en ms
-#define SIMULATION_REMPLISSAGE  (TEMPO_SIMULATION*2) // en ms
+#define TEMPO_SIMULATION       3000                   // en ms
+#define SIMULATION_TASSE       (TEMPO_SIMULATION)     // en ms
+#define SIMULATION_VIDAGE      (TEMPO_SIMULATION * 2) // en ms
+#define SIMULATION_REMPLISSAGE (TEMPO_SIMULATION * 2) // en ms
 
 // Protocole (cf. Google Drive)
-#define DELIMITEUR_CHAMP        ";"
-#define DELIMITEURS_FIN         "\r\n"
-#define DELIMITEUR_DATAS        ';'
-#define DELIMITEUR_FIN          '\n'
-#define EN_TETE                 "$PIKAWA"
-#define LONGUEUR_CHAMP          16
+#define DELIMITEUR_CHAMP ";"
+#define DELIMITEURS_FIN  "\r\n"
+#define DELIMITEUR_DATAS ';'
+#define DELIMITEUR_FIN   '\n'
+#define EN_TETE          "$PIKAWA"
+#define LONGUEUR_CHAMP   16
 
 // Trame de commande (application vers système) :
 //#define NB_PARAMETRES_CMD        3
@@ -94,9 +96,9 @@
  */
 enum Etat
 {
-  OFF = 0,  //!< l'état OFF
-  ON = 1,   //!< l'état ON
-  Inconnu
+    OFF = 0, //!< l'état OFF
+    ON  = 1, //!< l'état ON
+    Inconnu
 };
 
 /**
@@ -105,8 +107,8 @@ enum Etat
  */
 enum EtatTasse
 {
-  Absente = 0,
-  Presente = 1
+    Absente  = 0,
+    Presente = 1
 };
 
 /**
@@ -115,8 +117,8 @@ enum EtatTasse
  */
 enum EtatBac
 {
-  Plein = 0,
-  PasPlein = 1
+    Plein    = 0,
+    PasPlein = 1
 };
 
 /**
@@ -125,8 +127,8 @@ enum EtatBac
  */
 enum EtatCommande
 {
-  EnCours = 0,
-  Repos = 1
+    EnCours = 0,
+    Repos   = 1
 };
 
 /**
@@ -135,8 +137,8 @@ enum EtatCommande
  */
 enum EtatNiveauEau
 {
-  PasVide = 0,
-  Vide = 1
+    PasVide = 0,
+    Vide    = 1
 };
 
 /**
@@ -145,9 +147,9 @@ enum EtatNiveauEau
  */
 enum EtatCapsule
 {
-  Suffisant = 0,
-  Insuffisant = 1,
-  Erreur = 2
+    PasOk  = 0,
+    Ok     = 1,
+    Erreur = 2
 };
 
 /**
@@ -156,9 +158,9 @@ enum EtatCapsule
  */
 enum EtatMagasin
 {
-  Disponible = 0,
-  Indisponible = 1,
-  NonFonctionnel = 2 // non géré actuellement
+    Disponible     = 0,
+    Indisponible   = 1,
+    NonFonctionnel = 2 // non géré actuellement
 };
 
 /**
@@ -167,9 +169,9 @@ enum EtatMagasin
  */
 enum LongueurCafe
 {
-  Court = 1,
-  Moyen = 2,
-  Long = 3
+    Court = 1,
+    Moyen = 2,
+    Long  = 3
 };
 
 /**
@@ -178,11 +180,11 @@ enum LongueurCafe
  */
 enum Simulation
 {
-  Tasse = 0,
-  Bac = 1,
-  Eau = 2,
-  Magasin,
-  NbEtatsSimulation
+    Tasse = 0,
+    Bac   = 1,
+    Eau   = 2,
+    Magasin,
+    NbEtatsSimulation
 };
 
 #define CAFE_COURT "1"
@@ -194,39 +196,42 @@ enum Simulation
 #define TAILLE_LUNGO     3
 
 // Trame de requête/réponse :
-#define TRAME_REQUETE_ETAT_CAFETIERE                "ETAT;C;" // Format : $PIKAWA;ETAT;C;\r\n
-#define NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE  3   // 
-#define TRAME_REQUETE_ETAT_MAGASIN                  "ETAT;M;" // Format : $PIKAWA;ETAT;M;\r\n
-#define NB_PARAMETRES_TRAME_REQUETE_ETAT_MAGASIN    3   // 
-#define TRAME_COMMANDE_PREPARATION                  "P" // Format : $PIKAWA;P;NUMERO_RANGE;LONGUEUR;\r\n
-#define NB_PARAMETRES_TRAME_COMMANDE_PREPARATION    4   // 
-#define TRAME_REPONSE_ETAT_CAFETIERE                "C" // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
-#define TRAME_REPONSE_ETAT_MAGASIN                  "M" // Format : $PIKAWA;M;R1;R2;R3;R4;R5;R6;R7;R8;\r\n
-#define TRAME_REPONSE_ETAT_PREPARATION              "P" // Format : $PIKAWA;P;ETAT;\r\n
+#define TRAME_REQUETE_ETAT_CAFETIERE               "ETAT;C;" // Format : $PIKAWA;ETAT;C;\r\n
+#define NB_PARAMETRES_TRAME_REQUETE_ETAT_CAFETIERE 3 //
+#define TRAME_REQUETE_ETAT_MAGASIN                 "ETAT;M;" // Format : $PIKAWA;ETAT;M;\r\n
+#define NB_PARAMETRES_TRAME_REQUETE_ETAT_MAGASIN   3 //
+#define TRAME_COMMANDE_PREPARATION                                             \
+    "P" // Format : $PIKAWA;P;NUMERO_RANGE;LONGUEUR;\r\n
+#define NB_PARAMETRES_TRAME_COMMANDE_PREPARATION 4 //
+#define TRAME_REPONSE_ETAT_CAFETIERE                                           \
+    "C" // Format : $PIKAWA;C;EAU;BAC;CASPULE;TASSE;\r\n
+#define TRAME_REPONSE_ETAT_MAGASIN                                             \
+    "M" // Format : $PIKAWA;M;R1;R2;R3;R4;R5;R6;R7;R8;\r\n
+#define TRAME_REPONSE_ETAT_PREPARATION "P" // Format : $PIKAWA;P;ETAT;\r\n
 
 // Trame de service (application vers système) : périodique toutes les secondes
-#define TRAME_SERVICE                   "A" // Alive / Acquittement
-#define NB_PARAMETRES_SERVICE           1   // A + 0
+#define TRAME_SERVICE         "A" // Alive / Acquittement
+#define NB_PARAMETRES_SERVICE 1   // A + 0
 
-#define TRAME_ERREUR                    "ERREUR" // Erreur
-#define ERREUR_PROTOCOLE                1
-#define ERREUR_NB_PARAMETRES            2
-#define ERREUR_TRAME_INCONNUE           3
-#define ERREUR_TYPE_CAFE                4
-#define ERREUR_LONGUEUR_CAFE            5
+#define TRAME_ERREUR          "ERREUR" // Erreur
+#define ERREUR_PROTOCOLE      1
+#define ERREUR_NB_PARAMETRES  2
+#define ERREUR_TRAME_INCONNUE 3
+#define ERREUR_TYPE_CAFE      4
+#define ERREUR_LONGUEUR_CAFE  5
 
 // Les fonctions pikawa
 void initialiserPikawa();
 
 // La gestion des trames
-void traiterTrames();
-void envoyerTrame(String type, bool erreur=false);
-bool lireTrame(String &trame);
-int compterParametres(const String &trame);
-String verifierTrame(String &trame);
-void envoyerEtats();
-String extraireChamp(String &trame, unsigned int numeroChamp);
-String extraireChamp(String &donnee, char delimiteur, unsigned int numeroChamp);
+void   traiterTrames();
+void   envoyerTrame(String type, bool erreur = false);
+bool   lireTrame(String& trame);
+int    compterParametres(const String& trame);
+String verifierTrame(String& trame);
+void   envoyerEtats();
+String extraireChamp(String& trame, unsigned int numeroChamp);
+String extraireChamp(String& donnee, char delimiteur, unsigned int numeroChamp);
 #ifdef AFFICHAGE_NB_TRAMES_RECUES
 void incrementerNbTramesRecues();
 #endif
@@ -240,15 +245,15 @@ void setEtatTasse(int etat);
 void setEtatCapsule(int etat);
 void setEtatMagasin(int etat);
 bool estCapsuleVide(int numeroColonne);
-bool estCapsuleVide(String &typeCafe);
+bool estCapsuleVide(String& typeCafe);
 bool estMagasinVide();
 void mettreAJourMagasin(int numeroColonne);
 void gererEtatsMachine(int numeroColonne);
-int getNiveauNecessaire(String longueurCafe);
+int  getNiveauNecessaire(String longueurCafe);
 bool verifierEtatsMachine(int numeroColonne, String longueurCafe);
 bool commanderCafe(int etat);
 bool traiterCommandeCafe(String longueurCafe, String typeCafe);
-void reinitialiserParametresMachine(String &trame);
+void reinitialiserParametresMachine(String& trame);
 
 // Le simulateur
 void simuler();
@@ -263,7 +268,7 @@ void setLigne5();
 void setLigne6();
 
 void forcerEtatsSimules();
-void getRSSI(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param);
-void getEtatBluetooth(esp_spp_cb_event_t event, esp_spp_cb_param_t *param);
+void getRSSI(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t* param);
+void getEtatBluetooth(esp_spp_cb_event_t event, esp_spp_cb_param_t* param);
 void lireNiveauBluetooth();
 bool estEcheance(unsigned long intervalle);
