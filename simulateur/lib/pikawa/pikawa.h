@@ -164,6 +164,18 @@ enum EtatMagasin
 };
 
 /**
+ * @enum EtatPreparation
+ * @brief Les differents états d'une préparation
+ */
+enum EtatPreparation
+{
+    PasActive     = 0,
+    Active        = 1,
+    Impossible    = 2,
+    ErreurCapsule = 3
+};
+
+/**
  * @enum LongueurCafe
  * @brief Long ou Court
  */
