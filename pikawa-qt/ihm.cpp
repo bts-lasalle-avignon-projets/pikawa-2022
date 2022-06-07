@@ -830,7 +830,9 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Plus de caspules");
         else
+        {
             message.append("\nPlus de caspules");
+        }
     }
 
     if(!tassePresente)
@@ -1175,13 +1177,6 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
  * @fn IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
  * @brief Affiche le nombre de cafés depuis le dernier détartrage
  */
-/*void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
-{
-    ui->NombreCafeDepuisDernierDetartrage->setText(
-      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE -
-                      cafetiere->getNombreCafeAvantDetartrage().toInt()));
-}*/
-
 void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage(
   QString nombreCafeDepuisDernierDetartrage)
 {
