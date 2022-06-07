@@ -41,6 +41,8 @@ EtatCapsule etatCapsule =
   (EtatCapsule)Inconnu; //!< l'état pour une capsule (état simulé)
 EtatMagasin etatMagasin =
   (EtatMagasin)Inconnu; //!< l'état du magasin automatique (état simulé)
+EtatPreparation etatPreparation =
+  EtatPreparation::PasActive; //!< l'état de la préparation d'un café
 LongueurCafe longueurCafeCommande =
   (LongueurCafe)OFF; //!< long ou court commandé (au choix)
 int           numeroCapsuleCommande = -1; //!< type de capsule commandé
@@ -158,12 +160,12 @@ void initialiserPikawa()
     if(estMagasinVide())
     {
         setEtatMagasin(Indisponible);
-        setEtatCapsule(Insuffisant);
+        setEtatCapsule(PasOk);
     }
     else
     {
-        setEtatCapsule(Suffisant);
         setEtatMagasin(Disponible);
+        setEtatCapsule(Ok);
     }
 
     setLigne1();
@@ -260,10 +262,13 @@ void envoyerTrame(String type, bool erreur /*=false*/)
     else if(type == String(TRAME_REPONSE_ETAT_PREPARATION))
     {
         // Format : $PIKAWA;P;ETAT;\r\n
-        // r Booléen : réponse (1 = possible / 2 = impossible)
-        if(erreur)
+        if(etatPreparation == EtatPreparation::Impossible)
         {
             sprintf((char*)trameEnvoi, "%sP;2;\r\n", entete.c_str());
+        }
+        else if(etatPreparation == EtatPreparation::ErreurCapsule)
+        {
+            sprintf((char*)trameEnvoi, "%sP;3;\r\n", entete.c_str());
         }
         else
         {
@@ -566,6 +571,10 @@ void setEtatCommande(int etat)
     {
         etatCommande            = (EtatCommande)etat;
         changementEtatCafetiere = true;
+        if(etatCommande == EtatCommande::EnCours)
+            etatPreparation = EtatPreparation::Active;
+        else if(etatCommande == EtatCommande::Repos)
+            etatPreparation = EtatPreparation::PasActive;
         setLigne3();
     }
 }
@@ -664,12 +673,12 @@ bool estCapsuleVide(int numeroColonne)
 
     if(magasin[numeroColonne] > 0)
     {
-        setEtatCapsule(Suffisant);
+        // setEtatCapsule(Ok);
         return false;
     }
     else
     {
-        setEtatCapsule(Insuffisant);
+        // setEtatCapsule(PasOk);
         return true;
     }
 }
@@ -722,10 +731,10 @@ void mettreAJourMagasin(int numeroColonne)
     char cleMagasin[64] = "";
     sprintf((char*)cleMagasin, "%s%d", "colonne", numeroColonne);
     preferences.putInt(cleMagasin, magasin[numeroColonne]);
-    if(magasin[numeroColonne] > 0)
-        setEtatCapsule(Suffisant);
+    /*if(magasin[numeroColonne] > 0)
+        setEtatCapsule(Ok);
     else
-        setEtatCapsule(Insuffisant);
+        setEtatCapsule(PasOk);*/
 }
 
 /**
@@ -825,7 +834,7 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Type de cafe inconnu !"));
 #endif
-        erreurTrame = ERREUR_TYPE_CAFE;
+        etatPreparation = EtatPreparation::Impossible;
         return false;
     }
 
@@ -835,7 +844,7 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Longueur inconnue !"));
 #endif
-        erreurTrame = ERREUR_LONGUEUR_CAFE;
+        etatPreparation = EtatPreparation::Impossible;
         return false;
     }
 
@@ -844,7 +853,9 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Le magasin est vide !"));
 #endif
+        etatPreparation = EtatPreparation::Impossible;
         setEtatMagasin(Indisponible);
+        setEtatCapsule(PasOk);
         return false;
     }
 
@@ -853,7 +864,8 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Plus de ce type de capsule !"));
 #endif
-        setEtatCapsule(Insuffisant);
+        // setEtatCapsule(PasOk);
+        etatPreparation = EtatPreparation::Impossible;
         return false;
     }
 
@@ -862,6 +874,7 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Tasse absente"));
 #endif
+        etatPreparation = EtatPreparation::Impossible;
         return false;
     }
 
@@ -870,6 +883,7 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Bac plein !"));
 #endif
+        etatPreparation = EtatPreparation::Impossible;
         return false;
     }
 
@@ -879,14 +893,7 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Niveau eau vide ou insuffisant !"));
 #endif
-        return false;
-    }
-
-    if(etatCapsule == Absente)
-    {
-#ifdef DEBUG
-        Serial.println(String("<Erreur> Caspule absente !"));
-#endif
+        etatPreparation = EtatPreparation::Impossible;
         return false;
     }
 
@@ -895,6 +902,18 @@ bool verifierEtatsMachine(int numeroColonne, String longueurCafe)
 #ifdef DEBUG
         Serial.println(String("<Erreur> Cafe déjà encours !"));
 #endif
+        etatPreparation = EtatPreparation::Impossible;
+        return false;
+    }
+
+    // simuler un problème de capsule
+    int taus = random(0, 5); // 1 fois sur 5 pour simuler un problème
+    if(taus == 0)
+    {
+#ifdef DEBUG
+        Serial.println(String("<Erreur> Problème caspule !"));
+#endif
+        etatPreparation = EtatPreparation::ErreurCapsule;
         return false;
     }
 
@@ -930,6 +949,7 @@ bool commanderCafe(int etat)
                 Serial.println(String("<Erreur> Le magasin est vide !"));
 #endif
                 setEtatMagasin(Indisponible);
+                setEtatCapsule(PasOk);
                 return false;
             }
 #ifdef AFFICHAGE_TRAME_RECUE
@@ -961,9 +981,6 @@ bool traiterCommandeCafe(String longueurCafe, String typeCafe)
     if(!verifierEtatsMachine(numeroColonne, longueurCafe))
     {
         changementEtatPreparation = true;
-        if(erreurTrame == ERREUR_LONGUEUR_CAFE ||
-           erreurTrame == ERREUR_TYPE_CAFE)
-            envoyerTrame(String(TRAME_ERREUR));
         return false;
     }
 
@@ -1108,17 +1125,11 @@ void simuler()
                         preferences.putInt(cleMagasin, TAILLE_COLONNE);
                     }
                     setEtatMagasin(Disponible);
+                    setEtatCapsule(Ok);
 #ifdef DEBUG
                     Serial.println(
                       String("<Simulation> Remplissage magasin !"));
 #endif
-                }
-                break;
-            case Tasse:
-                // Simulation remise en place de la capsule
-                if(etatCapsule == Absente)
-                {
-                    setEtatCapsule(Presente);
                 }
                 break;
         }
@@ -1239,7 +1250,7 @@ void setLigne5()
     String ligne5a;
     String ligne5b;
 
-    if(etatCapsule == Suffisant)
+    if(etatCapsule == Ok)
         ligne5b = String("Cap : ok");
     else
         ligne5b = String("Cap : vide");
@@ -1305,9 +1316,9 @@ void forcerEtatsSimules()
 #endif
     }
 
-    if(etatCapsule == Absente)
+    if(etatCapsule == Erreur)
     {
-        setEtatCapsule(Presente);
+        setEtatCapsule(Ok);
 #ifdef DEBUG
         Serial.println(String("<SimulationForce> Capsule remise !"));
 #endif
@@ -1324,6 +1335,7 @@ void forcerEtatsSimules()
             preferences.putInt(cleMagasin, TAILLE_COLONNE);
         }
         setEtatMagasin(Disponible);
+        setEtatCapsule(Ok);
 #ifdef DEBUG
         Serial.println(String("<SimulationForce> Remplissage magasin !"));
 #endif

@@ -446,7 +446,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
         if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
         {
             ui->etatBac->setPixmap(*iconeBacPasPlein);
-            ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
+            ui->labelBac->setStyleSheet("color: black; font-size: 25px;");
         }
         else
         {
@@ -833,7 +833,9 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Plus de caspules");
         else
+        {
             message.append("\nPlus de caspules");
+        }
     }
 
     if(!tassePresente)
