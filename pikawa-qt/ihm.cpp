@@ -443,8 +443,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
     }
     else
     {
-        if(cafetiere->getNiveauBac().toInt() 
-           BAC_VIDE)
+        if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
         {
             ui->etatBac->setPixmap(*iconeBacPasPlein);
             ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
@@ -673,6 +672,9 @@ void IHMPikawa::gererEvenementsCafetiere()
     connect(cafetiere,
             SIGNAL(nombreDeCafeDepuisDetartrage(QString)),
             SLOT(mettreAJourNombreCafeDepuisDetartrage(QString)));
+    connect(cafetiere,
+            SIGNAL(capsuleAbsente()),
+            SLOT(afficherCaspuleAbsente()));
 }
 
 /**
@@ -948,17 +950,6 @@ void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
 }
 
 /**
- * @fn IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
- * @brief Affiche le nombre de cafés depuis le dernier détartrage
- */
-void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
-{
-    ui->NombreCafeDepuisDernierDetartrage->setText(
-      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE -
-                      cafetiere->getNombreCafeAvantDetartrage().toInt()));
-}
-
-/**
  * @fn IHMPikawa::afficherErreurAccesBaseDeDonnees()
  * @brief Affiche un message d'erreur d'accès à la base de données
  */
@@ -1183,9 +1174,18 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
     }
 }
 
+/**
+ * @fn IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
+ * @brief Affiche le nombre de cafés depuis le dernier détartrage
+ */
 void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage(
   QString nombreCafeDepuisDernierDetartrage)
 {
     ui->NombreCafeDepuisDernierDetartrage->setText(
       nombreCafeDepuisDernierDetartrage);
+}
+
+void IHMPikawa::afficherCaspuleAbsente()
+{
+    ui->labelAvertisseur->setText("Preparation impossible \r\ncapsule coincée");
 }

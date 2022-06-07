@@ -31,11 +31,11 @@ class Cafetiere;
 #define PAS_LUNGO                                  2
 #define TEMPS_ACTUALISATION_BAR_PROGRESSION        500
 #define TIME_OUT_PREPARATION                       20000
-#define BAC_VIDE                     0
-#define BAC_NIVEAU_1                 1
-#define BAC_NIVEAU_2                 2
-#define BAC_NIVEAU_3                 3
-#define BAC_NIVEAU_4                 4
+#define BAC_VIDE                                   0
+#define BAC_NIVEAU_1                               1
+#define BAC_NIVEAU_2                               2
+#define BAC_NIVEAU_3                               3
+#define BAC_NIVEAU_4                               4
 
 /**
  * @def VERSION
@@ -207,6 +207,7 @@ class IHMPikawa : public QMainWindow
     void mettreAJourNombreCafeDepuisDetartrage(
       QString nombreCafeDepuisDernierDetartrage);
     void timeOutAfficherPret();
+    void afficherCaspuleAbsente();
   signals:
     void detartrageReinitialise();
 };
