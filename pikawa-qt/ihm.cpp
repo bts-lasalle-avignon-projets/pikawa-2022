@@ -1189,5 +1189,5 @@ void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage(
 
 void IHMPikawa::afficherCaspuleAbsente()
 {
-    ui->labelAvertisseur->setText("Preparation impossible \r\ncapsule coincée");
+    ui->labelAvertisseur->setText("Preparation impossible \r\nerreur capsule");
 }
