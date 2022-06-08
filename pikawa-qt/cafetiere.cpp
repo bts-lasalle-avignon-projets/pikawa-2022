@@ -416,6 +416,11 @@ void Cafetiere::gererEtatPreparationCafe(int preparationCafe)
         recupererEtatMagasin();
         decrementerNombreCafeAvantDetartrage();
     }
+    else if(preparationCafe == ERREUR_CAPSULE_ABSENTE)
+    {
+        this->cafeEnPreparation = false;
+        emit capsuleAbsente();
+    }
     else
     {
         this->cafeEnPreparation = false;

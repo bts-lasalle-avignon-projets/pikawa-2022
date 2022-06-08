@@ -21,6 +21,7 @@
 #define CAFE_PRET                    0
 #define CAFE_EN_PREPARATION          1
 #define ERREUR_PREPARATION_CAFE      2
+#define ERREUR_CAPSULE_ABSENTE       3
 #define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 
 class IHMPikawa;
@@ -167,6 +168,7 @@ class Cafetiere : public QObject
     void nombreCafesAvantDetartrage(QString nombreCafeJourDecremente);
     void erreurAccesBaseDeDonnees();
     void nombreDeCafeDepuisDetartrage(QString nombreCafeDepuisDetartrage);
+    void capsuleAbsente();
 };
 
 #endif // CAFETIERE_H

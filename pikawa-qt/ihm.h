@@ -207,6 +207,7 @@ class IHMPikawa : public QMainWindow
     void mettreAJourNombreCafeDepuisDetartrage(
       QString nombreCafeDepuisDernierDetartrage);
     void timeOutAfficherPret();
+    void afficherCaspuleAbsente();
 
   signals:
     void detartrageReinitialise();

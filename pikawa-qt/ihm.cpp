@@ -446,7 +446,7 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
         if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
         {
             ui->etatBac->setPixmap(*iconeBacPasPlein);
-            ui->labelBac->setStyleSheet("font-color: black; font-size: 25px;");
+            ui->labelBac->setStyleSheet("color: black; font-size: 25px;");
         }
         else
         {
@@ -672,6 +672,9 @@ void IHMPikawa::gererEvenementsCafetiere()
     connect(cafetiere,
             SIGNAL(nombreDeCafeDepuisDetartrage(QString)),
             SLOT(mettreAJourNombreCafeDepuisDetartrage(QString)));
+    connect(cafetiere,
+            SIGNAL(capsuleAbsente()),
+            SLOT(afficherCaspuleAbsente()));
 }
 
 /**
@@ -1182,4 +1185,9 @@ void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage(
 {
     ui->NombreCafeDepuisDernierDetartrage->setText(
       nombreCafeDepuisDernierDetartrage);
+}
+
+void IHMPikawa::afficherCaspuleAbsente()
+{
+    ui->labelAvertisseur->setText("Preparation impossible \r\nerreur capsule");
 }
