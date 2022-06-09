@@ -32,7 +32,6 @@ IHMPikawa::IHMPikawa(QWidget* parent) :
     initialiserCafetiere();
     gererEvenements();
     initialiserIHM();
-    cafetiere->gererConnexion(); // connexion automatique
 }
 
 /**
@@ -125,7 +124,7 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
 {
     qDebug() << Q_FUNC_INFO;
     // si une cafetère pikawa a été déconnectée
-    ui->boutonConnexion->setEnabled(true);
+    ui->boutonConnexion->setEnabled(false);
     ui->boutonConnexion->setIcon(*iconeBoutonDeconnecte);
     ui->labelEtatConnection->setText("Cafetière déconnectée");
     ui->boutonRafraichir->setEnabled(true);

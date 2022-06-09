@@ -249,12 +249,8 @@ void Communication::decouvrirCafetiere(
              << '[' << appareilBluetooth.address().toString() << ']' << "rssi"
              << appareilBluetooth.rssi();
 
-    if(appareilBluetooth.name().contains(PREFIXE_NOM_CAFETIERE) &&
-       !appareilBluetooth.isCached())
+    if(appareilBluetooth.name().contains(PREFIXE_NOM_CAFETIERE))
     {
-        /**
-         * @see systemctl restart bluetooth
-         */
         qDebug() << Q_FUNC_INFO << "machine à café pikawa détectée"
                  << appareilBluetooth.name() << '['
                  << appareilBluetooth.address().toString() << ']';
@@ -264,6 +260,7 @@ void Communication::decouvrirCafetiere(
         emit rechercheTerminee(pikawaDetecte);
         emit cafetiereDetectee(appareilBluetooth.name(),
                                appareilBluetooth.address().toString());
+        connecter();
     }
 }
 
@@ -279,7 +276,6 @@ void Communication::terminerRecherche()
  * @details connexion des "signals" de l'objet socketBluetoothPikawa au
  * "slots"
  */
-
 void Communication::connecter()
 {
     qDebug() << Q_FUNC_INFO;
