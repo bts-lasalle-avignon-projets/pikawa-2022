@@ -358,6 +358,7 @@ void IHMPikawa::afficherCafePret()
     timeOutPreparation->stop();
     afficherMessageEtatCafe("Café prêt", "green");
     cafetiere->preparerCafetiere();
+    ui->selectionLongueurPreparation->setEnabled(true);
 }
 
 void IHMPikawa::timeOutAfficherPret()
@@ -397,6 +398,7 @@ void IHMPikawa::afficherCafeEnCours()
     timeOutPreparation->start(TIME_OUT_PREPARATION);
     ui->avancementPreparation->setValue(0);
     afficherMessageEtatCafe("Café en cours", "red");
+    ui->selectionLongueurPreparation->setEnabled(false);
 }
 
 /**

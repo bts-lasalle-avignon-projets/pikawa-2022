@@ -46,7 +46,8 @@ EtatPreparation etatPreparation =
 LongueurCafe longueurCafeCommande =
   (LongueurCafe)OFF; //!< long ou court commandé (au choix)
 int           numeroCapsuleCommande = -1; //!< type de capsule commandé
-unsigned long tempsDepartCommandeCafe;  //!< le temps simulé de la préparation
+unsigned long tempsDepartCommandeCafe =
+  0;                                    //!< le temps simulé de la préparation
                                         //!< d'un café long ou court
 unsigned long nbColonnes = NB_COLONNES; //!< le nombre de colonnes du magasin
 unsigned long magasin[NB_COLONNES] = {
@@ -935,15 +936,15 @@ bool commanderCafe(int etat)
 
     if((temps - tempsDepartCommandeCafe) >= dureeCafe)
     {
-        setEtatCommande(etat);
-        changementCommandeCafe = false;
         if(etat == Repos)
         {
+            setEtatCommande(etat);
+            changementCommandeCafe    = false;
             changementEtatPreparation = true;
 #ifdef DEBUG
             Serial.println("<Cafe> terminé !");
 #endif
-            if(estMagasinVide())
+            /*if(estMagasinVide())
             {
 #ifdef DEBUG
                 Serial.println(String("<Erreur> Le magasin est vide !"));
@@ -951,7 +952,7 @@ bool commanderCafe(int etat)
                 setEtatMagasin(Indisponible);
                 setEtatCapsule(PasOk);
                 return false;
-            }
+            }*/
 #ifdef AFFICHAGE_TRAME_RECUE
             trameRecue = "";
             setLigne6();
@@ -1000,16 +1001,16 @@ bool traiterCommandeCafe(String longueurCafe, String typeCafe)
     }
 
     // Lance la préparation du café
+    tempsDepartCommandeCafe = millis();
+    setEtatCommande(EnCours);
     commanderCafe(EnCours);
+    changementCommandeCafe = true;
 #ifdef DEBUG
     Serial.println("<Cafe> encours !");
 #endif
 
     // Met à jour la machine suite à un café
     gererEtatsMachine(numeroColonne);
-
-    changementCommandeCafe  = true;
-    tempsDepartCommandeCafe = millis();
 
     return true;
 }
