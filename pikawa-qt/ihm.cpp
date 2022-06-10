@@ -99,6 +99,7 @@ void IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString adresse)
     ui->boutonConnexion->setEnabled(true);
     ui->boutonConnexion->setIcon(*iconeBoutonDetectee);
     ui->labelEtatConnection->setText("Cafetière détectée");
+    ui->boutonRafraichir->setVisible(true);
 }
 
 /**
@@ -114,6 +115,7 @@ void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
     ui->boutonConnexion->setIcon(*iconeBoutonConnecte);
     ui->labelEtatConnection->setText("Cafetière connectée");
     ui->boutonRafraichir->setEnabled(false);
+    ui->boutonRafraichir->setVisible(false);
 }
 
 /**
@@ -128,6 +130,7 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
     ui->boutonConnexion->setIcon(*iconeBoutonDeconnecte);
     ui->labelEtatConnection->setText("Cafetière déconnectée");
     ui->boutonRafraichir->setEnabled(true);
+    ui->boutonRafraichir->setVisible(true);
 }
 
 /**
