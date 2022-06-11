@@ -1,9 +1,9 @@
 <map id="Preparation" name="Preparation">
-<area shape="rect" id="node1" title="Gére la préparation d&#39;un café" alt="" coords="371,907,582,1292"/>
-<area shape="rect" id="node4" href="$class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA." alt="" coords="316,1355,575,2019"/>
-<area shape="rect" id="node2" href="$class_q_object.html" title="Classe mère de toutes les classes Qt." alt="" coords="546,5,620,83"/>
-<area shape="rect" id="node3" href="$class_base_de_donnees.html" title=" " alt="" coords="160,132,318,400"/>
-<area shape="rect" id="node5" href="$class_communication.html" title="Permet de gérer les échanges Bluetooth." alt="" coords="640,424,860,883"/>
-<area shape="rect" id="node6" href="$class_i_h_m_pikawa.html" title="Déclaration de la classe IHMPikawa." alt="" coords="333,2081,556,2701"/>
-<area shape="rect" id="node7" href="$class_q_main_window.html" title="Classe permettant de créer des applications GUI." alt="" coords="600,1648,716,1725"/>
+<area shape="rect" id="node1" title="Gére la préparation d&#39;un café" alt="" coords="347,907,537,1292"/>
+<area shape="rect" id="node4" href="$class_cafetiere.html" title="Parmet de gérer la machine à café PIKAWA." alt="" coords="301,1355,532,2019"/>
+<area shape="rect" id="node2" href="$class_q_object.html" title="Classe mère de toutes les classes Qt." alt="" coords="507,5,577,83"/>
+<area shape="rect" id="node3" href="$class_base_de_donnees.html" title=" " alt="" coords="148,132,293,400"/>
+<area shape="rect" id="node5" href="$class_communication.html" title="Permet de gérer les échanges Bluetooth." alt="" coords="596,424,792,883"/>
+<area shape="rect" id="node6" href="$class_i_h_m_pikawa.html" title="Déclaration de la classe IHMPikawa." alt="" coords="315,2081,515,2716"/>
+<area shape="rect" id="node7" href="$class_q_main_window.html" title="Classe permettant de créer des applications GUI." alt="" coords="557,1648,663,1725"/>
 </map>
