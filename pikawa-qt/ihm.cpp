@@ -10,7 +10,7 @@
  *
  * @brief Définition de la classe IHMPikawa
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 /**
@@ -22,8 +22,9 @@
  */
 IHMPikawa::IHMPikawa(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::IHMPikawa), baseDeDonneesPikawa(nullptr),
-    cafetiere(nullptr), timerPreparation(nullptr), iconeBoutonConnecte(nullptr),
-    iconeBoutonDetectee(nullptr), iconeBoutonDeconnecte(nullptr)
+    cafetiere(nullptr), timerPreparation(nullptr), timeOutPreparation(nullptr),
+    iconeBoutonConnecte(nullptr), iconeBoutonDetectee(nullptr),
+    iconeBoutonDeconnecte(nullptr)
 {
     ui->setupUi(this);
     qDebug() << Q_FUNC_INFO;
@@ -50,6 +51,11 @@ IHMPikawa::~IHMPikawa()
     qDebug() << Q_FUNC_INFO;
 }
 
+/**
+ * @fn IHMPikawa::afficherPage(IHMPikawa::Page page)
+ * @brief Selectionne la fenetre grace à l'index passé en paramètre
+ * @details Pages empilées (Stacked Widget)
+ */
 void IHMPikawa::afficherPage(IHMPikawa::Page page)
 {
     ui->ecrans->setCurrentIndex(page);
@@ -82,6 +88,11 @@ void IHMPikawa::afficherPageSelectionCafe()
     afficherPage(IHMPikawa::Page::SelectionCafe);
 }
 
+/**
+ * @fn IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString
+ * adresse)
+ * @brief Change l'état du bouton de connexion en cafetiere détectée (orange)
+ */
 void IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
@@ -91,6 +102,11 @@ void IHMPikawa::activerBoutonConnexionEtatDetecte(QString nom, QString adresse)
     ui->labelEtatConnection->setText("Cafetière détectée");
 }
 
+/**
+ * @fn IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString
+ * adresse)
+ * @brief Change l'état du bouton de connexion en cafetiere connectée (vert)
+ */
 void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
 {
     qDebug() << Q_FUNC_INFO << nom << adresse;
@@ -101,6 +117,10 @@ void IHMPikawa::activerBoutonConnexionEtatConnecte(QString nom, QString adresse)
     ui->boutonRafraichir->setEnabled(false);
 }
 
+/**
+ * @fn IHMPikawa::activerBoutonConnexionEtatDeconnecte()
+ * @brief Change l'état du bouton de connexion en cafetiere déconnectée (noir)
+ */
 void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
 {
     qDebug() << Q_FUNC_INFO;
@@ -111,6 +131,11 @@ void IHMPikawa::activerBoutonConnexionEtatDeconnecte()
     ui->boutonRafraichir->setEnabled(true);
 }
 
+/**
+ * @fn IHMPikawa::rafraichirDecouverte()
+ * @brief Slot déclenché lors du clic du bouton rafraichir
+ * @details Relance une découverte
+ */
 void IHMPikawa::rafraichirDecouverte()
 {
     qDebug() << Q_FUNC_INFO;
@@ -124,6 +149,12 @@ void IHMPikawa::terminerDecouverte(bool detecte)
     ui->boutonRafraichir->setEnabled(true);
 }
 
+/**
+ * @fn IHMPikawa::gererLongueurPreparation(int longueurPreparation)
+ * @brief Slot déclenché lors d'un changement d'état de la barre de séléction
+ * des longueurs
+ * @details Change la valeur de la longueur du café
+ */
 void IHMPikawa::gererLongueurPreparation(int longueurPreparation)
 {
     qDebug() << Q_FUNC_INFO << "longueurPreparation" << longueurPreparation;
@@ -179,6 +210,10 @@ void IHMPikawa::gererSelectionCafes()
             SLOT(afficherErreurPreparation()));
 }
 
+/**
+ * @fn IHMPikawa::afficherCapsuleChoisie(int idCapsule)
+ * @brief Affiche la capsule sélectionnée dans le bouton
+ */
 void IHMPikawa::afficherCapsuleChoisie(int idCapsule)
 {
     ui->capsuleChoisie->setStyleSheet("font-size:25px; color:black;");
@@ -192,6 +227,11 @@ void IHMPikawa::afficherCapsuleChoisie(int idCapsule)
     afficherPageAcceuil();
 }
 
+/**
+ * @fn IHMPikawa::selectionnerColombia()
+ * @brief Slot du bouton capsule Colombia
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerColombia()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleColombia);
@@ -202,6 +242,11 @@ void IHMPikawa::selectionnerColombia()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::selectionnerIndonesia()
+ * @brief Slot du bouton capsule Indonesia
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerIndonesia()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleIndonesia);
@@ -212,6 +257,11 @@ void IHMPikawa::selectionnerIndonesia()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::selectionnerEthiopia()
+ * @brief Slot du bouton capsule Ethiopia
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerEthiopia()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleEthiopia);
@@ -221,7 +271,11 @@ void IHMPikawa::selectionnerEthiopia()
     afficherCapsuleChoisie(idCapsule);
     afficherIntensiteAccueil(idCapsule);
 }
-
+/**
+ * @fn IHMPikawa::selectionnerVolluto()
+ * @brief Slot du bouton capsule Volluto
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerVolluto()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleVolluto);
@@ -232,6 +286,11 @@ void IHMPikawa::selectionnerVolluto()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::selectionnerCosi()
+ * @brief Slot du bouton capsule Cosi
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerCosi()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleCosi);
@@ -242,6 +301,11 @@ void IHMPikawa::selectionnerCosi()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::selectionnerScuro()
+ * @brief Slot du bouton capsule Scuro
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerScuro()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleScuro);
@@ -252,6 +316,11 @@ void IHMPikawa::selectionnerScuro()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::selectionnerVanilla()
+ * @brief Slot du bouton capsule Vanilla
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerVanilla()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleVanilla);
@@ -262,6 +331,11 @@ void IHMPikawa::selectionnerVanilla()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::selectionnerCapriccio()
+ * @brief Slot du bouton capsule Capriccio
+ * @details Affiche la caspule choisie, l'intensité
+ */
 void IHMPikawa::selectionnerCapriccio()
 {
     ui->boutonChangerCafe->setIcon(*iconeCapsuleCapriccio);
@@ -272,23 +346,65 @@ void IHMPikawa::selectionnerCapriccio()
     afficherIntensiteAccueil(idCapsule);
 }
 
+/**
+ * @fn IHMPikawa::afficherCafePret()
+ * @brief Affiche un message "Café prêt"
+ */
 void IHMPikawa::afficherCafePret()
 {
     qDebug() << Q_FUNC_INFO;
     ui->avancementPreparation->setValue(100);
     timerPreparation->stop();
+    timeOutPreparation->stop();
     afficherMessageEtatCafe("Café prêt", "green");
     cafetiere->preparerCafetiere();
+    ui->selectionLongueurPreparation->setEnabled(true);
 }
 
+void IHMPikawa::timeOutAfficherPret()
+{
+    cafetiere->setCafeEnPreparation(false);
+    afficherCafePret();
+}
+
+void IHMPikawa::afficherNiveauBac()
+{
+    qDebug() << Q_FUNC_INFO << cafetiere->getNiveauBac();
+    switch(cafetiere->getNiveauBac().toInt())
+    {
+        case BAC_NIVEAU_1:
+            ui->etatBac->setPixmap(*iconeBacNiveau1);
+            break;
+        case BAC_NIVEAU_2:
+            ui->etatBac->setPixmap(*iconeBacNiveau2);
+            break;
+        case BAC_NIVEAU_3:
+            ui->etatBac->setPixmap(*iconeBacNiveau3);
+            break;
+        case BAC_NIVEAU_4:
+            ui->etatBac->setPixmap(*iconeBacNiveau4);
+            break;
+    }
+}
+
+/**
+ * @fn IHMPikawa::afficherCafeEnCours()
+ * @brief Affiche un message "Café en cours"
+ */
 void IHMPikawa::afficherCafeEnCours()
 {
     qDebug() << Q_FUNC_INFO;
-    timerPreparation->start(500);
+    timerPreparation->start(TEMPS_ACTUALISATION_BAR_PROGRESSION);
+    timeOutPreparation->start(TIME_OUT_PREPARATION);
     ui->avancementPreparation->setValue(0);
     afficherMessageEtatCafe("Café en cours", "red");
+    ui->selectionLongueurPreparation->setEnabled(false);
 }
 
+/**
+ * @fn IHMPikawa::afficherErreurPreparation()
+ * @brief Affiche un message "Erreur de Préparation"
+ */
 void IHMPikawa::afficherErreurPreparation()
 {
     qDebug() << Q_FUNC_INFO;
@@ -296,6 +412,13 @@ void IHMPikawa::afficherErreurPreparation()
     cafetiere->preparerCafetiere();
 }
 
+/**
+ * @fn IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
+                                         bool bacPasPlein,
+                                         bool etatCapsule,
+                                         bool etatTasse)
+ * @brief Affiche les états de la cafetiere
+ */
 void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
                                          bool bacPasPlein,
                                          bool etatCapsule,
@@ -318,16 +441,30 @@ void IHMPikawa::mettreAJourEtatCafetiere(int  reservoirEau,
         ui->etatBac->setPixmap(*iconeBacPlein);
         ui->labelBac->setStyleSheet("font-size: 25px; color: red;");
         ui->labelAvertisseur->setText("Vider le bac");
+        cafetiere->reinitialiserNiveauBac();
     }
     else
     {
-        ui->etatBac->setPixmap(*iconeBacPasPlein);
-        ui->labelBac->setStyleSheet("font-size: 25px; color: black;");
+        if(cafetiere->getNiveauBac().toInt() == BAC_VIDE)
+        {
+            ui->etatBac->setPixmap(*iconeBacPasPlein);
+            ui->labelBac->setStyleSheet("color: black; font-size: 25px;");
+        }
+        else
+        {
+            afficherNiveauBac();
+        }
     }
 
     afficherAvertissement(reservoirEau, bacPasPlein, etatCapsule, etatTasse);
 }
 
+/**
+ * @fn IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
+ * @brief Affiche les capsules disponibles
+ * @details Désactive le bouton si la capsule et indisponible et change
+ * l'indicateur rouge (absente) ou vert (présente)
+ */
 void IHMPikawa::mettreAJourMagasinIHM(QStringList caspulesDisponibles)
 {
     qDebug() << Q_FUNC_INFO;
@@ -370,6 +507,10 @@ void IHMPikawa::initialiserIcones()
     iconeCapsuleScuro     = new QIcon(":scuro.png");
     iconeCapsuleVanilla   = new QIcon(":vanilla-eclair.png");
     iconeBacPlein         = new QPixmap(":/images/bacPlein.png");
+    iconeBacNiveau4       = new QPixmap(":/images/bac-4.png");
+    iconeBacNiveau3       = new QPixmap(":/images/bac-3.png");
+    iconeBacNiveau2       = new QPixmap(":/images/bac-2.png");
+    iconeBacNiveau1       = new QPixmap(":/images/bac-1.png");
     iconeBacPasPlein      = new QPixmap(":/images/bacVide.png");
     capsulePresente       = new QPixmap(":/RondVert.png");
     capsuleAbsente        = new QPixmap(":/RondRouge.png");
@@ -379,6 +520,13 @@ void IHMPikawa::initialiserIcones()
     intensite4            = new QPixmap(":/images/intensite-cafe-4.png");
     intensite5            = new QPixmap(":/images/intensite-cafe-5.png");
 }
+
+/**
+ * @fn IHMPikawa::initialiserIHM()
+ * @brief Initialise l'IHM
+ * @details Charge les boutons, les labels, les icones, les préference, les
+ * descriptions et les intensités
+ */
 
 void IHMPikawa::initialiserIHM()
 {
@@ -395,6 +543,7 @@ void IHMPikawa::initialiserIHM()
     initialiserPageEntretien();
     chargerDescription();
     chargerIntensite();
+    afficherNiveauBac();
 
 #ifdef PLEIN_ECRAN
     showFullScreen();
@@ -457,11 +606,16 @@ void IHMPikawa::gererEvenementsBoutons()
             SIGNAL(timeout()),
             this,
             SLOT(afficherProgressionPrepration()));
+
+    connect(timeOutPreparation,
+            SIGNAL(timeout()),
+            this,
+            SLOT(timeOutAfficherPret()));
+
     connect(ui->boutonInformationsEntretien,
             SIGNAL(clicked()),
             this,
             SLOT(afficherPageInformations()));
-
     connect(ui->boutonAcceuilEntretien,
             SIGNAL(clicked()),
             this,
@@ -517,7 +671,18 @@ void IHMPikawa::gererEvenementsCafetiere()
             SIGNAL(erreurAccesBaseDeDonnees()),
             this,
             SLOT(afficherErreurAccesBaseDeDonnees()));
+    connect(cafetiere,
+            SIGNAL(nombreDeCafeDepuisDetartrage(QString)),
+            SLOT(mettreAJourNombreCafeDepuisDetartrage(QString)));
+    connect(cafetiere,
+            SIGNAL(capsuleAbsente()),
+            SLOT(afficherCaspuleAbsente()));
 }
+
+/**
+ * @fn IHMPikawa::initialiserPreferences()
+ * @brief Charge les préférences
+ */
 
 void IHMPikawa::initialiserPreferences()
 {
@@ -625,12 +790,25 @@ void IHMPikawa::chargerLabelsIntensiteCafe()
     labelsintensitesCafes.push_back(ui->intensiteVanilla);
 }
 
+/**
+ * @fn IHMPikawa::ouvrirBaseDeDonnees()
+ * @brief Instancie un objet base de données
+ */
 void IHMPikawa::ouvrirBaseDeDonnees()
 {
     baseDeDonneesPikawa = BaseDeDonnees::getInstance();
     baseDeDonneesPikawa->ouvrir(NOM_BDD);
 }
 
+/**
+* @fn IHMPikawa::afficherAvertissement(int  niveauEau,
+                                      bool bacPasPlein,
+                                      bool capsulePresente,
+                                      bool tassePresente)
+* @brief Affiche différents avertissements
+* @details Exemple : niveau d'eau trop bas, bac plein, capsule absente, tasse
+présente...
+*/
 void IHMPikawa::afficherAvertissement(int  niveauEau,
                                       bool bacPasPlein,
                                       bool capsulePresente,
@@ -657,7 +835,9 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
         if(message.isEmpty())
             message.append("Plus de caspules");
         else
+        {
             message.append("\nPlus de caspules");
+        }
     }
 
     if(!tassePresente)
@@ -694,6 +874,11 @@ void IHMPikawa::afficherAvertissement(int  niveauEau,
              << "tassePresente " << tassePresente;
 }
 
+/**
+ * @fn IHMPikawa::afficherMessage(QString message, QString couleur)
+ * @brief Affiche un message passé en paramètre dans l'IHM
+ */
+
 void IHMPikawa::afficherMessage(QString message, QString couleur)
 {
     qDebug() << Q_FUNC_INFO << "message" << message;
@@ -712,10 +897,15 @@ void IHMPikawa::afficherMessageEtatCafe(QString message, QString couleur)
                                         ";");
 }
 
+/**
+ * @fn IHMPikawa::initialiserCafetiere()
+ * @brief Instancie un objet cafetiere et un timer
+ */
 void IHMPikawa::initialiserCafetiere()
 {
-    cafetiere        = new Cafetiere(this);
-    timerPreparation = new QTimer(this);
+    cafetiere          = new Cafetiere(this);
+    timerPreparation   = new QTimer(this);
+    timeOutPreparation = new QTimer(this);
 }
 
 void IHMPikawa::mettreAJourNombreCafeTotal(QString nombreCafeIncremente)
@@ -723,6 +913,10 @@ void IHMPikawa::mettreAJourNombreCafeTotal(QString nombreCafeIncremente)
     ui->NombreCafeTotal->setText(nombreCafeIncremente);
 }
 
+/**
+ * @fn IHMPikawa::reinitialiserDetartrage()
+ * @brief Remet à 0 le nombre de cafés avant le détartrage
+ */
 void IHMPikawa::reinitialiserDetartrage()
 {
     ui->etatTartre->setValue(0);
@@ -737,13 +931,19 @@ void IHMPikawa::initialiserPageEntretien()
     ui->NombreCafeTotal->setText(cafetiere->getNombreCafeJour());
     ui->NombreCafeAvantDetartrage->setText(
       cafetiere->getNombreCafeAvantDetartrage());
+    ui->NombreCafeDepuisDernierDetartrage->setText(
+      cafetiere->getNombreCafeDepuisDetartrage());
     ui->etatTartre->setValue(
       (NOMBRE_CAFE_AVANT_DETARTRAGE -
        cafetiere->getNombreCafeAvantDetartrage().toInt()) *
       100 / NOMBRE_CAFE_AVANT_DETARTRAGE);
-    mettreAJourNombreCafeDepuisDetartrage();
 }
 
+/**
+* @fn IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
+  QString nombreCafeDecremente)
+* @brief Incremente le nombre de cafés avant le detartrage
+*/
 void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
   QString nombreCafeDecremente)
 {
@@ -751,22 +951,23 @@ void IHMPikawa::mettreAJourNombreCafeAvantDetartrage(
     ui->etatTartre->setValue(
       (NOMBRE_CAFE_AVANT_DETARTRAGE - nombreCafeDecremente.toInt()) * 100 /
       NOMBRE_CAFE_AVANT_DETARTRAGE);
-    mettreAJourNombreCafeDepuisDetartrage();
 }
 
-void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
-{
-    ui->NombreCafeDepuisDernierDetartrage->setText(
-      QString::number(NOMBRE_CAFE_AVANT_DETARTRAGE -
-                      cafetiere->getNombreCafeAvantDetartrage().toInt()));
-}
-
+/**
+ * @fn IHMPikawa::afficherErreurAccesBaseDeDonnees()
+ * @brief Affiche un message d'erreur d'accès à la base de données
+ */
 void IHMPikawa::afficherErreurAccesBaseDeDonnees()
 {
     qDebug() << Q_FUNC_INFO;
     afficherMessage("Erreur d'accès a la base de données", "red");
 }
 
+/**
+ * @fn IHMPikawa::afficherProgressionPrepration()
+ * @brief Slot connecté au timerPreparation
+ * @details Méthode appelée dès que le timerPreparation emet le signal timeout()
+ */
 void IHMPikawa::afficherProgressionPrepration()
 {
     int pasAvancementPreparation = 0;
@@ -793,6 +994,11 @@ void IHMPikawa::afficherProgressionPrepration()
     }
 }
 
+/**
+ * @fn IHMPikawa::chargerDescription()
+ * @brief Charge de la base de données les descriptions des capsules
+ * @details Table concernée Caspule
+ */
 void IHMPikawa::chargerDescription()
 {
     for(int i = 1; i < labelsDescriptions.size() + 1; ++i)
@@ -806,12 +1012,21 @@ void IHMPikawa::chargerDescription()
     }
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensiteDoux(int i)
+ * @brief Affiche l'intensité "doux" sur la page d'acceuil
+ */
 void IHMPikawa::afficherIntensiteDoux(int i)
 {
     labelsintensitesCafes.at(i)->setText("doux");
     labelsintensitesCafes.at(i)->setStyleSheet("font-size:25px;");
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensite1(int i)
+ * @brief Affiche l'intensité de la caspule choisie sur la page d'acceuil
+ * @details Ajuste la taille du label pour une intensité 1
+ */
 void IHMPikawa::afficherIntensite1(int i)
 {
     labelsintensitesCafes.at(i)->setPixmap(*intensite1);
@@ -819,6 +1034,11 @@ void IHMPikawa::afficherIntensite1(int i)
     labelsintensitesCafes.at(i)->setFixedWidth(30);
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensite2(int i)
+ * @brief Affiche l'intensité de la caspule choisie sur la page d'acceuil
+ * @details Ajuste la taille du label pour une intensité 2
+ */
 void IHMPikawa::afficherIntensite2(int i)
 {
     labelsintensitesCafes.at(i)->setPixmap(*intensite2);
@@ -826,6 +1046,11 @@ void IHMPikawa::afficherIntensite2(int i)
     labelsintensitesCafes.at(i)->setFixedWidth(60);
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensite3(int i)
+ * @brief Affiche l'intensité de la caspule choisie sur la page d'acceuil
+ * @details Ajuste la taille du label pour une intensité 3
+ */
 void IHMPikawa::afficherIntensite3(int i)
 {
     labelsintensitesCafes.at(i)->setPixmap(*intensite3);
@@ -833,6 +1058,11 @@ void IHMPikawa::afficherIntensite3(int i)
     labelsintensitesCafes.at(i)->setFixedWidth(80);
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensite4(int i)
+ * @brief Affiche l'intensité de la caspule choisie sur la page d'acceuil
+ * @details Ajuste la taille du label pour une intensité 4
+ */
 void IHMPikawa::afficherIntensite4(int i)
 {
     labelsintensitesCafes.at(i)->setPixmap(*intensite4);
@@ -840,6 +1070,11 @@ void IHMPikawa::afficherIntensite4(int i)
     labelsintensitesCafes.at(i)->setFixedWidth(100);
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensite5(int i)
+ * @brief Affiche l'intensité de la caspule choisie sur la page d'acceuil
+ * @details Ajuste la taille du label pour une intensité 5
+ */
 void IHMPikawa::afficherIntensite5(int i)
 {
     labelsintensitesCafes.at(i)->setPixmap(*intensite5);
@@ -847,6 +1082,10 @@ void IHMPikawa::afficherIntensite5(int i)
     labelsintensitesCafes.at(i)->setFixedWidth(120);
 }
 
+/**
+ * @fn IHMPikawa::chargerIntensite()
+ * @brief Charge les intensités des capsules
+ */
 void IHMPikawa::chargerIntensite()
 {
     for(int i = 0; i < labelsintensitesCafes.size(); ++i)
@@ -885,6 +1124,10 @@ void IHMPikawa::chargerIntensite()
     }
 }
 
+/**
+ * @fn IHMPikawa::afficherIntensiteAccueil(int idCapsule)
+ * @brief Affiche l'intensité de la caspule choisie sur l'écran d'accueil
+ */
 void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
 {
     QString reponse;
@@ -933,4 +1176,20 @@ void IHMPikawa::afficherIntensiteAccueil(int idCapsule)
             ui->intensiteChoisie->setFixedWidth(120);
             break;
     }
+}
+
+/**
+ * @fn IHMPikawa::mettreAJourNombreCafeDepuisDetartrage()
+ * @brief Affiche le nombre de cafés depuis le dernier détartrage
+ */
+void IHMPikawa::mettreAJourNombreCafeDepuisDetartrage(
+  QString nombreCafeDepuisDernierDetartrage)
+{
+    ui->NombreCafeDepuisDernierDetartrage->setText(
+      nombreCafeDepuisDernierDetartrage);
+}
+
+void IHMPikawa::afficherCaspuleAbsente()
+{
+    ui->labelAvertisseur->setText("Preparation impossible \r\nerreur capsule");
 }

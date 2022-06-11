@@ -1,9 +1,9 @@
 <map id="Cafetiere" name="Cafetiere">
-<area shape="rect" id="node1" title="Parmet de gérer la machine à café PIKAWA." alt="" coords="430,653,689,1317"/>
-<area shape="rect" id="node4" href="$class_preparation.html" title="Gére la préparation d&#39;un café" alt="" coords="604,1497,814,1883"/>
-<area shape="rect" id="node6" href="$class_i_h_m_pikawa.html" title="Déclaration de la classe IHMPikawa." alt="" coords="260,1380,483,2000"/>
-<area shape="rect" id="node2" href="$class_q_object.html" title=" " alt="" coords="561,5,636,83"/>
-<area shape="rect" id="node3" href="$class_communication.html" title="Permet de gérer les échanges Bluetooth." alt="" coords="355,132,575,591"/>
-<area shape="rect" id="node5" href="$class_base_de_donnees.html" title="Class permettant de s&#39;interfacer avec la base de données." alt="" coords="599,227,758,495"/>
-<area shape="rect" id="node7" href="$class_q_main_window.html" title=" " alt="" coords="290,947,406,1024"/>
+<area shape="rect" id="node1" title="Parmet de gérer la machine à café PIKAWA." alt="" coords="406,653,636,1317"/>
+<area shape="rect" id="node4" href="$class_preparation.html" title="Gére la préparation d&#39;un café" alt="" coords="562,1505,752,1890"/>
+<area shape="rect" id="node6" href="$class_i_h_m_pikawa.html" title="Déclaration de la classe IHMPikawa." alt="" coords="250,1380,450,2015"/>
+<area shape="rect" id="node2" href="$class_q_object.html" title="Classe mère de toutes les classes Qt." alt="" coords="516,5,587,83"/>
+<area shape="rect" id="node3" href="$class_communication.html" title="Permet de gérer les échanges Bluetooth." alt="" coords="332,132,528,591"/>
+<area shape="rect" id="node5" href="$class_base_de_donnees.html" title=" " alt="" coords="552,227,698,495"/>
+<area shape="rect" id="node7" href="$class_q_main_window.html" title="Classe permettant de créer des applications GUI." alt="" coords="274,947,381,1024"/>
 </map>

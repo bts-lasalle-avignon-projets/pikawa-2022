@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe Cafetiere
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 #include <QObject>
@@ -21,6 +21,7 @@
 #define CAFE_PRET                    0
 #define CAFE_EN_PREPARATION          1
 #define ERREUR_PREPARATION_CAFE      2
+#define ERREUR_CAPSULE_ABSENTE       3
 #define NOMBRE_CAFE_AVANT_DETARTRAGE 75
 
 class IHMPikawa;
@@ -45,7 +46,7 @@ class Cafetiere : public QObject
     QStringList    preferences;    //!< liste des préférences de l'utilisateur
     int            capsuleChoisie; //!< id de la capsule sélectionnée
     int  longueurChoisie; //!< la longueur de préparation sélectionnée
-    int  niveauEau;       //!< le nive d'eau dans la cafetière
+    int  niveauEau;       //!< le niveau d'eau dans la cafetière
     bool connectee;       //!< état de connexion de la cafetière
     bool capsulePresente; //!< au moins une capsule est présente dans le magasin
     bool tassePresente;   //!< une tasse est détectée
@@ -76,17 +77,24 @@ class Cafetiere : public QObject
     QStringList getPreferences() const;
     QString     getCapsulePreferee() const;
     QString     getLongueurPreferee() const;
+    QString     getNiveauBac() const;
+    QString     getNombreCafeDepuisDetartrage() const;
     void        setCapsuleChoisie(const int& capsuleChoisie);
     void        setLongueurChoisie(const int& boissonChoisie);
     void        setNiveauEau(const int& niveauEau);
+    void        setCafeEnPreparation(const bool cafeEnPreparation);
     bool        preparerCafetiere();
     QStringList getDisponibiliteCapsules() const;
     bool        estCapsuleChoisieDisponible();
     bool        estCapsuleChoisieDisponible(int capsule);
     void        incrementerNombreCafeJour();
+    void        incrementerNombreCafeDepuisDetartrage();
     void        decrementerNombreCafeAvantDetartrage();
     QString     getNombreCafeJour() const;
     QString     getNombreCafeAvantDetartrage() const;
+    void        incrementerNiveauBac();
+    void        reinitialiserNiveauBac();
+
     /**
      * @enum ChampsTablePreferences
      * @brief Les différentes colonne de la table Preferences
@@ -159,6 +167,8 @@ class Cafetiere : public QObject
     void nombreCafesTotal(QString nombreCafeJourIncremente);
     void nombreCafesAvantDetartrage(QString nombreCafeJourDecremente);
     void erreurAccesBaseDeDonnees();
+    void nombreDeCafeDepuisDetartrage(QString nombreCafeDepuisDetartrage);
+    void capsuleAbsente();
 };
 
 #endif // CAFETIERE_H

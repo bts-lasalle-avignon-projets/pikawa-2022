@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe Communication
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 #include <QObject>

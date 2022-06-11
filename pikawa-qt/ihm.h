@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMPikawa
  * @author Anthony BRYCKAERT
- * @version 0.2
+ * @version 1.1
  */
 
 #include <QtWidgets>
@@ -18,21 +18,30 @@ class Cafetiere;
  * @def NOM
  * @brief Le nom de l'application
  */
-#define NOM                          "Pikawa"
-#define NOMBRE_CAFE_AVANT_DETARTRAGE 75
-#define INTENSITE_MAX                12
-#define GRAIN_INTENSITE_MAX          5
-#define RISTRETTO 0
-#define PAS_RISTRETTO 7
-#define ESPRESSO 1
-#define PAS_ESPRESSO 4
-#define LUNGO 2
-#define PAS_LUNGO 2
+#define NOM                                        "Pikawa"
+#define NOMBRE_CAFE_AVANT_DETARTRAGE               75
+#define NOMBRE_CAFE_DEPUIS_DETARTRAGE_REINITIALISE 0
+#define INTENSITE_MAX                              12
+#define GRAIN_INTENSITE_MAX                        5
+#define RISTRETTO                                  0
+#define PAS_RISTRETTO                              7
+#define ESPRESSO                                   1
+#define PAS_ESPRESSO                               4
+#define LUNGO                                      2
+#define PAS_LUNGO                                  2
+#define TEMPS_ACTUALISATION_BAR_PROGRESSION        500
+#define TIME_OUT_PREPARATION                       20000
+#define BAC_VIDE                                   0
+#define BAC_NIVEAU_1                               1
+#define BAC_NIVEAU_2                               2
+#define BAC_NIVEAU_3                               3
+#define BAC_NIVEAU_4                               4
+
 /**
  * @def VERSION
  * @brief La version de l'application
  */
-#define VERSION "0.2"
+#define VERSION "1.1"
 
 /**
  * @def PLEIN_ECRAN
@@ -57,9 +66,6 @@ class IHMPikawa : public QMainWindow
 {
     Q_OBJECT
 
-    /**
-     * @todo Revoir COMPLETEMENT la mise en page de l'IHM
-     */
     /**
      * @enum Page
      * @brief Les différentes pages de l'application
@@ -92,6 +98,7 @@ class IHMPikawa : public QMainWindow
     BaseDeDonnees* baseDeDonneesPikawa; //!< instance d'un objet BaseDeDonnees
     Cafetiere*     cafetiere;           //!< instance d'un objet Cafetiere
     QTimer*        timerPreparation;
+    QTimer*        timeOutPreparation;
     // GUI
     QIcon*   iconeBoutonConnecte;
     QIcon*   iconeBoutonDetectee;
@@ -105,6 +112,10 @@ class IHMPikawa : public QMainWindow
     QIcon*   iconeCapsuleScuro;
     QIcon*   iconeCapsuleVanilla;
     QPixmap* iconeBacPlein;
+    QPixmap* iconeBacNiveau4;
+    QPixmap* iconeBacNiveau3;
+    QPixmap* iconeBacNiveau2;
+    QPixmap* iconeBacNiveau1;
     QPixmap* iconeBacPasPlein;
     QPixmap* capsulePresente;
     QPixmap* capsuleAbsente;
@@ -138,7 +149,6 @@ class IHMPikawa : public QMainWindow
     void afficherMessageEtatCafe(QString message, QString couleur);
     void initialiserCafetiere();
     void initialiserPageEntretien();
-    void mettreAJourNombreCafeDepuisDetartrage();
     void chargerDescription();
     void chargerLabelsIntensiteCafe();
     void chargerIntensite();
@@ -153,6 +163,8 @@ class IHMPikawa : public QMainWindow
   public:
     IHMPikawa(QWidget* parent = nullptr);
     ~IHMPikawa();
+
+    void afficherNiveauBac();
 
   public slots:
     void afficherPage(IHMPikawa::Page page);
@@ -192,6 +204,10 @@ class IHMPikawa : public QMainWindow
     void mettreAJourNombreCafeAvantDetartrage(QString nombreCafeDecremente);
     void afficherErreurAccesBaseDeDonnees();
     void afficherProgressionPrepration();
+    void mettreAJourNombreCafeDepuisDetartrage(
+      QString nombreCafeDepuisDernierDetartrage);
+    void timeOutAfficherPret();
+    void afficherCaspuleAbsente();
 
   signals:
     void detartrageReinitialise();
