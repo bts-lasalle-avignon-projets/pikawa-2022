@@ -25,10 +25,14 @@ Machine à café connectée, pilotable grâce à un écran tactile et un logicie
 
 Fonctionnalités :
 
-- lancement de la préparation d'un café personnalisé (type de capsule et longueur)
-- suivi de l'entretien de la machine
-- affichage des alertes (niveau d'eau, bac à capsule, présence tasse et capsule)
-- affichage de la description des capsules
+- Lancer la préparation d'un café personnalisé (type de capsule et longueur)
+- Choisir le type capsule
+- Afficher de la description des capsules
+- Choisir le type de longueur
+- Visualiser les alertes (niveau d'eau, bac à capsule, présence tasse et capsule)
+- Suivre état de vie de la machine
+- Dialoguer avec la machine en Bluetooth
+
 
 \author Anthony Bryckaert <<bryckaert.anthony@gmail.com>>
 \date 2022

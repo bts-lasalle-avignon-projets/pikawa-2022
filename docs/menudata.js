@@ -93,6 +93,7 @@ var menudata={children:[
 {text:"Liste des fichiers",url:"files.html"},
 {text:"Membres de fichier",url:"globals.html",children:[
 {text:"Tout",url:"globals.html",children:[
+{text:"b",url:"globals.html#index_b"},
 {text:"c",url:"globals.html#index_c"},
 {text:"d",url:"globals.html#index_d"},
 {text:"e",url:"globals.html#index_e"},
@@ -110,6 +111,7 @@ var menudata={children:[
 {text:"Énumérations",url:"globals_enum.html"},
 {text:"Valeurs énumérées",url:"globals_eval.html"},
 {text:"Macros",url:"globals_defs.html",children:[
+{text:"b",url:"globals_defs.html#index_b"},
 {text:"c",url:"globals_defs.html#index_c"},
 {text:"d",url:"globals_defs.html#index_d"},
 {text:"e",url:"globals_defs.html#index_e"},

@@ -30,7 +30,7 @@ var NAVTREE =
     [ "README", "page__r_e_a_d_m_e.html", null ],
     [ "A propos", "page_about.html", null ],
     [ "Licence GPL", "page_licence.html", null ],
-    [ "Le projet pikawa-2022", "md__home_btssn2_pikawa-2022__r_e_a_d_m_e.html", null ],
+    [ "Le projet pikawa-2022", "md__home_tv__documents_git_projets-2022_pikawa-2022__r_e_a_d_m_e.html", null ],
     [ "Liste des choses à faire", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Liste des classes", "annotated.html", "annotated_dup" ],
@@ -60,7 +60,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_i_h_m_pikawa.html#a8e8d165d1dab0f45af1261892494e210"
+"class_i_h_m_pikawa.html#a7a1c13ff0ccde44a504e261800a89cc4"
 ];
 
 var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';
