@@ -4,6 +4,7 @@
   - [Présentation](#présentation)
   - [Analyse de l’existant](#analyse-de-lexistant)
   - [Historique des versions](#historique-des-versions)
+  - [Diaporama](#diaporama)
   - [Configuration du mode kiosque](#configuration-du-mode-kiosque)
   - [Fabrication](#fabrication)
   - [Protocole](#protocole)
@@ -17,6 +18,8 @@
 Pikawa est une machine à café connectée, pilotable grâce à un écran tactile et un logiciel embarqué sur Raspberry Pi.
 
 La cafetière Ekawa est équipée d’un magasin rotatif et motorisé de capsules.
+
+![](captures/pikawa-systeme.gif)
 
 Le logiciel embarqué Pikawa permet :
 
@@ -37,6 +40,8 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ## Historique des versions
 
+![](captures/pikawa-version1.1.gif)
+
 - [Version 1.1](https://github.com/btssn-lasalle-84/pikawa-2022/releases/tag/1.1) : 11/06/2022
   - ajout d'une barre de progression
   - gestion de l'erreur capsule
@@ -56,6 +61,10 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
   - squelettes des classes Cafetiere et Preparation
 
 ![](captures/jira-versions-pikawa.png)
+
+## Diaporama
+
+- [Oral de revue finale - BRYCKAERT Anthony.pptx](docs/Oral%20de%20revue%20finale%20-%20BRYCKAERT%20Anthony.pptx)
 
 ## Configuration du mode kiosque
 
