@@ -17,6 +17,8 @@
 
 Pikawa est une machine à café connectée, pilotable grâce à un écran tactile et un logiciel embarqué sur Raspberry Pi.
 
+![](captures/pikawa-version1.1.gif)
+
 La cafetière Ekawa est équipée d’un magasin rotatif et motorisé de capsules.
 
 ![](captures/pikawa-systeme.gif)
@@ -40,14 +42,20 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
 
 ## Historique des versions
 
-![](captures/pikawa-version1.1.gif)
+Le projet a été géré avec [Jira Software](https://btssn-avignon.atlassian.net/) et la méthode Kanban.
+
+![](captures/jira-versions-pikawa.png)
 
 - [Version 1.1](https://github.com/btssn-lasalle-84/pikawa-2022/releases/tag/1.1) : 11/06/2022
   - ajout d'une barre de progression
   - gestion de l'erreur capsule
 
+![](captures/version-1.1.png)
+
 - [Version 1.0](https://github.com/btssn-lasalle-84/pikawa-2022/releases/tag/1.0) : 27/05/2022
   - génération de la documentation du code
+
+![](captures/version-1.0.png)
 
 - [Version 0.2](https://github.com/btssn-lasalle-84/pikawa-2022/releases/tag/0.2) : 25/05/2022
   - lancement de la préparation d'un café personnalisé (type de capsule et longueur)
@@ -55,12 +63,14 @@ Actuellement, il n’existe pas de solutions équivalentes pour des machines à 
   - affichage des alertes (niveau d'eau, bac à capsule, présence tasse et capsule)
   - affichage de la description des capsules
 
+![](captures/version-0.2.png)
+
 - [Version 0.1](https://github.com/btssn-lasalle-84/pikawa-2022/releases/tag/0.1) : 03/04/2022
   - affichage de l'écran d'accueil et d'informations
   - mise en oeuvre de la recherche d'interfaces Bluetooth
   - squelettes des classes Cafetiere et Preparation
 
-![](captures/jira-versions-pikawa.png)
+![](captures/version-0.1.png)
 
 ## Diaporama
 
