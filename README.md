@@ -2,6 +2,7 @@
 
 - [Le projet pikawa-2022](#le-projet-pikawa-2022)
   - [Présentation](#présentation)
+  - [Vidéo](#vidéo)
   - [Analyse de l’existant](#analyse-de-lexistant)
   - [Historique des versions](#historique-des-versions)
   - [Diaporama](#diaporama)
@@ -30,6 +31,10 @@ Le logiciel embarqué Pikawa permet :
 - suivre l’entretien
 
 ![](captures/pikawa.gif)
+
+## Vidéo
+
+[<img src="https://img.youtube.com/vi/2dUkWHmlBT0/maxresdefault.jpg" width="50%">](https://youtu.be/2dUkWHmlBT0)
 
 ## Analyse de l’existant
 
